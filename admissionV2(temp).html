@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Kiddo Academy SIS</title>
+    <link rel="icon" type="image/gif" href="images/School Logo/symbol.png"/>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="formwizard2.css">
+  </head>
+
+  <body class="hold-transition skin-green-light sidebar-mini">
+      <div class="wrapper">
+
+        <header class="main-header">
+          <!-- Logo -->
+          <a href="dashboard.php" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><image src="images/School Logo/logo.ico" style="width: 50px; padding: 3px"></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><image src="images/School Logo/logo.png" style="width: 200px; padding: 3px;"></span>
+          </a>
+          <!-- Header Navbar: style can be found in header.less -->
+          <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="images/Employees/registrar.jpg" class="user-image" alt="User Image">
+                    <span class="hidden-xs">Park Chanyeol</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                      <img src="images/Employees/registrar.jpg" class="img-circle" alt="User Image">
+
+                      <p>
+                        Park Chanyeol
+                        <small>Registrar</small>
+                      </p>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                      <div class="pull-left">
+                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      </div>
+                      <div class="pull-right">
+                        <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                 <!-- Control Sidebar Toggle Button -->
+                <li>
+                  <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+          <!-- sidebar: style can be found in sidebar.less -->
+          <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+              <div class="pull-left image">
+                <img src="images/Employees/registrar.jpg" class="img-circle" alt="User Image">
+              </div>
+              <div class="pull-left info" style="margin-top: 3%">
+                <p>Park Chanyeol<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+              </div>
+            </div>
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+              <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                      <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                      </button>
+                    </span>
+              </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" style="font-size:17px;">
+              <li class="header" style="color: white">Welcome!</li>
+              <li class="treeview">
+                <a href="RegistrarMessage.html">
+                  <i class="fa fa-envelope-o"></i> <span>Message</span>
+                </a>
+              </li>
+             <li class="treeview active">
+                <a href="admissionV2.html">
+                  <i class="fa fa-users"></i> <span>Admission</span>
+                </a>
+              </li>
+              <li class="treeview">
+                <a href="enrolment.html">
+                  <i class="fa fa-child"></i> <span>Enrollment</span>
+                </a>
+              </li>
+              <li class="treeview">
+                <a href="billing2.html">
+                  <i class="fa fa-calculator"></i> <span>Billing</span>
+                </a>
+              </li>
+              <li class="treeview">
+              <a href="registrar-profile.html">
+                <i class="fa fa-user"></i> <span>Profile</span>
+              </a>
+            </li>
+            </ul>
+          </section>
+          <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+          <section class="content-header">
+            <ol class="breadcrumb" style="font-size:15px;">
+              <li><a href="#" style="color: black;"><i class="fa fa-envelope-o"></i> Home</a></li>
+              <li class="active">Admission</li>
+            </ol>
+          </section>
+          <!-- Main content -->
+          <section class="content" style="margin-top: 3%">
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="box box-default">
+                    <div class="box-header with-border"></div>
+
+                    <div class="box-body">
+                      <section>
+                        <h3>Admission</h3>
+                        <div class="wizard">
+                          <div class="wizard-inner">
+                            <div class="connecting-line"></div>
+                            <ul class="nav nav-tabs" role="tablist">
+                              <li role="presentation" class="active">
+                                  <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Requirements">
+                                    <span class="round-tab">
+                                      1
+                                    </span>
+                                  </a>
+                              </li>
+
+                              <li role="presentation" class="disabled">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Personal Information">
+                                  <span class="round-tab">
+                                    2
+                                  </span>
+                                </a>
+                              </l>
+
+                              <li role="presentation" class="disabled">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Family Information">
+                                  <span class="round-tab">
+                                    3
+                                  </span>
+                                </a>
+                              </li>
+
+                              <li role="presentation" class="disabled">
+                                <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Health History">
+                                  <span class="round-tab">
+                                    4
+                                  </span>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <form role="form">
+                            <div class="tab-content">
+
+                              <div class="tab-pane active" role="tabpanel" id="step1">
+                                <h2 style="margin-bottom: 3%; margin-left: 3%">Check Requirements</h2>
+                                  <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <form class="form-horizontal" role="form">
+                                      <!-- radio -->
+                                      <div class="form-group" style="margin-top: 3%">
+                                        <div class="radio">
+                                          <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                            New Student
+                                          </label>
+                                        </div>
+                                        <div class="radio">
+                                          <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                            Transferee
+                                          </label>
+                                        </div>
+                                        </div>
+                                      <div class="form-group" style="margin-top: 3%">
+                                        <label style="width: 35%">Admission for:</label>
+                                        <div>
+                                          <select class="form-control choose" style="width: 35%;">
+                                            <option selected="selected">Grade 1</option>
+                                            <option>Grade 2</option>
+                                          </select>
+                                        </div>
+                                      </div>
+
+                                      <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
+                                        <form class="fieldsetbruh">
+                                          <fieldset style="margin-top: 2%; margin-left: 2%">
+                                            <h3>REQUIREMENTS</h3>
+                                              <div class="form-group" style="margin-top: 3%">
+                                                <label>
+                                                  <input type="checkbox" class="flat-red" checked>
+                                                  Form 138A
+                                                </label>
+                                              </div>
+                                              <div class="form-group">
+                                                <label>
+                                                  <input type="checkbox" class="flat-red">
+                                                  Birth Certificate
+                                                </label>
+                                              </div>
+                                              <div class="form-group">
+                                                <label>
+                                                  <input type="checkbox" class="flat-red">
+                                                  Admission Form
+                                                </label>
+                                              </div>
+                                          </fieldset>
+                                        </form>
+                                      </div> <!-- fieldser -->
+                                    </div> <!-- col -->
+
+                                      <ul class="list-inline pull-right" style="margin-top: 5%">
+                                          <li><button type="button" class="btn btn-primary next-step">Next</li>
+                                      </ul>
+                                    </form>
+                              </div> <!-- tab pane step1 -->
+
+                                  <div class="tab-pane" role="tabpanel" id="step2">
+                                    <h2 style="margin-bottom: 3%; margin-left: 3%">Student Information</h2>
+                                    <div class="container">
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Personal info</h3>
+        
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Middle name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Birthday:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="date" name="bday">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Birthplace:</label>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" placeholder="Unit/Bldg. No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Street Name/No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left"></label>
+            <div class="col-lg-6">
+              <input class="form-control" type="text" placeholder="City/Municipality">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Nationality:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Religion:</label>
+            <div class="col-lg-8">
+              <select class="form-control choose" style="width: 100%;">
+                     <option selected>Roman Catholic</option>
+                     <option>Christian</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Home Address:</label>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" placeholder="Unit/Bldg. No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Street Name/No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left"></label>
+            <div class="col-lg-6">
+              <input class="form-control" type="text" placeholder="City/Municipality">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Language Spoken:</label>
+            <div class="col-lg-8">
+              <select class="form-control choose" multiple="multiple" data-placeholder="Select language" style="width: 100%;">
+                                <option>Filipino</option>
+                                <option>English</option>
+                                <option>Korean</option>
+             </select>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+
+                                    <ul class="list-inline pull-right" style="margin-top: 5%">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Next</button></li>
+                                    </ul>
+                                  </div> <!-- tab pane step2-->
+
+                                  <div class="tab-pane" role="tabpanel" id="step3">
+                                    <h2 style="margin-bottom: 3%; margin-left: 3%">Family Information</h2>
+<div class="container">
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Father's info</h3>
+        
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Middle name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Mobile Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">E-mail Address:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Home Address:</label>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" placeholder="Unit/Bldg. No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Street Name/No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left"></label>
+            <div class="col-lg-6">
+              <input class="form-control" type="text" placeholder="City/Municipality">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Home Tel. Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Occupation/Title:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Company Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Company Address:</label>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" placeholder="Unit/Bldg. No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Street Name/No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left"></label>
+            <div class="col-lg-6">
+              <input class="form-control" type="text" placeholder="City/Municipality">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Work Phone Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+ 
+ <div class="container">
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Mother's info</h3>
+        
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Middle name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Mobile Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">E-mail Address:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Home Address:</label>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" placeholder="Unit/Bldg. No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Street Name/No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left"></label>
+            <div class="col-lg-6">
+              <input class="form-control" type="text" placeholder="City/Municipality">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Home Tel. Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Occupation/Title:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Company Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Company Address:</label>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" placeholder="Unit/Bldg. No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Street Name/No.">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No.">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left"></label>
+            <div class="col-lg-6">
+              <input class="form-control" type="text" placeholder="City/Municipality">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Work Phone Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+<div class="container">
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+      <form class="form-horizontal" role="form">
+ <div class="form-group">
+            <label class="col-lg-2 control-label left">Parent Status:</label>
+            <div class="col-lg-8">
+              <select class="form-control choose" multiple="multiple" data-placeholder="Select status" style="width: 100%;">
+                                <option>Parents Married</option>
+                                <option>Father Deceased</option>
+                                <option>Father Remarried</option>
+                                <option>Applicant Adopted</option>
+                                <option>Mother Deceased</option>
+                                <option>Mother Remarried</option>
+                                <option>Single Parent</option>
+                                <option>Parent Separated/Divorced</option>
+                              </select>
+            </div>
+          </div>
+  <div class="form-group">
+            <label class="col-lg-2 control-label left">Applicant Lives With:</label>
+            <div class="col-lg-8">
+              <select class="form-control choose" multiple="multiple" data-placeholder="Select status" style="width: 100%;">
+                                <option>Father and Mother</option>
+                                <option>Stepfather and Mother</option>
+                                <option>Father</option>
+                                <option>Stepmother and Father</option>
+                                <option>Mother</option>
+                              </select>
+            </div>
+          </div>
+        </form>
+          </div>
+          </div>
+          </div>
+
+<div class="container">
+    <hr>
+  <div class="row">
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Siblings</h3>
+        <div class= "right" style="margin-bottom: 5%">
+               <button type="button" class="btn btn-info" style="float: right"><i class="fa fa-plus"></i>Add</button>
+        </div>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Age:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Grade/Level:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">School:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+<div class="container">
+    <hr>
+  <div class="row">
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Other members of the Household</h3>
+        <div class= "right" style="margin-bottom: 5%">
+               <button type="button" class="btn btn-info" style="float: right"><i class="fa fa-plus"></i>Add</button>
+        </div>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Age:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label left">Relation:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+                                    <div>
+                                    <hr>
+                                    <ul class="list-inline pull-right" style="margin-top: 5%">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Next</button></li>
+                                    </ul>
+                                    </div>
+
+                                  </div> <!-- tab pane step3-->
+
+                                  <div class="tab-pane" role="tabpanel" id="step4">
+                                    <h2 style="margin-bottom: 3%; margin-left: 3%"></h2>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                      <h3>Health History</h3>
+                                      <div style="margin-top: 3%">
+                                        <form class="form-horizontal" role="form">
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label">Allergies:</label>
+                                            <div class="col-lg-7">
+                                              <input class="form-control" type="text">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label">Illness or Disability:</label>
+                                            <div class="col-lg-7">
+                                              <input class="form-control" type="text">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label">Medication:</label>
+                                            <div class="col-lg-7">
+                                              <input class="form-control" type="text">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label">Blood Type:</label>
+                                              <div class="col-lg-7">
+                                                <select class="form-control choose" style="width: 100%;">
+                                                  <option selected>A</option>
+                                                  <option>B</option>
+                                                  <option>O</option>
+                                                  <option>AB</option>
+                                                </select>
+                                              </div>
+
+                                              <div class="form-group" style="margin-top: 5%">
+                                                <label class="col-lg-3 control-label">Hospitalized?
+                                                  <label style="margin-left: 3%">Yes
+                                                    <input type="radio" name="h2" class="minimal" checked>
+                                                  </label>
+                                                  <label>No
+                                                    <input type="radio" name="h2" class="minimal">
+                                                  </label>
+                                                </label>
+                                              </div>
+
+                                              <div class="form-group" style="margin-bottom: 5%">
+                                                <label class="col-lg-2 control-label">Reason:</label>
+                                                <div class="col-lg-7">
+                                                  <input class="form-control" type="text">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-lg-7 control-label">In case of emergency, can we call your family doctor/pediatrician?
+                                                  <label style="margin-left: 3%">Yes
+                                                    <input type="radio" name="r1" class="minimal" checked>
+                                                  </label>
+                                                  <label>No
+                                                    <input type="radio" name="r1" class="minimal">
+                                                  </label>
+                                                </label>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-lg-2 control-label">Doctor's Name:</label>
+                                                <div class="col-lg-7">
+                                                  <input class="form-control" type="text">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-lg-2 control-label">Hospital:</label>
+                                                <div class="col-lg-7">
+                                                  <input class="form-control" type="text">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-lg-2 control-label">Tel/Mobile #:</label>
+                                                <div class="col-lg-7">
+                                                  <input class="form-control" type="text">
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label class="col-lg-2 control-label">Address:</label>
+                                                <div class="col-lg-7">
+                                                  <input class="form-control" type="text">
+                                                </div>
+                                              </div>
+                                            </div> <!-- form group main-->
+                                        </form>
+                                      </div> <!-- noname -->
+                                    </div> <!-- col col -->
+
+                                    <ul class="list-inline pull-right" style="margin-top: 5%">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save Applicant</button></li>
+                                    </ul>
+                                  </div> <!-- tab pane step4 -->
+                                <div class="clearfix"></div>
+                              </div> <!-- tab pane step4 -->
+                            </div> <!-- tab content -->
+                          </form> <!-- main form -->
+                        </div> <!-- wizard -->
+                      </section>
+                    </div> <!-- /.box-body -->
+                </div><!-- /.box-default -->
+              </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+          </section>
+          <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+          <div class="pull-right hidden-xs">
+            <b>Version</b> Last na please
+          </div>
+          <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
+          reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+          <!-- Create the tabs -->
+          <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane" id="control-sidebar-home-tab">
+              <h3 class="control-sidebar-heading">Recent Activity</h3>
+              <ul class="control-sidebar-menu">
+
+              </ul>
+              <!-- /.control-sidebar-menu -->
+
+              <h3 class="control-sidebar-heading">Tasks Progress</h3>
+              <ul class="control-sidebar-menu">
+
+              </ul>
+              <!-- /.control-sidebar-menu -->
+
+            </div>
+            <!-- /.tab-pane -->
+            <!-- Stats tab content -->
+            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+              <form method="post">
+                <h3 class="control-sidebar-heading">General Settings</h3>
+
+                <h3 class="control-sidebar-heading">Message Settings</h3>
+
+                <div class="form-group">
+                  <label class="control-sidebar-subheading">
+                    Show me as online
+                    <input type="checkbox" class="pull-right" checked>
+                  </label>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                  <label class="control-sidebar-subheading">
+                    Turn off notifications
+                    <input type="checkbox" class="pull-right">
+                  </label>
+                </div>
+                <!-- /.form-group -->
+              </form>
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+      </div>
+      <!-- ./wrapper -->
+
+  <!-- jQuery 2.2.3 -->
+  <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="plugins/fastclick/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/app.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="dist/js/demo.js"></script>
+  <!-- DataTables -->
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <script src="js/select2.full.min.js"></script>
+  <script type="text/javascript" src="formwizard.js"></script>
+  <script>
+    $(function () {
+      $("#datatable").DataTable();
+      $("#datatable1").DataTable();
+      $("#datatable2").DataTable();
+      $("#datatable3").DataTable();
+      $("#datatable4").DataTable();
+    });
+    $(document).ready(function() {
+    $(".choose").select2();
+  });
+  </script>
+
+  </body>
+
+</html>
