@@ -21,19 +21,19 @@ $query = "INSERT INTO tblschoolyear(tblSchoolYrId,tblSchoolYrYear, tblSchoolYr_t
 if (!$query = mysqli_query($con, $query)) {
     exit(mysqli_error($con));
 }else{
-    header('location:school-yearV2.php?mesage=2');
+    header('location:school-year.php?mesage=2');
 }
 }else if($result->num_rows > 0){
 	$search="select tblSchoolYrId from tblschoolyear where tblSchoolYrYear='$year' and tblSchoolYearFlag=0";
 	$find=$con->query($search);
 	if($find->num_rows == 0)
 	{
-		header('Location: school-yearV2.php?message=1');
+		header('Location: school-year.php?message=1');
 	}else if($find->num_rows == 1)
 	{
 		$query="update tblschoolyear set tblSchoolYearFlag=1 where tblSchoolYrYear='$year'";
 		$result=mysqli_query($con, $query);
-		header('Location: school-yearV2.php?message=2');
+		header('Location: school-year.php?message=2');
 	}
 }
 $arrPeriod = array("1st Quarter","2nd Quarter","3rd Quarter","4th Quarter");
@@ -47,7 +47,7 @@ foreach($arrPeriod as $value){
 	if (!$query = mysqli_query($con, $query)) {
 	    exit(mysqli_error($con));
 	}else{
-	    header('location:school-yearV2.php?message=2');
+	    header('location:school-year.php?message=2');
 	}
 }
 

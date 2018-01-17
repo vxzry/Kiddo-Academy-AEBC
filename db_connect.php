@@ -3,7 +3,7 @@
 // Connection variables 
 $host = "127.0.0.1"; // MySQL host name eg. localhost
 $user = "root"; // MySQL user. eg. root ( if your on localserver)
-$password = "gambit"; // MySQL user password  (if password is not set for your root user then keep it empty )
+$password = ""; // MySQL user password  (if password is not set for your root user then keep it empty )
 $database = "dbkadc"; // MySQL Database name
  
 // Connect to MySQL Database

@@ -12,7 +12,7 @@
 		$result = $con->query($search);
 		if ($result->num_rows > 0) 
 		{
-			header('Location: school-yearV2.php?msg=1');
+			header('Location: school-year.php?msg=1');
 		}else{
 		$query = "select tblCurriculumId from tblcurriculum where tblCurriculumName = '$curr'";
 		$result = mysqli_query($con, $query);
@@ -24,7 +24,7 @@
 	        exit(mysqli_error($con));
 	    }else
 	    {
-	    	header('Location: school-yearV2.php?msg=2');
+	    	header('Location: school-year.php?msg=2');
 	    }
 */		if($active == 'ACTIVE')
 		{
@@ -32,7 +32,7 @@
 			$result = mysqli_query($con, $query);
 			$query = "update tblschoolyear set tblSchoolYrActive = 'ACTIVE' where tblSchoolYrYear = '$year'";
 			$result = mysqli_query($con, $query);
-			header('Location: school-yearV2.php?message=4');
+			header('Location: school-year.php?message=4');
 		}else
 		{
 			$query = "select tblSchoolYrActive from tblschoolyear where tblSchoolYrActive = 'ACTIVE' and tblSchoolYrId <> '$id' and tblSchoolYearFlag = 1";
@@ -44,9 +44,9 @@
 				
 			}else
 			{
-				header('Location: school-yearV2.php?message=3');
+				header('Location: school-year.php?message=3');
 			}
-			header('Location: school-yearV2.php?message=4');
+			header('Location: school-year.php?message=4');
 		}
 	}
 }

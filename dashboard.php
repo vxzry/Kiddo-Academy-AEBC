@@ -227,7 +227,13 @@
 
         <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>S.Y. <?php echo date("Y"); ?> - <?php echo date('Y', strtotime('+1 year')); ?></h3>
+              <?php
+                $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+                $result=mysqli_query($con, $query);
+                $row=mysqli_fetch_array($result);
+                $sy=$row['tblSchoolYrYear'];
+              ?>
+              <h3><?php echo $sy ?></h3>
               <p style="font-size: 24px">Welcome!</p>
             </div>
             <div class="icon">

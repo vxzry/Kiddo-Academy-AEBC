@@ -7,7 +7,10 @@ if(isset($_POST['btnProceed']))
 	$session=$_POST['txtSession'];
 	$schemem=$_POST['selSchemeMand'];
 	$schemeo=$_POST['selSchemeOpt'];
-	$feeId=$_POST['txtFeeId2'];
+	
+		$feeId=$_POST['txtFeeId2'];
+	
+	
 	$feeId1=$_POST['txtFeeId1'];
 	$query="select tblSchoolYrId from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
 	$result=mysqli_query($con, $query);
@@ -45,9 +48,13 @@ if(isset($_POST['btnProceed']))
 	$length1=count($schemem);
 	foreach($feeId1 as $val1)
 	{
-		for($i=1; $i<$length1; $i++)
+		for($i=0; $i<=$length1; $i++)
 		{
 			$scheme1=$schemem[$i];
+			if($scheme1=='None')
+			{
+				$scheme1="";
+			}
 			$search="select * from tblscheme where tblScheme_tblFeeId='$val1' and tblSchemeId='$scheme1' and tblSchemeFlag=1";
 			$result=$con->query($search);
 			if($result->num_rows > 0)
@@ -74,13 +81,20 @@ if(isset($_POST['btnProceed']))
 				 }
 			}
 		}
+		
 	}//foreach feeId(mandatory)
 	$length=count($schemeo);
+	if($feeId != 'None')
+	{
 	foreach($feeId as $val2)
 	{
-		for($i=0; $i<$length; $i++)
+		for($i=0; $i<=$length; $i++)
 		{
 			$scheme=$schemeo[$i];
+			if($scheme == 'None')
+			{
+				$scheme = "";
+			}
 			$search="select * from tblscheme where tblScheme_tblFeeId='$val2' and tblSchemeId='$scheme' and tblSchemeFlag=1";
 			$result=$con->query($search);
 			if($result->num_rows > 0)
@@ -107,7 +121,9 @@ if(isset($_POST['btnProceed']))
 				 }
 			}
 		}
+	
 	}
+}
 
 	$query="select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' and tblStudScheme_tblSchoolYrId='$syid' and tblStudSchemeFlag=1";
 	$result=mysqli_query($con, $query);
@@ -155,12 +171,14 @@ if(isset($_POST['btnProceed']))
 		}
 	endwhile;
 	
-	$query="update tblstudent set tblStudentType='OFFICIAL', tblStudentPreferSession='$session' where tblStudentId='$studid' and tblStudentFlag=1";
+	$query="update tblstudent set tblStudentPreferSession='$session' where tblStudentId='$studid' and tblStudentFlag=1";
 	if (!$query = mysqli_query($con, $query)) {
 				exit(mysqli_error($con));
 	}else
 	{
 		header("location:collection2.php?studentid=$studid");
+
 	}
+	
 }//btnProceed
 ?>

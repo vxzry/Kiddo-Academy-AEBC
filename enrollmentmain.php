@@ -324,12 +324,15 @@
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
                                         <fieldset style="margin-top: 2%; margin-left: 2%">
                                         <h4 style="font-weight: bold">Optional Fees</h4>
+                                        <input type="hidden" name="optionalfees" value="None" />
                                         <?php
                                         $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
                                         $result=mysqli_query($con, $query);
                                         while($row=mysqli_fetch_array($result)):
                                         ?>
-                                        <div><input type="checkbox" name="optionalfees[]" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>" onclick="addRow()"> <?php echo $row['tblFeeName'] ?></div>
+                                        <div>
+                                          
+                                          <input type="checkbox" name="optionalfees[]" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>"> <?php echo $row['tblFeeName'] ?></div>
                                       <?php endwhile; ?>
                                         </fieldset>
                                         </div>

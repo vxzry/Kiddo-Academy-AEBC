@@ -423,7 +423,6 @@
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs" id="myTab">
                       <li class="active"><a href="#tab_1" data-toggle="tab">Curriculum</a></li>
-                      <li><a href="#tab_2" data-toggle="tab">Division</a></li>
                       <li><a href="#tab_3" data-toggle="tab">Level</a></li>
                       <li><a href="#tab_4" data-toggle="tab">Subject</a></li>
                       <li><a href="#tab_5" data-toggle="tab">Curriculum Details</a></li>

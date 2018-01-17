@@ -108,6 +108,10 @@ $sibSchool=$_POST['txtSiblSchool'];
 $relName=$_POST['txtRelName'];
 $relAge=$_POST['txtRelAge'];
 $relRelation=$_POST['txtRelRelation'];
+$emName=$_POST['txtEmName'];
+$emRel=$_POST['txtReltoStud'];
+$emNum=$_POST['txtEmNum'];
+$emAddress=$_POST['txtEmAdress'];
 
 
 $query="insert into tblstudent(tblStudentId, tblStudentType, tblStudent_tblLevelId, tblStudentFlag, tblStudentTransferee) values ('$studentid', 'APPLICANT', '$lvl', 1, '$type')";
@@ -148,6 +152,26 @@ for($j=0; $j<$y; $j++)
 	   exit(mysqli_error($con));
 	}
 }
+/*added*/
+$z=count($emName);
+for($i=0; $i<$z; $i++)
+{
+	$ename=$emName[$i];
+	$erel=$emRel[$i];
+	$enum=$emNum[$i];
+	$eaddress=$emAddress[$i];
+	$query="select * from tblstudemergency order by tblStudEmId desc limit 0, 1";
+	$result=mysqli_query($con, $query);
+	$row=mysqli_fetch_array($result);
+	$studemid=$row['tblStudEmId'];
+	$studemid++;
+	$query="insert into tblstudemergency(tblStudEmId, tblStudEmName, tblStudEmRelation, tblStudEmTelNo, tblStudEmAddress, tblStudEm_tblStudentId) values ('$studemid','$ename', '$erel', '$enum', '$eaddress', '$studentid')";
+	if (!$query = mysqli_query($con, $query)) {
+	   exit(mysqli_error($con));
+	}
+	
+}
+/*added*/
 $query = "select * from tblstudentinfo order by tblStudInfoId desc limit 0, 1";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);

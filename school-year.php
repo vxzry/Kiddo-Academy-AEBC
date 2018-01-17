@@ -1,5 +1,35 @@
-<?php include "db_connect.php"; ?>
-<!DOCTYPE html>
+<?php 
+   include('session.php');
+   include('db_connect.php');
+   $x=substr($login_session,0,1);
+   if($x=="P")
+   {
+    $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblParentId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+   }else if($x=="F")
+   {
+    $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as names from tblfaculty where tblFaculty_tblUserId='$user_id' and tblFacultyFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblFacultyId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
+   }
+?><!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -250,43 +280,54 @@ function showTblMonth()
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header" style="color: white">Welcome!</li>
-        <li class="treeview">
-          <a href="dashboard.php">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="treeview">
+        <?php 
+        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+        $result=mysqli_query($con, $query);
+        $row=mysqli_fetch_array($result);
+          $rolename=$row['tblRoleName'];
+          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+          {
+            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+            $result1=mysqli_query($con, $query1);
+            while($row1=mysqli_fetch_array($result1))
+            {
+              $modulename=$row1['tblModuleType'];
+
+        ?>
+
+        <li class="treeview"> 
           <a href="#">
-            <i class="fa fa-gears"></i> <span>Maintenance</span>
+            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="curriculumv2.php"><i class="fa fa-circle-o"></i>Curriculum</a></li>
-            <li><a href="school-yearv2.php"><i class="fa fa-circle-o"></i>School Year</a></li>
-            <li><a href="sectionv2.php"><i class="fa fa-circle-o"></i>Section</a></li>
-            
-            <li><a href="requirementv2.php"><i class="fa fa-circle-o"></i>Requirement</a></li>
-            <li><a href="paymentv2.php"><i class="fa fa-circle-o"></i>Payment</a></li>
-            <li><a href="profilev2.php"><i class="fa fa-circle-o"></i>Profile</a></li>
+           <?php
+              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+              $result2=mysqli_query($con, $query2);
+              while($row2=mysqli_fetch_array($result2)):
+            ?>
+            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+            <?php endwhile; ?>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-refresh"></i> <span>Transaction</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="admission.html"><i class="fa fa-circle-o"></i>Admission</a></li>
-            <li><a href="enrollment.html"><i class="fa fa-circle-o"></i>Enrollment</a></li>
-             <li><a href="view-gradesv2.html"><i class="fa fa-circle-o"></i>Promotion</a></li>
-            <li><a href="sectioningv2.html"><i class="fa fa-circle-o"></i>Sectioning</a></li>
-            <li><a href="dismiss-withdraw.html"><i class="fa fa-circle-o"></i>Dismissal/ Withdrawal</a></li>
-          </ul>
-        </li>
+      <?php 
+      }//while
+      }else
+      {
+              $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
+              $result=mysqli_query($con, $query);
+              while($row=mysqli_fetch_array($result)):
+      ?>
+           <li class="treeview">
+              <a href="<?php echo $row['tblModuleLinks'] ?>">
+                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
+              </a>
+            </li>
+      <?php
+       endwhile; } 
+      ?>
       </ul>
     </section>
     <!-- /.sidebar -->

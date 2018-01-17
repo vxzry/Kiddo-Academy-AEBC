@@ -1,4 +1,35 @@
-<?php include "db_connect.php" ?>
+<?php 
+   include('session.php');
+   include('db_connect.php');
+   $x=substr($login_session,0,1);
+   if($x=="P")
+   {
+    $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblParentId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+   }else if($x=="F")
+   {
+    $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as names from tblfaculty where tblFaculty_tblUserId='$user_id' and tblFacultyFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblFacultyId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
+   }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,42 +171,54 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header" style="color: white">Welcome!</li>
-        <li class="treeview">
-          <a href="dashboard.php">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#"> 
-            <i class="fa fa-gears"></i> <span>Maintenance</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="curriculumv2.php"><i class="fa fa-circle-o"></i>Curriculum</a></li>
-            <li><a href="school-yearv2.php"><i class="fa fa-circle-o"></i>School Year</a></li>
-            <li><a href="sectionv2.php"><i class="fa fa-circle-o"></i>Section</a></li>
-            <li><a href="requirementv2.php"><i class="fa fa-circle-o"></i>Requirement</a></li>
-            <li><a href="paymentv2.php"><i class="fa fa-circle-o"></i>Payment</a></li>
-            <li><a href="profilev2.php"><i class="fa fa-circle-o"></i>Profile</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
+        <?php 
+        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+        $result=mysqli_query($con, $query);
+        $row=mysqli_fetch_array($result);
+          $rolename=$row['tblRoleName'];
+          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+          {
+            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+            $result1=mysqli_query($con, $query1);
+            while($row1=mysqli_fetch_array($result1))
+            {
+              $modulename=$row1['tblModuleType'];
+
+        ?>
+
+        <li class="treeview"> 
           <a href="#">
-            <i class="fa fa-refresh"></i> <span>Transaction</span>
+            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="admission.html"><i class="fa fa-circle-o"></i>Admission</a></li>
-            <li><a href="enrollment.html"><i class="fa fa-circle-o"></i>Enrollment</a></li>
-             <li><a href="view-gradesv2.html"><i class="fa fa-circle-o"></i>Promotion</a></li>
-            <li><a href="sectioningv2.html"><i class="fa fa-circle-o"></i>Sectioning</a></li>
-            <li><a href="dismiss-withdraw.html"><i class="fa fa-circle-o"></i>Dismissal/ Withdrawal</a></li>
+           <?php
+              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+              $result2=mysqli_query($con, $query2);
+              while($row2=mysqli_fetch_array($result2)):
+            ?>
+            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+            <?php endwhile; ?>
           </ul>
         </li>
+      <?php 
+      }//while
+      }else
+      {
+              $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
+              $result=mysqli_query($con, $query);
+              while($row=mysqli_fetch_array($result)):
+      ?>
+           <li class="treeview">
+              <a href="<?php echo $row['tblModuleLinks'] ?>">
+                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
+              </a>
+            </li>
+      <?php
+       endwhile; } 
+      ?>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -225,7 +268,7 @@
       if(isset($_POST['btnStud']))
       {
         $id = $_POST['txtStudId'];
-        $query="select si.tblStudInfoFname, si.tblStudInfoLname, si.tblStudInfoMname, si.tblStudInfoBday, si.tblStudInfoBplace, si.tblStudInfoAddress, si.tblStudInfoGender, si.tblStudInfoReligion, si.tblStudInfoNationality, si.tblStudInfoLang1, si.tblStudInfoLang2 from tblstudent s, tblstudentinfo si where s.tblStudentId = '$id' and s.tblStudentId = si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
+        $query="select si.tblStudInfoFname, si.tblStudInfoLname, si.tblStudInfoMname, si.tblStudInfoBday, si.tblStudInfoBplace, si.tblStudInfoAddSt, si.tblStudInfoAddBrgy, si.tblStudInfoAddCity, si.tblStudInfoAddCountry, si.tblStudInfoGender, si.tblStudInfoReligion, si.tblStudInfoNationality, si.tblStudInfoLang1, si.tblStudInfoLang2 from tblstudent s, tblstudentinfo si where s.tblStudentId = '$id' and s.tblStudentId = si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
         $result = mysqli_query($con, $query);
         $row = mysqli_fetch_array($result);
         $fname = $row['tblStudInfoFname'];
@@ -233,13 +276,16 @@
         $mname = $row['tblStudInfoMname'];
         $bday = $row['tblStudInfoBday'];
         $bplace = $row['tblStudInfoBplace'];
-        $add = $row['tblStudInfoAddress'];
+        $addst = $row['tblStudInfoAddSt'];
+        $addbrgy = $row['tblStudInfoAddBrgy'];
+        $addcity = $row['tblStudInfoAddCity'];
+        $addcountry = $row['tblStudInfoAddCountry'];
         $gender = $row['tblStudInfoGender'];
         $religion = $row['tblStudInfoReligion'];
         $nationality = $row['tblStudInfoNationality'];
         $lang1 = $row['tblStudInfoLang1'];
         $lang2 = $row['tblStudInfoLang2'];
-        $arrStud = array($fname, $lname, $mname, $bday, $bplace, $gender, $add, $religion, $nationality, $lang1, $lang2);
+        $arrStud = array($fname, $lname, $mname, $bday, $bplace, $gender, $addst, $addbrgy, $addcity, $addcountry, $religion, $nationality, $lang1, $lang2);
         ?>
         <input type="hidden" name="txtPerId" id="txtPerId" value="<?php echo $id ?>"/>
         <div class="form-group">
@@ -284,11 +330,23 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label">Home Address:</label>
-          <div class="col-lg-7">
-            <input class="form-control" type="text" name="txtPerAdd" id="txtPerAdd" value = "<?php echo $add ?>">
-          </div>
+            <label class="col-lg-3 control-label left">Home Address:</label>
+            <div class="col-lg-4">
+              <input class="form-control" type="text" placeholder="Street Name/No." name="txtAddSt" id="txtAddSt" value = "<?php echo $addst ?>">
+            </div>
+            <div class="col-lg-3">
+              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtAddBrgy" id="txtAddBrgy" value = "<?php echo $addbrgy ?>">
+            </div>
         </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label left"></label>
+            <div class="col-lg-5">
+              <input class="form-control" type="text" placeholder="City/Municipality" name="txtAddCity" id="txtAddCity" value = "<?php echo $addcity ?>">
+            </div>
+            <div class="col-lg-2">
+              <input class="form-control" type="text" value="Philippines" name="txtAddCountry" id="txtAddCountry" value = "<?php echo $addcountry ?>">
+            </div>
+          </div>
         <div class="form-group">
                 <label class="col-lg-3 control-label">Religion:</label>
                 <div class="col-sm-7">

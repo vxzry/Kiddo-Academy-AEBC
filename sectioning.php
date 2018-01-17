@@ -238,10 +238,43 @@ function run(){
 
                         <div class="tab-pane active" id="tab_1">
                         <div class="box">
-                             
+                             <?php
+                              $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+                              $result=mysqli_query($con, $query);
+                              $row=mysqli_fetch_array($result);
+                              $sy=$row['tblSchoolYrId'];
+                             ?>
                              
                                 <div class="box-body">
-
+                                  <div style="margin-top: 5%">
+                                    <table id="datatable7" name="datatable7" class="table table-bordered table-striped">
+                                      <thead>
+                                        <tr>
+                                          <th>Student Id</th>
+                                          <th>Student Name</th>
+                                          <th>Student Level</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                      <?php
+                                      $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudentFlag=1 and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudent_tblLevelId=l.tblLevelId and s.tblStudentType='OFFICIAL'";
+                                      $result=mysqli_query($con, $query);
+                                      while($row=mysqli_fetch_array($result)):
+                                        $sid=$row['tblStudentId'];
+                                        $query1="select * from tblsectionstud where tblSectStud_tblStudentId='$sid' and tblSectStud_tblSchoolYrId='$sy'";
+                                        $result1 = $con->query($query1);
+                                        if ($result1->num_rows == 0)
+                                        {
+                                      ?>
+                                      <tr>
+                                        <td><?php echo $row['tblStudentId'] ?></td>
+                                        <td><?php echo $row['studentname'] ?></td>
+                                        <td><?php echo $row['tblLevelName'] ?></td>
+                                      </tr>
+                                      <?php } endwhile; ?>
+                                      </tbody>
+                                    </table>
+                                  </div>
                                   <div style="margin-top: 5%">
                                     <table id="datatable1" name="datatable1" class="table table-bordered table-striped">
                                       <thead>
@@ -282,7 +315,7 @@ function run(){
                                             $row1=mysqli_fetch_array($result1);
                                           ?>
                                           <td hidden><?php echo $row1['tblFacultyId'] ?></td>
-                                          <td><?php echo $row1['facultyname'] ?></td>>
+                                          <td><?php echo $row1['facultyname'] ?></td>
                                           <td style="width: 25%"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
                                           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
                                           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
@@ -368,8 +401,8 @@ function run(){
     </div>
   </div>
 
-  <div class="modal fade" id="mdlViewStud" role="dialog">
-    <div class="modal-dialog">
+  <div class="modal fade " id="mdlViewStud" role="dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -596,6 +629,7 @@ function run(){
         $("#datatable2").DataTable();
         $("#datatable3").DataTable();
         $("#datatable4").DataTable();
+        $("#datatable7").DataTable();
       });
       $(document).ready(function() {
       $(".choose").select2();

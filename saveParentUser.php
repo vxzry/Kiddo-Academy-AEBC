@@ -2,8 +2,9 @@
 include "db_connect.php";
 $parentid=$_POST['txtParentId'];
 $parentpass=$_POST['txtParentPass'];
+$parentid= 'P-'.$parentid;
 
-$query="select * from tbluser order by tblFeeId desc limit 0, 1";
+$query="select * from tbluser order by tblUserId desc limit 0, 1";
 $result=mysqli_query($con, $query);
 $row=mysqli_fetch_array($result);
 $id=$row['tblUserId'];
@@ -16,7 +17,7 @@ if (!$query = mysqli_query($con, $query)) {
    if (!$query = mysqli_query($con, $query)) {
     exit(mysqli_error($con));
 	}else{
-    header('location:enrolment(main).php');
+    header('location:enrollmentmain.php');
 	}
 }
 

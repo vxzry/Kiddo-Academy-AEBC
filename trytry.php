@@ -23,7 +23,15 @@ foreach($id as $x)
 }
 if($num == 1)
 {
-	header("location:createUser.php?studentid=$studid");
+	$query="update tblstudent set tblStudentType='OFFICIAL' where tblStudentId='$studid' and tblStudentFlag=1";
+	if (!$query = mysqli_query($con, $query)) {
+				exit(mysqli_error($con));
+	}else
+	{
+		header("location:createParentUser.php?studentid=$studid");
+
+	}
+	
 }else if($num != 1)
 {
 	header("location:billing.php"); 

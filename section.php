@@ -118,7 +118,8 @@
       var f6=document.getElementById('updSectName');
       var f7=document.getElementById('txtDelSectId');
       var f8=document.getElementById('updSesSelect');
-      var f9=document.getElementById('updSectName2');
+      var f9=document.getElementById('updMaxCap');
+      var f10=document.getElementById('updMinCap');
       f1.value=cells[0].innerHTML;
       f2.value=cells[1].innerHTML;
       f3.value=cells[2].innerHTML;
@@ -127,7 +128,8 @@
       f6.value=cells[5].innerHTML;
       f7.value=cells[2].innerHTML;
       f8.value=cells[6].innerHTML;
-      f9.value=cells[5].innerHTML;
+      f9.value=cells[7].innerHTML;
+      f10.value=cells[8].innerHTML;
     };
   }})();
     </script>
@@ -391,6 +393,24 @@
                               </div>
                             </div>
 
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label">Maximum Slot</label>
+                              <div class="col-sm-6 selectContainer">
+                                <div class = "input-group" style="width:100%;">
+                                  <input type="number" class="form-control" name="addMaxCap" id="addMaxCap"/>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label">Minimum Slot</label>
+                              <div class="col-sm-6 selectContainer">
+                                <div class = "input-group" style="width:100%;">
+                                  <input type="number" class="form-control" name="addMinCap" id="addMinCap"/>
+                                </div>
+                              </div>
+                            </div>
+
                             <div class="modal-footer" style="margin-top: 7%">
                               <button type="submit" class="btn btn-info" name="addSectBtn" id="addSectBtn">Save</button>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -481,6 +501,24 @@
                               </div>
                             </div>
 
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label">Maximum Slot</label>
+                              <div class="col-sm-6 selectContainer">
+                                <div class = "input-group" style="width:100%;">
+                                  <input type="number" class="form-control" name="updMaxCap" id="updMaxCap"/>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label">Minimum Slot</label>
+                              <div class="col-sm-6 selectContainer">
+                                <div class = "input-group" style="width:100%;">
+                                  <input type="number" class="form-control" name="updMinCap" id="updMinCap"/>
+                                </div>
+                              </div>
+                            </div>
+
                             <div class="modal-footer" style="margin-top: 7%">
                               <button type="submit" class="btn btn-info" name="updSectBtn" id="updSectBtn">Save</button>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -539,12 +577,14 @@
         <th>Level Name</th>
         <th>Section Name</th>
         <th>Session</th>
+        <th>Maximum Slot</th>
+        <th>Minimum Slot</th>
         <th>Action</th>
       </tr>
       </thead>
       <tbody>
       <?php
-      $query = "select d.tblDivisionId, d.tblDivisionName, l.tblLevelId, l.tblLevelName, s.tblSectionId, s.tblSectionName, s.tblSectionSession from tbldivision d, tbllevel l, tblsection s
+      $query = "select d.tblDivisionId, d.tblDivisionName, l.tblLevelId, l.tblLevelName, s.tblSectionId, s.tblSectionName, s.tblSectionSession, s.tblSectionMaxCap, s.tblSectionMinCap from tbldivision d, tbllevel l, tblsection s
         where l.tblLevel_tblDivisionId = d.tblDivisionId and s.tblSection_tblLevelId = l.tblLevelId and s.tblSectionFlag = 1 order by d.tblDivisionId";
       $result = mysqli_query($con, $query)or die(mysqli_error());
 
@@ -558,6 +598,8 @@
       <td style="width:100px;"><?php echo $row1['tblLevelName']; ?></td>
       <td style="width:100px;"><?php echo $row1['tblSectionName']; ?></td>
       <td style="width:100px;"><?php echo $row1['tblSectionSession']; ?></td>
+      <td style="width:100px;"><?php echo $row1['tblSectionMaxCap']; ?></td>
+      <td style="width:100px;"><?php echo $row1['tblSectionMinCap']; ?></td>
       <td style="width:50px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
       </tr>

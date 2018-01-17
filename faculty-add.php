@@ -312,8 +312,9 @@
                                   <div class="col-sm-7">
                                     <select class="form-control choose" style="width: 100%;" name="selPosition" id="selPosition">
                                       <option selected="selected" disabled>--Select position--</option>
-                                      <option value="Teacher">TEACHER</option>
-                                      <option value="Registrar">REGISTRAR</option>
+                                      <option value="TEACHER">TEACHER</option>
+                                      <option value="REGISTRAR">REGISTRAR</option>
+                                      <option value="SCHOOL HEAD">SCHOOL HEAD</option>
 
                                     </select>
                                   </div>

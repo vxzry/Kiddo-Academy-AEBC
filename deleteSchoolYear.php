@@ -14,11 +14,11 @@
 			if (!$query = mysqli_query($con, $query)) {
 	   			exit(mysqli_error($con));
 			}else{
-	   			header('location:school-yearv2.php?message=6');
+	   			header('location:school-year.php?message=6');
 			}
         }else if($active=="ACTIVE")
         {
-        	header('location:school-yearv2.php?message=7');
+        	header('location:school-yearphp?message=7');
         }
     }
 ?>

@@ -94,10 +94,12 @@ function run(){
     var f2=document.getElementById('txtUpdReqName');
     var f3=document.getElementById('txtUpdReqDesc');
     var f4=document.getElementById('txtDelReqId');
+    var f5=document.getElementById('updReqType');
     f1.value=cells[0].innerHTML;
     f2.value=cells[1].innerHTML;
     f3.value=cells[2].innerHTML;
     f4.value=cells[0].innerHTML;
+    f5.value=cells[3].innerHTML;
   };
 }})();
   </script>
@@ -305,6 +307,22 @@ function run(){
                                   </div>
                                 </div>
 
+                                 <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Requirement Type </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%" name="addReqType" id="addReqType">
+                                        <option selected="selected" disabled>--Choose Type--</option>
+                                          <option value="ADMISSION">ADMISSION</option>
+                                          <option value="ENROLLMENT">ENROLLMENT</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <div class="modal-footer" style="margin-top: 7%">
                                   <button type="submit" class="btn btn-info" name="btnAddReq" id="btnAddReq">Save</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -349,6 +367,23 @@ function run(){
                                   <div class="col-sm-6 selectContainer">
                                     <div class="input-group" style="width:100%;">
                                       <textarea type="text" style="text-transform: uppercase; resize: vertical;" class="form-control" name="txtUpdReqDesc" id="txtUpdReqDesc"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                               
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Requirement Type </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%" name="updReqType" id="updReqType">
+                                        <option selected="selected" disabled>--Choose Type--</option>
+                                          <option value="ADMISSION">ADMISSION</option>
+                                          <option value="ENROLLMENT">ENROLLMENT</option>
+                                      </select>
                                     </div>
                                   </div>
                                 </div>
@@ -407,6 +442,7 @@ function run(){
              <th hidden></th>
              <th>Requirement Name</th>
              <th>Requirement Description</th>
+             <th>Type</th>
              <th>Action</th>
            </tr>
            </thead>
@@ -421,6 +457,7 @@ function run(){
            <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
            <td style="width:100px;"><?php echo $row1['tblReqDescription']; ?></td>
+           <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>           
            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
            </tr>

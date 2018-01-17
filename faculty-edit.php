@@ -228,7 +228,7 @@
       $add=$row['tblFacultyAddress'];
       $no=$row['tblFacultyContact'];
       $email=$row['tblFacultyEmail'];
-      $position=$row['tblFaculty_tblFacultyPositionId'];
+      $position=$row['tblFacultyPosition'];
       ?>
       <input class="form-control" type="hidden" name="txtId" id="txtId" value="<?php echo $id ?>">
         <div class="form-group">

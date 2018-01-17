@@ -15,7 +15,7 @@ if(isset($_POST['btnDel']))
 	if (!$query = mysqli_query($con, $query)) {
     	exit(mysqli_error($con));
 	}else{
-    	header('location:profilev2.php?message=6');
+    	header('location:profile.php?message=6');
 	}
 }
 ?>

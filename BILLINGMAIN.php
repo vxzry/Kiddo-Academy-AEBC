@@ -149,17 +149,54 @@ $lvlid=$row['tblStudent_tblLevelId'];
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
+            <?php 
+        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+        $result=mysqli_query($con, $query);
+        $row=mysqli_fetch_array($result);
+          $rolename=$row['tblRoleName'];
+          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+          {
+            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+            $result1=mysqli_query($con, $query1);
+            while($row1=mysqli_fetch_array($result1))
+            {
+              $modulename=$row1['tblModuleType'];
+
+        ?>
+
+        <li class="treeview"> 
+          <a href="#">
+            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
            <?php
+              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+              $result2=mysqli_query($con, $query2);
+              while($row2=mysqli_fetch_array($result2)):
+            ?>
+            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+            <?php endwhile; ?>
+          </ul>
+        </li>
+      <?php 
+      }//while
+      }else
+      {
               $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
               $result=mysqli_query($con, $query);
               while($row=mysqli_fetch_array($result)):
-            ?>
+      ?>
            <li class="treeview">
               <a href="<?php echo $row['tblModuleLinks'] ?>">
                 <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
               </a>
             </li>
-          <?php endwhile ?>
+      <?php
+       endwhile; } 
+      ?>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -213,10 +250,10 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                   </thead>
                                   <tbody>
                                   <?php
-                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=5 and a.tblAccPaid!='PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
+                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=1 and a.tblAccPaid!='PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
-                                      $payment=$row['tblAccCredit']
+                                      $payment=$row['tblAccCredit'];
                                       $feeId=$row['tblStudScheme_tblFeeId'];
                                       $query1="select * from tblfee where tblFeeId='$feeId'";
                                       $result1=mysqli_query($con, $query1);

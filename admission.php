@@ -95,6 +95,14 @@
       divingr2.innerHTML = '<br /><label class="col-lg-2 control-label left">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtRelName[]" id="txtRelName"></div><label class="col-lg-2 control-label left">Age:</label><div class="col-lg-8"><input class="form-control" type="number" name="txtRelAge[]" id="txtRelAge"></div><label class="col-lg-2 control-label left">Relation:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation"></div>';
       objTo2.appendChild(divingr2);
     }
+
+    function addEmergencyContact()
+    { 
+      var objTo2 = document.getElementById('relative');
+      var divingr2 = document.createElement("div");
+      divingr2.innerHTML = '<br /> <label class="col-lg-4 control-label">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtEmName[]" id="txtEmName"></div><label class="col-lg-4 control-label">Relation to Student:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtReltoStud[]" id="txtReltoStud"><label class="col-lg-4 control-label">Tel/Mobile Number:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtEmNum[]" id="txtEmNum"></div><label class="col-lg-4 control-label">Address:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtEmAdress[]" id="txtEmAdress"></div>';
+      objTo2.appendChild(divingr2);
+    }
     </script>
   </head>
 
@@ -124,13 +132,13 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <img src="images/User/admin.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs"><?php echo $namess ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+                    <img src="images/User/admin.jpg" class="img-circle" alt="User Image">
 
                     <p>
                       <?php echo $namess ?>
@@ -159,7 +167,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel"  style="margin-top: 8%">
             <div class="pull-left image">
-              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+              <img src="images/User/admin.jpg" class="img-circle" alt="User Image">
             </div>
 
             <div class="pull-left info">
@@ -241,6 +249,18 @@
                     <div class="box-header with-border"></div>
 
                     <div class="box-body">
+                      <label style="text-align: right">Parent: </label>
+                      <select class="form-control choose" name="parentChoose" id="parentChoose" style="text-align: right; width: 40%">
+                        <option selected="selected" value="">--Select Parent--</option>
+                            <?php
+                            $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+                            $result = mysqli_query($con, $query);
+                            while($row = mysqli_fetch_array($result))
+                            {
+                            ?>
+                              <option value="<?php echo $row['tblDivisionId'] ?>"><?php echo $row['tblDivisionName'] ?></option>
+                            <?php } ?>
+                      </select>
                       <section>
                         <h3>Admission</h3>
                         <div class="wizard">
@@ -306,7 +326,7 @@
                                       <div class="form-group" style="margin-top: 3%">
                                         <label style="width: 35%">Admission for:</label>
                                         <div>
-                                          <select class="form-control choose" style="width: 35%;" name="selLevel" id="selLevel">
+                                          <select class="form-control" style="width: 35%;" name="selLevel" id="selLevel">
                                                   <option selected="selected" disabled>--Choose Level--</option>
                                                   <?php
                                                   $query="select * from tbllevel where tblLevelFlag=1";
@@ -325,7 +345,7 @@
                                           <fieldset style="margin-top: 2%; margin-left: 2%">
                                             <h3>REQUIREMENTS</h3>
                                               <?php
-                                            $query="select * from tblrequirement where tblRequirementFlag=1";
+                                            $query="select * from tblrequirement where tblRequirementFlag=1 and tblReqType='ADMISSION'";
                                             $result=mysqli_query($con, $query);
                                             while($row=mysqli_fetch_array($result))
                                             {
@@ -917,6 +937,39 @@
               <input class="form-control" type="text" value="Philippines" name="txtHealthAddCountry" id="txtHealthAddCountry">
             </div>
           </div>
+
+
+  <div class="container" style="margin-top: 50%">
+    <hr>
+  <div class="row">
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h5>Other person(s) to contact in case of emergency</h5>
+        <div class= "right" style="margin-bottom:5%">
+               <a href="#"><span class="btn btn-info" id="emcontactbutton" style="float: right" onclick="addEmergencyContact();" >ADD</span></a>
+        </div>
+        <div class="form-group" id="sibling"> 
+          
+            <label class="col-lg-4 control-label">Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="txtEmName[]" id="txtEmName">
+            </div>
+            <label class="col-lg-4 control-label">Relation to Student:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="txtReltoStud[]" id="txtReltoStud">
+            </div>
+            <label class="col-lg-4 control-label">Tel/Mobile Number:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="txtEmNum[]" id="txtEmNum">
+            </div>
+            <label class="col-lg-4 control-label">Address:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="txtEmAdress[]" id="txtEmAdress">
+          </div>
+       </div>
+      </div>
+  </div>
+</div>
                                       
                                     
 

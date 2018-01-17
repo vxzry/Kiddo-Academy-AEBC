@@ -241,9 +241,11 @@ $acc=$_POST['chkbills'];
                                     <th>Amount</th>
                                     <th>Payment</th>
                                 </tr>
-                            </thead>
+                            </thead> 
                             <tbody>
                             <?php
+                            $totalamountdue=0;
+                              $totalamountpaid=0;
                               foreach($acc as $accId)
                               {
                                 $query="select * from tblaccount where tblAccId='$accId' and tblAccFlag=1";
@@ -253,6 +255,7 @@ $acc=$_POST['chkbills'];
                                 $query1="select * from tblstudscheme s, tblfee f where f.tblFeeId=s.tblStudScheme_tblFeeId and s.tblStudSchemeId='$studschemeid' and s.tblStudSchemeFlag=1 and f.tblFeeFlag=1";
                                 $result1=mysqli_query($con, $query1);
                                 $row1=mysqli_fetch_array($result1);
+                                $credit=$row['tblAccCredit'];
                             ?>
                               <tr>
                               <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row['tblAccId'] ?>"/>
@@ -264,7 +267,8 @@ $acc=$_POST['chkbills'];
                               <td><?php echo $row['tblAccCredit'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
                             </tr>
-                            <?php } ?>
+                            <?php $totalamountdue += $credit;
+                            $totalamountpaid += $credit;} ?>
                             </tbody> <!-- preview content goes here-->
                         </table>
                     </div>                           
@@ -280,13 +284,13 @@ $acc=$_POST['chkbills'];
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Due</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
+                            <input type="number" class="form-control" id="amount" name="amount" disabled value="<?php echo $totalamountdue ?>">
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Paid</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount">
+                            <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -298,11 +302,12 @@ $acc=$_POST['chkbills'];
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="date" name="date" disabled>
+                            <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
                     </div>   
+
                 </div>
-            </div>            
+            </div>        
         </div> <!-- / panel preview -->
          <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
     </form> 

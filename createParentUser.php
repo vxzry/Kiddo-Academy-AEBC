@@ -1,4 +1,33 @@
 <?php include "db_connect.php"; 
+include('session.php');
+   $x=substr($login_session,0,1);
+   if($x=="P")
+   {
+    $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblParentId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+   }else if($x=="F")
+   {
+    $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as names from tblfaculty where tblFaculty_tblUserId='$user_id' and tblFacultyFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblFacultyId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
+   }
   $studid=$_GET['studentid'];
   $query="select concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId='$studid' and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblstudentFlag=1";
   $result=mysqli_query($con, $query);
@@ -31,14 +60,14 @@
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
   <script>
-  function showLevel()
-    {
-      var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showTblStudent.php?selLevel="+document.getElementById("selLevel").value,false);
-      xmlhttp.send(null);
+  // function showLevel()
+  //   { 
+  //     var xmlhttp =  new XMLHttpRequest();
+  //     xmlhttp.open("GET","showTblStudent.php?selLevel="+document.getElementById("selLevel").value,false);
+  //     xmlhttp.send(null);
 
-      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
-    }
+  //     document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+  //   }
   function putParentId()
   {
     var id=document.getElementById("selParent").value;
@@ -251,7 +280,7 @@
                                 </div>  
                                 <div class="form-group" style="margin-top: 2%">
                                   <label>Student's Parent:</label>
-                                  <select style="width: 30%;" name="selParent" id="selParent">
+                                  <select style="width: 30%;" name="selParent" id="selParent" onchange="putParentId()">
                                   <option>--Select Parent--</option>
                                   <?php 
                                     $query="select  s.tblStudentId, p.tblParentId, p.tblParentRelation, concat(p.tblParentLname, ', ', p.tblParentFname, ' ', p.tblParentMname) as parentname from tblstudent s, tblparentstudent ps, tblparent p where s.tblStudentId='$studid' and s.tblStudentId=ps.tblParStud_tblStudentId and ps.tblParStud_tblParentId=p.tblParentId";
@@ -259,7 +288,7 @@
                                     while($row=mysqli_fetch_array($result)):
                                       $parentid=$row['tblParentId'];
                                   ?>
-                                  <option value="<?php echo $row['tblParentId'] ?>" onclick="putParentId()"><?php echo $row['tblParentRelation'].": ".$row['parentname'] ?></option>
+                                  <option value="<?php echo $row['tblParentId'] ?>"><?php echo $row['tblParentRelation'].": ".$row['parentname'] ?></option>
                                 <?php endwhile; ?>
                                   </select>
                                 </div>
