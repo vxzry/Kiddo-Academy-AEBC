@@ -18,24 +18,27 @@ $result=mysqli_query($con, $query);
 $row=mysqli_fetch_array($result);
 $sectcnt=$row['count'];
 $arrStud=array();
-
+$x=$max-$sectcnt;
 if($sectcnt < $max)
 {
 	$query="select s.tblStudentId,  concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name
 from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId 
 and s.tblStudentType='OFFICIAL'
-and s.tblStudentFlag=1 order by tblStudentId limit 15";
+and s.tblStudentFlag=1 order by tblStudentId";
 $result=mysqli_query($con, $query);
 while($row=mysqli_fetch_array($result)):
 	$studid=$row['tblStudentId'];
+	$ctr = count($arrStud);
+	if($ctr<$x)
+	{
 	if($studid!="")
 	{
 	array_push($arrStud, $studid);
 	}
+	}
 endwhile;
-$x=$max-$sectcnt;
-
-for($y=0; $y<$x; $y++)
+$ctr=count($arrStud);
+for($y=0; $y<$ctr; $y++)
 {
 	
 	$stud=$arrStud[$y];
