@@ -338,11 +338,6 @@ function showTblMonth()
     <!-- Content Header (Page header) -->
     <section class="content-header"  style="margin-bottom: -25px; ">
     <h5>
-      <ol class="breadcrumb">
-        <li><a href="#"  style="color: black;"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#" style="color: black;">Maintenance</a></li>
-        <li class="active">School Year</li>
-      </ol>
       </h5>
     </section>
 
@@ -427,19 +422,19 @@ function showTblMonth()
         <form data-toggle="validator" role="form" method="post" action="saveSchoolYear.php" name="addSchoolYr" id="addSchoolYr">
         <div class="modal-body inline">
          
-        <div class="form-group" style="margin-top: 5%">
+        <div class="form-group">
                 <label class="col-sm-4" style="text-align: right">Start of school year</label>
                 <div class="col-sm-7 selectContainer">
                 <div class="input-group" style="width: 100%">
-                <input type="text" class="form-control" id="txtAddSy" name="txtAddSy" maxlength="4">
+                <input type="text" class="form-control" id="txtAddSy" name="txtAddSy" maxlength="4"  style="margin-bottom: 20px">
                 </div>
                 </div>
         </div> 
-        <div class="form-group" style="margin-top: 15%">
+        <div class="form-group">
           <label class="col-sm-4" style="text-align: right">Curriculum</label>
             <div class="col-sm-7 selectContainer">
-              <div class="input-group" style="width: 100%">
-                <select class="form-control choose" name="selAddSyCurr" id="selAddSyCurr">
+              <div class="input-group" style="width: 100%; margin-bottom: 15px">
+                <select class="form-control choose" name="selAddSyCurr" id="selAddSyCurr" >
                   <option disabled="disabled" selected="selected">--SELECT CURRICULUM--</option>
                   <?php
                   $query = "select tblCurriculumId, tblCurriculumName from tblcurriculum where tblCurriculumFlag=1";
@@ -454,7 +449,7 @@ function showTblMonth()
           </div>
         </div>        
         </div>
-        <div class="modal-footer" style="margin-top: 10%">
+        <div class="modal-footer" style="margin-top: 20%">
         <button type="submit" class="btn btn-info" name="btnAddSy" id="btnAddSy">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
