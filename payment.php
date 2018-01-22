@@ -30,19 +30,6 @@
     $rolename=$row['tblRoleName'];
    }
 ?>
-<?php
-  if(isset($_GET['msg']))
-  {
-    $msg = $_GET['msg'];
-    if ($msg == 1)
-    {
-    echo "<script> swal('Data already exist', ' ', 'info'); </script>";
-    }else if($msg == 2)
-    {
-    echo '<script>alert("Success"); </script>';
-    }
-  } 
-?> 
 <!DOCTYPE html>
 
 <html>
@@ -120,6 +107,19 @@
     xmlhttp.open("GET","changeSchedSchemeLvl.php?selSchedLvl="+document.getElementById("selSchedLvl").value,false);
     xmlhttp.send(null);
   }
+
+  function changeTblMass()
+  {
+    
+    var xmlhttp =  new XMLHttpRequest();
+    xmlhttp.open("GET","changeTblMass.php?chkPSchedStat="+document.getElementById("chkPSchedStat").value,false);
+    xmlhttp.send(null);
+    document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
+  }
+  function enable()
+  {
+    document.getElementById("selSchedLvl").disabled = false;
+  }
     function changeFee()
   {
     document.getElementById("selSchedScheme").disabled = false;
@@ -137,6 +137,16 @@
     xmlhttp.send(null);
     
     document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
+
+  }
+  function changeTblFeeType()
+  {
+    document.getElementById("selFee").disabled=false;
+    var xmlhttp =  new XMLHttpRequest();
+    xmlhttp.open("GET","changeTblFeeType.php?selFeeType="+document.getElementById("selFeeType").value,false);
+    xmlhttp.send(null);
+    
+    document.getElementById("selFee").innerHTML=xmlhttp.responseText;
 
   }
   function changeTblFeeDetail()
@@ -171,9 +181,17 @@ function run(){
     var f1=document.getElementById('txtUpdFeeId');
     var f2=document.getElementById('txtUpdFee');
     var f3=document.getElementById('txtDelFee');
+    var f4=document.getElementById('selUpdFeeType');
+    var f5=document.getElementById('selUpdFeeMand');
+    var f6=document.getElementById('txtUpdFeeCode');
+    var f7=document.getElementById('txtFdFeeCode');
     f1.value=cells[2].innerHTML;
-    f2.value=cells[2].innerHTML;
+    f2.value=cells[3].innerHTML;
     f3.value=cells[2].innerHTML;
+    f4.value=cells[4].innerHTML;
+    f5.value=cells[5].innerHTML;
+    f6.value=cells[2].innerHTML;
+    f7.value=cells[2].innerHTML;
   };
 }})();
  (function(){
@@ -260,12 +278,20 @@ function run(){
       var f2=document.getElementById('txtDetNo');   
       var f3=document.getElementById('txtDetDueDate');    
       var f4=document.getElementById('txtDetAmount');   
-      var f5=document.getElementById('txtDetDelId');    
+      var f5=document.getElementById('txtDetDelId');
+      var f6=document.getElementById('txtDetId1');   
+      var f7=document.getElementById('txtDetNo1');   
+      var f8=document.getElementById('txtDetDueDate1');    
+      var f9=document.getElementById('txtDetAmount1');    
       f1.value=cells[0].innerHTML;    
       f2.value=cells[1].innerHTML;    
-      f3.value=cells[2].innerHTML;    
+      f3.value=cells[2].innerHTML;
       f4.value=cells[3].innerHTML;    
-      f5.value=cells[0].innerHTML;    
+      f5.value=cells[0].innerHTML;   
+      f6.value=cells[0].innerHTML;   
+      f7.value=cells[4].innerHTML;   
+      f8.value=cells[5].innerHTML;   
+      f9.value=cells[6].innerHTML;   
     };    
   }})();
 
@@ -317,6 +343,9 @@ $(document).ready(function(){
     
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+    }
+    if($message == 7) {
+      echo "<script> swal('Reset succesful!', ' ', 'success'); </script>";
     }
   ?>
 
@@ -464,7 +493,6 @@ $(document).ready(function(){
               <li class="active"><a href="#tab_1" data-toggle="tab">Fees</a></li>
               <li><a href="#tab_2" data-toggle="tab">Payment Scheme Type</a></li>
               <li><a href="#tab_3" data-toggle="tab">Payment Schedule</a></li>
-              <li><a href="#tab_4" data-toggle="tab">Fee Details</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
@@ -473,20 +501,58 @@ $(document).ready(function(){
             </div>
 
               <div class="box-body">
-              <div class="container">
-                      <label class="col-sm-1">Level: </label>
-                      <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selFeeLvl" id="selFeeLvl" onchange = "changeTblFee();">
-                        <option>--Select Here--</option>
-                        <?php
-                        $query = "select tblLevelId, tblLevelName from tbllevel where tblLevelFlag = 1";
-                        $result = mysqli_query($con, $query);
-                        while($row = mysqli_fetch_array($result))
-                        {
-                        ?>
-                        <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
-                        <?php } ?>  
-                      </select>
-            </div>
+                    <div class="btn-group" style="margin-bottom: 3%">
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalList"><i class="fa fa-list"></i>  View Fee List</button>
+                    </div>
+
+
+ <!-- Add Modal -->
+<div class="modal fade" id="modalList" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 150%;">
+        <div class="modal-header">
+          <h4 class="modal-title" id="addModalFour"> ADD FEE </h4>
+        </div>
+
+        <div class="modal-body">
+
+          <table id="datatable" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Fee Code</th>
+                  <th>Fee Name</th>
+                  <th>Level Name</th>
+                  <th>Fee Type</th>
+                  <th>Fee Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <?php
+                $query="select f.tblFeeCode, f.tblFeeName, f.tblFeeType, l.tblLevelName, fa.tblFeeAmountAmount from tblfee f, tbllevel l, tblfeeamount fa where fa.tblFeeAmount_tblFeeId=f.tblFeeId and fa.tblFeeAmount_tblLevelId=l.tblLevelId and f.tblFeeFlag=1";
+                $result=mysqli_query($con, $query);
+                while($row=mysqli_fetch_array($result)):
+                ?>
+                <tr>
+                <td><?php echo $row['tblFeeCode'] ?></td>
+                <td><?php echo $row['tblFeeName'] ?></td>
+                <td><?php echo $row['tblLevelName'] ?></td>
+                <td><?php echo $row['tblFeeType'] ?></td>
+                <td><?php echo $row['tblFeeAmountAmount'] ?></td>
+                </tr>
+              <?php endwhile; ?>
+                </tbody>
+                </table>
+
+          <div class="modal-footer" style="margin-top: 7%">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
                     <div class="btn-group" style="margin-bottom: 3%">
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
                     </div>
@@ -522,13 +588,27 @@ $(document).ready(function(){
           </div>
 
           <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label">Fee Type:</label></b>
+            <b><label class="col-sm-4 control-label">Fee Status:</label></b>
             <div class="col-sm-6 selectContainer">
               <div class="input-group" style="width:100%;">
                 <select class="form-control" name="selAddFeeMand" id="selAddFeeMand" style="text-transform:uppercase ;">
-                <option selected disabled>--Select Fee Type--</option>
-                <option value='Y'>Yes</option>
-                <option value='N'>No</option>
+                <option selected disabled>--Select Fee Status--</option>
+                <option value='Y'>Mandatory</option>
+                <option value='N'>Optional</option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:7%">
+            <b><label class="col-sm-4 control-label">Fee Type:</label></b>
+            <div class="col-sm-6 selectContainer">
+              <div class="input-group" style="width:100%;">
+                <select class="form-control" name="selAddFeeType" id="selAddFeeType" style="text-transform:uppercase ;">
+                <option selected disabled>--Select Fee Status--</option>
+                <option value='Mass Fee'>Mass Fee</option>
+                <option value='Different Per Level'>Different Per Level</option>
                 </select>
 
               </div>
@@ -566,10 +646,47 @@ $(document).ready(function(){
           </div>
 
           <div class="form-group" style="margin-top:7%">
+            <b><label class="col-sm-4 control-label"> Fee Code </label></b>
+            <div class="col-sm-6 selectContainer">
+              <div class="input-group" style="width:100%;">
+                <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:7%">
             <b><label class="col-sm-4 control-label"> Fee Name </label></b>
             <div class="col-sm-6 selectContainer">
               <div class="input-group" style="width:100%;">
                 <input type="text" class="form-control" name="txtUpdFee" id="txtUpdFee" style="text-transform:uppercase ;">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:7%">
+            <b><label class="col-sm-4 control-label">Fee Status:</label></b>
+            <div class="col-sm-6 selectContainer">
+              <div class="input-group" style="width:100%;">
+                <select class="form-control" name="selUpdFeeMand" id="selUpdFeeMand" style="text-transform:uppercase ;">
+                <option selected disabled>--Select Fee Status--</option>
+                <option value='Mandatory'>Mandatory</option>
+                <option value='Optional'>Optional</option>
+                </select>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:7%">
+            <b><label class="col-sm-4 control-label">Fee Type:</label></b>
+            <div class="col-sm-6 selectContainer">
+              <div class="input-group" style="width:100%;">
+                <select class="form-control" name="selUpdFeeType" id="selUpdFeeType" style="text-transform:uppercase ;">
+                <option selected disabled>--Select Fee Status--</option>
+                <option value='Mass Fee'>Mass Fee</option>
+                <option value='Different Per Level'>Different Per Level</option>
+                </select>
+
               </div>
             </div>
           </div>
@@ -619,27 +736,100 @@ $(document).ready(function(){
 </div>
   <!--modal delete end-->
 
-              <table id="datatable" class="table table-bordered table-striped">
+  <div class="modal fade" id="mdlFeeDetails" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form method="POST" action="" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title"> FEE DETAILS </h4>
+        </div>
+
+        <div class="modal-body">
+              <input type="hidden" name="txtFdFeeCode" id="txtFdFeeCode" readonly="" />
+
+            <div class="form-group" style="margin-top:7%">
+            <b><label class="col-sm-4 control-label"> Fee Detail Name: </label></b>
+            <div class="col-sm-6 selectContainer">
+              <div class="input-group" style="width:100%;">
+                <input type="text" class="form-control" name="txtFdName" id="txtFdName" style="text-transform:uppercase ;">
+              </div>
+            </div>
+          </div>
+          <h4 style="margin-left: 15px">Amount</h4>
+          <?php
+          $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
+          $result=mysqli_query($con, $query);
+          while($row=mysqli_fetch_array($result)):
+          ?>
+          <div class="form-group" style="margin-top:7%">
+            <b><label class="col-sm-4 control-label"> <?php echo $row['tblLevelName'] ?>: </label></b>
+            <div class="col-sm-6 selectContainer">
+              <div class="input-group" style="width:100%;">
+                <input type="text" class="form-control" name="txtFdAmnt" id="txtFdAmnt" style="text-transform:uppercase ;">
+              </div>
+            </div>
+          </div>
+        <?php endwhile; ?>
+        </div><!-- modal body -->
+
+        <div class="modal-footer" style="margin-top: 5%; float: center">
+          <button type="submit" class="btn btn-danger" name="btnFd" id="btnFd">Delete</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+              <h4>Fee Amounts</h4>
+              <table id="datatable7" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th hidden>Fee Id</th>
+                  <th hidden>Level Id</th>
                   <th>Fee Code</th>
                   <th>Fee Name</th>
                   <th>Fee Type</th>
-                  <th>Amount</th>
+                  <th>Fee Status</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- <tr>
-                  <td>Tuition Fee</td>
-                  <td>12,000</td>
-                   <td>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
-                   </td>
-                </tr> -->
+                 <?php
+                 $query = "select distinct(tblFeeCode), tblFeeName, tblFeeId, tblFeeType, tblFeeMandatory from tblfee where tblFeeFlag=1";
+                  $result = mysqli_query($con, $query);
+                  while($row = mysqli_fetch_array($result)):
+                    $type=$row['tblFeeType'];
+                    $stat=$row['tblFeeMandatory'];
+                    if($stat=='Y')
+                    {
+                        $stat1='Mandatory';
+                    }else if($stat=='N')
+                    {
+                        $stat1='Optional';
+                    }
+                  ?>
+                  <tr>
+                  <td hidden><?php echo $row['tblFeeId'] ?></td>
+                  <td hidden></td>
+                  <td><?php echo $row['tblFeeCode'] ?></td>
+                  <td><?php echo $row['tblFeeName'] ?></td>
+                  <td><?php echo $row['tblFeeType'] ?></td>
+                  <td><?php echo $stat1 ?></td>
+                  <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
+                  
+                  <a href = "feedetails.php"><form method="post" action="feedetails.php">
+                  <input type="hidden" name="" id="" value=""/>
+                  <button type="submit" class="btn btn-success" name="btnFeeDetails" id="btnFeeDetails" style="margin-top: 4px;"><i class="fa fa-edit"></i>Fee Details</button>
+                  </form></a>
+                  </td>
+                  </tr>
+                <?php endwhile; ?>
                 </tbody>
               </table>
+
             </div>
             </div>
             <!-- /.box-body -->
@@ -852,16 +1042,24 @@ $(document).ready(function(){
             </div>
               <div class="box-body">
               <div class="form-inline">
+            <div class="container" style="margin-bottom: 15px">
+                  <label class="col-sm-2">Fee Type: </label>   
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Mass Fee" onchange="changeTblMass()">  General Fees
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Different Per Level" onchange="enable()" style="margin-left: 10px;">  Specific Fees
+              </div>    
+              </div>
+
+              <div class="form-inline">
             <div class="container">
                   <label class="col-sm-1">Level: </label>   
-                        <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()">  
+                        <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()" disabled>  
                           <option>--Select Here--</option>    
                         <?php   
                         $query="select * from tbllevel where tblLevelFlag=1";   
                         $result=mysqli_query($con, $query);   
                         while($row=mysqli_fetch_array($result))   
                         {   
-                        ?>    
+                        ?>
                         <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>   
                         <?php } ?>    
                         </select>   
@@ -873,7 +1071,7 @@ $(document).ready(function(){
                       <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedFee" id="selSchedFee" onchange="changeFee()" disabled>
                         <option>--Select Here--</option>
                         <?php 
-                          $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1";
+                          $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1 and tblFeeType='Different Per Level'";
                           $result = mysqli_query($con, $query);
                           while($row = mysqli_fetch_array($result))
                           {
@@ -936,6 +1134,50 @@ $(document).ready(function(){
       
     </div>
   </div>
+
+<div class="modal fade" id="mdlUpdateSched" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
+        </div>
+        <form method="post" action="updateSchemeDetail.php">
+        <div class="modal-body">
+        <input type="hidden" class="form-control" name="txtDetId" id="txtDetId1">
+        <div class="form-group" style="margin-top: 5%">
+                <label class="col-sm-4" style="text-align: right">Payment Order</label>
+                <div class="col-sm-7">
+                <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo1">
+                </div>
+        </div>
+        <div class="form-group"  style="margin-top: 15%">
+             
+            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate1">
+            </div>
+        </div> 
+        <div class="form-group"  style="margin-top: 25%">
+             
+            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount1">
+            </div>
+        </div>       
+        </div>
+        <div class="modal-footer" style="margin-top: 10%">
+        <button type="submit" class="btn btn-info"  name="btnDetSave1" id="btnDetSave1">Save</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
   
   <div class="modal fade" id="deleteModalThree" role="dialog">
     <div class="modal-dialog">
@@ -981,221 +1223,7 @@ $(document).ready(function(){
               </div>
                 <!-- /.tab-pane -->
 
-      <div class="tab-pane" id="tab_4">
-          <div class="box">
-            <div class="box-header">
-            </div>
-              <div class="box-body">
-              <div class="form-inline">
-            <div class="container">
-                      <label class="col-sm-1">Fee: </label>
-                      <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selFee" id="selFee" onchange="changeTblFeeDetail()">
-                        <option>--Select Here--</option>
-                        <?php
-                        $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag=1";
-                        $result=mysqli_query($con, $query);
-                        while($row=mysqli_fetch_array($result))
-                        {
-                        ?>
-                        <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
-                        <?php } ?>
-                      </select>
-            </div>
-            </div>
-            
-               <div class="btn-group" style="margin-bottom: 3%">
-                  <button type="button" class="btn btn-info" id="btnbtn" name="btnbtn" data-toggle="modal" data-target="#addModalFive" disabled="disabled"><i class="fa fa-plus"></i>Add</button>
-              </div>
-  
-<!-- Add Modal -->
-<div class="modal fade" id="addModalFive" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div>
-        <div class="modal-header">
-          <h4 class="modal-title" id="addModalFive"> ADD FEE DETAIL </h4>
-        </div>
-
-        <div class="modal-body">
-
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label"> Scheme Name </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                  <input type="text" class="form-control" name="txtFeeDetName" id="txtFeeDetName" style="text-transform:uppercase ;">
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer" style="margin-top: 23%">
-            <button type="button" class="btn btn-info" data-toggle="modal" href="#updateModalTemp" onclick="getFeeId()">Next</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Second Modal -->
-<div class="modal fade" id="updateModalTemp" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form autocomplete="off" id = "UpdScheme" name="UpdScheme" role="form" method="POST" action="saveFeeDetail.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="updateModalTemp"> ADD AMOUNT DETAIL </h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Scheme ID</label>
-            <div class="col-sm-6">
-              <div class = "input-group">
-                <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-                <input type="text" name="txtFeeDet" id="txtFeeDet" readonly="" />
-                <input type="text" name="txtFeeDetFee" id="txtFeeDetFee" readonly="" />
-              </div>
-            </div>
-          </div>
-
-          <?php
-            $query = "select tblLevelName, tblLevelId from tbllevel where tblLevelFlag = 1";
-            $result = mysqli_query($con, $query);
-            while($row = mysqli_fetch_array($result))
-            {
-          ?>
-
-          <div class="form-group" style="margin-top:7%">
-            <label class="col-sm-4 control-label"> <?php echo $row['tblLevelName'] ?> </label>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group">
-                <input type="text" class="form-control" name="txtName[]">
-              </div>
-            </div>
-          </div>
-
-           <?php } ?>  
-
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="submit" class="btn btn-info">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-  <!-- Update Modal -->
-<div class="modal fade" id="updateModalFive" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form autocomplete="off" id = "UpdFee" name="UpdFee" role="form" method="POST" action="updateFeeDetail.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="updateModalFive"> UPDATE PAYMENT SCHEME </h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Detail ID</label>
-            <div class="col-sm-6">
-              <div class = "input-group">
-                <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-                <input type="text" name="txtUpdDetFeeId" id="txtUpdDetFeeId" readonly="" />
-                <input type="text" name="txtUpdDetLvlId" id="txtUpdDetLvlId" readonly="" />
-                <input type="text" name="txtTempDetName" id="txtTempDetName" readonly="" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top:7%">
-            <label class="col-sm-4 control-label"> Level Name </label>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group">
-                <input type="text" class="form-control" disabled name="txtUpdDetLvl" id="txtUpdDetLvl">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <b><label class="col-sm-4 control-label"> Detail Name </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-               <input type="text" class="form-control" name="txtUpdDetName" id="txtUpdDetName" style="text-transform:uppercase;">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" >
-            <b><label class="col-sm-4 control-label"> Amount </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:50%;">
-                <input type="text" class="form-control" name="txtUpdDetAmnt" id="txtUpdDetAmnt">
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="submit" class="btn btn-info" id="btnFeeDet" name="btnFeeDet">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-  
-  <!-- Delete Modal -->
-<div class="modal fade" id="deleteModalFive" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form method="POST" action="deleteFeeDetail.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="deleteModalFive"> DELETE </h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Fee Detail ID</label>
-            <div class="col-sm-5 input-group">
-              <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-              <input type="text" name="txtDelFeeDet" id="txtDelFeeDet" readonly="" />
-              <input type="text" name="txtDelAmnt" id="txtDelAmnt" readonly="" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
-          </div>
-        </div>
-
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-          <button type="submit" class="btn btn-danger" name="btnDelFeeDet" id="btnDelFeeDet">Delete</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-  <!--modal delete end-->
-              <table id="datatable4" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Level</th>
-                  <th>Detail Name</th>
-                  <th>Amount</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                
-              </table>
-            </div>
-            </div>
-            <!-- /.box-body -->
-              </div>
-                <!-- /.tab-pane -->
+    
             </div>
             <!-- /.tab-content -->
           </div>

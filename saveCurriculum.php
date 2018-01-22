@@ -12,6 +12,6 @@ $query = "insert into tblcurriculum(tblCurriculumId, tblCurriculumName, tblCurri
 if (!$query = mysqli_query($con, $query)) {
     exit(mysqli_error($con));
 }else{
-    header('location:curriculum.php?message=2');;
+    header('location:curriculum.php?message=2');
 }
 ?>

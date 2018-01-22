@@ -7,7 +7,7 @@ if(isset($_POST['btnReset']))
 	if (!$query = mysqli_query($con, $query)) {
     	exit(mysqli_error($con));
 	}else{
-    	header('location:payment.php?message=6');
+    	header('location:payment.php?message=7');
 	}
 }
 ?>
