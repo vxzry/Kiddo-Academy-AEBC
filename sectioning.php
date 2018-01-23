@@ -59,6 +59,14 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        padding-right: 0 !important }
+      }
+    </style>
     <script>
         (function(){
   if(window.addEventListener){
@@ -161,7 +169,7 @@ function run(){
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
+          <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
            <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
@@ -223,256 +231,260 @@ function run(){
         </section>
 
         <!-- Main content -->
-        <section class="content"  style="margin-top: 4%">
+        <section class="content">
           <div class="row">
             <div class="col-md-12">
-              <div class="box box-default">
-                <div class="box-header with-border"></div>
-                  <div class="box-body">
+              <div class="box box-default" style="margin-top: 10px">
+                <div class="box-body">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs" id="myTab">
                           <li class="active"><a href="#tab_1" data-toggle="tab">Sectioning by Section</a></li>
                           <li><a href="#tab_2" data-toggle="tab">Sectioning by Students</a></li>
                         </ul>
-                    <div class="tab-content">
-
-                        <div class="tab-pane active" id="tab_1">
-                        <div class="box">
-                             <?php
-                              $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
-                              $result=mysqli_query($con, $query);
-                              $row=mysqli_fetch_array($result);
-                              $sy=$row['tblSchoolYrId'];
-                             ?>
-                             
-                                <div class="box-body">
-                                  <div style="margin-top: 5%">
-                                    <table id="datatable7" name="datatable7" class="table table-bordered table-striped">
-                                      <thead>
-                                        <tr>
-                                          <th>Student Id</th>
-                                          <th>Student Name</th>
-                                          <th>Student Level</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      <?php
-                                      $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudentFlag=1 and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudent_tblLevelId=l.tblLevelId and s.tblStudentType='OFFICIAL'";
-                                      $result=mysqli_query($con, $query);
-                                      while($row=mysqli_fetch_array($result)):
-                                        $sid=$row['tblStudentId'];
-                                        $query1="select * from tblsectionstud where tblSectStud_tblStudentId='$sid' and tblSectStud_tblSchoolYrId='$sy'";
-                                        $result1 = $con->query($query1);
-                                        if ($result1->num_rows == 0)
-                                        {
-                                      ?>
-                                      <tr>
-                                        <td><?php echo $row['tblStudentId'] ?></td>
-                                        <td><?php echo $row['studentname'] ?></td>
-                                        <td><?php echo $row['tblLevelName'] ?></td>
-                                      </tr>
-                                      <?php } endwhile; ?>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                  <div style="margin-top: 5%">
-                                    <table id="datatable1" name="datatable1" class="table table-bordered table-striped">
-                                      <thead>
-                                        <tr>
-                                          <th hidden></th>
-                                          <th>Section</th>
-                                          <th>Division</th>
-                                          <th>Level</th>
-                                          <th>Session</th>
-                                          <th hidden>Slots Available</th>
-                                          <th>Number of Students</th>
-                                          <th hidden>Teacher Id</th>
-                                          <th>Teacher</th>
-                                          <th>Action</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      <?php
-                                      $query="select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId";
-                                      $result=mysqli_query($con, $query);
-                                      while($row=mysqli_fetch_array($result)):
-                                        $facultyid=$row['tblSection_tblFacultyId'];
-                                        $count=$row['sectCount'];
-                                        $max=$row['tblSectionMaxCap'];
-                                        $slot=$max - $count;
-                                      ?>
-                                        <tr>
-                                          <td hidden><?php echo $row['tblSectionId'] ?></td>
-                                          <td><?php echo $row['tblSectionName'] ?></td>
-                                          <td><?php echo $row['tblDivisionName'] ?></td>
-                                          <td><?php echo $row['tblLevelName'] ?></td>
-                                          <td><?php echo $row['tblSectionSession'] ?></td>
-                                          <td hidden><?php echo $slot ?></td>
-                                          <td><?php echo $row['sectCount'] ?></td>
-                                          <?php
-                                            $query1="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1";
-                                            $result1=mysqli_query($con, $query1);
-                                            $row1=mysqli_fetch_array($result1);
-                                          ?>
-                                          <td hidden><?php echo $row1['tblFacultyId'] ?></td>
-                                          <td><?php echo $row1['facultyname'] ?></td>
-                                          <td style="width: 25%"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
-                                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
-                                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
-                                        </tr>
-                                      <?php endwhile; ?>
-                                      </tbody>
-                                    </table>
-                                  </div>
-
-    <div class="modal fade" id="mdlFillSection" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Fill Section</h3>
-        </div>
-        <form action="fillSection.php" method="post">
-        <div class="modal-body">
-        <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
-          <div><input type="hidden" name="txtFillSectionId" id="txtFillSectionId"/></div>
-          <div class="form-group" style="margin-top: 5%">
-                <label class="col-sm-4" style="text-align: right">Available Slot:</label>
-                <div class="col-sm-7 selectContainer">
-                <input type="text" disabled style="text-transform: uppercase;" class="form-control" name="txtSlot" id="txtSlot">
-                </div>
-        </div>
-        </div>         
-        </div>
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-        <button type="submit" class="btn btn-danger" name="btnFillSection" id="btnFillSection">Fill</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-
-  <div class="modal fade" id="mdlAssignFaculty" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Assign Faculty</h3>
-        </div>
-        <form action="assignFaculty.php" method="post">
-        <div class="modal-body">
-        <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
-          <div><input type="hidden" name="txtSectionId" id="txtSectionId"/></div>
-        <div class="form-group" style="margin-top: 5%">
-                <label class="col-sm-4" style="text-align: right">Faculty-In-Charge:</label>
-                <div class="col-sm-7 selectContainer">
-                <select class="form-control" style="width: 100%;" name="selFaculty" id="selFaculty">
-                <option selected disabled>--Select Faculty-in-charge--</option>
-                <?php
-                $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblFaculty where tblFacultyFlag=1";
-                $result=mysqli_query($con, $query);
-                while($row=mysqli_fetch_array($result)):
-                  $facultyid=$row['tblFacultyId'];
-                  $query1="select * from tblsection where tblSection_tblFacultyId='$facultyid' and tblSectionFlag=1";
-                  $result1 = $con->query($query1);
-                  if($result1->num_rows == 0)
-                  {
-                ?>
-                <option value="<?php echo $row['tblFacultyId'] ?>"><?php echo $row['facultyname'] ?></option>
-                <?php }; endwhile; ?>
-                </select>
-                </div>
-        </div>
-        </div>         
-        </div>
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-        <button type="submit" class="btn btn-danger" name="btnFillSection" id="btnFillSection">Assign</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-
-  <div class="modal fade " id="mdlViewStud" role="dialog">
-    <div class="modal-dialog modal-lg">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">View Students</h3>
-        </div>
-        <form action="" method="post">
-        <div class="modal-body">
-        <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
-          <table id="datatable3" name="datatable3" class="table table-bordered table-striped">
-          <thead>
-          <th>Student Id</th>
-          <th>Student Name</th>
-          </thead>
-          <tbody>
-          </tbody>
-          </table>
-        </div>         
-        </div>
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-        <button type="submit" class="btn btn-danger" name="btnFillSection" id="btnFillSection">Yes</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-                                </div> <!-- box body -->
-                  
-                           
-                          </div> <!-- box -->
-                      </div>
                       
-                      <div class="tab-pane" id="tab_2">
-                        <div class="box">
-                                                       
-                               
-                                <div class="box-body">
 
-                                  <div style="margin-top: 5%">
-                                  <form>
-                                    <table id="datatable2" class="table table-bordered table-striped">
-                                      <thead>
-                                        <tr>
-                                         <th hidden></th>
-                                          <th>Level Name</th>
-                                          <th>Action</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      
-                                      <?php
-                                        $query="select * from tbllevel where tblLevelFlag=1";
-                                        $result=mysqli_query($con, $query);
-                                        while($row=mysqli_fetch_array($result)):
-                                      ?>
-                                        <tr>
-                                          <td hidden></td>
-                                          <td><?php echo $row['tblLevelName'] ?></td>
-                                          <td><form method="get" action="SectionStudent.php"><input type="hidden" name="txtlvl" id="txtlvl" value="<?php echo $row['tblLevelId'] ?>"/><button type="submit" class="btn btn-success">Section Student</button></form></td>
-                                        </tr>
-                                      <?php endwhile; ?>
-                                     
-                                      </tbody>
-                                    </table>
+                      <div class="tab-content">
+
+                        <div class="tab-pane active" id="tab_1" style="padding: 3%">
+                          <div class="btn-group" style="margin-bottom: 3%">
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalList"><i class="fa fa-list"></i>  View Unsectioned Students</button>
+                            </div>
+
+                              <!-- Unsectioned Student List Modal -->
+                              <div class="modal fade" id="modalList" role="dialog">
+                                <div class="modal-dialog">
+                                  <div class="modal-content" style="width: 150%;">
+                                      <div class="modal-header">
+                                        <h4 class="modal-title" id="modalList"> LIST OF UNSECTIONED STUDENTS </h4>
+                                      </div>
+
+                                      <div class="modal-body">
+                                        <?php
+                                          $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+                                          $result=mysqli_query($con, $query);
+                                          $row=mysqli_fetch_array($result);
+                                          $sy=$row['tblSchoolYrId'];
+                                         ?>
+                                        <table id="datatable7" name="datatable7" class="table table-bordered table-striped">
+                                                  <thead>
+                                                    <tr>
+                                                      <th>Student Id</th>
+                                                      <th>Student Name</th>
+                                                      <th>Student Level</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                  <?php
+                                                  $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudentFlag=1 and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudent_tblLevelId=l.tblLevelId and s.tblStudentType='OFFICIAL'";
+                                                  $result=mysqli_query($con, $query);
+                                                  while($row=mysqli_fetch_array($result)):
+                                                    $sid=$row['tblStudentId'];
+                                                    $query1="select * from tblsectionstud where tblSectStud_tblStudentId='$sid' and tblSectStud_tblSchoolYrId='$sy'";
+                                                    $result1 = $con->query($query1);
+                                                    if ($result1->num_rows == 0)
+                                                    {
+                                                  ?>
+                                                  <tr>
+                                                    <td><?php echo $row['tblStudentId'] ?></td>
+                                                    <td><?php echo $row['studentname'] ?></td>
+                                                    <td><?php echo $row['tblLevelName'] ?></td>
+                                                  </tr>
+                                                  <?php } endwhile; ?>
+                                                  </tbody>
+                                                </table>
+
+                                        <div class="modal-footer" style="margin-top: 7%">
+                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <table id="datatable1" name="datatable1" class="table table-bordered table-striped">
+                                <thead>
+                                  <tr>
+                                    <th hidden></th>
+                                    <th>Section</th>
+                                    <th>Division</th>
+                                    <th>Level</th>
+                                    <th>Session</th>
+                                    <th hidden>Slots Available</th>
+                                    <th>Number of Students</th>
+                                    <th hidden>Teacher Id</th>
+                                    <th>Teacher</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $query="select tblsection.tblSectionId, tblsection.tblSectionName, tbllevel.tblLevelName, tbldivision.tblDivisionName, tblsection.tblSectionSession, count(tblsectionstud.tblSectStud_tblSectionId) as sectCount, tblsection.tblSection_tblFacultyId, tblsection.tblSectionMaxCap from tblsection inner join tbllevel on tblsection.tblSection_tblLevelId=tbllevel.tblLevelId inner join tbldivision on tbllevel.tblLevel_tblDivisionId=tbldivision.tblDivisionId left join tblsectionstud on tblsection.tblSectionId=tblsectionstud.tblSectStud_tblSectionId where tblsection.tblSectionFlag=1 group by tblsection.tblSectionId";
+                                $result=mysqli_query($con, $query);
+                                while($row=mysqli_fetch_array($result)):
+                                  $facultyid=$row['tblSection_tblFacultyId'];
+                                  $count=$row['sectCount'];
+                                  $max=$row['tblSectionMaxCap'];
+                                  $slot=$max - $count;
+                                ?>
+                                  <tr>
+                                    <td hidden><?php echo $row['tblSectionId'] ?></td>
+                                    <td><?php echo $row['tblSectionName'] ?></td>
+                                    <td><?php echo $row['tblDivisionName'] ?></td>
+                                    <td><?php echo $row['tblLevelName'] ?></td>
+                                    <td><?php echo $row['tblSectionSession'] ?></td>
+                                    <td hidden><?php echo $slot ?></td>
+                                    <td><?php echo $row['sectCount'] ?></td>
+                                    <?php
+                                      $query1="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$facultyid' and tblFacultyFlag=1";
+                                      $result1=mysqli_query($con, $query1);
+                                      $row1=mysqli_fetch_array($result1);
+                                    ?>
+                                    <td hidden><?php echo $row1['tblFacultyId'] ?></td>
+                                    <td><?php echo $row1['facultyname'] ?></td>
+                                    <td style="width: 25%"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
+                                  </tr>
+                                <?php endwhile; ?>
+                                </tbody>
+                              </table>
+
+                            <div class="modal fade" id="mdlFillSection" role="dialog">
+                              <div class="modal-dialog">
+                            
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h3 class="modal-title" style="font-style: bold">Fill Section</h3>
+                                    </div>
+                                    <form action="fillSection.php" method="post">
+                                    <div class="modal-body">
+                                    <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
+                                      <div><input type="hidden" name="txtFillSectionId" id="txtFillSectionId"/></div>
+                                      <div class="form-group" style="margin-top: 5%">
+                                            <label class="col-sm-4" style="text-align: right">Available Slot:</label>
+                                            <div class="col-sm-7 selectContainer">
+                                            <input type="text" disabled style="text-transform: uppercase;" class="form-control" name="txtSlot" id="txtSlot">
+                                            </div>
+                                    </div>
+                                    </div>         
+                                    </div>
+                                    <div class="modal-footer" style="margin-top: 5%; float: center">
+                                    <button type="submit" class="btn btn-danger" name="btnFillSection" id="btnFillSection">Fill</button>
+                                      <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                    </div>
                                     </form>
                                   </div>
-                                </div> <!-- box body -->
+                              
+                            </div>
+                          </div>
+
+                          <div class="modal fade" id="mdlAssignFaculty" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h3 class="modal-title" style="font-style: bold">Assign Faculty</h3>
+                                </div>
+                                <form action="assignFaculty.php" method="post">
+                                <div class="modal-body">
+                                <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
+                                  <div><input type="hidden" name="txtSectionId" id="txtSectionId"/></div>
+                                <div class="form-group" style="margin-top: 5%">
+                                        <label class="col-sm-4" style="text-align: right">Faculty-In-Charge:</label>
+                                        <div class="col-sm-7 selectContainer">
+                                        <select class="form-control" style="width: 100%;" name="selFaculty" id="selFaculty">
+                                        <option selected="selected" disabled>--Select Faculty-in-charge--</option>
+                                            <?php
+                                            $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblFaculty where tblFacultyFlag=1";
+                                            $result=mysqli_query($con, $query);
+                                            while($row=mysqli_fetch_array($result)):
+                                              $facultyid=$row['tblFacultyId'];
+                                              $query1="select * from tblsection where tblSection_tblFacultyId='$facultyid' and tblSectionFlag=1";
+                                              $result1 = $con->query($query1);
+                                              if($result1->num_rows == 0)
+                                              {
+                                            ?>
+                                            <option value="<?php echo $row['tblFacultyId'] ?>"><?php echo $row['facultyname'] ?></option>
+                                            <?php }; endwhile; ?>
+                                        </select>
+                                        </div>
+                                </div>
+                                </div>         
+                                </div>
+                                <div class="modal-footer" style="margin-top: 5%; float: center">
+                                <button type="submit" class="btn btn-danger" name="btnFillSection" id="btnFillSection">Assign</button>
+                                  <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                </div>
+                                </form>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                          <div class="modal fade " id="mdlViewStud" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h3 class="modal-title" style="font-style: bold">View Students</h3>
+                                </div>
+                                <form action="" method="post">
+                                <div class="modal-body">
+                                <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
+                                  <table id="datatable3" name="datatable3" class="table table-bordered table-striped">
+                                  <thead>
+                                  <th>Student Id</th>
+                                  <th>Student Name</th>
+                                  </thead>
+                                  <tbody>
+                                  </tbody>
+                                  </table>
+                                </div>         
+                                </div>
+                                <div class="modal-footer" style="margin-top: 5%; float: center">
+                                <button type="submit" class="btn btn-danger" name="btnFillSection" id="btnFillSection">OK</button>
+                                  <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                </div>
+                                </form>
+                              </div>
+                              
+                            </div>
+                          </div>
+                  </div>
+                      
+                      <div class="tab-pane" id="tab_2" style="padding: 3%">
+                          <form>
+                            <table id="datatable2" class="table table-bordered table-striped">
+                              <thead>
+                                <tr>
+                                 <th hidden></th>
+                                  <th>Level Name</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              
+                              <?php
+                                $query="select * from tbllevel where tblLevelFlag=1";
+                                $result=mysqli_query($con, $query);
+                                while($row=mysqli_fetch_array($result)):
+                              ?>
+                                <tr>
+                                  <td hidden></td>
+                                  <td><?php echo $row['tblLevelName'] ?></td>
+                                  <td><form method="get" action="SectionStudent.php"><input type="hidden" name="txtlvl" id="txtlvl" value="<?php echo $row['tblLevelId'] ?>"/><button type="submit" class="btn btn-success">Section Student</button></form></td>
+                                </tr>
+                              <?php endwhile; ?>
+                             
+                              </tbody>
+                            </table>
+                            </form>
                                 
                          <div class="modal fade" id="mdlSectionStudent" role="dialog">
                             <div class="modal-dialog">
@@ -521,10 +533,9 @@ function run(){
                               </div> <!-- modal content -->
                             </div> <!-- modal dialog -->
                           </div> <!-- modal fade -->
-                          </div> <!-- box -->
-
                     </div> <!-- tab pane tab_2 -->
-                  </div> <!-- tab content -->
+                   
+                   </div> <!-- tab content -->
                   </div><!-- nav tabs custom -->
                 </div> <!-- box body -->
               </div> <!-- box box default -->
