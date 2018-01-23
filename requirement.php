@@ -1,4 +1,4 @@
-<?php 
+<?php
    include('session.php');
    include('db_connect.php');
    $x=substr($login_session,0,1);
@@ -214,7 +214,7 @@ function run(){
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
-           <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -229,7 +229,7 @@ function run(){
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -246,7 +246,7 @@ function run(){
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -260,7 +260,7 @@ function run(){
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>''
           </ul>
         </section>
@@ -322,7 +322,7 @@ function run(){
                                         <i class="fa fa-clone" aria-hidden="true"></i>
                                       </div>
                                       <select class="form-control" style="width: 100%" name="addReqType" id="addReqType">
-                                        <option selected="selected" disabled>--Choose Type--</option>
+                                        <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="ADMISSION">ADMISSION</option>
                                           <option value="ENROLLMENT">ENROLLMENT</option>
                                       </select>
@@ -377,7 +377,7 @@ function run(){
                                     </div>
                                   </div>
                                 </div>
-                               
+
 
                                 <div class="form-group">
                                   <label class="col-sm-4 control-label"> Requirement Type </label>
@@ -462,7 +462,7 @@ function run(){
                            <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqDescription']; ?></td>
-                           <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>           
+                           <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>
                            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
                            </tr>
@@ -598,7 +598,7 @@ function run(){
                 validators: {
                     stringLength: {
                         min: 3,
-                        max: 20,
+                        max: 50,
                         message: 'Please enter at least 3 characters'
                     },
 
@@ -627,6 +627,13 @@ function run(){
                         message: 'Requirement description is required'
                     },
                 }
+            },
+            addReqType:{
+              validators:{
+                notEmpty:{
+                  message: 'Requirement Type is required'
+                }
+              }
             },
             }
         })
@@ -657,7 +664,7 @@ function run(){
                 validators: {
                     stringLength: {
                         min: 3,
-                        max: 20,
+                        max: 50,
                         message: 'Please enter at least 3 characters'
                     },
 
@@ -685,6 +692,13 @@ function run(){
                         message: 'Requirement description is required'
                     }
                 }
+            },
+            updReqType:{
+              validators:{
+                notEmpty:{
+                  message: 'Requirement Type is required'
+                }
+              }
             },
             }
         })
