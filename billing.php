@@ -55,7 +55,13 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -129,7 +135,7 @@
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
+          <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
            <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
@@ -192,26 +198,22 @@
         </section>
 
         <!-- Main content -->
-        <section class="content"  style="margin-top: 4%">
+        <section class="content">
           <div class="row">
             <div class="col-md-12">
-              <div class="box box-default">
-                <div class="box-header with-border"></div>
+              <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
                   <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px;">Billing</h2>
-                    <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
+                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">BILLING</h2>
                   </div>
+
 
                   <div class="tab-content">
 
                     <div class="tab-pane active" id="tab_1">
-                      <div class="box">
-                        <div class="box-header"></div>
-                        <div class="box-body">
                           
-                            <div class="box-body">
-                            <div class="col-md-6">
+                          <div class="box-body">
+                            <div class="col-md-6"  style="margin-top: 3%">
                               <div class="form-group">
                                   <label>Level</label>
                                   <select class="form-control select2" style="width: 50%;">
@@ -222,7 +224,7 @@
                                 </div>
                               </div>
 
-                              <div class="col-md-12">
+                              <div class="col-md-12" style="margin-top: 3%">
                                 <table id="datatable1" class="table table-bordered table-striped">
                                   <thead>
                                     <tr>
@@ -251,8 +253,6 @@
                               </div> <!-- col-md-12 -->
                             </div> <!-- box body -->
                           
-                        </div> <!-- box-body -->
-                      </div> <!-- box-->
                     </div> <!--tab pane tab_1 -->
                   </div> <!-- tab content -->
                 </div> <!-- box body -->
