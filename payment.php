@@ -607,8 +607,8 @@ $(document).ready(function(){
               <div class="input-group" style="width:100%;">
                 <select class="form-control" name="selAddFeeType" id="selAddFeeType" style="text-transform:uppercase ;">
                 <option selected disabled>--Select Fee Status--</option>
-                <option value='Mass Fee'>Mass Fee</option>
-                <option value='Different Per Level'>Different Per Level</option>
+                <option value='Mass Fee'>General Fees</option>
+                <option value='Different Per Level'>Specific Fees</option>
                 </select>
 
               </div>
