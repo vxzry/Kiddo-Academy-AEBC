@@ -87,6 +87,13 @@
     <script src="js/sweetalert.min.js"></script>
     <!-- Bootstrap validator -->
     <script src="js/bootstrapValidator.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
 
     </head>
   <script>
@@ -186,22 +193,22 @@ function run(){
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
+          <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
            <?php 
-        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
-        $result=mysqli_query($con, $query);
-        $row=mysqli_fetch_array($result);
-          $rolename=$row['tblRoleName'];
-          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
-          {
-            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
-            $result1=mysqli_query($con, $query1);
-            while($row1=mysqli_fetch_array($result1))
-            {
-              $modulename=$row1['tblModuleType'];
+            $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+            $result=mysqli_query($con, $query);
+            $row=mysqli_fetch_array($result);
+              $rolename=$row['tblRoleName'];
+              if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+              {
+                $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+                $result1=mysqli_query($con, $query1);
+                while($row1=mysqli_fetch_array($result1))
+                {
+                  $modulename=$row1['tblModuleType'];
 
-        ?>
+            ?>
 
         <li class="treeview"> 
           <a href="#">
@@ -245,127 +252,130 @@ function run(){
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper" style="height: 100%">
        <!-- Main content -->
-    <section class="content">
-      <div class="row">
-          <div class="col-md-12">
-            <div class="box box-default" style="margin-top: 5%">
-              <div class="box-header with-border"></div>
-                <div class="box-body">
-                  <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px;">Dismiss/Withdraw</h2>
-                      <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
+        <section class="content">
+          <div class="row">
+              <div class="col-md-12">
+                <div class="box box-default" style="margin-top: 25px">
+                    <div class="box-body">
+                       <div class="box-header with-border">
+                          <h2 class="box-title" style="font-size:21px; margin-top: 10px">DISMISS/ WITHDRAW</h2>
+                        </div>
+                      
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                          <form role="form">
+                            <div class="box-body" style="margin-top: 3%">
+                         
+                            
+                             <table id="datatable" class="table table-bordered table-striped">
+                             <thead>
+                              <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Level</th>
+                                <th>Action</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <?php
+                                $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudent_tblLevelId=l.tblLevelId and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentFlag=1 and s.tblStudentType != 'DISMISS' and s.tblStudentType != 'WITHDRAW' group by s.tblStudentId";
+                                $result=mysqli_query($con, $query);
+                                while($row=mysqli_fetch_array($result)) :
+                              ?>
+                              <tr>
+                                <td><?php echo $row['tblStudentId'] ?></td>
+                                <td><?php echo $row['name'] ?></td>
+                                <td><?php echo $row['tblLevelName'] ?></td>
+                                <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalOne"><i class="fa fa-edit"></i></button></td>
+                                </tr>
+                              <?php endwhile; ?>
+                              </tbody>
+                            </table>
+                          </div> 
+                          </form>   
+
+
+                  <div class="modal fade" id="ModalOne" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3 class="modal-title" style="font-style: bold">Student Status</h3>
+                        </div>
+                        <form autocomplete="off" method="post" action="dismissWithdrawStudent.php">
+                        <div class="modal-body">
+                        <div class="form-group"  style="margin-top: 5%">
+                            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Id</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control" style="text-transform:uppercase ;" name="txtStudId" id="txtStudId" readonly>
+                            </div>
+                        </div> 
+                        <div class="form-group"  style="margin-top: 15%">
+                            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Name</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control" style="text-transform:uppercase ;" name="txtStudName" id="txtStudName" disabled="disabled">
+                            </div>
+                        </div> 
+                        <div class="form-group" style="margin-top: 25%">
+                                <label class="col-sm-4" style="text-align: right">Action</label>
+                                <div class="col-sm-7 selectContainer">
+                                <select class="form-control" style="width: 100%;" name="selChoose" id="selChoose">
+                                  <option selected disabled>--Select--</option>
+                                  <option>DISMISS</option>
+                                  <option>WITHDRAW</option>
+                                </select>
+                                </div>
+                              
+                        </div>
+                        <div class="form-group" style="margin-top: 35%">
+                                <label class="col-sm-4" style="text-align: right">Reason</label>
+                                <div class="col-sm-7 selectContainer">
+                                <div class="form-group">
+                                  
+                                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="taReason" id="taReason" ></textarea>
+                                </div>
+                                </div>
+                              
+                        </div>
+                        <div class="modal-footer" style="margin-top: 50%">
+                          <button type="submit" class="btn btn-info" name="btnDismiss" id="btnDismiss">Save</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                        </form>
+                      </div>
+                      
+                    </div>
                   </div>
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-        <div class="box">
-                        <div class="box-header"></div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-           
-              
-               <table id="datatable1" class="table table-bordered table-striped">
-               <thead>
-                <tr>
-                  <th>Student ID</th>
-                  <th>Student Name</th>
-                  <th>Level</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                  $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudent_tblLevelId=l.tblLevelId and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentFlag=1 and s.tblStudentType != 'DISMISS' and s.tblStudentType != 'WITHDRAW' group by s.tblStudentId";
-                  $result=mysqli_query($con, $query);
-                  while($row=mysqli_fetch_array($result)) :
-                ?>
-                <tr>
-                  <td><?php echo $row['tblStudentId'] ?></td>
-                  <td><?php echo $row['name'] ?></td>
-                  <td><?php echo $row['tblLevelName'] ?></td>
-                  <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalOne"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                <?php endwhile; ?>
-                </tbody>
-              </table>
-            </div>    
-            </div>
-
-            
-            </form>
-
-  <div class="modal fade" id="ModalOne" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Student Status</h3>
-        </div>
-        <form autocomplete="off" method="post" action="dismissWithdrawStudent.php">
-        <div class="modal-body">
-        <div class="form-group"  style="margin-top: 5%">
-            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Id</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" style="text-transform:uppercase ;" name="txtStudId" id="txtStudId" readonly>
-            </div>
-        </div> 
-        <div class="form-group"  style="margin-top: 15%">
-            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Student Name</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" style="text-transform:uppercase ;" name="txtStudName" id="txtStudName" disabled="disabled">
-            </div>
-        </div> 
-        <div class="form-group" style="margin-top: 25%">
-                <label class="col-sm-4" style="text-align: right">Action</label>
-                <div class="col-sm-7 selectContainer">
-                <select class="form-control" style="width: 100%;" name="selChoose" id="selChoose">
-                  <option selected disabled>--Select--</option>
-                  <option>DISMISS</option>
-                  <option>WITHDRAW</option>
-                </select>
-                </div>
-              
-        </div>
-        <div class="form-group" style="margin-top: 35%">
-                <label class="col-sm-4" style="text-align: right">Reason</label>
-                <div class="col-sm-7 selectContainer">
-                <div class="form-group">
-                  
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="taReason" id="taReason" ></textarea>
-                </div>
-                </div>
-              
-        </div>
-        <div class="modal-footer" style="margin-top: 40%">
-        <button type="submit" class="btn btn-info" name="btnDismiss" id="btnDismiss">Save</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
           
-
-          </div>
-          </div>
-          </div>
-        </div>
-      <!-- /.row -->
-    </section>
-          
-         
+                  </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          <!-- /.row -->
+        </section>  
       </div><!-- ./content-wrapper -->
-     
-
-      
-
     </div><!-- ./wrapper -->
 
-    
     <?php include 'footer.php';?>
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+    <script src="js/select2.full.min.js"></script>
+    <script>
+      $(function () {
+        $("#datatable").DataTable();
+        $("#datatable1").DataTable();
+        $("#datatable2").DataTable();
+        $("#datatable3").DataTable();
+      });
+
+    </script>
     </body>
 </html>
