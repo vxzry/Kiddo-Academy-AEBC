@@ -65,7 +65,7 @@
     <link rel="stylesheet" href="css/iCheck/all.css">
 
     <link rel="stylesheet" type="text/css" href="css/formwizard2.css">
-    
+
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
 
@@ -79,7 +79,7 @@
     <link rel="stylesheet" type="text/css" href="css/validDesignSubject.css">
     <link rel="stylesheet" type="text/css" href="css/validDesignLevel.css">
     <link rel="stylesheet" type="text/css" href="css/validDesignDetails.css">
-    <link rel="stylesheet" type="text/css" href="css/validDesignDivision.css">  
+    <link rel="stylesheet" type="text/css" href="css/validDesignDivision.css">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -357,7 +357,7 @@
 
           <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
-           <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -372,7 +372,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -389,7 +389,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -403,7 +403,7 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -556,11 +556,11 @@
 
           <div class="modal-body">
             <div class="form-group">
-                  
+
                     <b><label class="col-sm-4 control-label"> Level/s: </label></b>
                     <div class="col-sm-6 selectContainer">
                       <div class="input-group">
-                      <?php 
+                      <?php
                         $query="select tblSubjectId, tblSubjectDesc from tblsubject where tblSubjectFlag=1";
                         $result=mysqli_query($con, $query);
                         while($row=mysqli_fetch_array($result)):
@@ -842,12 +842,12 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <b><label class="col-sm-4 control-label"> Level/s: </label></b>
                     <div class="col-sm-6 selectContainer">
-                      <div class="input-group">
-                      <?php 
+                      <div class="input-group" style="width:100%;">
+                      <?php
                         $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
                         $result=mysqli_query($con, $query);
                         while($row=mysqli_fetch_array($result)):
@@ -910,8 +910,8 @@
             <div class="form-group">
                     <b><label class="col-sm-4 control-label"> Level/s: </label></b>
                     <div class="col-sm-6 selectContainer">
-                      <div class="input-group">
-                      <?php 
+                      <div class="input-group"  style="width:100%;">
+                      <?php
                         $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
                         $result=mysqli_query($con, $query);
                         while($row=mysqli_fetch_array($result)):
@@ -1251,7 +1251,7 @@
                                       </tr>
                                       <?php } ?>
                                       </tbody> -->
-                                      
+
                                 </table>
                             </div>
                             <!--box-body tab_5-->
@@ -1664,7 +1664,7 @@
                 validators: {
                     stringLength: {
                         min: 3,
-                        max: 20,
+                        max: 50,
                         message: 'Please enter at least 3 characters'
                     },
 
@@ -1680,19 +1680,27 @@
             txtAddSubj: {
                 validators: {
                     stringLength: {
-                        min: 5,
-                        max: 30,
+                        min: 3,
+                        max: 100,
                         message: 'Please enter at least 3 characters'
                     },
 
                      regexp: {
-                        regexp: /^[a-zA-Z_\w-][0-9a-zA-Z_\w-\s][\w-'\s]+$/,
+                        regexp: /^[a-zA-Z_\w-][0-9a-zA-Z_\w-\s][\w-,'\s]+$/,
                         message: 'The first character must be an alphabet or does not allow special character'
                     },
                         notEmpty: {
                         message: 'Subject name is required'
                     }
                 }
+            },
+            'chkAddLvlId[]':{
+              validators:{
+                choice: {
+                    min: 1,
+                    message: 'Check atleast 1 level'
+                }
+              }
             },
             }
         })
@@ -1720,12 +1728,12 @@
                 validators: {
                     stringLength: {
                         min: 3,
-                        max: 20,
+                        max: 100,
                         message: 'Please enter at least 3 characters'
                     },
 
                      regexp: {
-                        regexp: /^[a-zA-Z_\w-][0-9a-zA-Z_\w-\s][\w-'\s]+$/,
+                        regexp: /^[a-zA-Z_\w-][0-9a-zA-Z_\w-\s][\w-,'\s]+$/,
                         message: 'The first character must be an alphabet or does not allow special character'
                     },
                         notEmpty: {
@@ -1733,6 +1741,14 @@
                     }
                 }
             },
+            'chkUpdLvlId[]':{
+              validators:{
+                choice: {
+                    min: 1,
+                    message: 'Check atleast 1 level'
+                }
+              }
+            }
             }
         })
 
