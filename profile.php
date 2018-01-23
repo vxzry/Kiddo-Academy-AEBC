@@ -56,6 +56,13 @@
   <!-- sweetalert -->
   <script src="sweetalert-master/dist/sweetalert-dev.js"></script>
   <link rel="stylesheet" href="sweetalert-master/dist/sweetalert.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
       $(document).ready(function(){
@@ -199,7 +206,7 @@ function run(){
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
+          <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
            <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
@@ -255,135 +262,113 @@ function run(){
       </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header" style="margin-bottom: -25px;">
-    </section>
 
     <!-- Main content -->
-    <section class="content" style="margin-top: 3%">
-    <div class="row">
+    <section class="content">
+      <div class="row">
         <div class="col-md-12">
-          <div class="box box-default">
-            <div class="box-header with-border">
-            </div>
-            <!-- /.box-header -->
-        <div class="box-body">
+          <div class="box box-default" style="margin-top: 25px">
+            <div class="box-body">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab_1" data-toggle="tab">Student</a></li>
+                  <li><a href="#tab_2" data-toggle="tab">Faculty</a></li>
+                </ul>
+            
 
-        <div class="nav-tabs-custom">
-        <div class="box-header with-border">
-            </div>
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Student</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Faculty</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-            <div class="box">
-            <div class="box-header">
-            </div>
+              <div class="tab-content">
+              
 
-              <div class="box-body">
-                    <div class="btn-group" style="margin-bottom: 3%">
-                    
+              <div class="tab-pane active" id="tab_1" style="padding: 3%">
+                  <table id="datatable" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Student ID</th>
+                      <th>Student Name</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                    $query = "select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
+                    $result = mysqli_query($con, $query);
+                    while($row = mysqli_fetch_array($result))
+                    {
+                    ?>
+                    <tr>
+                      <td><?php echo $row['tblStudentId'] ?></td>
+                      <td><?php echo $row['name'] ?></td>
+                      <td><a href = "student-editv2.php"><form method="post" action="student-editv2.php">
+                      <input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $row['tblStudentId'] ?>"/>
+                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Edit Profile</button></form></a></td>
+                    </tr>
+                    <?php } ?>
+                    </tbody>
+                  </table>
+             </div>
+            <!-- /.tab-pane -->
+        
+
+            <div class="tab-pane" id="tab_2" style="padding: 3%">
+               <div class="btn-group" style="margin-bottom: 3%; margin-top: 1%">
+                  <a href= "faculty-add.php"><button type="button" class="btn btn-info"><i class="fa fa-plus"></i>Add</button></a>
+               </div>
+
+                <div class="modal fade" id="deleteModalOne" role="dialog">
+                  <div class="modal-dialog">
+                  
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title" style="font-style: bold">Delete Faculty</h3>
+                      </div>
+                      <form action="deleteFacultyProfile.php" method="post">
+                      <div class="modal-body">
+                      <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
+                        <div><input type="hidden" name="txtDelId" id="txtDelId"/></div>
+                        <div>
+                          <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                        </div> 
+                      </div>
+                      </div>
+                      <div class="modal-footer" style="margin-top: 5%; float: center">
+                      <button type="submit" class="btn btn-danger" name="btnDel" id="btnDel">Yes</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                      </div>
+                      </form>
                     </div>
-              <table id="datatable" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Student ID</th>
-                  <th>Student Name</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php 
-                $query = "select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
-                $result = mysqli_query($con, $query);
-                while($row = mysqli_fetch_array($result))
-                {
-                ?>
-                <tr>
-                  <td><?php echo $row['tblStudentId'] ?></td>
-                  <td><?php echo $row['name'] ?></td>
-                  <td><a href = "student-editv2.php"><form method="post" action="student-editv2.php">
-                  <input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $row['tblStudentId'] ?>"/>
-                  <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Edit Profile</button></form></a></td>
-                </tr>
-                <?php } ?>
-                </tbody>
-              </table>
-            </div>
-            </div>
-            <!-- /.box-body -->
-              </div>
-              <!-- /.tab-pane -->
-        <div class="tab-pane" id="tab_2">
-          <div class="box">
-            <div class="box-header">
-            </div>
-              <div class="box-body">
+                    
+                  </div>
+                </div>
 
-             <div class="btn-group" style="margin-bottom: 3%; margin-top: 1%">
-                      <a href= "faculty-add.php"><button type="button" class="btn btn-info"><i class="fa fa-plus"></i>Add</button></a>
-            </div>
-
-            <div class="modal fade" id="deleteModalOne" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Delete Faculty</h3>
-        </div>
-        <form action="deleteFacultyProfile.php" method="post">
-        <div class="modal-body">
-        <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
-          <div><input type="hidden" name="txtDelId" id="txtDelId"/></div>
-          <div>
-            <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
-          </div> 
-        </div>
-        </div>
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-        <button type="submit" class="btn btn-danger" name="btnDel" id="btnDel">Yes</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-
-              <table id="datatable1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Faculty ID</th>
-                  <th>Faculty Name</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php 
-                $query = "select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as name from tblfaculty where tblFacultyFlag = 1";
-                $result = mysqli_query($con, $query);
-                while($row = mysqli_fetch_array($result))
-                {
-                ?>
-                <tr>
-                  <td><?php echo $row['tblFacultyId'] ?></td>
-                  <td><?php echo $row['name'] ?></td>
-                  <td><form method="post" action="faculty-edit.php">
-                  <input type="hidden" name="txtFacultyId" id="txtFacultyId" value="<?php echo $row['tblFacultyId'] ?>"/>
-                  <button type="submit" class="btn btn-success" name="btnFclty" id="btnFclty"><i class="fa fa-edit"></i>Edit Profile</button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></form></td>
-                </tr>
-                <?php } ?>
-                </tbody>
-              </table>
-            </div>
-            </div>
-            <!-- /.box-body -->
-              </div>
-              <!-- /.tab-pane -->
+                    <table id="datatable1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Faculty ID</th>
+                        <th>Faculty Name</th>
+                        <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php 
+                      $query = "select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as name from tblfaculty where tblFacultyFlag = 1";
+                      $result = mysqli_query($con, $query);
+                      while($row = mysqli_fetch_array($result))
+                      {
+                      ?>
+                      <tr>
+                        <td><?php echo $row['tblFacultyId'] ?></td>
+                        <td><?php echo $row['name'] ?></td>
+                        <td><form method="post" action="faculty-edit.php">
+                        <input type="hidden" name="txtFacultyId" id="txtFacultyId" value="<?php echo $row['tblFacultyId'] ?>"/>
+                        <button type="submit" class="btn btn-success" name="btnFclty" id="btnFclty"><i class="fa fa-edit"></i>Edit Profile</button><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></form></td>
+                      </tr>
+                      <?php } ?>
+                      </tbody>
+                    </table>
+                </div>
+                <!-- /.tab-pane -->
        
             </div>
             <!-- /.tab-content -->

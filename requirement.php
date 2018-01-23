@@ -71,6 +71,13 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="css/validDesignReq.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
 
   <script>
     (function(){
@@ -266,16 +273,16 @@ function run(){
         <section class="content">
           <div class="row">
               <div class="col-md-12">
-                <div class="box box-default">
+                <div class="box box-default" style="margin-top: 25px">
                   <div class="box-body">
                     <div class="box-header with-border">
-                        <h2 class="box-title" style="font-size:20px; margin-top: 10px;">Requirement</h2>
-                      </div>
+                        <h2 class="box-title" style="font-size:23px; margin-top: 10px;">REQUIREMENT</h2>
+                    </div>
 
                       <div class="box-body" style="margin-top: 3%">
                         <div class="btn-group" style="float: left;  margin-bottom: 2%;">
                           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
-                            </div>
+                        </div>
                       </div>
 
                       <!-- Add Modal -->
@@ -398,75 +405,72 @@ function run(){
                         </div>
                       </div>
 
-      <!-- Delete Modal -->
-      <div class="modal fade" id="deleteModalOne" role="dialog">
-      <div class="modal-dialog">
+                      <!-- Delete Modal -->
+                      <div class="modal fade" id="deleteModalOne" role="dialog">
+                        <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <form method="POST" action="deleteRequirement.php" class="form-horizontal">
-            <div class="modal-header">
-              <h4 class="modal-title" id="deleteModalOne"> DELETE REQUIREMENT </h4>
-            </div>
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <form method="POST" action="deleteRequirement.php" class="form-horizontal">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="deleteModalOne"> DELETE REQUIREMENT </h4>
+                              </div>
 
-            <div class="modal-body">
-              <div class="form-group" style="display: none;">
-                <label class="col-sm-4 control-label">Requirement ID</label>
-                <div class="col-sm-5 input-group">
-                  <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-                  <input type="text" name="txtDelReqId" id="txtDelReqId" readonly=""/>
-                </div>
-              </div>
+                              <div class="modal-body">
+                                <div class="form-group" style="display: none;">
+                                  <label class="col-sm-4 control-label">Requirement ID</label>
+                                  <div class="col-sm-5 input-group">
+                                    <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                    <input type="text" name="txtDelReqId" id="txtDelReqId" readonly=""/>
+                                  </div>
+                                </div>
 
-              <div class="form-group">
-                <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
-              </div>
-            </div>
+                                <div class="form-group">
+                                  <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                                </div>
+                              </div>
 
-            <div class="modal-footer" style="margin-top: 5%; float: center">
-              <button type="submit" class="btn btn-danger" name="btnDelReq" id="btnDelReq">Yes</button>
-              <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      </div>
+                              <div class="modal-footer" style="margin-top: 5%; float: center">
+                                <button type="submit" class="btn btn-danger" name="btnDelReq" id="btnDelReq">Yes</button>
+                                <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
 
-      <form role="form">
-        <div class="box-body">
+                      <form role="form">
+                       <div class="box-body">
+                         <table id="tblReq" class="table table-bordered table-striped">
+                           <thead>
+                           <tr>
+                             <th hidden></th>
+                             <th>Requirement Name</th>
+                             <th>Requirement Description</th>
+                             <th>Type</th>
+                             <th>Action</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <?php
+                           $query = "select * from tblrequirement where tblRequirementFlag = 1";
+                           $result = mysqli_query($con, $query)or die(mysqli_error());
 
-       <div class="box-body">
-         <table id="tblReq" class="table table-bordered table-striped">
-           <thead>
-           <tr>
-             <th hidden></th>
-             <th>Requirement Name</th>
-             <th>Requirement Description</th>
-             <th>Type</th>
-             <th>Action</th>
-           </tr>
-           </thead>
-           <tbody>
-           <?php
-           $query = "select * from tblrequirement where tblRequirementFlag = 1";
-           $result = mysqli_query($con, $query)or die(mysqli_error());
-
-           while($row1 = mysqli_fetch_array($result))
-           {
-           ?>
-           <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
-           <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
-           <td style="width:100px;"><?php echo $row1['tblReqDescription']; ?></td>
-           <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>           
-           <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
-           </tr>
-           <?php } ?>
-           </tbody>
-         </table>
-      </div>
-      </form>
-      </div>
+                           while($row1 = mysqli_fetch_array($result))
+                           {
+                           ?>
+                           <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
+                           <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
+                           <td style="width:100px;"><?php echo $row1['tblReqDescription']; ?></td>
+                           <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>           
+                           <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
+                           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
+                           </tr>
+                           <?php } ?>
+                           </tbody>
+                         </table>
+                        </div>
+                      </form>
                   </div><!-- /. box-body -->
                 </div> <!-- /.box-default -->
               </div> <!-- col-md -->

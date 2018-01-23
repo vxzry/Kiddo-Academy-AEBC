@@ -75,6 +75,13 @@
   <!--  Validations Design Keme  -->
   <link rel="stylesheet" type="text/css" href="css/validDesignPayment.css">
   <link rel="stylesheet" type="text/css" href="css/validDesignScheme.css">
+   <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
 
 <script>
   $(document).ready(function(){
@@ -480,748 +487,682 @@ $(document).ready(function(){
 
     <!-- Main content -->
     <section class="content">
-    <div class="row">
+      <div class="row">
         <div class="col-md-12">
-          <div class="box box-default">
-            <div class="box-header with-border">
-            </div>
-            <!-- /.box-header -->
-        <div class="box-body">
+          <div class="box box-default" style="margin-top: 25px">
+            <div class="box-body">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab_1" data-toggle="tab">Fees</a></li>
+                  <li><a href="#tab_2" data-toggle="tab">Payment Scheme Type</a></li>
+                  <li><a href="#tab_3" data-toggle="tab">Payment Schedule</a></li>
+                </ul>
 
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Fees</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Payment Scheme Type</a></li>
-              <li><a href="#tab_3" data-toggle="tab">Payment Schedule</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-            <div class="box">
-            <div class="box-header">
-            </div>
 
-              <div class="box-body">
+                <div class="tab-content">
+                  
+
+                <div class="tab-pane active" id="tab_1" style="padding: 3%">
                     <div class="btn-group" style="margin-bottom: 3%">
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalList"><i class="fa fa-list"></i>  View Fee List</button>
                     </div>
-
-
- <!-- Add Modal -->
-<div class="modal fade" id="modalList" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content" style="width: 150%;">
-        <div class="modal-header">
-          <h4 class="modal-title" id="addModalFour"> ADD FEE </h4>
-        </div>
-
-        <div class="modal-body">
-
-          <table id="datatable" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Fee Code</th>
-                  <th>Fee Name</th>
-                  <th>Level Name</th>
-                  <th>Fee Type</th>
-                  <th>Fee Amount</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <?php
-                $query="select f.tblFeeCode, f.tblFeeName, f.tblFeeType, l.tblLevelName, fa.tblFeeAmountAmount from tblfee f, tbllevel l, tblfeeamount fa where fa.tblFeeAmount_tblFeeId=f.tblFeeId and fa.tblFeeAmount_tblLevelId=l.tblLevelId and f.tblFeeFlag=1";
-                $result=mysqli_query($con, $query);
-                while($row=mysqli_fetch_array($result)):
-                ?>
-                <tr>
-                <td><?php echo $row['tblFeeCode'] ?></td>
-                <td><?php echo $row['tblFeeName'] ?></td>
-                <td><?php echo $row['tblLevelName'] ?></td>
-                <td><?php echo $row['tblFeeType'] ?></td>
-                <td><?php echo $row['tblFeeAmountAmount'] ?></td>
-                </tr>
-              <?php endwhile; ?>
-                </tbody>
-                </table>
-
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
                     <div class="btn-group" style="margin-bottom: 3%">
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
                     </div>
 
- <!-- Add Modal -->
-<div class="modal fade" id="addModalOne" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form autocomplete="off" id = "addFee" name="addFee" role="form" method="POST" action="saveFee.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="addModalFour"> ADD FEE </h4>
-        </div>
 
-        <div class="modal-body">
+                   <!-- Fee List Modal -->
+                  <div class="modal fade" id="modalList" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content" style="width: 150%;">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="modalList"> LIST OF FEES </h4>
+                          </div>
 
-          <div class="form-group" style="margin-top:5%">
-            <b><label class="col-sm-4 control-label"> Fee Code </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtAddFeeCode" id="txtAddFeeCode" style="text-transform:uppercase ;">
+                          <div class="modal-body">
 
-              </div>
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:6%">
-            <b><label class="col-sm-4 control-label"> Fee Name </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtAddFeeName" id="txtAddFeeName" style="text-transform:uppercase ;">
+                            <table id="datatable" class="table table-bordered table-striped">
+                                  <thead>
+                                  <tr>
+                                    <th>Fee Code</th>
+                                    <th>Fee Name</th>
+                                    <th>Level Name</th>
+                                    <th>Fee Type</th>
+                                    <th>Fee Amount</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                      <?php
+                                      $query="select f.tblFeeCode, f.tblFeeName, f.tblFeeType, l.tblLevelName, fa.tblFeeAmountAmount from tblfee f, tbllevel l, tblfeeamount fa where fa.tblFeeAmount_tblFeeId=f.tblFeeId and fa.tblFeeAmount_tblLevelId=l.tblLevelId and f.tblFeeFlag=1";
+                                      $result=mysqli_query($con, $query);
+                                      while($row=mysqli_fetch_array($result)):
+                                      ?>
+                                      <tr>
+                                      <td><?php echo $row['tblFeeCode'] ?></td>
+                                      <td><?php echo $row['tblFeeName'] ?></td>
+                                      <td><?php echo $row['tblLevelName'] ?></td>
+                                      <td><?php echo $row['tblFeeType'] ?></td>
+                                      <td><?php echo $row['tblFeeAmountAmount'] ?></td>
+                                      </tr>
+                                    <?php endwhile; ?>
+                                  </tbody>
+                            </table>
 
-              </div>
-            </div>
-          </div>
+                            <div class="modal-footer" style="margin-top: 7%">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
 
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label">Fee Status:</label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <select class="form-control" name="selAddFeeMand" id="selAddFeeMand" style="text-transform:uppercase ;">
-                <option selected disabled>--Select Fee Status--</option>
-                <option value='Y'>Mandatory</option>
-                <option value='N'>Optional</option>
-                </select>
+                  <!-- Add Modal -->
+                  <div class="modal fade" id="addModalOne" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form autocomplete="off" id = "addFee" name="addFee" role="form" method="POST" action="saveFee.php" class="form-horizontal">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="addModalFour"> ADD FEE </h4>
+                          </div>
 
-              </div>
-            </div>
-          </div>
+                          <div class="modal-body">
 
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label">Fee Type:</label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <select class="form-control" name="selAddFeeType" id="selAddFeeType" style="text-transform:uppercase ;">
-                <option selected disabled>--Select Fee Status--</option>
-                <option value='Mass Fee'>General Fees</option>
-                <option value='Different Per Level'>Specific Fees</option>
-                </select>
+                            <div class="form-group" style="margin-top:5%">
+                              <b><label class="col-sm-4 control-label"> Fee Code </label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <input type="text" class="form-control" name="txtAddFeeCode" id="txtAddFeeCode" style="text-transform:uppercase ;">
 
-              </div>
-            </div>
-          </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group" style="margin-top:6%">
+                              <b><label class="col-sm-4 control-label"> Fee Name </label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <input type="text" class="form-control" name="txtAddFeeName" id="txtAddFeeName" style="text-transform:uppercase ;">
 
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="submit" class="btn btn-info">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-  
-  <!-- Update Modal -->
-<div class="modal fade" id="updateModalOne" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form autocomplete="off" id = "UpdFee" name="UpdFee" role="form" method="POST" action="updateFee.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="updateModalOne"> UPDATE FEE NAME </h4>
-        </div>
+                                </div>
+                              </div>
+                            </div>
 
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Fee ID</label>
-            <div class="col-sm-6">
-              <div class = "input-group">
-                <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="txtUpdFeeId" id="txtUpdFeeId" readonly="">
-              </div>
-            </div>
-          </div>
+                            <div class="form-group" style="margin-top:7%">
+                              <b><label class="col-sm-4 control-label">Fee Status:</label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <select class="form-control" name="selAddFeeMand" id="selAddFeeMand" style="text-transform:uppercase ;">
+                                  <option selected disabled>--Select Fee Status--</option>
+                                  <option value='Y'>Mandatory</option>
+                                  <option value='N'>Optional</option>
+                                  </select>
 
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label"> Fee Code </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
-              </div>
-            </div>
-          </div>
+                                </div>
+                              </div>
+                            </div>
 
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label"> Fee Name </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtUpdFee" id="txtUpdFee" style="text-transform:uppercase ;">
-              </div>
-            </div>
-          </div>
+                            <div class="form-group" style="margin-top:7%">
+                              <b><label class="col-sm-4 control-label">Fee Type:</label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <select class="form-control" name="selAddFeeType" id="selAddFeeType" style="text-transform:uppercase ;">
+                                  <option selected disabled>--Select Fee Status--</option>
+                                  <option value='Mass Fee'>General Fees</option>
+                                  <option value='Different Per Level'>Specific Fees</option>
+                                  </select>
 
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label">Fee Status:</label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <select class="form-control" name="selUpdFeeMand" id="selUpdFeeMand" style="text-transform:uppercase ;">
-                <option selected disabled>--Select Fee Status--</option>
-                <option value='Mandatory'>Mandatory</option>
-                <option value='Optional'>Optional</option>
-                </select>
+                                </div>
+                              </div>
+                            </div>
 
-              </div>
-            </div>
-          </div>
+                            <div class="modal-footer" style="margin-top: 7%">
+                              <button type="submit" class="btn btn-info">Save</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <!-- Update Modal -->
+                  <div class="modal fade" id="updateModalOne" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form autocomplete="off" id = "UpdFee" name="UpdFee" role="form" method="POST" action="updateFee.php" class="form-horizontal">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="updateModalOne"> UPDATE FEE NAME </h4>
+                          </div>
 
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label">Fee Type:</label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <select class="form-control" name="selUpdFeeType" id="selUpdFeeType" style="text-transform:uppercase ;">
-                <option selected disabled>--Select Fee Status--</option>
-                <option value='Mass Fee'>Mass Fee</option>
-                <option value='Different Per Level'>Different Per Level</option>
-                </select>
+                          <div class="modal-body">
+                            <div class="form-group" style="display: none;">
+                              <label class="col-sm-4 control-label">Fee ID</label>
+                              <div class="col-sm-6">
+                                <div class = "input-group">
+                                  <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                  <input type="text" class="form-control" name="txtUpdFeeId" id="txtUpdFeeId" readonly="">
+                                </div>
+                              </div>
+                            </div>
 
-              </div>
-            </div>
-          </div>
+                            <div class="form-group" style="margin-top:7%">
+                              <b><label class="col-sm-4 control-label"> Fee Code </label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
+                                </div>
+                              </div>
+                            </div>
 
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="submit" class="btn btn-info" name="btnUpdFee" id="btnUpdFee">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-  
-  <!-- Delete Modal -->
-<div class="modal fade" id="deleteModalOne" role="dialog">
-  <div class="modal-dialog">
+                            <div class="form-group" style="margin-top:7%">
+                              <b><label class="col-sm-4 control-label"> Fee Name </label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <input type="text" class="form-control" name="txtUpdFee" id="txtUpdFee" style="text-transform:uppercase ;">
+                                </div>
+                              </div>
+                            </div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form method="POST" action="deleteFee.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="deleteModalOne"> DELETE FEE </h4>
-        </div>
+                            <div class="form-group" style="margin-top:7%">
+                              <b><label class="col-sm-4 control-label">Fee Status:</label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <select class="form-control" name="selUpdFeeMand" id="selUpdFeeMand" style="text-transform:uppercase ;">
+                                  <option selected disabled>--Select Fee Status--</option>
+                                  <option value='Mandatory'>Mandatory</option>
+                                  <option value='Optional'>Optional</option>
+                                  </select>
 
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Fee ID</label>
-            <div class="col-sm-5 input-group">
-              <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-              <input type="text" name="txtDelFee" id="txtDelFee" readonly="" />
-            </div>
-          </div>
+                                </div>
+                              </div>
+                            </div>
 
-          <div class="form-group">
-            <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
-          </div>
-        </div>
+                            <div class="form-group" style="margin-top:7%">
+                              <b><label class="col-sm-4 control-label">Fee Type:</label></b>
+                              <div class="col-sm-6 selectContainer">
+                                <div class="input-group" style="width:100%;">
+                                  <select class="form-control" name="selUpdFeeType" id="selUpdFeeType" style="text-transform:uppercase ;">
+                                  <option selected disabled>--Select Fee Status--</option>
+                                  <option value='Mass Fee'>Mass Fee</option>
+                                  <option value='Different Per Level'>Different Per Level</option>
+                                  </select>
 
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-          <button type="submit" class="btn btn-danger" name="btnDelFee" id="btnDelFee">Delete</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-  <!--modal delete end-->
+                                </div>
+                              </div>
+                            </div>
 
-  <div class="modal fade" id="mdlFeeDetails" role="dialog">
-  <div class="modal-dialog">
+                            <div class="modal-footer" style="margin-top: 7%">
+                              <button type="submit" class="btn btn-info" name="btnUpdFee" id="btnUpdFee">Save</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <!-- Delete Modal -->
+                  <div class="modal fade" id="deleteModalOne" role="dialog">
+                    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form method="POST" action="" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title"> FEE DETAILS </h4>
-        </div>
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <form method="POST" action="deleteFee.php" class="form-horizontal">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="deleteModalOne"> DELETE FEE </h4>
+                          </div>
 
-        <div class="modal-body">
-              <input type="hidden" name="txtFdFeeCode" id="txtFdFeeCode" readonly="" />
+                          <div class="modal-body">
+                            <div class="form-group" style="display: none;">
+                              <label class="col-sm-4 control-label">Fee ID</label>
+                              <div class="col-sm-5 input-group">
+                                <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                <input type="text" name="txtDelFee" id="txtDelFee" readonly="" />
+                              </div>
+                            </div>
 
-            <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label"> Fee Detail Name: </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtFdName" id="txtFdName" style="text-transform:uppercase ;">
-              </div>
-            </div>
-          </div>
-          <h4 style="margin-left: 15px">Amount</h4>
-          <?php
-          $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
-          $result=mysqli_query($con, $query);
-          while($row=mysqli_fetch_array($result)):
-          ?>
-          <div class="form-group" style="margin-top:7%">
-            <b><label class="col-sm-4 control-label"> <?php echo $row['tblLevelName'] ?>: </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtFdAmnt" id="txtFdAmnt" style="text-transform:uppercase ;">
-              </div>
-            </div>
-          </div>
-        <?php endwhile; ?>
-        </div><!-- modal body -->
+                            <div class="form-group">
+                              <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                            </div>
+                          </div>
 
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-          <button type="submit" class="btn btn-danger" name="btnFd" id="btnFd">Delete</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-              <h4>Fee Amounts</h4>
-              <table id="datatable7" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th hidden>Fee Id</th>
-                  <th hidden>Level Id</th>
-                  <th>Fee Code</th>
-                  <th>Fee Name</th>
-                  <th>Fee Type</th>
-                  <th>Fee Status</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                 <?php
-                 $query = "select distinct(tblFeeCode), tblFeeName, tblFeeId, tblFeeType, tblFeeMandatory from tblfee where tblFeeFlag=1";
-                  $result = mysqli_query($con, $query);
-                  while($row = mysqli_fetch_array($result)):
-                    $type=$row['tblFeeType'];
-                    $stat=$row['tblFeeMandatory'];
-                    if($stat=='Y')
-                    {
-                        $stat1='Mandatory';
-                    }else if($stat=='N')
-                    {
-                        $stat1='Optional';
-                    }
-                  ?>
-                  <tr>
-                  <td hidden><?php echo $row['tblFeeId'] ?></td>
-                  <td hidden></td>
-                  <td><?php echo $row['tblFeeCode'] ?></td>
-                  <td><?php echo $row['tblFeeName'] ?></td>
-                  <td><?php echo $row['tblFeeType'] ?></td>
-                  <td><?php echo $stat1 ?></td>
-                  <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
-                  
-                  <a href = "feedetails.php"><form method="post" action="feedetails.php">
-                  <input type="hidden" name="" id="" value=""/>
-                  <button type="submit" class="btn btn-success" name="btnFeeDetails" id="btnFeeDetails" style="margin-top: 4px;"><i class="fa fa-edit"></i>Fee Details</button>
-                  </form></a>
-                  </td>
-                  </tr>
-                <?php endwhile; ?>
-                </tbody>
-              </table>
+                          <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="submit" class="btn btn-danger" name="btnDelFee" id="btnDelFee">Delete</button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                 <!--modal delete end-->
 
-            </div>
-            </div>
-            <!-- /.box-body -->
+                  <table id="datatable3" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th hidden>Fee Id</th>
+                      <th hidden>Level Id</th>
+                      <th>Fee Code</th>
+                      <th>Fee Name</th>
+                      <th>Fee Type</th>
+                      <th>Fee Status</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                     <?php
+                     $query = "select distinct(tblFeeCode), tblFeeName, tblFeeId, tblFeeType, tblFeeMandatory from tblfee where tblFeeFlag=1";
+                      $result = mysqli_query($con, $query);
+                      while($row = mysqli_fetch_array($result)):
+                        $type=$row['tblFeeType'];
+                        $stat=$row['tblFeeMandatory'];
+                        if($stat=='Y')
+                        {
+                            $stat1='Mandatory';
+                        }else if($stat=='N')
+                        {
+                            $stat1='Optional';
+                        }
+                      ?>
+                      <tr>
+                      <td hidden><?php echo $row['tblFeeId'] ?></td>
+                      <td hidden></td>
+                      <td><?php echo $row['tblFeeCode'] ?></td>
+                      <td><?php echo $row['tblFeeName'] ?></td>
+                      <td><?php echo $row['tblFeeType'] ?></td>
+                      <td><?php echo $stat1 ?></td>
+                      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
+                      
+                      <a href = "feedetails.php"><form method="post" action="feedetails.php">
+                      <input type="hidden" name="" id="" value=""/>
+                      <button type="submit" class="btn btn-success" name="btnFeeDetails" id="btnFeeDetails" style="margin-top: 4px;"><i class="fa fa-edit"></i>Fee Details</button>
+                      </form></a>
+                      </td>
+                      </tr>
+                    <?php endwhile; ?>
+                    </tbody>
+                  </table>
+
               </div>
               <!-- /.tab-pane -->
 
-        <div class="tab-pane" id="tab_2">
-          <div class="box">
-            <div class="box-header">
-            </div>
-              <div class="box-body">
-
+        <div class="tab-pane" id="tab_2" style="padding: 3%">
              <div class="btn-group" style="margin-bottom: 3%; margin-top: 1%">
-                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalTwo"><i class="fa fa-plus"></i>Add</button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalTwo"><i class="fa fa-plus"></i>Add</button>
+             </div>
+
+            <!-- Add Modal -->
+            <div class="modal fade" id="addModalTwo" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form autocomplete="off" id = "addScheme" name="addScheme" role="form" method="POST" action="saveScheme.php" class="form-horizontal">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="addModalTwo"> ADD PAYMENT SCHEME </h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                      <div class="form-group" style="margin-top: 7%;">
+                        <label class="col-sm-4 control-label"> Payment Scheme </label>
+                        <div class="col-sm-6 selectContainer">
+                          <div class="input-group">
+                            <div class="input-group-addon">
+                              <i class="fa fa-clone" aria-hidden="true"></i>
+                            </div>
+                            <select class="form-control choose" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
+                              <option selected="selected" value="">--Select Fee--</option>
+                              <?php
+                                $query = "select distinct tblFeeName from tblfee where tblFeeFlag = 1";
+                                $result = mysqli_query($con, $query);
+                                while($row = mysqli_fetch_array($result))
+                                {
+                              ?>
+                              <option value="<?php echo $row['tblFeeName'] ?>"><?php echo $row['tblFeeName'] ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <b><label class="col-sm-4 control-label"> Scheme Name </label></b>
+                        <div class="col-sm-6 selectContainer">
+                          <div class="input-group" style="width:100%;">
+                              <input type="text" class="form-control" name="txtAddScheme" id="txtAddScheme" style="text-transform:uppercase;">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <b><label class="col-sm-4 control-label"> No. of Payments </label></b>
+                        <div class="col-sm-6 selectContainer">
+                          <div class="input-group" style="width:100%;">
+                            <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal-footer" style="margin-top: 7%">
+                        <button type="submit" class="btn btn-info">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
 
-  <!-- Add Modal -->
-<div class="modal fade" id="addModalTwo" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form autocomplete="off" id = "addScheme" name="addScheme" role="form" method="POST" action="saveScheme.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="addModalTwo"> ADD PAYMENT SCHEME </h4>
-        </div>
+            <!-- Update Modal -->
+            <div class="modal fade" id="updateModalTwo" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form autocomplete="off" id = "UpdScheme" name="UpdScheme" role="form" method="POST" action="updateScheme.php" class="form-horizontal">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="updateModalTwo"> UPDATE PAYMENT SCHEME </h4>
+                    </div>
 
-        <div class="modal-body">
+                    <div class="modal-body">
+                      <div class="form-group" style="display: none;">
+                        <label class="col-sm-4 control-label">Scheme ID</label>
+                        <div class="col-sm-6">
+                          <div class = "input-group">
+                            <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                            <input type="text" name="txtUpdSchemeId" id="txtUpdSchemeId" readonly="" />
+                          </div>
+                        </div>
+                      </div>
 
-          <div class="form-group" style="margin-top: 7%;">
-            <label class="col-sm-4 control-label"> Payment Scheme </label>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-clone" aria-hidden="true"></i>
+                      <div class="form-group" style="margin-top:7%">
+                        <label class="col-sm-4 control-label"> Fee </label>
+                        <div class="col-sm-6 selectContainer">
+                          <div class="input-group">
+                            <div class="input-group-addon">
+                              <i class="fa fa-clone" aria-hidden="true"></i>
+                            </div>
+                            <input type="text" class="form-control" name="txtUpdFeeName" id="txtUpdFeeName" disabled>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <b><label class="col-sm-4 control-label"> Scheme Name </label></b>
+                        <div class="col-sm-6 selectContainer">
+                          <div class="input-group" style="width:100%;">
+                            <input type="text" class="form-control" name="txtUpdScheme" id="txtUpdScheme" style="text-transform:uppercase;">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group" >
+                        <b><label class="col-sm-4 control-label"> No. of Payment </label></b>
+                        <div class="col-sm-6 selectContainer">
+                          <div class="input-group" style="width:100%;">
+                            <input class="rem" type="number" min="1" max="31" name="txtUpdSchemeNo" id="txtUpdSchemeNo">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal-footer" style="margin-top: 7%">
+                        <button type="submit" class="btn btn-info" name="btnUpdScheme" id="btnUpdScheme">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <select class="form-control choose" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
-                  <option selected="selected" value="">--Select Fee--</option>
-                  <?php
-                    $query = "select distinct tblFeeName from tblfee where tblFeeFlag = 1";
+              </div>
+            </div>
+
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModalTwo" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <form method="POST" action="deleteScheme.php" class="form-horizontal">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="deleteModalTwo"> DELETE PAYMENT SCHEME </h4>
+                    </div>
+
+                    <div class="modal-body">
+                      <div class="form-group" style="display: none;">
+                        <label class="col-sm-4 control-label">Scheme ID</label>
+                        <div class="col-sm-5 input-group">
+                          <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                          <input type="text" name="txtDelScheme" id="txtDelScheme" readonly="" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer" style="margin-top: 5%; float: center">
+                      <button type="submit" class="btn btn-danger" name="btnDelScheme" id="btnDelScheme">Delete</button>
+                      <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!--modal delete end-->
+            
+
+            <table id="datatable1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th hidden>Scheme Id</th>
+                <th>Fee</th>
+                <th>Scheme</th>
+                <th>No. of Payments</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <?php
+              $query = "select s.tblSchemeId, f.tblFeeName, s.tblSchemeType, s.tblSchemeNoOfPayment from tblscheme s, tblfee f where s.tblScheme_tblFeeId = f.tblFeeId and f.tblFeeFlag = 1 and s.tblSchemeFlag=1";
+              $result = mysqli_query($con, $query);
+              while($row = mysqli_fetch_array($result))
+              {
+              ?>
+              <tr>
+                <td hidden><?php echo $row['tblSchemeId'] ?></td>
+                <td><?php echo $row['tblFeeName'] ?></td>
+                <td><?php echo $row['tblSchemeType'] ?></td>
+                <td><?php echo $row['tblSchemeNoOfPayment'] ?></td>
+                 <td>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalTwo"><i class="fa fa-trash"></i></button>
+                 </td>
+              </tr>
+              <?php } ?>
+              </tbody>
+            </table>
+
+        </div>
+        <!-- /.tab-pane -->
+        
+
+        <div class="tab-pane" id="tab_3" style="padding: 3%">
+          <div class="form-inline">
+            <div class="container" style="margin-bottom: 15px">
+                  <label class="col-sm-1">Fee Type: </label>   
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Mass Fee" onchange="changeTblMass()">  General Fees
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Different Per Level" onchange="enable()" style="margin-left: 10px;">  Specific Fees
+              </div>    
+          </div>
+
+          <div class="form-inline">
+            <div class="container">
+              <label class="col-sm-1">Level: </label>   
+                    <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()" disabled>  
+                      <option>--Select Here--</option>    
+                    <?php   
+                    $query="select * from tbllevel where tblLevelFlag=1";   
+                    $result=mysqli_query($con, $query);   
+                    while($row=mysqli_fetch_array($result))   
+                    {   
+                    ?>
+                    <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>   
+                    <?php } ?>    
+                    </select>   
+              </div>    
+          </div>    
+          
+          <div class="form-inline">   
+            <div class="container">
+                <label class="col-sm-1">Fee: </label>
+                <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedFee" id="selSchedFee" onchange="changeFee()" disabled>
+                  <option>--Select Here--</option>
+                  <?php 
+                    $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1 and tblFeeType='Different Per Level'";
                     $result = mysqli_query($con, $query);
                     while($row = mysqli_fetch_array($result))
                     {
                   ?>
-                  <option value="<?php echo $row['tblFeeName'] ?>"><?php echo $row['tblFeeName'] ?></option>
+                  <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
                   <?php } ?>
                 </select>
-              </div>
             </div>
           </div>
-
-          <div class="form-group">
-            <b><label class="col-sm-4 control-label"> Scheme Name </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                  <input type="text" class="form-control" name="txtAddScheme" id="txtAddScheme" style="text-transform:uppercase;">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <b><label class="col-sm-4 control-label"> No. of Payments </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="submit" class="btn btn-info">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
- <!-- Update Modal -->
-<div class="modal fade" id="updateModalTwo" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form autocomplete="off" id = "UpdScheme" name="UpdScheme" role="form" method="POST" action="updateScheme.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="updateModalTwo"> UPDATE PAYMENT SCHEME </h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Scheme ID</label>
-            <div class="col-sm-6">
-              <div class = "input-group">
-                <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-                <input type="text" name="txtUpdSchemeId" id="txtUpdSchemeId" readonly="" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top:7%">
-            <label class="col-sm-4 control-label"> Fee </label>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-clone" aria-hidden="true"></i>
-                </div>
-                <input type="text" class="form-control" name="txtUpdFeeName" id="txtUpdFeeName" disabled>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <b><label class="col-sm-4 control-label"> Scheme Name </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input type="text" class="form-control" name="txtUpdScheme" id="txtUpdScheme" style="text-transform:uppercase;">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" >
-            <b><label class="col-sm-4 control-label"> No. of Payment </label></b>
-            <div class="col-sm-6 selectContainer">
-              <div class="input-group" style="width:100%;">
-                <input class="rem" type="number" min="1" max="31" name="txtUpdSchemeNo" id="txtUpdSchemeNo">
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer" style="margin-top: 7%">
-            <button type="submit" class="btn btn-info" name="btnUpdScheme" id="btnUpdScheme">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModalTwo" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form method="POST" action="deleteScheme.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="deleteModalTwo"> DELETE PAYMENT SCHEME </h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Scheme ID</label>
-            <div class="col-sm-5 input-group">
-              <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-              <input type="text" name="txtDelScheme" id="txtDelScheme" readonly="" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
-          </div>
-        </div>
-
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-          <button type="submit" class="btn btn-danger" name="btnDelScheme" id="btnDelScheme">Delete</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-  <!--modal delete end-->
-              <table id="datatable1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th hidden>Scheme Id</th>
-                  <th>Fee</th>
-                  <th>Scheme</th>
-                  <th>No. of Payments</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $query = "select s.tblSchemeId, f.tblFeeName, s.tblSchemeType, s.tblSchemeNoOfPayment from tblscheme s, tblfee f where s.tblScheme_tblFeeId = f.tblFeeId and f.tblFeeFlag = 1 and s.tblSchemeFlag=1";
-                $result = mysqli_query($con, $query);
-                while($row = mysqli_fetch_array($result))
-                {
-                ?>
-                <tr>
-                  <td hidden><?php echo $row['tblSchemeId'] ?></td>
-                  <td><?php echo $row['tblFeeName'] ?></td>
-                  <td><?php echo $row['tblSchemeType'] ?></td>
-                  <td><?php echo $row['tblSchemeNoOfPayment'] ?></td>
-                   <td>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalTwo"><i class="fa fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalTwo"><i class="fa fa-trash"></i></button>
-                   </td>
-                </tr>
-                <?php } ?>
-                </tbody>
-              </table>
-            </div>
-            </div>
-            <!-- /.box-body -->
-              </div>
-              <!-- /.tab-pane -->
-        <div class="tab-pane" id="tab_3">
-          <div class="box">
-            <div class="box-header">
-            </div>
-              <div class="box-body">
-              <div class="form-inline">
-            <div class="container" style="margin-bottom: 15px">
-                  <label class="col-sm-2">Fee Type: </label>   
-                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Mass Fee" onchange="changeTblMass()">  General Fees
-                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Different Per Level" onchange="enable()" style="margin-left: 10px;">  Specific Fees
-              </div>    
-              </div>
-
-              <div class="form-inline">
-            <div class="container">
-                  <label class="col-sm-1">Level: </label>   
-                        <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()" disabled>  
-                          <option>--Select Here--</option>    
-                        <?php   
-                        $query="select * from tbllevel where tblLevelFlag=1";   
-                        $result=mysqli_query($con, $query);   
-                        while($row=mysqli_fetch_array($result))   
-                        {   
-                        ?>
-                        <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>   
-                        <?php } ?>    
-                        </select>   
-              </div>    
-              </div>    
-                <div class="form-inline">   
-              <div class="container">
-                      <label class="col-sm-1">Fee: </label>
-                      <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedFee" id="selSchedFee" onchange="changeFee()" disabled>
-                        <option>--Select Here--</option>
-                        <?php 
-                          $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1 and tblFeeType='Different Per Level'";
-                          $result = mysqli_query($con, $query);
-                          while($row = mysqli_fetch_array($result))
-                          {
-                        ?>
-                        <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
-                        <?php } ?>
-                      </select>
-            </div>
-            </div>
-            <div class="form-inline">
+            
+          <div class="form-inline">
             <div class="container">
                       <label class="col-sm-1">Scheme: </label>
                       <select class="form-control" style="width: 30%; margin-bottom: 1%" disabled name="selSchedScheme" id="selSchedScheme" onchange="changeTblSchedScheme()">
                         <option>--Select Here--</option>
                       </select>
             </div>
-            </div>
-               <div class="btn-group" style="margin-bottom: 3%">
-
+          </div>
+               
+          <div class="modal fade" id="updateModalThree" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
+                </div>
+                <form method="post" action="updateSchemeDetail.php">
+                <div class="modal-body">
+                <input type="hidden" class="form-control" name="txtDetId" id="txtDetId">
+                <div class="form-group" style="margin-top: 5%">
+                        <label class="col-sm-4" style="text-align: right">Payment Order</label>
+                        <div class="col-sm-7">
+                        <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo">
+                        </div>
+                </div>
+                <div class="form-group"  style="margin-top: 15%">
+                     
+                    <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate">
                     </div>
-  <div class="modal fade" id="updateModalThree" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
-        </div>
-        <form method="post" action="updateSchemeDetail.php">
-        <div class="modal-body">
-        <input type="hidden" class="form-control" name="txtDetId" id="txtDetId">
-        <div class="form-group" style="margin-top: 5%">
-                <label class="col-sm-4" style="text-align: right">Payment Order</label>
-                <div class="col-sm-7">
-                <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo">
+                </div> 
+                <div class="form-group"  style="margin-top: 25%">
+                     
+                    <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
+                    </div>
+                </div>       
                 </div>
-        </div>
-        <div class="form-group"  style="margin-top: 15%">
-             
-            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate">
+                <div class="modal-footer" style="margin-top: 10%">
+                <button type="submit" class="btn btn-info"  name="btnDetSave" id="btnDetSave">Save</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+              </div>
+              
             </div>
-        </div> 
-        <div class="form-group"  style="margin-top: 25%">
-             
-            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
-            </div>
-        </div>       
-        </div>
-        <div class="modal-footer" style="margin-top: 10%">
-        <button type="submit" class="btn btn-info"  name="btnDetSave" id="btnDetSave">Save</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
+          </div>
 
-<div class="modal fade" id="mdlUpdateSched" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
-        </div>
-        <form method="post" action="updateSchemeDetail.php">
-        <div class="modal-body">
-        <input type="hidden" class="form-control" name="txtDetId" id="txtDetId1">
-        <div class="form-group" style="margin-top: 5%">
-                <label class="col-sm-4" style="text-align: right">Payment Order</label>
-                <div class="col-sm-7">
-                <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo1">
+          <div class="modal fade" id="mdlUpdateSched" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
+                  </div>
+                  <form method="post" action="updateSchemeDetail.php">
+                  <div class="modal-body">
+                  <input type="hidden" class="form-control" name="txtDetId" id="txtDetId1">
+                  <div class="form-group" style="margin-top: 5%">
+                          <label class="col-sm-4" style="text-align: right">Payment Order</label>
+                          <div class="col-sm-7">
+                          <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo1">
+                          </div>
+                  </div>
+                  <div class="form-group"  style="margin-top: 15%">
+                       
+                      <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
+                      <div class="col-sm-7">
+                        <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate1">
+                      </div>
+                  </div> 
+                  <div class="form-group"  style="margin-top: 25%">
+                       
+                      <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
+                      <div class="col-sm-7">
+                        <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount1">
+                      </div>
+                  </div>       
+                  </div>
+                  <div class="modal-footer" style="margin-top: 10%">
+                  <button type="submit" class="btn btn-info"  name="btnDetSave1" id="btnDetSave1">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                  </form>
                 </div>
-        </div>
-        <div class="form-group"  style="margin-top: 15%">
-             
-            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate1">
-            </div>
-        </div> 
-        <div class="form-group"  style="margin-top: 25%">
-             
-            <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount1">
-            </div>
-        </div>       
-        </div>
-        <div class="modal-footer" style="margin-top: 10%">
-        <button type="submit" class="btn btn-info"  name="btnDetSave1" id="btnDetSave1">Save</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
+                
+              </div>
+          </div>
 
   
-  <div class="modal fade" id="deleteModalThree" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title" style="font-style: bold">Reset</h3>
-        </div>
-        <form method="post" action="deleteSchemeDetail.php">
-        <div class="modal-body">
-        <input type="hidden" class="form-control" name="txtDetDelId" id="txtDetDelId">
-        <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
-              <h3 align="center"> Are you sure you want to reset?</h3>
-            </div>
-                  
-        </div>
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-        <button type="submit" class="btn btn-danger" name="btnReset" id="bnReset">Reset</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-  <!--modal delete end-->
-              <table id="datatable2" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Payment</th>
-                  <th>Due Date</th>
-                  <th>Amount on Due Date</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-               
-              </table>
-            </div>
-            </div>
-            <!-- /.box-body -->
+          <div class="modal fade" id="deleteModalThree" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title" style="font-style: bold">Reset</h3>
+                </div>
+                <form method="post" action="deleteSchemeDetail.php">
+                <div class="modal-body">
+                <input type="hidden" class="form-control" name="txtDetDelId" id="txtDetDelId">
+                <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
+                      <h3 align="center"> Are you sure you want to reset?</h3>
+                    </div>
+                          
+                </div>
+                <div class="modal-footer" style="margin-top: 5%; float: center">
+                <button type="submit" class="btn btn-danger" name="btnReset" id="bnReset">Reset</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+                </form>
               </div>
-                <!-- /.tab-pane -->
+              
+            </div>
+          </div>
+          <!--modal delete end-->
+          
+
+          <table id="datatable2" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Payment</th>
+              <th>Due Date</th>
+              <th>Amount on Due Date</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+          </table>
+
+      </div>
+      <!-- /.tab-pane -->
 
     
             </div>

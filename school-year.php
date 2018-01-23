@@ -63,6 +63,13 @@
   <![endif]--> 
 
   <link rel="stylesheet" type="text/css" href="css/validDesignSchoolYr.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <script>
@@ -321,34 +328,20 @@ function showTblMonth()
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header"  style="margin-bottom: -25px; ">
-    <h5>
-      </h5>
-    </section>
+
 
     <!-- Main content -->
-    <section class="content" style="margin-top: 3%">
-    <div class="row">
+    <section class="content">
+      <div class="row">
         <div class="col-md-12">
-          <div class="box box-default">
-            <div class="box-header with-border">
-            </div>
+          <div class="box box-default"  style="margin-top: 25px">
             <!-- /.box-header -->
         <div class="box-body">
           <div class="box-header with-border">
-            <h2 class="box-title" style="font-size:25px;">SCHOOL YEAR</h2>
-              <div class="form-group" style="margin-top: 3%; margin-left: 2%">
-              </div>
-            </div>
+            <h2 class="box-title" style="font-size:25px; margin-top: 10px">SCHOOL YEAR</h2>
+          </div>
 
-        <div class="tab-content">
-          
-          <div class="tab-pane active" id="tab_1">
-            <div class="box">
-            <div class="box-header">
-            </div>
-              <div class="box-body">
+              <div class="box-body"  style="margin-top: 3%">
                     <div class="btn-group" style="margin-bottom: 3%">
                       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
                     </div>
@@ -389,7 +382,7 @@ function showTblMonth()
                    <?php } ?>
                 </tbody>
               </table>
-            </div>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

@@ -84,9 +84,24 @@
     <link rel="stylesheet" type="text/css" href="css/validDesignDetails.css">
     <link rel="stylesheet" type="text/css" href="css/validDesignDivision.css">  
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <style>
-      body { padding-right: 0 !important }
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        padding-right: 0 !important }
     </style>
+    <script>
+      $(document).ready(function(){
+      $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+      });
+      var activeTab = localStorage.getItem('activeTab');
+      if(activeTab){
+        $('#myTab a[href="' + activeTab + '"]').tab('show');
+      }
+    });
+    </script>
     <script>
       //CURRICULUM
       (function(){
@@ -408,7 +423,7 @@
         <section class="content">
           <div class="row">
             <div class="col-md-12">
-              <div class="box box-default" style="margin-top: 20px">
+              <div class="box box-default" style="margin-top: 25px">
                 <div class="box-body">
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs" id="myTab">
