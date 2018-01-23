@@ -86,7 +86,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/validDesignSection.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
     <script type="text/javascript">
       function myFunction() {
       document.getElementById("addCurriculum").reset();
@@ -296,17 +302,17 @@
     <section class="content">
       <div class="row">
           <div class="col-md-12">
-            <div class="box box-default">
-              <div class="box-body">
-                <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px; margin-top: 10px;">Section</h2>
-                  </div>
+            <div class="box box-default" style="margin-top: 25px">
+              <div class="box-body" style="padding: 20px">
+                <div class="box-header with-border" style="padding: 0px 2px 10px 2px">
+                    <h2 class="box-title" style="font-size:23px; margin-top: 10px;">SECTION</h2>
+                </div>
 
-                  <div class="box-body" style="margin-top: 3%">
-                    <div class="btn-group" style="float: left;  margin-bottom: 2%;">
-                      <button type="reset" onclick="myFunction()" value="Reset form"  class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
-                        </div>
-                  </div>
+              <div class="box-body" style="margin-top: 3%;">
+                <div class="btn-group" style="float: left;  margin-bottom: 2%;">
+                  <button type="reset" onclick="myFunction()" value="Reset form"  class="btn btn-info" data-toggle="modal" data-target="#addModalOne"><i class="fa fa-plus"></i>Add</button>
+                </div>
+              </div>
 
                   <!-- Add Modal -->
                   <div class="modal fade" id="addModalOne" role="dialog">
@@ -529,85 +535,81 @@
                     </div>
                   </div>
 
-  <!-- Delete Modal -->
-<div class="modal fade" id="deleteModalOne" role="dialog">
-  <div class="modal-dialog">
+                  <!-- Delete Modal -->
+                  <div class="modal fade" id="deleteModalOne" role="dialog">
+                    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form method="POST" action="deleteSection.php" class="form-horizontal">
-        <div class="modal-header">
-          <h4 class="modal-title" id="deleteModalOne"> DELETE SECTION </h4>
-        </div>
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <form method="POST" action="deleteSection.php" class="form-horizontal">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="deleteModalOne"> DELETE SECTION </h4>
+                          </div>
 
-        <div class="modal-body">
-          <div class="form-group" style="display: none;">
-            <label class="col-sm-4 control-label">Detail ID</label>
-            <div class="col-sm-5 input-group">
-              <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-              <input type="text" name="txtDelSectId" id="txtDelSectId"/>
-            </div>
-          </div>
+                          <div class="modal-body">
+                            <div class="form-group" style="display: none;">
+                              <label class="col-sm-4 control-label">Detail ID</label>
+                              <div class="col-sm-5 input-group">
+                                <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                <input type="text" name="txtDelSectId" id="txtDelSectId"/>
+                              </div>
+                            </div>
 
-          <div class="form-group">
-            <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
-          </div>
-        </div>
+                            <div class="form-group">
+                              <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                            </div>
+                          </div>
 
-        <div class="modal-footer" style="margin-top: 5%; float: center">
-          <button type="submit" class="btn btn-danger" name="delSectBtn" id="delSectBtn">Yes</button>
-          <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+                          <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="submit" class="btn btn-danger" name="delSectBtn" id="delSectBtn">Yes</button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
 
-  <form role="form">
-    <div class="box-body">
+                  <form role="form">
+                    <table id="datatable2" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th>Division Name</th>
+                        <th>Level Name</th>
+                        <th>Section Name</th>
+                        <th>Session</th>
+                        <th>Maximum Slot</th>
+                        <th>Minimum Slot</th>
+                        <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                      $query = "select d.tblDivisionId, d.tblDivisionName, l.tblLevelId, l.tblLevelName, s.tblSectionId, s.tblSectionName, s.tblSectionSession, s.tblSectionMaxCap, s.tblSectionMinCap from tbldivision d, tbllevel l, tblsection s
+                        where l.tblLevel_tblDivisionId = d.tblDivisionId and s.tblSection_tblLevelId = l.tblLevelId and s.tblSectionFlag = 1 order by d.tblDivisionId";
+                      $result = mysqli_query($con, $query)or die(mysqli_error());
 
-   <div class="box-body">
-    <table id="datatable2" class="table table-bordered table-striped">
-      <thead>
-      <tr>
-        <th hidden></th>
-        <th hidden></th>
-        <th hidden></th>
-        <th>Division Name</th>
-        <th>Level Name</th>
-        <th>Section Name</th>
-        <th>Session</th>
-        <th>Maximum Slot</th>
-        <th>Minimum Slot</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <?php
-      $query = "select d.tblDivisionId, d.tblDivisionName, l.tblLevelId, l.tblLevelName, s.tblSectionId, s.tblSectionName, s.tblSectionSession, s.tblSectionMaxCap, s.tblSectionMinCap from tbldivision d, tbllevel l, tblsection s
-        where l.tblLevel_tblDivisionId = d.tblDivisionId and s.tblSection_tblLevelId = l.tblLevelId and s.tblSectionFlag = 1 order by d.tblDivisionId";
-      $result = mysqli_query($con, $query)or die(mysqli_error());
-
-      while($row1 = mysqli_fetch_array($result))
-      {
-      ?>
-      <tr><td style="width:100px;" hidden><?php echo $row1['tblDivisionId']; ?></td>
-      <td style="width:100px;" hidden><?php echo $row1['tblLevelId']; ?></td>
-      <td style="width:100px;" hidden><?php echo $row1['tblSectionId']; ?></td>
-      <td style="width:100px;"><?php echo $row1['tblDivisionName']; ?></td>
-      <td style="width:100px;"><?php echo $row1['tblLevelName']; ?></td>
-      <td style="width:100px;"><?php echo $row1['tblSectionName']; ?></td>
-      <td style="width:100px;"><?php echo $row1['tblSectionSession']; ?></td>
-      <td style="width:100px;"><?php echo $row1['tblSectionMaxCap']; ?></td>
-      <td style="width:100px;"><?php echo $row1['tblSectionMinCap']; ?></td>
-      <td style="width:50px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
-      </tr>
-      <?php } ?>
-      </tbody>
-    </table>
-  </div>
-  </form>
+                      while($row1 = mysqli_fetch_array($result))
+                      {
+                      ?>
+                      <tr><td style="width:100px;" hidden><?php echo $row1['tblDivisionId']; ?></td>
+                      <td style="width:100px;" hidden><?php echo $row1['tblLevelId']; ?></td>
+                      <td style="width:100px;" hidden><?php echo $row1['tblSectionId']; ?></td>
+                      <td style="width:100px;"><?php echo $row1['tblDivisionName']; ?></td>
+                      <td style="width:100px;"><?php echo $row1['tblLevelName']; ?></td>
+                      <td style="width:100px;"><?php echo $row1['tblSectionName']; ?></td>
+                      <td style="width:100px;"><?php echo $row1['tblSectionSession']; ?></td>
+                      <td style="width:100px;"><?php echo $row1['tblSectionMaxCap']; ?></td>
+                      <td style="width:100px;"><?php echo $row1['tblSectionMinCap']; ?></td>
+                      <td style="width:50px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
+                      </tr>
+                      <?php } ?>
+                      </tbody>
+                    </table>
+                </form>
 
               </div> <!-- /. box-body -->
             </div> <!-- /.boc-default -->

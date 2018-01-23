@@ -65,6 +65,13 @@ $lvlid=$row['tblStudent_tblLevelId'];
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
     <script>
     function changeScheme()
     {
@@ -147,7 +154,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
+          <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
             <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
@@ -210,31 +217,35 @@ $lvlid=$row['tblStudent_tblLevelId'];
         </section>
 
         <!-- Main content -->
-        <section class="content"  style="margin-top: 4%">
+        <section class="content">
           <div class="row">
             <div class="col-md-12">
-              <div class="box box-default">
-                <div class="box-header with-border"></div>
+              <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
                   <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px;">Billing</h2>
-                    <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
+                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">BILLING</h2>
+                    <hr>
+                    <?php
+                            $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
+                            $result=mysqli_query($con, $query);
+                            $row=mysqli_fetch_array($result);
+                            ?> 
+                    <h4 style="font-weight: bold">Student: <?php echo $row['name'] ?></h4>
                   </div>
+
 
                   <div class="tab-content">
 
                     <div class="tab-pane active" id="tab_1">
-                      <div class="box">
-                        <div class="box-header"></div>
                         <div class="box-body">
                           <form action="collection.php" method="post">
                             <div class="box-body">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-top: 2%">
                               <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Avail fees</button>
                               <button type="submit" class="btn btn-success" style="margin-bottom: 3%">Proceed to Collection</button>
-                              </div>
+                            </div>
 
-                              <div class="col-md-12">
+                              <div class="col-md-12" style="margin-top: 5%">
                                 <table id="datatable1" class="table table-bordered table-striped">
                                   <thead>
                                     <tr>
@@ -296,65 +307,63 @@ $lvlid=$row['tblStudent_tblLevelId'];
                           </form>
 
 
-            <!-- Modal starts here-->
-  <div class="modal fade" id="addFeesModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" style="font-style: bold">Additional Fees</h3>
-        </div>
-        <form autocomplete="off" method="post" data-toggle="validator" role="form" action="addFees.php">
-        <div class="modal-body">
-         
-        <div class="form-group" style="margin-top: 5%">
-                <input type="hidden" name="txtStud" id="txtStud" value="<?php echo $studid ?>"/>
-                <label class="col-sm-4" style="text-align: right">Fee Description</label>
-                <div class="col-sm-7 selectContainer">
-                 <select class="form-control choose" name="selAddFee" id="selAddFee" style="width: 100%;" onclick="changeScheme()">
-                  <option selected disabled>--Select Fee--</option>
-                  <?php
-                  $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
-                  $result=mysqli_query($con, $query);
-                  while($row=mysqli_fetch_array($result)):
-                  ?>
-                  <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
-                <?php endwhile; ?>
-                </select>
-                </div>
-        </div> 
-        <div class="form-group" style="margin-top: 15%">
-                <label class="col-sm-4" style="text-align: right">Payment Scheme</label>
-                <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" name="selAddScheme" id="selAddScheme" style="width: 100%;">
-                <option selected disabled>--Select Schemes--</option>
-                </select>
-                </div>
-        </div> 
-        <div class="form-group" style="margin-top: 25%">
-                <label class="col-sm-4" style="text-align: right">Due Date</label>
-                <div class="col-sm-7 selectContainer" name="divDate" id="divDate">
-                <input type="date" class="form-control" disabled>
-                </div>       
-        </div>
-        <div class="form-group" style="margin-top: 35%">
-                <label class="col-sm-4" style="text-align: right">Amount</label>
-                <div class="col-sm-7 selectContainer">
-                <input type="text" class="form-control" disabled>
-                </div>       
-        </div>
-            <div class="modal-footer" style="margin-top: 50%">
-            <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-      </form>
-      </div>    
-    </div>
-  </div>
+                          <!-- Modal starts here-->
+                          <div class="modal fade" id="addFeesModal" role="dialog">
+                            <div class="modal-dialog">
+                            
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h3 class="modal-title" style="font-style: bold">Additional Fees</h3>
+                                </div>
+                                <form autocomplete="off" method="post" data-toggle="validator" role="form" action="addFees.php">
+                                <div class="modal-body">
+                                 
+                                <div class="form-group" style="margin-top: 5%">
+                                        <input type="hidden" name="txtStud" id="txtStud" value="<?php echo $studid ?>"/>
+                                        <label class="col-sm-4" style="text-align: right">Fee Description</label>
+                                        <div class="col-sm-7 selectContainer">
+                                         <select class="form-control choose" name="selAddFee" id="selAddFee" style="width: 100%;" onclick="changeScheme()">
+                                          <option selected disabled>--Select Fee--</option>
+                                          <?php
+                                          $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
+                                          $result=mysqli_query($con, $query);
+                                          while($row=mysqli_fetch_array($result)):
+                                          ?>
+                                          <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeName'] ?></option>
+                                        <?php endwhile; ?>
+                                        </select>
+                                        </div>
+                                </div> 
+                                <div class="form-group" style="margin-top: 15%">
+                                        <label class="col-sm-4" style="text-align: right">Payment Scheme</label>
+                                        <div class="col-sm-7 selectContainer">
+                                        <select class="form-control choose" name="selAddScheme" id="selAddScheme" style="width: 100%;">
+                                        <option selected disabled>--Select Schemes--</option>
+                                        </select>
+                                        </div>
+                                </div> 
+                                <div class="form-group" style="margin-top: 25%">
+                                        <label class="col-sm-4" style="text-align: right">Due Date</label>
+                                        <div class="col-sm-7 selectContainer" name="divDate" id="divDate">
+                                        <input type="date" class="form-control" disabled>
+                                        </div>       
+                                </div>
+                                <div class="form-group" style="margin-top: 35%">
+                                        <label class="col-sm-4" style="text-align: right">Amount</label>
+                                        <div class="col-sm-7 selectContainer">
+                                        <input type="text" class="form-control" disabled>
+                                        </div>       
+                                </div>
+                                    <div class="modal-footer" style="margin-top: 50%">
+                                    <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+                              </form>
+                              </div>    
+                            </div>
+                          </div>
 
-                        </div> <!-- box-body -->
-                      </div> <!-- box-->
                     </div> <!--tab pane tab_1 -->
                   </div> <!-- tab content -->
                 </div> <!-- box body -->
