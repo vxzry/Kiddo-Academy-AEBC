@@ -243,7 +243,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
-           <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -258,7 +258,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -275,7 +275,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -289,7 +289,7 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -358,7 +358,7 @@
                                   </div>
 
                                   <select class="form-control select2" name="addLvlSelect" id="addLvlSelect" disabled style="width: 100%;" onchange="changeLvl();">
-                                    <option selected value="">--Select Level--</option>
+                                    <option selected value="0">--Select Level--</option>
                                     <?php
                                       $query = "select * from tbllevel where tblLevelFlag = 1 order by tblLevelId";
                                       $result = mysqli_query($con, $query);
@@ -402,7 +402,7 @@
                             <div class="form-group">
                               <label class="col-sm-4 control-label">Maximum Slot</label>
                               <div class="col-sm-6 selectContainer">
-                                <div class = "input-group" style="width:100%;">
+                                <div class = "input-group" style="width:40%;">
                                   <input type="number" class="form-control" name="addMaxCap" id="addMaxCap"/>
                                 </div>
                               </div>
@@ -411,7 +411,7 @@
                             <div class="form-group">
                               <label class="col-sm-4 control-label">Minimum Slot</label>
                               <div class="col-sm-6 selectContainer">
-                                <div class = "input-group" style="width:100%;">
+                                <div class = "input-group" style="width:40%;">
                                   <input type="number" class="form-control" name="addMinCap" id="addMinCap"/>
                                 </div>
                               </div>
@@ -510,7 +510,7 @@
                             <div class="form-group">
                               <label class="col-sm-4 control-label">Maximum Slot</label>
                               <div class="col-sm-6 selectContainer">
-                                <div class = "input-group" style="width:100%;">
+                                <div class = "input-group" style="width:40%;">
                                   <input type="number" class="form-control" name="updMaxCap" id="updMaxCap"/>
                                 </div>
                               </div>
@@ -519,7 +519,7 @@
                             <div class="form-group">
                               <label class="col-sm-4 control-label">Minimum Slot</label>
                               <div class="col-sm-6 selectContainer">
-                                <div class = "input-group" style="width:100%;">
+                                <div class = "input-group" style="width:40%;">
                                   <input type="number" class="form-control" name="updMinCap" id="updMinCap"/>
                                 </div>
                               </div>
@@ -804,13 +804,13 @@ var activeTab = localStorage.getItem('activeTab');
                 validators: {
                     stringLength: {
                         min: 3,
-                        max: 20,
+                        max: 30,
                         message: 'Please enter at least 3 characters'
                     },
 
                      regexp: {
-                        regexp: /^[a-zA-Z_\w-][0-9a-zA-Z_\w-\s][\w-'\s]+$/,
-                        message: 'The first character must be an alphabet or does not allow special character'
+                        regexp: /^[a-zA-Z_0-9\w-][0-9a-zA-Z_\w-\s][\w-'\s]+$/,
+                        message: 'This field does not allow special characters'
                     },
                         notEmpty: {
                         message: 'Section name is required'
@@ -823,6 +823,20 @@ var activeTab = localStorage.getItem('activeTab');
                       message: 'Session is required.'
                   },
                 }
+            },
+            addMaxCap:{
+              validators:{
+                   notEmpty: {
+                   message: 'Maximum slot is required'
+               }
+              }
+            },
+            addMinCap:{
+              validators:{
+                   notEmpty: {
+                   message: 'Minimum slot is required'
+               }
+              }
             },
             }
         })
@@ -850,22 +864,50 @@ var activeTab = localStorage.getItem('activeTab');
           validating: 'glyphicon glyphicon-refresh'
       },
       fields: {
+           updLvlName: {
+              validators: {
+                notEmpty: {
+                    message: 'Level name is required.'
+                },
+              }
+          },
           updSectName: {
               validators: {
                   stringLength: {
                       min: 3,
-                      max: 20,
+                      max: 30,
                       message: 'Please enter at least 3 characters'
                   },
 
                    regexp: {
-                      regexp: /^[a-zA-Z_\w-][0-9a-zA-Z_\w-\s][\w-'\s]+$/,
-                      message: 'The first character must be an alphabet or does not allow special character'
+                      regexp: /^[a-zA-Z_0-9\w-][0-9a-zA-Z_\w-\s][\w-'\s]+$/,
+                      message: 'This field does not allow special characters'
                   },
                       notEmpty: {
                       message: 'Section name is required'
                   }
               }
+          },
+          updSesSelect: {
+              validators: {
+                notEmpty: {
+                    message: 'Session is required.'
+                },
+              }
+          },
+          updMaxCap:{
+            validators:{
+                 notEmpty: {
+                 message: 'Maximum slot is required'
+             }
+            }
+          },
+          updMinCap:{
+            validators:{
+                 notEmpty: {
+                 message: 'Minimum slot is required'
+             }
+            }
           },
           }
       })
