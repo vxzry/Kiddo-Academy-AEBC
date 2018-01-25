@@ -20,112 +20,79 @@ if(isset($_POST['btnProceed']))
 	$result=mysqli_query($con, $query);
 	$row=mysqli_fetch_array($result);
 	$lvlid=$row['tblStudent_tblLevelId'];
-
+	
+	$query9="select * from tblstudenroll where tblStudEnroll_tblStudentId='$studid'";
+	$result9=$con->query($query9);
+	if($result9->num_rows == 0)
+	{
 	$query="select * from tblstudenroll order by tblStudEnrollId desc limit 0, 1";
 	$result = mysqli_query($con, $query);
 	$row = mysqli_fetch_assoc($result);
 	$enrollid = $row['tblStudEnrollId'];
 	$enrollid++;
 	$query="insert into tblstudenroll(tblStudEnrollId, tblStudEnrollPreferedSession, tblStudEnrollClearance, tblStudEnroll_tblStudentId) values ('$enrollid', '$session', '$clear', '$studid')";
-	$result=mysqli_query($con, $query);
+	if (!$query = mysqli_query($con, $query)) {
+	   exit(mysqli_error($con));
+		}
+	}else if($result9->num_rows >= 1)
+	{
+		$query="update tblstudenroll set tblStudEnrollPreferedSession = '$session', tblStudEnrollClearance='$clear', tblStudEnroll_tblStudentId='$studid'";
+		if (!$query = mysqli_query($con, $query)) {
+	   exit(mysqli_error($con));
+		}
+	}
 
-	foreach($schemem as $val1)
+	foreach($schemem as $val)
 	{
 		$query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
 		$result = mysqli_query($con, $query);
 		$row = mysqli_fetch_assoc($result);
 		$studschemeid = $row['tblStudSchemeId'];
 		$studschemeid++;
-		$query="select * from tblscheme where tblSchemeId='$val1' and tblSchemeFlag=1";
+		$query="select * from tblscheme where tblSchemeId='$val' and tblSchemeFlag=1";
 		$result = mysqli_query($con, $query);
 		$row = mysqli_fetch_assoc($result);
 		$fee=$row['tblScheme_tblFeeId'];
-		$query="insert into tblStudScheme(tblStudSchemeId, tblStudScheme_tblSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studschemeid', '$val1', '$fee', '$studid', '$syid')";
+		$query="insert into tblStudScheme(tblStudSchemeId, tblStudScheme_tblSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studschemeid', '$val', '$fee', '$studid', '$syid')";
 		if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 		}
 	}
-	$length1=count($schemem);
-	foreach($feeId1 as $val1)
-	{
-		for($i=0; $i<=$length1; $i++)
-		{
-			$scheme1=$schemem[$i];
-			if($scheme1=='None')
-			{
-				$scheme1="";
-			}
-			$search="select * from tblscheme where tblScheme_tblFeeId='$val1' and tblSchemeId='$scheme1' and tblSchemeFlag=1";
-			$result=$con->query($search);
-			if($result->num_rows > 0)
-			{
-				$query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
-				$result = mysqli_query($con, $query);
-				$row = mysqli_fetch_assoc($result);
-				$studschemeid = $row['tblStudSchemeId'];
-				$studschemeid++;
-				$query="insert into tblstudscheme(tblStudSchemeId, tblStudScheme_tblSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studschemeid', '$scheme1', '$val1', '$studid', '$syid')";
-				if (!$query = mysqli_query($con, $query)) {
-				exit(mysqli_error($con));
-				 }
-			}else if($result->num_rows == 0)
-			{
-				$query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
-				$result = mysqli_query($con, $query);
-				$row = mysqli_fetch_assoc($result);
-				$studschemeid = $row['tblStudSchemeId'];
-				$studschemeid++;
-				$query="insert into tblstudscheme(tblStudSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studschemeid', '$val1', '$studid', '$syid')";
-				if (!$query = mysqli_query($con, $query)) {
-				exit(mysqli_error($con));
-				 }
-			}
-		}
-		
-	}//foreach feeId(mandatory)
-	$length=count($schemeo);
+	
 	if($feeId != 'None')
 	{
 	foreach($feeId as $val2)
 	{
-		for($i=0; $i<=$length; $i++)
+		$query="select * from tblscheme where tblScheme_tblFeeId='$val2' and tblSchemeFlag=1";
+		$result=mysqli_fetch_array(mysqli_query($con, $query));
+		$q=$result['tblSchemeId'];
+		if(!empty($q))
 		{
-			$scheme=$schemeo[$i];
-			if($scheme == 'None')
+			foreach($schemeo as $val3)
 			{
-				$scheme = "";
+				$query6="select * from tblscheme where tblScheme_tblFeeId='$val2' and tblSchemeId='$val3' and tblSchemeFlag=1";
+				$result6 = $con->query($query6);
+				if ($result6->num_rows > 0)
+				{
+				$query7="insert into tblstudscheme(tblStudScheme_tblSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudSchemeFlag, tblStudScheme_tblSchoolYrId) value ('$val3', '$val2', '$studid', 1, '$syid')";
+				if (!$query7 = mysqli_query($con, $query7)){
+    					exit(mysqli_error($con));
+    					
+				}
+				}
 			}
-			$search="select * from tblscheme where tblScheme_tblFeeId='$val2' and tblSchemeId='$scheme' and tblSchemeFlag=1";
-			$result=$con->query($search);
-			if($result->num_rows > 0)
-			{
-				$query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
-				$result = mysqli_query($con, $query);
-				$row = mysqli_fetch_assoc($result);
-				$studschemeid = $row['tblStudSchemeId'];
-				$studschemeid++;
-				$query="insert into tblstudscheme(tblStudSchemeId, tblStudScheme_tblSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studschemeid', '$scheme', '$val2', '$studid', '$syid')";
-				if (!$query = mysqli_query($con, $query)) {
-				exit(mysqli_error($con));
-				 }
-			}else if($result->num_rows == 0)
-			{
-				$query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
-				$result = mysqli_query($con, $query);
-				$row = mysqli_fetch_assoc($result);
-				$studschemeid = $row['tblStudSchemeId'];
-				$studschemeid++;
-				$query="insert into tblstudscheme(tblStudSchemeId, tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studschemeid', '$val2', '$studid', '$syid')";
-				if (!$query = mysqli_query($con, $query)) {
-				exit(mysqli_error($con));
-				 }
+		}else if(empty($q))
+		{
+			$query8="insert into tblstudscheme(tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudSchemeFlag, tblStudScheme_tblSchoolYrId) value ('$val2', '$studid', 1, '$syid')";
+			if (!$query8 = mysqli_query($con, $query8)){
+    			exit(mysqli_error($con));
+    					
 			}
 		}
-	
 	}
-}
+	}
 
-	$query="select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' and tblStudScheme_tblSchoolYrId='$syid' and tblStudSchemeFlag=1";
+	 $query="select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' and tblStudScheme_tblSchoolYrId='$syid' and tblStudSchemeFlag=1";
 	$result=mysqli_query($con, $query);
 	while($row=mysqli_fetch_array($result)):
 		$studscheme=$row['tblStudSchemeId'];

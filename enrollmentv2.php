@@ -256,9 +256,9 @@ if(isset($_POST['btnProceed']))
                         <div class="box-header"></div>
                         <form action="EnrollStudent.php" method="post">
                             <div class="box-body">
-                            <input type="text" name="txtStudId" id="txtStudId" value="<?php echo $studid ?>"/>
-                            <input type="text" name="txtClear" id="txtClear" value="<?php echo $clear ?>"/>
-                            <input type="text" name="txtSession" id="txtSession" value="<?php echo $session ?>"/>
+                            <input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $studid ?>"/>
+                            <input type="hidden" name="txtClear" id="txtClear" value="<?php echo $clear ?>"/>
+                            <input type="hidden" name="txtSession" id="txtSession" value="<?php echo $session ?>"/>
                             <?php
                             $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
                             $result=mysqli_query($con, $query);
