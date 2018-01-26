@@ -267,15 +267,26 @@
                                   </thead>
                                   <tbody>
                                   <?php
-                                  $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentType='APPLICANT'";
+                                  $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and (s.tblStudentType='APPLICANT' or s.tblStudentType='PROMOTED') and s.tblStudentFlag=1";
                                   $result=mysqli_query($con, $query);
                                   while($row=mysqli_fetch_array($result)):
+								  $studid=$row['tblStudentId'];
                                   ?>
                                     <tr>
                                       <td><?php echo $row['tblStudentId'] ?></td>
                                       <td><?php echo $row['name'] ?></td>
                                       <td><?php echo $row['tblStudentType'] ?></td>
-                                      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment">Enroll Student</button></td>
+									  <?php
+									  $query1="select * from tblstudenroll where tblStudEnroll_tblStudentId='$studid' and tblStudEnrollClearance='Y'";
+									  $result1=$con->query($query1);
+									  if($result1->num_rows == 0)
+									  {
+									  ?>
+                                      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment" disabled>Enroll Student</button></td>
+									  <?php }else if($result1->num_rows > 0)
+									  { ?>
+										<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment">Enroll Student</button></td>
+									  <?php } ?>
                                     </tr>
                                   <?php endwhile; ?>
                                   </tbody>
