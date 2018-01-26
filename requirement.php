@@ -439,9 +439,10 @@ function run(){
                         </div>
                       </div>
 
-                      <form role="form">
+                      
                        <div class="box-body">
-                         <table id="tblReq" class="table table-bordered table-striped">
+                        <form role="form">
+                         <table id="tblReq" class="table table-bordered table-striped" ">
                            <thead>
                            <tr>
                              <th hidden></th>
@@ -461,7 +462,7 @@ function run(){
                            ?>
                            <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
-                           <td style="width:100px;"><?php echo $row1['tblReqDescription']; ?></td>
+                           <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis;    white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>
                            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
@@ -469,8 +470,9 @@ function run(){
                            <?php } ?>
                            </tbody>
                          </table>
+                         </form>
                         </div>
-                      </form>
+                      
                   </div><!-- /. box-body -->
                 </div> <!-- /.box-default -->
               </div> <!-- col-md -->
