@@ -448,7 +448,8 @@ function run(){
                              <th hidden></th>
                              <th>Requirement Name</th>
                              <th>Requirement Description</th>
-                             <th>Type</th>
+                             <th>Process Type</th>
+                             <th>Student Type</th>
                              <th>Action</th>
                            </tr>
                            </thead>
@@ -464,8 +465,9 @@ function run(){
                            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
                            <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis;    white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>
+                           <td style="width:100px;"><?php echo $row1['tblReqStudent']; ?></td>
                            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-                           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
+                           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne" style="margin-top: 5px; width: 40px"><i class="fa fa-trash"></i></button></td>
                            </tr>
                            <?php } ?>
                            </tbody>
