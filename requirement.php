@@ -261,7 +261,7 @@ function run(){
             </li>
       <?php
        endwhile; }
-      ?>''
+      ?>
           </ul>
         </section>
         <!-- /.sidebar -->
