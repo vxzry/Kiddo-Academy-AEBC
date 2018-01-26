@@ -102,11 +102,13 @@ function run(){
     var f3=document.getElementById('txtUpdReqDesc');
     var f4=document.getElementById('txtDelReqId');
     var f5=document.getElementById('updReqType');
+    var f6=document.getElementById('updReqStudent');
     f1.value=cells[0].innerHTML;
     f2.value=cells[1].innerHTML;
     f3.value=cells[2].innerHTML;
     f4.value=cells[0].innerHTML;
     f5.value=cells[3].innerHTML;
+    f6.value=cells[4].innerHTML;
   };
 }})();
   </script>
@@ -315,7 +317,7 @@ function run(){
                                 </div>
 
                                  <div class="form-group">
-                                  <label class="col-sm-4 control-label"> Requirement Type </label>
+                                  <label class="col-sm-4 control-label"> Process Type </label>
                                   <div class="col-sm-6 selectContainer">
                                     <div class="input-group">
                                       <div class="input-group-addon">
@@ -325,6 +327,22 @@ function run(){
                                         <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="ADMISSION">ADMISSION</option>
                                           <option value="ENROLLMENT">ENROLLMENT</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Student Type </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%" name="addReqStudent" id="addReqStudent">
+                                        <option selected="selected" disabled value="">--Choose Type--</option>
+                                          <option value="NEW">NEW</option>
+                                          <option value="TRANSFEREE">TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -390,6 +408,22 @@ function run(){
                                         <option selected="selected" disabled>--Choose Type--</option>
                                           <option value="ADMISSION">ADMISSION</option>
                                           <option value="ENROLLMENT">ENROLLMENT</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Student Type </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%" name="updReqStudent" id="updReqStudent">
+                                        <option selected="selected" disabled value="">--Choose Type--</option>
+                                          <option value="NEW">NEW</option>
+                                          <option value="TRANSFEREE">TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -635,7 +669,14 @@ function run(){
             addReqType:{
               validators:{
                 notEmpty:{
-                  message: 'Requirement Type is required'
+                  message: 'Process Type is required'
+                }
+              }
+            },
+            addReqStudent:{
+              validators:{
+                notEmpty:{
+                  message: 'Student Type is required'
                 }
               }
             },
@@ -700,7 +741,14 @@ function run(){
             updReqType:{
               validators:{
                 notEmpty:{
-                  message: 'Requirement Type is required'
+                  message: 'Process Type is required'
+                }
+              }
+            },
+            updReqStudent:{
+              validators:{
+                notEmpty:{
+                  message: 'Student Type is required'
                 }
               }
             },
