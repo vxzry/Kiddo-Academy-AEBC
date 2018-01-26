@@ -2,9 +2,9 @@
 include "db_connect.php";
 // $lvlId = $_POST['txtAddFeeLvlId'];
 $name = strtoupper($_POST['txtAddFeeName']);
-$code = $_POST['txtAddFeeCode'];
-$mand = $_POST['selAddFeeMand'];
-$type = $_POST['selAddFeeType'];
+$code = strtoupper($_POST['txtAddFeeCode']);
+$mand = strtoupper($_POST['selAddFeeMand']);
+$type = strtoupper($_POST['selAddFeeType']);
 // $arrLevel = array();
 $query="select * from tblfee order by tblFeeId desc limit 0, 1";
 $result = mysqli_query($con, $query);

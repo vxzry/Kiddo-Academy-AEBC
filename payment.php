@@ -175,7 +175,7 @@
     window.attachEvent('onload',run);
   }
 function run(){
-  var t=document.getElementById('datatable');
+  var t=document.getElementById('datatable3');
   t.onclick=function(event){
     event=event || window.event;
     var target=event.target||event.srcElement;
@@ -194,7 +194,7 @@ function run(){
     var f7=document.getElementById('txtFdFeeCode');
     f1.value=cells[2].innerHTML;
     f2.value=cells[3].innerHTML;
-    f3.value=cells[2].innerHTML;
+    f3.value=cells[0].innerHTML;
     f4.value=cells[4].innerHTML;
     f5.value=cells[5].innerHTML;
     f6.value=cells[2].innerHTML;
@@ -606,8 +606,8 @@ $(document).ready(function(){
                                 <div class="input-group" style="width:100%;">
                                   <select class="form-control" name="selAddFeeType" id="selAddFeeType" style="text-transform:uppercase ;">
                                   <option selected disabled>--Select Fee Status--</option>
-                                  <option value='Mass Fee'>General Fees</option>
-                                  <option value='Different Per Level'>Specific Fees</option>
+                                  <option value='GENERAL FEE'>GENERAL FEE</option>
+                                  <option value='SPECIFIC FEE'>SPECIFIC FEE</option>
                                   </select>
 
                                 </div>
@@ -682,8 +682,8 @@ $(document).ready(function(){
                                 <div class="input-group" style="width:100%;">
                                   <select class="form-control" name="selUpdFeeType" id="selUpdFeeType" style="text-transform:uppercase ;">
                                   <option selected disabled>--Select Fee Status--</option>
-                                  <option value='Mass Fee'>Mass Fee</option>
-                                  <option value='Different Per Level'>Different Per Level</option>
+                                  <option value='GENERAL FEE'>GENERAL FEE</option>
+                                  <option value='SPECIFIC FEE'>SPECIFIC FEE</option>
                                   </select>
 
                                 </div>
@@ -712,7 +712,7 @@ $(document).ready(function(){
                           </div>
 
                           <div class="modal-body">
-                            <div class="form-group" style="display: none;">
+                            <div class="form-group" style="display: none">
                               <label class="col-sm-4 control-label">Fee ID</label>
                               <div class="col-sm-5 input-group">
                                 <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
@@ -986,8 +986,8 @@ $(document).ready(function(){
           <div class="form-inline">
             <div class="container" style="margin-bottom: 15px">
                   <label class="col-sm-1">Fee Type: </label>   
-                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Mass Fee" onchange="changeTblMass()">  General Fees
-                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="Different Per Level" onchange="enable()" style="margin-left: 10px;">  Specific Fees
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="GENERAL FEE" onchange="changeTblMass()">  GENERAL FEE
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="SPECIFIC FEE" onchange="enable()" style="margin-left: 10px;">  SPECIFIC FEE
               </div>    
           </div>
 
@@ -1014,7 +1014,7 @@ $(document).ready(function(){
                 <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedFee" id="selSchedFee" onchange="changeFee()" disabled>
                   <option>--Select Here--</option>
                   <?php 
-                    $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1 and tblFeeType='Different Per Level'";
+                    $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1 and tblFeeType='SPECIFIC FEE'";
                     $result = mysqli_query($con, $query);
                     while($row = mysqli_fetch_array($result))
                     {

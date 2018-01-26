@@ -80,6 +80,10 @@ $lvlid=$row['tblStudent_tblLevelId'];
       xmlhttp.send(null);
       document.getElementById("selAddScheme").innerHTML=xmlhttp.responseText;
     }
+    function disableProceed()
+    {
+      document.getElementById('proceed').disabled=false;
+    }
     </script>
   </head>
 
@@ -242,7 +246,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                             <div class="box-body">
                             <div class="col-md-6" style="margin-top: 2%">
                               <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Avail fees</button>
-                              <button type="submit" class="btn btn-success" style="margin-bottom: 3%">Proceed to Collection</button>
+                              <button type="submit" class="btn btn-success" id="proceed" name="proceed" disabled style="margin-bottom: 3%">Proceed to Collection</button>
                             </div>
 
                               <div class="col-md-12" style="margin-top: 5%">
@@ -284,7 +288,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                       }
                                   ?>
                                     <tr>
-                                      <td><input type="checkbox" name="chkbills[]" id="chkbills" value="<?php echo $row['tblAccId'] ?>"/></td>
+                                      <td><input type="checkbox" name="chkbills[]" id="chkbills" value="<?php echo $row['tblAccId'] ?>" onclick="disableProceed()"/></td>
                                       <td><?php echo $over ?></td>
                                       <td><?php echo $row['tblAccDueDate'] ?></td>
                                       <td><?php echo $fee ?></td>

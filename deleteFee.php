@@ -3,9 +3,9 @@
     if(isset($_POST['btnDelFee'])){
         $fee = $_POST['txtDelFee'];
 
-		$query="update tblfee set tblFeeFlag = 0 where tblFeeName = '$fee'";
+		$query="update tblfee set tblFeeFlag = 0 where tblFeeId = '$fee'";
 		$result = mysqli_query($con, $query);
-		$query="select tblFeeId from tblfee where tblFeeName='$fee'";
+		$query="select tblFeeId from tblfee where tblFeeId='$fee'";
 		$result = mysqli_query($con, $query);
 		$row = mysqli_fetch_array($result);
 		$feeId = $row['tblFeeId'];
