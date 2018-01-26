@@ -102,11 +102,13 @@ function run(){
     var f3=document.getElementById('txtUpdReqDesc');
     var f4=document.getElementById('txtDelReqId');
     var f5=document.getElementById('updReqType');
+    var f6=document.getElementById('updReqStudent');
     f1.value=cells[0].innerHTML;
     f2.value=cells[1].innerHTML;
     f3.value=cells[2].innerHTML;
     f4.value=cells[0].innerHTML;
     f5.value=cells[3].innerHTML;
+    f6.value=cells[4].innerHTML;
   };
 }})();
   </script>
@@ -261,7 +263,7 @@ function run(){
             </li>
       <?php
        endwhile; }
-      ?>''
+      ?>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -315,7 +317,7 @@ function run(){
                                 </div>
 
                                  <div class="form-group">
-                                  <label class="col-sm-4 control-label"> Requirement Type </label>
+                                  <label class="col-sm-4 control-label"> Process Type </label>
                                   <div class="col-sm-6 selectContainer">
                                     <div class="input-group">
                                       <div class="input-group-addon">
@@ -325,6 +327,22 @@ function run(){
                                         <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="ADMISSION">ADMISSION</option>
                                           <option value="ENROLLMENT">ENROLLMENT</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Student Type </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%" name="addReqStudent" id="addReqStudent">
+                                        <option selected="selected" disabled value="">--Choose Type--</option>
+                                          <option value="NEW">NEW</option>
+                                          <option value="TRANSFEREE">TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -395,6 +413,22 @@ function run(){
                                   </div>
                                 </div>
 
+                                <div class="form-group">
+                                  <label class="col-sm-4 control-label"> Student Type </label>
+                                  <div class="col-sm-6 selectContainer">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-clone" aria-hidden="true"></i>
+                                      </div>
+                                      <select class="form-control" style="width: 100%" name="updReqStudent" id="updReqStudent">
+                                        <option selected="selected" disabled value="">--Choose Type--</option>
+                                          <option value="NEW">NEW</option>
+                                          <option value="TRANSFEREE">TRANSFEREE</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <div class="modal-footer" style="margin-top: 7%">
                                   <button type="submit" class="btn btn-info" name="btnUpdReq" id="btnUpdReq">Save</button>
                                   <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -439,15 +473,17 @@ function run(){
                         </div>
                       </div>
 
-                      <form role="form">
+                      
                        <div class="box-body">
-                         <table id="tblReq" class="table table-bordered table-striped">
+                        <form role="form">
+                         <table id="tblReq" class="table table-bordered table-striped" ">
                            <thead>
                            <tr>
                              <th hidden></th>
                              <th>Requirement Name</th>
                              <th>Requirement Description</th>
-                             <th>Type</th>
+                             <th>Process Type</th>
+                             <th>Student Type</th>
                              <th>Action</th>
                            </tr>
                            </thead>
@@ -461,16 +497,18 @@ function run(){
                            ?>
                            <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
-                           <td style="width:100px;"><?php echo $row1['tblReqDescription']; ?></td>
+                           <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis;    white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>
+                           <td style="width:100px;"><?php echo $row1['tblReqStudent']; ?></td>
                            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
-                           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
+                           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne" style="margin-top: 5px; width: 40px"><i class="fa fa-trash"></i></button></td>
                            </tr>
                            <?php } ?>
                            </tbody>
                          </table>
+                         </form>
                         </div>
-                      </form>
+                      
                   </div><!-- /. box-body -->
                 </div> <!-- /.box-default -->
               </div> <!-- col-md -->
@@ -631,7 +669,14 @@ function run(){
             addReqType:{
               validators:{
                 notEmpty:{
-                  message: 'Requirement Type is required'
+                  message: 'Process Type is required'
+                }
+              }
+            },
+            addReqStudent:{
+              validators:{
+                notEmpty:{
+                  message: 'Student Type is required'
                 }
               }
             },
@@ -696,7 +741,14 @@ function run(){
             updReqType:{
               validators:{
                 notEmpty:{
-                  message: 'Requirement Type is required'
+                  message: 'Process Type is required'
+                }
+              }
+            },
+            updReqStudent:{
+              validators:{
+                notEmpty:{
+                  message: 'Student Type is required'
                 }
               }
             },
