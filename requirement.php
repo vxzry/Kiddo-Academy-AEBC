@@ -343,6 +343,7 @@ function run(){
                                         <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="NEW">NEW</option>
                                           <option value="TRANSFEREE">TRANSFEREE</option>
+                                          <option value="NEW AND TRANSFEREE">NEW AND TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -424,6 +425,7 @@ function run(){
                                         <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="NEW">NEW</option>
                                           <option value="TRANSFEREE">TRANSFEREE</option>
+                                          <option value="NEW AND TRANSFEREE">NEW AND TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -473,7 +475,7 @@ function run(){
                         </div>
                       </div>
 
-                      
+
                        <div class="box-body">
                         <form role="form">
                          <table id="tblReq" class="table table-bordered table-striped" ">
@@ -508,7 +510,7 @@ function run(){
                          </table>
                          </form>
                         </div>
-                      
+
                   </div><!-- /. box-body -->
                 </div> <!-- /.box-default -->
               </div> <!-- col-md -->
