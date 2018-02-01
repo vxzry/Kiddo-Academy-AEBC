@@ -33,7 +33,6 @@
 if(isset($_POST['btnProceed']))
 {
   $studid = $_POST['txtStudentId'];
-  $clear=$_POST['chkClear'];
   $session=$_POST['selSession'];
   $optfees=$_POST['optionalfees'];
 
@@ -257,7 +256,7 @@ if(isset($_POST['btnProceed']))
                         <form action="EnrollStudent.php" method="post">
                             <div class="box-body">
                             <input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $studid ?>"/>
-                            <input type="hidden" name="txtClear" id="txtClear" value="<?php echo $clear ?>"/>
+                            
                             <input type="hidden" name="txtSession" id="txtSession" value="<?php echo $session ?>"/>
                             <?php
                             $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
@@ -291,10 +290,15 @@ if(isset($_POST['btnProceed']))
                                           <td><?php echo $row['tblFeeCode'] ?></td>
                                           <td><?php echo $row['tblFeeName'] ?></td>
                                           <td>
+                                          <?php
+                                          $feeid=$row['tblFeeId'];
+                                          $query3="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
+                                          $result3=$con->query($query3);
+                                          if($result->num_rows > 0):
+                                          ?>
                                           <select class="form-control" style="width: 50%;" name="selSchemeMand[]" id="selSchemeMand" >
                                             <option selected="selected" readonly value="None">--CHOOSE SCHEME--</option>
                                           <?php 
-                                          $feeid=$row['tblFeeId'];
                                           $query1="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
                                           $result1=mysqli_query($con, $query1);
                                           while($row1=mysqli_fetch_array($result1)){
@@ -302,6 +306,7 @@ if(isset($_POST['btnProceed']))
                                             <option value="<?php echo $row1['tblSchemeId'] ?>"><?php echo $row1['tblSchemeType'] ?></option>
                                           <?php } ?>
                                           </select>
+                                        <?php endif; ?>
                                           </td>
                                         </tr>
                                       <?php endwhile; ?>  
@@ -317,22 +322,25 @@ if(isset($_POST['btnProceed']))
                                       <td hidden><input type="hidden" name="txtFeeId2[]" id="txtFeeId2" value="<?php echo $row['tblFeeId'] ?>" /><?php echo $row['tblFeeId'] ?></td>
                                       <td><?php echo $row['tblFeeCode'] ?></td>
                                       <td><?php echo $row['tblFeeName'] ?></td>
-                                      <td><select class="form-control" style="width: 50%;" name="selSchemeOpt[]" id="selSchemeOpt">
+                                      <td>
+                                        <?php
+                                          $feeid=$row['tblFeeId'];
+                                          $query3="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
+                                          $result3=$con->query($query3);
+                                          if($result3->num_rows > 0):
+                                          ?>
+                                        <select class="form-control" style="width: 50%;" name="selSchemeOpt[]" id="selSchemeOpt">
                                       <option selected="selected" readonly value="None">--CHOOSE SCHEME--</option>
                                       <?php 
-                                          $feeid=$row['tblFeeId'];
                                           $query1="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
                                           $result1=mysqli_query($con, $query1);
                                           while($row1=mysqli_fetch_array($result1)){
                                           ?>
                                           <option value="<?php echo $row1['tblSchemeId'] ?>"><?php echo $row1['tblSchemeType'] ?></option>
                                           <?php } ?>
-                                      </select></td>
+                                      </select><?php endif; ?></td>
                                       </tr>
-                                      <?php }}else if($optfees == 'None')
-                                        {
-                                          ?><input type="text" name="txtFeeId2" value="None" /><input type="text" name="selSchemeOpt" value="None" /> <?php
-                                        }
+                                      <?php }}
                                        
                                         ?>
                                       </tbody>

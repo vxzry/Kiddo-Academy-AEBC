@@ -3,7 +3,6 @@ include "db_connect.php";
 if(isset($_POST['btnProceed']))
 {
 	$studid = $_POST['txtStudId'];
-	$clear=$_POST['txtClear'];
 	$session=$_POST['txtSession'];
 	$schemem=$_POST['selSchemeMand'];
 	$schemeo=$_POST['selSchemeOpt'];
@@ -30,13 +29,13 @@ if(isset($_POST['btnProceed']))
 	$row = mysqli_fetch_assoc($result);
 	$enrollid = $row['tblStudEnrollId'];
 	$enrollid++;
-	$query="insert into tblstudenroll(tblStudEnrollId, tblStudEnrollPreferedSession, tblStudEnrollClearance, tblStudEnroll_tblStudentId) values ('$enrollid', '$session', '$clear', '$studid')";
+	$query="insert into tblstudenroll(tblStudEnrollId, tblStudEnrollPreferedSession, tblStudEnroll_tblStudentId) values ('$enrollid', '$session', '$studid')";
 	if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 		}
 	}else if($result9->num_rows >= 1)
 	{
-		$query="update tblstudenroll set tblStudEnrollPreferedSession = '$session', tblStudEnrollClearance='$clear', tblStudEnroll_tblStudentId='$studid'";
+		$query="update tblstudenroll set tblStudEnrollPreferedSession = '$session', tblStudEnroll_tblStudentId='$studid'";
 		if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 		}

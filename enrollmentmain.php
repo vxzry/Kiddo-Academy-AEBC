@@ -270,20 +270,22 @@
                                   $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and (s.tblStudentType='APPLICANT' or s.tblStudentType='PROMOTED') and s.tblStudentFlag=1";
                                   $result=mysqli_query($con, $query);
                                   while($row=mysqli_fetch_array($result)):
-								  $studid=$row['tblStudentId'];
+								                  $studid=$row['tblStudentId'];
                                   ?>
                                     <tr>
                                       <td><?php echo $row['tblStudentId'] ?></td>
                                       <td><?php echo $row['name'] ?></td>
                                       <td><?php echo $row['tblStudentType'] ?></td>
 									  <?php
-									  $query1="select * from tblstudenroll where tblStudEnroll_tblStudentId='$studid' and tblStudEnrollClearance='Y'";
-									  $result1=$con->query($query1);
-									  if($result1->num_rows == 0)
+									  $query1="select s.tblStudentId, s.tblStudentType, se.tblStudEnrollClearance from tblstudent s left join tblstudenroll se on se.tblStudEnroll_tblStudentId=s.tblStudentId where s.tblStudentId='$studid' and s.tblStudentFlag=1";
+									  $row3=mysqli_fetch_array(mysqli_query($con, $query1));
+                    $studclear=$row3['tblStudEnrollClearance'];
+                    $studtype=$row3['tblStudentType'];
+									  if($studtype=='PROMOTED' && $studclear='N')
 									  {
 									  ?>
                                       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment" disabled>Enroll Student</button></td>
-									  <?php }else if($result1->num_rows > 0)
+									  <?php }else
 									  { ?>
 										<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment">Enroll Student</button></td>
 									  <?php } ?>
@@ -301,11 +303,8 @@
                                 </div>
                                 <form method="post" action="enrollmentv2.php"/>
                                   <input type="hidden" name="txtStudentId" id="txtStudentId"/>
-                                <div class="form-group" style="margin-top: 5%">
-                                    <input class="col-sm-2" type="checkbox" name="chkClear" id="chkClear" value="Y">Clearance
-                                </div>
 
-                                <div class="form-group" style="margin-top: 5%">
+                                <div class="form-group">
                                   <label class="col-sm-2" style="text-align: right">Session</label>
                                     <div class="col-sm-7">
                                     <select class="form-control choose" style="width: 100%;" name="selSession" id="selSession" >
@@ -316,7 +315,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" style="margin-top: 15%">  
+                                <div class="form-group" style="margin-top: 5%">  
                                     <div class="col-sm-6">
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
                                         <fieldset style="margin-top: 2%; margin-left: 2%">
@@ -350,7 +349,7 @@
                                     </div>
                                 </div>
 
-                                <div class="modal-footer" style="margin-top: 50%; float: center">
+                                <div class="modal-footer" style="margin-top: 25%; float: center">
                                   <button type="submit" class="btn btn-danger" name="btnProceed" id="btnProceed">OK</button>
                                   <button type="button" class="btn btn-info" data-dismiss="modal">CANCEL</button>
                                 </div>
