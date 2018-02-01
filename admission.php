@@ -419,7 +419,7 @@
             <form>
             <label class="col-lg-2 control-label left">Birthday:</label>
             <div class="col-lg-4">
-              <input class="form-control" type="text" name="txtStudBday" id="txtStudBday" placeholder="dd/mm/yyyy">
+              <input class="form-control" type="text" name="txtStudBday" id="txtStudBday" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
             </div>
             <div class="col-lg-2">
               <span id="agecalc"> </span>
@@ -744,9 +744,8 @@
  <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">Parent Status:</label>
             <div class="col-lg-8">
-            <select class="form-control choose" style="width: 100%" name="chkParentStat" id="chkParentStat">
-                    <option selected="selected" disabled>--Select Parent Status--</option>
-                    <option value="Parents Married">Parents Married</option>
+            <select class="form-control choose" style="width: 100%">
+                    <option selected="selected" value="Parents Married">Parents Married</option>
                     <option value="Father Deceased">Father Deceased</option>
                     <option value="Father Remarried">Father Remarried</option>
                     <option value="Mother Deceased">Mother Deceased</option>
@@ -754,15 +753,14 @@
                     <option value="Applicant Adopted">Applicant Adopted</option>
                     <option value="Single Parent">Single Parent</option>
                     <option value="Parents Separated/Divorced">Parents Separated/Divorced</option>
-                  </select>
+              </select>
             </div>
           </div>
   <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Applicant Lives With:</label>
             <div class="col-lg-8">
               <select class="form-control choose" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
-                <option selected="selected" disabled>--Select Applicant Lives With--</option>
-                <option value="Father and Mother">Father and Mother</option>
+                <option selected="selected" value="Father and Mother">Father and Mother</option>
                 <option value="Stepfather and Mother">Stepfather and Mother</option>
                 <option value="Father">Father</option>
                 <option value="Stepmother and Father">Stepmother and Father</option>
@@ -1097,11 +1095,16 @@
   <script src="dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
+  <!-- InputMask -->
+  <script src="jquery.inputmask.js"></script>
+  <script src="jquery.inputmask.date.extensions.js"></script>
+  <script src="jquery.inputmask.extensions.js"></script>
   <!-- DataTables -->
   <script src="plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
   <script src="js/select2.full.min.js"></script>
   <script type="text/javascript" src="formwizard.js"></script>
+  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
   <script>
     $(function () {
       $("#datatable").DataTable();
@@ -1111,7 +1114,13 @@
       $("#datatable4").DataTable();
     });
     $(document).ready(function() {
-    $(".choose").select2();
+      $(".choose").select2();
+    });
+
+   //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    $(window).load(function(){
+    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
   });
 
   window.onload = function() {
