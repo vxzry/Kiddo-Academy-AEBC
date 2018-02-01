@@ -499,7 +499,7 @@ function run(){
                            ?>
                            <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
-                           <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis;    white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
+                           <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqStudent']; ?></td>
                            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
