@@ -55,7 +55,14 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
-
+    <link href="css/multiple-select.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
     <script>
     function disabledReason() {
     var txtHealthReason = document.getElementById('txtHealthReason');
@@ -81,27 +88,35 @@
     }
 
     function addSibling()
-    { 
+    {
       var objTo = document.getElementById('sibling');
       var divingr = document.createElement("div");
-      divingr.innerHTML = '<br /><label class="col-lg-2 control-label left" style="margin-bottom:10%">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblName[]" id="txtSiblName"></div><label class="col-lg-2 control-label left">Age:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblAge[]" id="txtSiblAge"></div><label class="col-lg-2 control-label left">Grade/Level:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblGrd[]" id="txtSiblGrd"></div><label class="col-lg-2 control-label left">School:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblSchool[]" id="txtSiblSchool"></div>';
+      divingr.innerHTML = '<br /><label class="col-lg-4 control-label left">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblName[]" id="txtSiblName"></div><label class="col-lg-4 control-label left">Age:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblAge[]" id="txtSiblAge"></div><label class="col-lg-4 control-label left">Grade/Level:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblGrd[]" id="txtSiblGrd"></div><label class="col-lg-4 control-label left">School:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtSiblSchool[]" id="txtSiblSchool"></div>';
       objTo.appendChild(divingr);
     }
 
     function addRelative()
-    { 
+    {
       var objTo2 = document.getElementById('relative');
       var divingr2 = document.createElement("div");
-      divingr2.innerHTML = '<br /><label class="col-lg-2 control-label left">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtRelName[]" id="txtRelName"></div><label class="col-lg-2 control-label left">Age:</label><div class="col-lg-8"><input class="form-control" type="number" name="txtRelAge[]" id="txtRelAge"></div><label class="col-lg-2 control-label left">Relation:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation"></div>';
+      divingr2.innerHTML = '<br /><label class="col-lg-4 control-label left">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtRelName[]" id="txtRelName"></div><label class="col-lg-4 control-label left">Age:</label><div class="col-lg-8"><input class="form-control" type="number" name="txtRelAge[]" id="txtRelAge"></div><label class="col-lg-4 control-label left">Relation:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation"></div>';
       objTo2.appendChild(divingr2);
     }
 
     function addEmergencyContact()
-    { 
+    {
       var objTo2 = document.getElementById('relative');
       var divingr2 = document.createElement("div");
       divingr2.innerHTML = '<br /> <label class="col-lg-4 control-label">Name:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtEmName[]" id="txtEmName"></div><label class="col-lg-4 control-label">Relation to Student:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtReltoStud[]" id="txtReltoStud"><label class="col-lg-4 control-label">Tel/Mobile Number:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtEmNum[]" id="txtEmNum"></div><label class="col-lg-4 control-label">Address:</label><div class="col-lg-8"><input class="form-control" type="text" name="txtEmAdress[]" id="txtEmAdress"></div>';
       objTo2.appendChild(divingr2);
+    }
+
+    function changeRequirement()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeRequirement.php?r3="+document.getElementById("r3").value,false);
+      xmlhttp.send(null);
+      document.getElementById("requirementfield").innerHTML=xmlhttp.responseText;
     }
     </script>
   </head>
@@ -128,36 +143,36 @@
             </a>
 
             <div class="navbar-custom-menu">
-              <ul class="nav navbar-nav">
-                <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="images/User/admin.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs"><?php echo $namess ?></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="images/User/admin.jpg" class="img-circle" alt="User Image">
+		        <ul class="nav navbar-nav">
+		          <!-- User Account: style can be found in dropdown.less -->
+		          <li class="dropdown user user-menu">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		              <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+		              <span class="hidden-xs"><?php echo $namess ?></span>
+		            </a>
+		            <ul class="dropdown-menu">
+		              <!-- User image -->
+		              <li class="user-header">
+		                <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
-                    <p>
-                      <?php echo $namess ?>
-                      <small><?php echo $rolename ?></small>
-                    </p>
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+		                <p>
+		                  <?php echo $namess ?>
+		                  <small><?php echo $rolename ?></small>
+		                </p>
+		              </li>
+		              <!-- Menu Footer-->
+		              <li class="user-footer">
+		                <div class="pull-left">
+		                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+		                </div>
+		                <div class="pull-right">
+		                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
+		                </div>
+		              </li>
+		            </ul>
+		          </li>
+		        </ul>
+		      </div>
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -167,19 +182,19 @@
           <!-- Sidebar user panel -->
           <div class="user-panel"  style="margin-top: 8%">
             <div class="pull-left image">
-              <img src="images/User/admin.jpg" class="img-circle" alt="User Image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
 
             <div class="pull-left info">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
             </div>
           </div>
-         
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
-           <?php 
+            <li class="header" style="color: black; font-size: 15px; margin-top: 3%">Welcome!</li>
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -194,7 +209,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -211,7 +226,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -225,7 +240,7 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -249,20 +264,19 @@
                     <div class="box-header with-border"></div>
 
                     <div class="box-body">
-                      <label style="text-align: right">Parent: </label>
-                      <select class="form-control choose" name="parentChoose" id="parentChoose" style="text-align: right; width: 40%">
-                        <option selected="selected" value="">--Select Parent--</option>
+                      <label style="padding: 3%">Parent: </label>
+                      <select class="form-control choose" name="parentChoose" id="parentChoose" style="width: 40%">
+                        <option selected="selected" disabled>--Select Parent--</option>
                             <?php
-                            $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+                            $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParentFlag=1";
                             $result = mysqli_query($con, $query);
                             while($row = mysqli_fetch_array($result))
                             {
                             ?>
-                              <option value="<?php echo $row['tblDivisionId'] ?>"><?php echo $row['tblDivisionName'] ?></option>
+                              <option value="<?php echo $row['tblParentId'] ?>"><?php echo $row['names'] ?></option>
                             <?php } ?>
                       </select>
                       <section>
-                        <h3>Admission</h3>
                         <div class="wizard">
                           <div class="wizard-inner">
                             <div class="connecting-line"></div>
@@ -303,22 +317,23 @@
 
                           <form method="post" action="saveadmission.php">
                             <div class="tab-content">
-                    
+
                               <div class="tab-pane active" role="tabpanel" id="step1">
-                                <h2 style="margin-bottom: 3%; margin-left: 3%">Check Requirements</h2>
+                                <h3 style="margin-bottom: 3%; margin-left: 3%">Check Requirements</h3>
+                                <hr>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
-                                    
+
                                       <!-- radio -->
                                       <div class="form-group" style="margin-top: 3%">
                                         <div class="radio">
                                           <label>
-                                            <input type="radio" name="r3" id="r3" value="New Student" checked>
+                                            <input type="radio" name="r3" id="r3" value="NEW STUDENT" onchange="changeRequirement()" checked>
                                             New Student
                                           </label>
                                         </div>
                                         <div class="radio">
                                           <label>
-                                            <input type="radio" name="r3" id="r3" value="Transferee">
+                                            <input type="radio" name="r3" id="r3" value="TRANSFEREE" onchange="changeRequirement()">
                                             Transferee
                                           </label>
                                         </div>
@@ -340,10 +355,11 @@
                                         </div>
                                       </div>
 
-                                      <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
-                                        
-                                          <fieldset style="margin-top: 2%; margin-left: 2%">
+                                      <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
+
+                                          <fieldset style="margin-top: 3%; padding: 3%">
                                             <h3>REQUIREMENTS</h3>
+                                            <hr>
                                               <?php
                                             $query="select * from tblrequirement where tblRequirementFlag=1 and tblReqType='ADMISSION'";
                                             $result=mysqli_query($con, $query);
@@ -358,18 +374,18 @@
                                               </div>
                                               <?php } ?>
                                           </fieldset>
-                                        
+
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
 
                                       <ul class="list-inline pull-right" style="margin-top: 5%">
                                           <li><button type="button" class="btn btn-primary next-step">Next</li>
                                       </ul>
-                                   
+
                               </div> <!-- tab pane step1 -->
 
                                   <div class="tab-pane" role="tabpanel" id="step2">
-                                    <h2 style="margin-bottom: 3%; margin-left: 3%">Student Information</h2>
+                                    <h3 style="margin-bottom: 3%; margin-left: 3%">Student's Personal Information</h3>
                                     <div class="container">
     <hr>
   <div class="row">
@@ -378,16 +394,15 @@
         <div class="text-center">
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
           <h6>Upload a different photo...</h6>
-          
+
           <input type="file" class="form-control">
         </div>
       </div>
-      
+
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <h3>Personal info</h3>
-        
-        
+
+
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:</label>
             <div class="col-lg-8">
@@ -407,15 +422,21 @@
             </div>
           </div>
           <div class="form-group" style="margin-bottom:25%;">
+            <form>
             <label class="col-lg-2 control-label left">Birthday:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="date" name="txtStudBday" id="txtStudBday">
+            <div class="col-lg-4">
+              <input class="form-control" type="text" name="txtStudBday" id="txtStudBday" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
             </div>
+            <div class="col-lg-2">
+              <span id="agecalc"> </span>
+            </div>
+            </form>
           </div>
           <div class="form-group" style="margin-bottom:31%;">
             <label class="col-lg-2 control-label left">Birthplace:</label>
-            <div class="col-lg-7">
-              <input class="form-control" type="text" name="txtStudBplace" id="txtStudBplace">            </div>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="txtStudBplace" id="txtStudBplace">
+            </div>
           </div>
           <div class="form-group" style="margin-bottom:37%;">
             <label class="col-lg-2 control-label left">Nationality:</label>
@@ -425,7 +446,7 @@
           </div>
           <div class="form-group" style="margin-bottom:43%;">
             <label class="col-lg-2 control-label left">Religion:</label>
-            <div class="col-lg-7">
+            <div class="col-lg-8">
               <input class="form-control" type="text" name="txtStudReligion" id="txtStudReligion">
             </div>
           </div>
@@ -451,18 +472,18 @@
             </div>
           </div>
           <div class="form-group" style="margin-bottom:61%;">
-          <label class="col-lg-3 control-label">First Language:</label>
-          <div class="col-lg-7">
+          <label class="col-lg-2 control-label">First Language:</label>
+          <div class="col-lg-8">
           <input class="form-control" type="text" name="txtStudLang1" id="txtStudLang1">
           </div>
           </div>
           <div class="form-group">
-          <label class="col-lg-3 control-label">Second Language:</label>
-          <div class="col-lg-7">
+          <label class="col-lg-2 control-label">Second Language:</label>
+          <div class="col-lg-8">
           <input class="form-control" type="text" name="txtStudLang2" id="txtStudLang2">
           </div>
           </div>
-        
+
       </div>
   </div>
 </div>
@@ -475,7 +496,7 @@
                                   </div> <!-- tab pane step2-->
 
                                   <div class="tab-pane" role="tabpanel" id="step3">
-                                    <h2 style="margin-bottom: 3%; margin-left: 3%">Family Information</h2>
+                                    <h3 style="margin-bottom: 3%; margin-left: 3%">Family Information</h3>
 <div class="container">
     <hr>
   <div class="row">
@@ -484,16 +505,16 @@
         <div class="text-center">
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
           <h6>Upload a different photo...</h6>
-          
+
           <input type="file" class="form-control">
         </div>
       </div>
-      
+
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <h3>Father's info</h3>
-        
-        
+        <h3>Father's Information</h3>
+
+
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:</label>
             <div class="col-lg-8">
@@ -590,12 +611,12 @@
               <input class="form-control" type="text" name="txtFatherComNum" id="txtFatherComNum">
             </div>
           </div>
-       
+
       </div>
   </div>
 </div>
 
- 
+
  <div class="container">
     <hr>
   <div class="row">
@@ -604,16 +625,16 @@
         <div class="text-center">
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
           <h6>Upload a different photo...</h6>
-          
+
           <input type="file" class="form-control">
         </div>
       </div>
-      
+
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <h3>Mother's info</h3>
-        
-        
+        <h3>Mother's Information</h3>
+
+
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:</label>
             <div class="col-lg-8">
@@ -710,7 +731,7 @@
               <input class="form-control" type="text" name="txtMotherComNum" id="txtMotherComNum">
             </div>
           </div>
-       
+
       </div>
   </div>
 </div>
@@ -720,37 +741,41 @@
   <div class="row">
       <!-- left column -->
       <div class="col-md-3">
-        
+
       </div>
-      
+
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-     
+
  <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">Parent Status:</label>
             <div class="col-lg-8">
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Parents Married"/>Parents Married
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Father Deceased"/>Father Deceased
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Father Remarried"/>Father Remarried
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Mother Deceased"/>Mother Deceased
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Mother Remarried"/>Mother Remarried
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Applicant Adopted"/>Applicant Adopted
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Single Parent"/>Single Parent
-            <input type="checkbox" class="flat-red" name="chkParentStat[]" id="chkParentStat" value="Parents Separated/Divorced"/>Parents Separated/Divorced
+            <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkParentStat" id="chkParentStat">
+                    <option value="Parents Married">Parents Married</option>
+                    <option value="Father Deceased">Father Deceased</option>
+                    <option value="Father Remarried">Father Remarried</option>
+                    <option value="Mother Deceased">Mother Deceased</option>
+                    <option value="Mother Remarried">Mother Remarried</option>
+                    <option value="Applicant Adopted">Applicant Adopted</option>
+                    <option value="Single Parent">Single Parent</option>
+                    <option value="Parents Separated/Divorced">Parents Separated/Divorced</option>
+              </select>
             </div>
           </div>
   <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Applicant Lives With:</label>
             <div class="col-lg-8">
-            <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Father and Mother"/>Father and Mother
-            <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Stepfather and Mother"/>Stepfather and Mother
-            <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Father"/>Father
-            <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Stepmother and Father"/>Stepmother and Father
-            <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Mother"/>Mother
-            <input type="checkbox" class="flat-red" name="chkLivesWith[]" id="chkLivesWith" value="Relative/s"/>Relative/s
+              <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
+                <option value="Father and Mother">Father and Mother</option>
+                <option value="Stepfather and Mother">Stepfather and Mother</option>
+                <option value="Father">Father</option>
+                <option value="Stepmother and Father">Stepmother and Father</option>
+                <option value="Mother">Mother</option>
+                <option value="Relative/s">Relative/s</option>
+              </select>
             </div>
           </div>
-        
+
           </div>
           </div>
           </div>
@@ -762,23 +787,23 @@
       <div class="col-md-9 personal-info">
         <h3>Siblings</h3>
         <div class= "right" style="margin-bottom:5%">
-               <a href="#"><span class="btn btn-info" id="siblingbutton" style="float: right" onclick="addSibling();" >ADD</span></a>
+               <a href="#"><span class="btn btn-info" id="siblingbutton" style="float: right;" onclick="addSibling();" >ADD</span></a>
         </div>
         <div class="form-group" id="sibling">
-          
-            <label class="col-lg-2 control-label left" style="margin-bottom:10%">Name:</label>
+
+            <label class="col-lg-4 control-label left">Name:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtSiblName[]" id="txtSiblName">
             </div>
-            <label class="col-lg-2 control-label left">Age:</label>
+            <label class="col-lg-4 control-label left">Age:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtSiblAge[]" id="txtSiblAge">
             </div>
-            <label class="col-lg-2 control-label left">Grade/Level:</label>
+            <label class="col-lg-4 control-label left">Grade/Level:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtSiblGrd[]" id="txtSiblGrd">
             </div>
-            <label class="col-lg-2 control-label left">School:</label>
+            <label class="col-lg-4 control-label left">School:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtSiblSchool[]" id="txtSiblSchool">
           </div>
@@ -796,24 +821,24 @@
         <div class= "right" style="margin-bottom: 5%">
                <a href="#"><span class="btn btn-info" id="relativebutton" style="float: right" onclick="addRelative();" >ADD</span></a>
         </div>
-       
+
           <div class="form-group" id="relative">
-            <label class="col-lg-2 control-label left">Name:</label>
+            <label class="col-lg-4 control-label left">Name:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtRelName[]" id="txtRelName">
             </div>
-          
-            <label class="col-lg-2 control-label left">Age:</label>
+
+            <label class="col-lg-4 control-label left">Age:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtRelAge[]" id="txtRelAge">
             </div>
-         
-            <label class="col-lg-2 control-label left">Relation:</label>
+
+            <label class="col-lg-4 control-label left">Relation:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation">
             </div>
           </div>
-         
+
       </div>
   </div>
 </div>
@@ -828,10 +853,12 @@
                                   </div> <!-- tab pane step3-->
 
                                   <div class="tab-pane" role="tabpanel" id="step4">
-                                    
+
                                     <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
-                                      <h3>Health History</h3>
-                                       
+                                    <h3 style="margin-left: 3%">Health History</h3>
+                                    <hr>	
+                                      <!-- <h3>Health History</h3> -->
+
                                           <div class="form-group">
                                             <label class="col-lg-2 control-label">Allergies:</label>
                                             <div class="col-lg-7">
@@ -839,21 +866,21 @@
                                             </div>
                                           </div>
 
-                                          <div class="form-group" style="margin-top: 5%">
+                                          <div class="form-group" style="margin-top: 6%">
                                             <label class="col-lg-2">Illness or Disability:</label>
                                             <div class="col-lg-7">
                                               <input class="form-control" type="text" name="txtHealthIllness" id="txtHealthIllness">
                                             </div>
                                           </div>
 
-                                          <div class="form-group" style="margin-top: 9%">
+                                          <div class="form-group" style="margin-top: 10%">
                                             <label class="col-lg-2 control-label">Medication:</label>
                                             <div class="col-lg-7">
                                               <input class="form-control" type="text" name="txtHealthMeds" id="txtHealthMeds">
                                             </div>
                                           </div>
 
-                                          <div class="form-group" style="margin-top: 13%">
+                                          <div class="form-group" style="margin-top: 14%">
                                             <label class="col-lg-2 control-label">Blood Type:</label>
                                               <div class="col-lg-7">
                                                 <select class="form-control choose" style="width: 100%;" name="selHealthBtype" id="selHealthBtype">
@@ -866,7 +893,7 @@
                                               </div>
 
 
-                                              <div class="form-group" style="margin-top: 17%">
+                                              <div class="form-group" style="margin-top: 18%">
                                                 <label class="col-lg-3 control-label">Hospitalized?
                                                   <label style="margin-left: 3%">Yes
                                                     <input type="radio" name="h2" class="minimal" checked value="Y">
@@ -924,13 +951,13 @@
                                                 <div class="col-lg-3">
                                                   <input class="form-control" type="text" placeholder="Street Name/No." name="txtHealthAddSt" id="txtHealthAddSt">
                                                 </div>
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-2">
                                                   <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtHealthAddBrgy" id="txtHealthAddBrgy">
                                                 </div>
                                               </div>
           <div class="form-group" style="margin-top: 46%;">
             <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <input class="form-control" type="text" placeholder="City/Municipality" name="txtHealthAddCity" id="txtHealthAddCity">
             </div>
             <div class="col-lg-2">
@@ -944,12 +971,13 @@
   <div class="row">
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
+      	<h4 style="font-weight: bold">Emergency Contact</h4>
         <h5>Other person(s) to contact in case of emergency</h5>
         <div class= "right" style="margin-bottom:5%">
                <a href="#"><span class="btn btn-info" id="emcontactbutton" style="float: right" onclick="addEmergencyContact();" >ADD</span></a>
         </div>
-        <div class="form-group" id="sibling"> 
-          
+        <div class="form-group" id="sibling">
+
             <label class="col-lg-4 control-label">Name:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" name="txtEmName[]" id="txtEmName">
@@ -970,15 +998,14 @@
       </div>
   </div>
 </div>
-                                      
-                                    
+
+
 
                                     <ul class="list-inline pull-right" style="margin-top: 5%">
                                         <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save Applicant</button></li>
                                     </ul>
                                     <div class="btn-group" style="margin-top: 5%; float: right">
-                                    <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save</button>
+                                    <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button>
                                     </div>
                                   </div> <!-- tab pane step4 -->
                                 <div class="clearfix"></div>
@@ -998,7 +1025,7 @@
 
         <footer class="main-footer">
           <div class="pull-right hidden-xs">
-            <b>Version</b> Last na please
+            <b>Version</b> 2017
           </div>
           <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
           reserved.
@@ -1077,11 +1104,17 @@
   <script src="dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
+  <!-- InputMask -->
+  <script src="jquery.inputmask.js"></script>
+  <script src="jquery.inputmask.date.extensions.js"></script>
+  <script src="jquery.inputmask.extensions.js"></script>
   <!-- DataTables -->
   <script src="plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
   <script src="js/select2.full.min.js"></script>
   <script type="text/javascript" src="formwizard.js"></script>
+  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+  <script src="js/multiple-select.js"></script>
   <script>
     $(function () {
       $("#datatable").DataTable();
@@ -1091,8 +1124,38 @@
       $("#datatable4").DataTable();
     });
     $(document).ready(function() {
-    $(".choose").select2();
-  });
+      $(".choose").select2();
+    });
+    $('.select2').multipleSelect();
+   	//Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    $(window).load(function(){
+	    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+	  });
+
+  window.onload = function() {
+        document.getElementById("txtStudBday").onblur = function() {
+            ageCount(this.value);
+        }
+	}
+
+    function ageCount(dob) {
+		var date1 = new Date();
+		var date2 = new Date(dob);
+		var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/; //Regex to validate date format (dd/mm/yyyy)
+		if(pattern.test(dob)) {
+			var y1 = date1.getFullYear(); //getting current year
+			var y2 = date2.getFullYear(); //getting dob year
+			var age = y1 - y2;           //calculating age
+			document.getElementById("agecalc").innerHTML = "Age: " + age;
+			return true;
+		}
+		else {
+			alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
+			return false;
+		}
+
+	}
   </script>
 
   </body>

@@ -343,6 +343,7 @@ function run(){
                                         <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="NEW">NEW</option>
                                           <option value="TRANSFEREE">TRANSFEREE</option>
+                                          <option value="NEW AND TRANSFEREE">NEW AND TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -424,6 +425,7 @@ function run(){
                                         <option selected="selected" disabled value="">--Choose Type--</option>
                                           <option value="NEW">NEW</option>
                                           <option value="TRANSFEREE">TRANSFEREE</option>
+                                          <option value="NEW AND TRANSFEREE">NEW AND TRANSFEREE</option>
                                       </select>
                                     </div>
                                   </div>
@@ -473,7 +475,7 @@ function run(){
                         </div>
                       </div>
 
-                      
+
                        <div class="box-body">
                         <form role="form">
                          <table id="tblReq" class="table table-bordered table-striped" ">
@@ -497,7 +499,7 @@ function run(){
                            ?>
                            <tr><td style="width:100px;" hidden><?php echo $row1['tblReqId']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqName']; ?></td>
-                           <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis;    white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
+                           <td style="max-width:30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?php echo $row1['tblReqDescription']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqType']; ?></td>
                            <td style="width:100px;"><?php echo $row1['tblReqStudent']; ?></td>
                            <td style="width:30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
@@ -508,7 +510,7 @@ function run(){
                          </table>
                          </form>
                         </div>
-                      
+
                   </div><!-- /. box-body -->
                 </div> <!-- /.box-default -->
               </div> <!-- col-md -->
