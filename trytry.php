@@ -23,13 +23,27 @@ foreach($id as $x)
 }
 if($num == 1)
 {
+	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'"
+	$row1=mysqli_fetch_array(mysqli_query($con, $query1));
+	$studtype=$row1['tblStudentType'];
+	if($studtype=='APPLICANT')
+	{
 	$query="update tblstudent set tblStudentType='OFFICIAL' where tblStudentId='$studid' and tblStudentFlag=1";
 	if (!$query = mysqli_query($con, $query)) {
 				exit(mysqli_error($con));
 	}else
 	{
 		header("location:createParentUser.php?studentid=$studid");
-
+	}
+	}else if($studtype=='PROMOTED')
+	{
+		$query="update tblstudent set tblStudentType='OFFICIAL' where tblStudentId='$studid' and tblStudentFlag=1";
+		if (!$query = mysqli_query($con, $query)) {
+					exit(mysqli_error($con));
+		}else
+		{
+			header("location:enrollmentmain.php");
+		}
 	}
 	
 }else if($num != 1)

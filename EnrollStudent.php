@@ -139,16 +139,9 @@ if(isset($_POST['btnProceed']))
 				exit(mysqli_error($con));
 	}else
 	{
-		$query8="select tblStudentId from tblstudent where tblStudentFlag=1 and tblStudentId='$studid' and tblStudentType='APPLICANT'";
-		$search=$con->query($query8);
-		if($search->num_rows == 0)
-		{
+		
 		header("location:collection2.php?studentid=$studid");
-		}else if($search->num_rows > 0)
-		{
-			header("location:enrollmentmain.php);
 		}
-
 	}
 	
 }//btnProceed
