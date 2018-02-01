@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <link href="css/multiple-select.css" rel="stylesheet"/>
 
     <script>
     function disabledReason() {
@@ -744,8 +745,8 @@
  <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">Parent Status:</label>
             <div class="col-lg-8">
-            <select class="form-control choose" style="width: 100%">
-                    <option selected="selected" value="Parents Married">Parents Married</option>
+            <select multiple="multiple" class="select2" style="width: 100%" name="chkParentStat" id="chkParentStat">
+                    <option value="Parents Married">Parents Married</option>
                     <option value="Father Deceased">Father Deceased</option>
                     <option value="Father Remarried">Father Remarried</option>
                     <option value="Mother Deceased">Mother Deceased</option>
@@ -759,8 +760,8 @@
   <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Applicant Lives With:</label>
             <div class="col-lg-8">
-              <select class="form-control choose" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
-                <option selected="selected" value="Father and Mother">Father and Mother</option>
+              <select multiple="multiple" class="select2" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
+                <option value="Father and Mother">Father and Mother</option>
                 <option value="Stepfather and Mother">Stepfather and Mother</option>
                 <option value="Father">Father</option>
                 <option value="Stepmother and Father">Stepmother and Father</option>
@@ -1105,6 +1106,7 @@
   <script src="js/select2.full.min.js"></script>
   <script type="text/javascript" src="formwizard.js"></script>
   <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+  <script src="js/multiple-select.js"></script>
   <script>
     $(function () {
       $("#datatable").DataTable();
@@ -1116,12 +1118,12 @@
     $(document).ready(function() {
       $(".choose").select2();
     });
-
-   //Datemask dd/mm/yyyy
+    $('.select2').multipleSelect();
+   	//Datemask dd/mm/yyyy
     $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
     $(window).load(function(){
-    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-  });
+	    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+	  });
 
   window.onload = function() {
         document.getElementById("txtStudBday").onblur = function() {
