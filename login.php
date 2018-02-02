@@ -38,6 +38,14 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/font-awesome.css">
  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      html,body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+    </style>
 
 </head>
 
@@ -54,11 +62,11 @@
     <center><form id="form1" name="form1" method="post">
     <div class="main">
      <div class="form-input">
-		  <input type="text" name="username" id="username" class="userName" placeholder="Enter Username">
+		  <input type="text" name="username" id="username" class="userName" placeholder="Username">
 	   </div>
 
 	  <div class="form-input1">
-	  <input type="password" name="password" id="password" class="pwd" placeholder="Enter Password">
+	  <input type="password" name="password" id="password" class="pwd" placeholder="Password">
       </div>
 
         <input name="submit" type="submit" class="btn" id="submit" value="Log-In">

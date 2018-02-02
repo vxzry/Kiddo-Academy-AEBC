@@ -327,13 +327,13 @@
                                       <div class="form-group" style="margin-top: 3%">
                                         <div class="radio">
                                           <label>
-                                            <input type="radio" name="r3" id="r3" value="New Student" onchange="changeRequirement()" checked>
+                                            <input type="radio" name="r3" id="r3" value="NEW STUDENT" onchange="changeRequirement()" checked>
                                             New Student
                                           </label>
                                         </div>
                                         <div class="radio">
                                           <label>
-                                            <input type="radio" name="r3" id="r3" value="Transferee" onchange="changeRequirement()">
+                                            <input type="radio" name="r3" id="r3" value="TRANSFEREE" onchange="changeRequirement()">
                                             Transferee
                                           </label>
                                         </div>
