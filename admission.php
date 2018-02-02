@@ -166,7 +166,7 @@
 		                  <a href="#" class="btn btn-default btn-flat">Profile</a>
 		                </div>
 		                <div class="pull-right">
-		                  <a href="#" class="btn btn-default btn-flat">Logout</a>
+		                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
 		                </div>
 		              </li>
 		            </ul>
@@ -264,11 +264,11 @@
                     <div class="box-header with-border"></div>
 
                     <div class="box-body">
-                      <label style="text-align: right; padding: 3%">Parent: </label>
-                      <select class="form-control choose" name="parentChoose" id="parentChoose" style="text-align: right; float: right; width: 40%">
-                        <option selected="selected" value="">--Select Parent--</option>
+                      <label style="padding: 3%">Parent: </label>
+                      <select class="form-control choose" name="parentChoose" id="parentChoose" style="width: 40%">
+                        <option selected="selected" disabled>--Select Parent--</option>
                             <?php
-                            $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+                            $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParentFlag=1";
                             $result = mysqli_query($con, $query);
                             while($row = mysqli_fetch_array($result))
                             {
@@ -856,7 +856,7 @@
 
                                     <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
                                     <h3 style="margin-left: 3%">Health History</h3>
-                                    <hr>
+                                    <hr>	
                                       <!-- <h3>Health History</h3> -->
 
                                           <div class="form-group">
