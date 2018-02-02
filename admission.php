@@ -856,7 +856,7 @@
 
                                     <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
                                     <h3 style="margin-left: 3%">Health History</h3>
-                                    <hr>	
+                                    <hr>
                                       <!-- <h3>Health History</h3> -->
 
                                           <div class="form-group">

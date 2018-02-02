@@ -544,7 +544,7 @@
               <div class="form-group" style="margin-bottom:27%;">
                 <label class="col-lg-2 control-label left">Mobile Number: <span style="color:red; padding:2%;">*</span></label>
                 <div class="col-lg-7">
-                  <div class="input-group" style="width:60%;">
+                  <div class="input-group" style="width:35%;">
                     <div class="input-group-addon">
                       <i class="fa fa-mobile" aria-hidden="true"></i>
                     </div>
@@ -555,11 +555,11 @@
               <div class="form-group" style="margin-bottom:33%;">
                 <label class="col-lg-2 control-label left">E-mail Address: <span style="color:red; padding:2%;">*</span></label>
                 <div class="col-lg-8">
-                  <div class="input-group" style="width:60%;">
+                  <div class="input-group" style="width:40%;">
                     <div class="input-group-addon">
                       <i class="fa fa-envelope" aria-hidden="true"></i>
                     </div>
-                    <input class="form-control" type="email" name="txtFatherEmail" id="txtFatherEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                    <input class="form-control" type="email" name="txtFatherEmail" id="txtFatherEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="required">
                   </div>
                 </div>
               </div>
@@ -590,13 +590,13 @@
                 </div>
               </div>
               <div class="form-group" style="margin-bottom:51%;">
-                <label class="col-lg-2 control-label left">Home Tel. Number: </label>
+                <label class="col-lg-2 control-label left">Home Tel. Number: <span style="color:red; padding:2%;">*</span></label>
                 <div class="col-lg-8">
-                  <div class="input-group" style="width:60%;">
+                  <div class="input-group" style="width:35%;">
                     <div class="input-group-addon">
                       <i class="fa fa-phone" aria-hidden="true"></i>
                     </div>
-                    <input class="form-control" type="text" name="txtFatherTelnum" id="txtFatherTelnum">
+                    <input class="form-control" type="text" name="txtFatherTelnum" id="txtFatherTelnum" required>
                   </div>
                 </div>
               </div>
@@ -664,7 +664,293 @@
               </div>
             </div>
         </div>
-        <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;">Next</button>
+
+        <div class="container">
+           <hr>
+         <div class="row">
+             <center><h3>Mother's Information</h3></center>
+             <!-- left column -->
+             <div class="col-md-3">
+               <div class="text-center" style="margin-top: 7%;">
+               <img src="//placehold.it/200" id="profile-img-tag" class="avatar img-thumbnail" width="200px" />
+               <input type="file" class="text-center center-block well well-sm" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
+               </div>
+             </div>
+
+             <!-- edit form column -->
+             <div class="col-md-9 personal-info">
+
+                 <div class="form-group" style="margin-top:3%; margin-bottom:9%;">
+                   <label class="col-lg-2 control-label left">First name: <span style="color:red; padding:5%;">*</span></label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-user" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherFname" id="txtMotherFname" required>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:15%;">
+                   <label class="col-lg-2 control-label left">Middle name:</label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-user" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherMname" id="txtMotherMname">
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:21%;">
+                   <label class="col-lg-2 control-label left">Last name: <span style="color:red; padding:5%;">*</span></label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-user" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherLname" id="txtMotherLname" required>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:27%;">
+                   <label class="col-lg-2 control-label left">Mobile Number <span style="color:red; padding:5%;">*</span></label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:35%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-mobile" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherNum" id="txtMotherNum" required>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:33%;">
+                   <label class="col-lg-2 control-label left">E-mail Address: <span style="color:red; padding:5%;">*</span></label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-envelope" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="email" name="txtMotherEmail" id="txtMotherEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:39%;">
+                   <label class="col-lg-2 control-label left">Home Address:<span style="color:red; padding:5%;">*</span></label>
+                   <div class="col-lg-3">
+                     <div class="input-group" style="width:80%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-home" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" placeholder="Unit/Bldg. No." name="txtMotherAddBldg" id="txtMotherAddBldg" required>
+                     </div>
+                   </div>
+
+                   <div class="col-lg-3" style="margin-left:-55px;">
+                     <input class="form-control" type="text" placeholder="Street Name/No." name="txtMotherAddSt" id="txtMotherAddSt">
+                   </div>
+
+                   <div class="col-lg-3" style="margin-left:-20px;">
+                     <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtMotherAddBrgy" id="txtMotherAddBrgy">
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:45%;">
+                   <label class="col-lg-2 control-label left"></label>
+                   <div class="col-lg-6" style="width:33%">
+                     <input class="form-control" type="text" placeholder="City/Municipality" name="txtMotherAddCity" id="txtMotherAddCity" required>
+                   </div>
+                   <div class="col-lg-2">
+                     <input class="form-control" type="text" value="Philippines" name="txtMotherAddCountry" id="txtMotherAddCountry">
+                   </div>
+                 </div>
+
+                 <div class="form-group" style="margin-bottom:51%;">
+                   <label class="col-lg-2 control-label left">Home Tel. Number:</label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-phone" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherTelnum" id="txtMotherTelnum">
+                     </div>
+                   </div>
+                 </div>
+                 <div class="form-group" style="margin-bottom:57%;">
+                   <label class="col-lg-2 control-label left">Occupation/Title:</label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherJob" id="txtMotherJob">
+                     </div>
+                   </div>
+                 </div>
+                 <div class="form-group" style="margin-bottom:63%;">
+                   <label class="col-lg-2 control-label left">Company Name:</label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-industry" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherCompany" id="txtMotherCompany">
+                     </div>
+                   </div>
+                 </div>
+                 <div class="form-group" style="margin-bottom:69%;">
+                   <label class="col-lg-2 control-label left">Company Address:</label>
+                   <div class="col-lg-3">
+                     <div class="input-group" style="width:80%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-building" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" placeholder="Unit/Bldg. No." name="txtMotherComAddBldg" id="txtMotherComAddBldg">
+                     </div>
+                   </div>
+                   <div class="col-lg-3" style="margin-left:-55px;">
+                     <input class="form-control" type="text" placeholder="Street Name/No." name="txtMotherComAddSt" id="txtMotherComAddSt">
+                   </div>
+                   <div class="col-lg-3" style="margin-left:-19px;">
+                     <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtMotherComAddBrgy" id="txtMotherComAddBrgy">
+                   </div>
+                 </div>
+                 <div class="form-group" style="margin-bottom:75%;">
+                   <label class="col-lg-2 control-label left"></label>
+                   <div class="col-lg-6" style="width:33%">
+                     <input class="form-control" type="text" placeholder="City/Municipality" name="txtMotherComAddCity" id="txtMotherComAddCity">
+                   </div>
+                   <div class="col-lg-2">
+                     <input class="form-control" type="text" value="Philippines" name="txtMotherComAddCountry" id="txtMotherComAddCountry">
+                   </div>
+                 </div>
+                 <div class="form-group">
+                   <label class="col-lg-2 control-label left">Work Phone Number:</label>
+                   <div class="col-lg-7">
+                     <div class="input-group" style="width:60%;">
+                       <div class="input-group-addon">
+                         <i class="fa fa-phone" aria-hidden="true"></i>
+                       </div>
+                       <input class="form-control" type="text" name="txtMotherComNum" id="txtMotherComNum">
+                     </div>
+                   </div>
+                 </div>
+
+             </div>
+         </div>
+       </div>
+
+       <div class="container">
+           <hr>
+         <div class="row">
+             <!-- left column -->
+             <div class="col-md-3"></div>
+
+             <!-- edit form column -->
+             <div class="col-md-9 personal-info">
+
+        <div class="form-group" style="margin-bottom:7%;">
+                   <label class="col-lg-2 control-label left">Parent Status:</label>
+                   <div class="col-lg-8">
+                   <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkParentStat" id="chkParentStat">
+                           <option value="Parents Married">Parents Married</option>
+                           <option value="Father Deceased">Father Deceased</option>
+                           <option value="Father Remarried">Father Remarried</option>
+                           <option value="Mother Deceased">Mother Deceased</option>
+                           <option value="Mother Remarried">Mother Remarried</option>
+                           <option value="Applicant Adopted">Applicant Adopted</option>
+                           <option value="Single Parent">Single Parent</option>
+                           <option value="Parents Separated/Divorced">Parents Separated/Divorced</option>
+                     </select>
+                   </div>
+                 </div>
+         <div class="form-group" style="margin-bottom:13%;">
+                   <label class="col-lg-2 control-label left">Applicant Lives With:</label>
+                   <div class="col-lg-8">
+                     <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
+                       <option value="Father and Mother">Father and Mother</option>
+                       <option value="Stepfather and Mother">Stepfather and Mother</option>
+                       <option value="Father">Father</option>
+                       <option value="Stepmother and Father">Stepmother and Father</option>
+                       <option value="Mother">Mother</option>
+                       <option value="Relative/s">Relative/s</option>
+                     </select>
+                   </div>
+                 </div>
+
+                 </div>
+                 </div>
+                 </div>
+
+                 <div class="container">
+                     <hr>
+                   <div class="row">
+                       <!-- edit form column -->
+                       <div class="col-md-9 personal-info">
+                         <h3>Siblings</h3>
+                         <div class= "right" style="margin-bottom:7%">
+                                <a href="#"><span class="btn btn-info" id="siblingbutton" style="float: right;" onclick="addSibling();" >ADD</span></a>
+                         </div>
+                         <div class="form-group" id="sibling">
+
+                             <label class="col-lg-4 control-label left">Name:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtSiblName[]" id="txtSiblName">
+                             </div>
+                             <label class="col-lg-4 control-label left">Age:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtSiblAge[]" id="txtSiblAge">
+                             </div>
+                             <label class="col-lg-4 control-label left">Grade/Level:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtSiblGrd[]" id="txtSiblGrd">
+                             </div>
+                             <label class="col-lg-4 control-label left">School:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtSiblSchool[]" id="txtSiblSchool">
+                           </div>
+                        </div>
+                       </div>
+                   </div>
+                 </div>
+
+                 <div class="container">
+                     <hr>
+                   <div class="row">
+                       <!-- edit form column -->
+                       <div class="col-md-9 personal-info">
+                         <h3>Other members of the Household</h3>
+                         <div class= "right" style="margin-bottom: 5%">
+                                <a href="#"><span class="btn btn-info" id="relativebutton" style="float: right" onclick="addRelative();" >ADD</span></a>
+                         </div>
+
+                           <div class="form-group" id="relative">
+                             <label class="col-lg-4 control-label left">Name:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtRelName[]" id="txtRelName">
+                             </div>
+
+                             <label class="col-lg-4 control-label left">Age:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtRelAge[]" id="txtRelAge">
+                             </div>
+
+                             <label class="col-lg-4 control-label left">Relation:</label>
+                             <div class="col-lg-8">
+                               <input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation">
+                             </div>
+                           </div>
+
+                       </div>
+                   </div>
+                 </div>
+
+               <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;">Next</button>
     </div>
     </div>
   </div>
@@ -900,33 +1186,73 @@
       </div>
       <!-- ./wrapper -->
 
-  <!-- jQuery 2.2.3 -->
-  <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-  <!-- Bootstrap 3.3.6 -->
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="plugins/fastclick/fastclick.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/app.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
-  <!-- DataTables -->
-  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-  <script src="js/select2.full.min.js"></script>
-  <script type="text/javascript" src="formwizard.js"></script>
-  <script>
-    $(function () {
-      $("#datatable").DataTable();
-      $("#datatable1").DataTable();
-      $("#datatable2").DataTable();
-      $("#datatable3").DataTable();
-      $("#datatable4").DataTable();
-    });
-    $(document).ready(function() {
-    $(".choose").select2();
-  });
-  </script>
+      <!-- jQuery 2.2.3 -->
+      <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+      <!-- Bootstrap 3.3.6 -->
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="plugins/fastclick/fastclick.js"></script>
+      <!-- AdminLTE App -->
+      <script src="dist/js/app.min.js"></script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="dist/js/demo.js"></script>
+      <!-- InputMask -->
+      <script src="jquery.inputmask.js"></script>
+      <script src="jquery.inputmask.date.extensions.js"></script>
+      <script src="jquery.inputmask.extensions.js"></script>
+      <!-- DataTables -->
+      <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+      <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+      <script src="js/select2.full.min.js"></script>
+      <script type="text/javascript" src="formwizard.js"></script>
+      <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+      <script src="js/multiple-select.js"></script>
+      <script>
+        $(function () {
+          $("#datatable").DataTable();
+          $("#datatable1").DataTable();
+          $("#datatable2").DataTable();
+          $("#datatable3").DataTable();
+          $("#datatable4").DataTable();
+        });
+        $(document).ready(function() {
+          $(".choose").select2();
+        });
+        $('.select2').multipleSelect();
+       	//Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        $(window).load(function(){
+    	    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    	  });
+
+      window.onload = function() {
+            document.getElementById("txtStudBday").onblur = function() {
+                ageCount(this.value);
+            }
+    	}
+
+        function ageCount(dob) {
+    		var date1 = new Date();
+    		var date2 = new Date(dob);
+    		var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/; //Regex to validate date format (dd/mm/yyyy)
+    		if(pattern.test(dob)) {
+    			var y1 = date1.getFullYear(); //getting current year
+    			var y2 = date2.getFullYear(); //getting dob year
+    			var age = y1 - y2;           //calculating age
+    			document.getElementById("agecalc").innerHTML = "Age: " + age;
+    			return true;
+    		}
+    		else {
+    			alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
+    			return false;
+    		}
+
+    	}
+      </script>
+
+
+
+  </body>
 
   <script>
   function scrollWin() {
@@ -979,7 +1305,5 @@
   $('div.setup-panel div a.btn-primary').trigger('click');
 });
   </script>
-
-  </body>
 
 </html>
