@@ -1,7 +1,7 @@
 <?php
    include('session.php');
    include('db_connect.php');
-   $x=substr($login_session,0,1);
+   $x=substr($login_session,0,1); 
    if($x=="P")
    {
     $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
@@ -773,7 +773,8 @@ $(document).ready(function(){
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
                       
                       <a href = "feedetails.php"><form method="post" action="feedetails.php">
-                      <input type="hidden" name="" id="" value=""/>
+                      <input type="hidden" name="txtFdFeeId" id="txtFdFeeId" value="<?php echo $row['tblFeeId'] ?>"/>
+                      <input type="hidden" name="txtFdFeeType" id="txtFdFeeType" value="<?php echo $row['tblFeeType'] ?>"/>
                       <button type="submit" class="btn btn-success" name="btnFeeDetails" id="btnFeeDetails" style="margin-top: 4px;"><i class="fa fa-edit"></i>Fee Details</button>
                       </form></a>
                       </td>

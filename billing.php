@@ -62,6 +62,17 @@
         font-weight: bold;
       }
     </style>
+    <script>
+    function changeBillingLevel()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeTblBilling.php?selLevel="+document.getElementById("selLevel").value,false);
+      xmlhttp.send(null);
+      
+      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+
+    }
+    </script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -109,7 +120,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -216,10 +227,15 @@
                             <div class="col-md-6"  style="margin-top: 3%">
                               <div class="form-group">
                                   <label>Level</label>
-                                  <select class="form-control select2" style="width: 50%;">
-                                    <option selected="selected">Kinder</option>
-                                    <option>Nursery</option>
-                                    <option>Grade 1</option>
+                                  <select class="form-control" style="width: 50%;" onchange="changeBillingLevel()" name="selLevel" id="selLevel">
+                                    <option selected="selected" disabled>--Select Level--</option>
+                                    <?php
+                                    $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
+                                    $result = mysqli_query($con, $query);
+                                    while($row=mysqli_fetch_array($result)):
+                                    ?>
+                                    <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
+                                    <?php endwhile ?>
                                   </select>
                                 </div>
                               </div>

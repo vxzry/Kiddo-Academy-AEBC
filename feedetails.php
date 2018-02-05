@@ -1,9 +1,11 @@
 <?php
    include('session.php');
    include('db_connect.php');
+   $feeid=$_POST['txtFdFeeId'];
+   $feetype=$_POST['txtFdFeeType'];
    $x=substr($login_session,0,1);
    if($x=="P")
-   {
+   { 
     $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
     $result=mysqli_query($con, $query);
     $row=mysqli_fetch_array($result);
@@ -158,7 +160,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -273,9 +275,9 @@
                         <!-- edit form column -->
                         <div class="col-md-8 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
 
-                          <form class="form-horizontal" role="form" method="post" action="saveFacultyProfile.php">
+                          <form class="form-horizontal" role="form" method="post" action="">
                             <div class="form-group">
-                              <label class="col-lg-3 control-label">First name:</label>
+                              <label class="col-lg-3 control-label">Fee name:</label>
                               <div class="col-lg-7">
                                 <input class="form-control" type="text" name="txtFname" id="txtFname">
                               </div>
