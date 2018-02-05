@@ -131,7 +131,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Logout</a>
+                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                 </div>
               </li>
             </ul>
@@ -253,18 +253,19 @@
     <div class="box">
       <div class="box-body">  
   <!-- left column -->
+  <form class="form-horizontal" role="form" method="post" action="updatePersonalInfo.php" enctype="multipart/form-data">
+
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
         <img src="admin.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
         <h6>Upload new photo</h6>
-        <input type="file" class="text-center center-block well well-sm">
+        <input type="file" class="text-center center-block well well-sm" name="file" id="file">
       </div>
     </div>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
      
-      <form class="form-horizontal" role="form" method="post" action="updatePersonalInfo.php">
-      <?php
+            <?php
       if(isset($_POST['btnStud']))
       {
         $id = $_POST['txtStudId'];
@@ -377,10 +378,11 @@
        <div class="btn-group" style="margin-top: 5%; float: right">
                       <button type="submit" class="btn btn-info" name="btnpersonal" id="btnpersonal">Save</button>
                     </div>
-      </form>
+      
       </div>
       </div>
       <!-- /.box-body -->
+      </form>
         </div>
         <!-- /.tab-pane -->
         <div class="tab-pane" id="tab_2">
@@ -450,22 +452,28 @@
                       {
 
                         $id = $_POST['txtStudId'];
-                        $query = "select tblParentId, tblParentLname, tblParentFname, tblParentMname, tblParentAdd, tblParentTelNo, tblParentCpNo, tblParentOccupation, tblParentCompany, tblParentCompanyAdd, tblParentWorkNo, tblParentEmail from tblparent where tblParent_tblStudentId = '$id' and tblParentFlag = 1 and tblParentRelation = 'Father'";
+                        $query = "select p.tblParentId, p.tblParentLname, p.tblParentFname, p.tblParentMname, p.tblParentAddSt, p.tblParentAddBrgy, p.tblParentAddCity, p.tblParentAddCountry, p.tblParentTelNo, p.tblParentCpNo, p.tblParentOccupation, p.tblParentCompany, p.tblParentComAddSt, p.tblParentComAddBrgy, p.tblParentComAddCity, p.tblParentComAddCountry, p.tblParentWorkNo, p.tblParentEmail from tblparent p, tblparentstudent ps where ps.tblParStud_tblStudentId = '$user_id' and p.tblParentId=ps.tblParStud_tblParentId and p.tblParentFlag = 1 and p.tblParentRelation = 'Father'";
                         $result = mysqli_query($con, $query);
                         $row = mysqli_fetch_array($result);
                         $pId = $row['tblParentId'];
                         $pfname = $row['tblParentFname'];
                         $plname = $row['tblParentLname'];
                         $pmname = $row['tblParentMname'];
-                        $padd = $row['tblParentAdd'];
+                        $paddst = $row['tblParentAddSt'];
+                        $paddbrgy = $row['tblParentAddBrgy'];
+                        $paddcity = $row['tblParentAddCity'];
+                        $paddcountry = $row['tblParentAddCountry'];
                         $ptelno = $row['tblParentTelNo'];
                         $pcpno = $row['tblParentCpNo'];
                         $pjob = $row['tblParentOccupation'];
                         $pcompany = $row['tblParentCompany'];
-                        $pcompanyadd = $row['tblParentCompanyAdd'];
+                        $pcaddst = $row['tblParentComAddSt'];
+                        $pcaddbrgy = $row['tblParentComAddBrgy'];
+                        $pcaddcity = $row['tblParentComAddCity'];
+                        $pcaddcountry = $row['tblParentComAddCountry'];                        
                         $pcompanyno = $row['tblParentWorkNo'];
                         $pemail = $row['tblParentEmail'];
-                        $arrFather = array($pfname, $plname, $pmname, $padd, $ptelno, $pcpno, $pjob, $pcompany, $pcompanyadd, $pcompanyno, $pemail);
+                        $arrFather = array($pfname, $plname, $pmname, $ptelno, $pcpno, $pjob, $pcompany, $pcompanyno, $pemail);
                         ?>
                         <input type="hidden" name="txtFStudId" id="txtFStudId" value="<?php echo $id ?>"/>
                         <input type="hidden" id="txtId" name="txtId" value="<?php echo $pId; ?>"/>
@@ -488,9 +496,21 @@
                             </div>
                           </div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Home Address:</label>
-                            <div class="col-lg-7">
-                              <input class="form-control" type="text" name="txtParentAdd" id="txtParentAdd" value = "<?php echo $padd ?>">
+                            <label class="col-lg-3 control-label left">Home Address:</label>
+                            <div class="col-lg-4">
+                              <input class="form-control" type="text" placeholder="Street Name/No." name="txtParentAddSt" id="txtParentAddSt" value = "<?php echo $paddst ?>">
+                            </div>
+                            <div class="col-lg-3">
+                              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtParentAddBrgy" id="txtParentAddBrgy" value = "<?php echo $paddbrgy ?>">
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label left"></label>
+                            <div class="col-lg-5">
+                              <input class="form-control" type="text" placeholder="City/Municipality" name="txtParentAddCity" id="txtParentAddCity" value = "<?php echo $paddcity ?>">
+                            </div>
+                            <div class="col-lg-2">
+                              <input class="form-control" type="text" value="Philippines" name="txtParentAddCountry" id="txtParentAddCountry" value = "<?php echo $paddcountry ?>">
                             </div>
                           </div>
                           <div class="form-group">
@@ -518,9 +538,21 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="col-lg-3 control-label">Company Address:</label>
-                            <div class="col-lg-7">
-                              <input class="form-control" type="text" name="txtParentCompanyAdd" id="txtParentCompanyAdd" value = "<?php echo $pcompanyadd ?>">
+                            <label class="col-lg-3 control-label left">Company Address:</label>
+                            <div class="col-lg-4">
+                              <input class="form-control" type="text" placeholder="Street Name/No." name="txtParentCompanyAddSt" id="txtParentCompanyAddSt" value = "<?php echo $pcaddst ?>">
+                            </div>
+                            <div class="col-lg-3">
+                              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtParentCompanyAddBrgy" id="txtParentCompanyAddBrgy" value = "<?php echo $pcaddbrgy ?>">
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label left"></label>
+                            <div class="col-lg-5">
+                              <input class="form-control" type="text" placeholder="City/Municipality" name="txtParentCompanyAddCity" id="txtParentCompanyAddCity" value = "<?php echo $pcaddcity ?>">
+                            </div>
+                            <div class="col-lg-2">
+                              <input class="form-control" type="text" value="Philippines" name="txtParentCompanyAddCountry" id="txtParentCompanyAddCountry" value = "<?php echo $pcaddcountry ?>">
                             </div>
                           </div>
                           <div class="form-group">
@@ -564,28 +596,34 @@
                       if(isset($_POST['btnStud']))
                       {
                         $id = $_POST['txtStudId'];
-                        $query = "select tblParentLname, tblParentFname, tblParentMname, tblParentAdd, tblParentTelNo, tblParentCpNo, tblParentOccupation, tblParentCompany, tblParentCompanyAdd, tblParentWorkNo, tblParentEmail from tblparent where tblParent_tblStudentId = '$id' and tblParentFlag = 1 and tblParentRelation = 'Mother'";
+                        $query = "select p.tblParentId, p.tblParentLname, p.tblParentFname, p.tblParentMname, p.tblParentAddSt, p.tblParentAddBrgy, p.tblParentAddCity, p.tblParentAddCountry, p.tblParentTelNo, p.tblParentCpNo, p.tblParentOccupation, p.tblParentCompany, p.tblParentComAddSt, p.tblParentComAddBrgy, p.tblParentComAddCity, p.tblParentComAddCountry, p.tblParentWorkNo, p.tblParentEmail from tblparent p, tblparentstudent ps where ps.tblParStud_tblStudentId = '17004' and p.tblParentId=ps.tblParStud_tblParentId and p.tblParentFlag = 1 and p.tblParentRelation = 'Mother'";
                         $result = mysqli_query($con, $query);
                         $row = mysqli_fetch_array($result);
                         $pmfname = $row['tblParentFname'];
                         $pmlname = $row['tblParentLname'];
                         $pmmname = $row['tblParentMname'];
-                        $pmadd = $row['tblParentAdd'];
+                        $pmaddst = $row['tblParentAddSt'];
+                        $pmaddbrgy = $row['tblParentAddBrgy'];
+                        $pmaddcity = $row['tblParentAddCity'];
+                        $pmaddcountry = $row['tblParentAddCountry'];                        
                         $pmtelno = $row['tblParentTelNo'];
                         $pmcpno = $row['tblParentCpNo'];
                         $pmjob = $row['tblParentOccupation'];
                         $pmcompany = $row['tblParentCompany'];
-                        $pmcompanyadd = $row['tblParentCompanyAdd'];
+                        $pmcaddst = $row['tblParentComAddSt'];
+                        $pmcaddbrgy = $row['tblParentComAddBrgy'];
+                        $pmcaddcity = $row['tblParentComAddCity'];
+                        $pmcaddcountry = $row['tblParentComAddCountry']; 
                         $pmcompanyno = $row['tblParentWorkNo'];
                         $pmemail = $row['tblParentEmail'];
-                        $arrMother = array($pmfname, $pmlname, $pmmname, $pmadd, $pmtelno, $pmcpno, $pmjob, $pmcompany, $pmcompanyadd, $pmcompanyno, $pmemail);
+                        $arrMother = array($pmfname, $pmlname, $pmmname, $pmtelno, $pmcpno, $pmjob, $pmcompany, $pmcompanyno, $pmemail);
 
                    ?>
-
+                        <input type="hidden" name="txtPmId" id="txtPmId" value="<?php echo $row['tblParentId'] ?>"
                         <div class="form-group">
                             <label class="col-lg-3 control-label">First name:</label>
                             <div class="col-lg-7">
-                              <input class="form-control" type="text" name="txtParentMFname" id="txtParentMFname" value = "<?php echo $pmfname = $row['tblParentFname']; ?>">
+                              <input class="form-control" type="text" name="txtParentMFname" id="txtParentMFname" value = "<?php echo $pmfname ?>">
                             </div>
                           </div>
                         <div class="form-group">
@@ -601,9 +639,21 @@
                             </div>
                           </div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Home Address:</label>
-                            <div class="col-lg-7">
-                              <input class="form-control" type="text" name="txtParentMAdd" id="txtParentMAdd" value = "<?php echo $pmadd ?>">
+                            <label class="col-lg-3 control-label left">Home Address:</label>
+                            <div class="col-lg-4">
+                              <input class="form-control" type="text" placeholder="Street Name/No." name="txtParentMAddSt" id="txtParentMAddSt" value = "<?php echo $pmaddst ?>">
+                            </div>
+                            <div class="col-lg-3">
+                              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtParentMAddBrgy" id="txtParentMAddBrgy" value = "<?php echo $pmaddbrgy ?>">
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label left"></label>
+                            <div class="col-lg-5">
+                              <input class="form-control" type="text" placeholder="City/Municipality" name="txtParentMAddCity" id="txtParentMAddCity" value = "<?php echo $pmaddcity ?>">
+                            </div>
+                            <div class="col-lg-2">
+                              <input class="form-control" type="text" value="Philippines" name="txtParentMAddCountry" id="txtParentMAddCountry" value = "<?php echo $pmaddcountry ?>">
                             </div>
                           </div>
                           <div class="form-group">
@@ -631,9 +681,21 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="col-lg-3 control-label">Company Address:</label>
-                            <div class="col-lg-7">
-                              <input class="form-control" type="text" name="txtParentMCompanyAdd" id="txtParentMCompanyAdd" value = "<?php echo $pmcompanyadd ?>">
+                            <label class="col-lg-3 control-label left">Company Address:</label>
+                            <div class="col-lg-4">
+                              <input class="form-control" type="text" placeholder="Street Name/No." name="txtParentMComAddSt" id="txtParentMComAddSt" value = "<?php echo $pmcaddst ?>">
+                            </div>
+                            <div class="col-lg-3">
+                              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtParentMComAddBrgy" id="txtParentMComAddBrgy" value = "<?php echo $pmcaddbrgy ?>">
+                            </div>
+                        </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label left"></label>
+                            <div class="col-lg-5">
+                              <input class="form-control" type="text" placeholder="City/Municipality" name="txtParentMComAddCity" id="txtParentMComAddCity" value = "<?php echo $pmcaddcity ?>">
+                            </div>
+                            <div class="col-lg-2">
+                              <input class="form-control" type="text" value="Philippines" name="txtParentMComAddCountry" id="txtParentMComAddCountry" value = "<?php echo $pmcaddcountry ?>">
                             </div>
                           </div>
                           <div class="form-group">
@@ -656,19 +718,12 @@
                             <li><button type="button" class="btn btn-primary next-step">Next</button></li>
                         </ul>
                         </div>
-                    </div>
+                    
                     <div class="tab-pane" role="tabpanel" id="step3">
                         <h3>Siblings</h3>
                         <div class="col-md-8 col-sm-6 col-xs-12">                        
                         <div>
                         <?php
-                        /*$id = $_POST['txtStudId'];
-                        $query = "select * from tblstudentinfo where tblStudInfo_tblStudentId = '$id' and tblStudInfoFlag = 1";
-                        $result = mysqli_query($con, $query);
-                        $row = mysqli_fetch_array($result);
-                        $siblingNo = $row['tblStudInfoSiblingNo'];
-                        while($siblingNo > 0)
-                        {*/
                         $query = "select * from tblstudsiblings where tblStudSib_tblStudId='$id'";
                         $result = mysqli_query($con, $query);
                         while($row=mysqli_fetch_array($result))
@@ -679,19 +734,7 @@
                         <input type="hidden" value="<?php echo $row['tblStudSibId'] ?>">
                             <label class="col-lg-3 control-label">First name:</label>
                             <div class="col-lg-7">
-                              <input class="form-control" type="text" value="<?php echo $row['tblStudSibFname'] ?>">
-                            </div>
-                          </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Last name:</label>
-                            <div class="col-lg-7">
-                              <input class="form-control" type="text" value="<?php echo $row['tblStudSibLname'] ?>">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-lg-3 control-label">Middle name:</label>
-                            <div class="col-lg-7">
-                              <input class="form-control" type="text" value="<?php echo $row['tblStudSibMname'] ?>">
+                              <input class="form-control" type="text" value="<?php echo $row['tblStudSibName'] ?>">
                             </div>
                           </div>
                         <div class="form-group">
@@ -700,7 +743,19 @@
                               <input class="form-control" type="text" value="<?php echo $row['tblStudSibAge'] ?>">
                             </div>
                           </div>
-                        <div class="connecting-line" style="margin-bottom: 10%"></div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Grade/Level:</label>
+                            <div class="col-lg-7">
+                              <input class="form-control" type="text" value="<?php echo $row['tblStudSibGrade'] ?>">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">School:</label>
+                            <div class="col-lg-7">
+                              <input class="form-control" type="text" value="<?php echo $row['tblStudSibSchool'] ?>">
+                            </div>
+                          </div>
+                        <div><p></p></div>
                         <?php } ?>
                         </div>
                         <ul class="list-inline pull-right">
@@ -750,7 +805,10 @@
       $doctor = $row['tblStudHealthDoctor'];
       $hospital = $row['tblStudHealthHospital'];
       $hospitalno = $row['tblStudHealthHospitalNo'];
-      $hospitaladd = $row['tblStudHealthHospitalAdd'];
+      $hospaddst = $row['tblStudHealthHospAddSt'];
+      $hospaddbrgy = $row['tblStudHealthHospAddBrgy'];
+      $hospaddcity = $row['tblStudHealthHospAddCity'];
+      $hospaddcountry = $row['tblStudHealthHospAddCountry'];
       $emergency = $row['tblStudHealthEmergency'];
       ?>
       <input type="hidden" name="txtHStudId" id="txtHStudId" value="<?php echo $id ?>"/>
@@ -827,11 +885,23 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-2 control-label">Address:</label>
-          <div class="col-lg-7">
-            <input class="form-control" type="text" name="txtHealthAdd" id="txtHealthAdd" value = "<?php echo $hospitaladd ?>">
-          </div>
+        <label class="col-lg-3 control-label">Hospital Address:</label>
+        <div class="col-lg-4">
+          <input class="form-control" type="text" placeholder="Street Name/No." name="txtHealthAddSt" id="txtHealthAddSt" value = "<?php echo $hospaddst ?>">
         </div>
+        <div class="col-lg-3">
+          <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtHealthAddBrgy" id="txtHealthAddBrgy" value = "<?php echo $hospaddbrgy ?>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label left"></label>
+        <div class="col-lg-5">
+          <input class="form-control" type="text" placeholder="City/Municipality" name="txtHealthAddCity" id="txtHealthAddCity" value = "<?php echo $hospaddcity ?>">
+        </div>
+        <div class="col-lg-2">
+          <input class="form-control" type="text" value="Philippines" name="txtHealthAddCountry" id="txtHealthAddCountry" value = "<?php echo $hospaddcountry ?>">
+        </div>
+      </div>
       
       <div class="btn-group" style="margin-top: 5%; float: right">
                       <button type="submit" class="btn btn-info" name="btnHealth" id="btnHealth">Save</button>
