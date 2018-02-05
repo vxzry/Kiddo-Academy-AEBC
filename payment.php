@@ -985,7 +985,8 @@ $(document).ready(function(){
         <div class="tab-pane" id="tab_3" style="padding: 3%">
           <div class="form-inline">
             <div class="container" style="margin-bottom: 15px">
-                  <label class="col-sm-1">Fee Type: </label>   
+                  <label class="col-sm-1">Fee Type: </label>  
+                      
                         <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="GENERAL FEE" onchange="changeTblMass()">  GENERAL FEE
                         <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="SPECIFIC FEE" onchange="enable()" style="margin-left: 10px;">  SPECIFIC FEE
               </div>    

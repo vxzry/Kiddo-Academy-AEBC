@@ -1,6 +1,6 @@
 <?php
-   include('session.php');
-   include('db_connect.php');
+   include('session.php'); 
+   include('db_connect.php'); 
    $x=substr($login_session,0,1);
    if($x=="P")
    {
@@ -114,7 +114,7 @@
     function changeRequirement()
     {
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","changeRequirement.php?r3="+document.getElementById("r3").value,false);
+      xmlhttp.open("GET","changeRequirement.php?r3="+document.querySelector('input[name="r3"]:checked').value,false);
       xmlhttp.send(null);
       document.getElementById("requirementfield").innerHTML=xmlhttp.responseText;
     }
@@ -327,14 +327,12 @@
                                       <div class="form-group" style="margin-top: 3%">
                                         <div class="radio">
                                           <label>
-                                            <input type="radio" name="r3" id="r3" value="NEW STUDENT" onchange="changeRequirement()" checked>
-                                            New Student
+                                            <input type="radio" name="r3" id="r3" value="NEW STUDENT" onchange="changeRequirement()">New Student
                                           </label>
                                         </div>
                                         <div class="radio">
                                           <label>
-                                            <input type="radio" name="r3" id="r3" value="TRANSFEREE" onchange="changeRequirement()">
-                                            Transferee
+                                            <input type="radio" name="r3" id="r3" value="TRANSFEREE" onchange="changeRequirement()">Transferee
                                           </label>
                                         </div>
                                         </div>
@@ -357,23 +355,7 @@
 
                                       <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
 
-                                          <fieldset style="margin-top: 3%; padding: 3%">
-                                            <h3>REQUIREMENTS</h3>
-                                            <hr>
-                                              <?php
-                                            $query="select * from tblrequirement where tblRequirementFlag=1 and tblReqType='ADMISSION'";
-                                            $result=mysqli_query($con, $query);
-                                            while($row=mysqli_fetch_array($result))
-                                            {
-                                            ?>
-                                              <div class="form-group">
-                                                <label>
-                                                  <input type="checkbox" class="flat-red" name="chkReq[]" id="chkReq" value="<?php echo $row['tblReqId']; ?>">
-                                                  <?php echo $row['tblReqName']; ?>
-                                                </label>
-                                              </div>
-                                              <?php } ?>
-                                          </fieldset>
+                                         
 
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
