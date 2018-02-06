@@ -1,6 +1,6 @@
 <?php
-   include('session.php'); 
-   include('db_connect.php'); 
+   include('session.php');
+   include('db_connect.php');
    $x=substr($login_session,0,1);
    if($x=="P")
    {
@@ -355,7 +355,7 @@
 
                                       <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
 
-                                         
+
 
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
