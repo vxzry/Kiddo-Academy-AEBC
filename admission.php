@@ -64,10 +64,10 @@
       }
     </style>
     <script>
-    function disabledReason() {
-    var txtHealthReason = document.getElementById('txtHealthReason');
-    txtHealthReason.readOnly = true;
-    }
+    // function disabledReason() {
+    // var txtHealthReason = document.getElementById('txtHealthReason');
+    // txtHealthReason.readOnly = true;
+    // }
     function disabledEmergency() {
     var txtHealthDoctor = document.getElementById('txtHealthDoctor');
     var txtHealthHospital = document.getElementById('txtHealthHospital');
@@ -422,8 +422,16 @@
           </div>
           <div class="form-group" style="margin-bottom:37%;">
             <label class="col-lg-2 control-label left">Nationality:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-4">
               <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
+            </div>
+            <label class="col-lg-1 control-label left">Gender:</label>
+            <div class="col-lg-3">
+              <select class="form-control" type="text" name="txtStudGender" id="txtStudGender">
+                <option selected disabled>--Select Gender--</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:43%;">
@@ -1115,11 +1123,18 @@
 	    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 	  });
 
-  window.onload = function() {
-        document.getElementById("txtStudBday").onblur = function() {
-            ageCount(this.value);
+    window.onload = function() {
+          document.getElementById("txtStudBday").onblur = function() {
+              ageCount(this.value);
+          }
+  	}
+
+    $(".minimal").click(function() {
+        $("#txtHealthReason").attr("disabled", true);
+        if ($("input[name=h2]:checked").val() == "Y") {
+            $("#txtHealthReason").attr("disabled", false);
         }
-	}
+    });
 
     function ageCount(dob) {
 		var date1 = new Date();
