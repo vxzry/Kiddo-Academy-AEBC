@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <link href="css/multiple-select.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="css/Addmdesign.css">
 
     <script>
@@ -248,24 +249,24 @@
 
                     <div class="box-body">
                       <div style="margin-left:3%; margin-bottom:2%;">
-                      <label style="text-align: right:">Parent: </label>
-                      <select class="form-control choose" name="parentChoose" id="parentChoose" style="text-align: right; width: 30%;">
-                        <option selected="selected" value="">--Select Parent--</option>
-                            <?php
-                            $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
-                            $result = mysqli_query($con, $query);
-                            while($row = mysqli_fetch_array($result))
-                            {
-                            ?>
-                              <option value="<?php echo $row['tblDivisionId'] ?>"><?php echo $row['tblDivisionName'] ?></option>
-                            <?php } ?>
-                      </select>
+                        <label style="padding: 3%">Parent: </label>
+                        <select class="form-control choose" name="parentChoose" id="parentChoose" style="width: 40%">
+                          <option selected="selected" disabled>--Select Parent--</option>
+                              <?php
+                              $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParentFlag=1";
+                              $result = mysqli_query($con, $query);
+                              while($row = mysqli_fetch_array($result))
+                              {
+                              ?>
+                                <option value="<?php echo $row['tblParentId'] ?>"><?php echo $row['names'] ?></option>
+                              <?php } ?>
+                        </select>
                     </div>
                       <section>
                         <!--<center><b><h2>ADMISSION</h2></b></center>-->
                         <div class="container">
-<div class="stepwizard">
-  <div class="stepwizard-row setup-panel">
+<div class="wizard stepwizard">
+  <div class="wizard-inner stepwizard-row setup-panel">
       <div class="stepwizard-step">
           <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
           <p>Step 1</p>
@@ -340,7 +341,7 @@
                   </fieldset>
 
               </div> <!-- fieldser -->
-              <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;" >Next</button>
+              <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;"  onclick="scrollWin()" >Next</button>
           </div>
       </div>
   </div>
@@ -489,7 +490,7 @@
                   </div>
               </div>
           </div>
-          <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;">Next</button>
+          <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;" onclick="scrollWin()">Next</button>
       </div>
     </div>
   </div>
@@ -771,13 +772,13 @@
                  </div>
 
                  <div class="form-group" style="margin-bottom:51%;">
-                   <label class="col-lg-2 control-label left">Home Tel. Number:</label>
+                   <label class="col-lg-2 control-label left">Home Tel. Number: <span style="color:red; padding:5%;">*</span></label>
                    <div class="col-lg-7">
                      <div class="input-group" style="width:60%;">
                        <div class="input-group-addon">
                          <i class="fa fa-phone" aria-hidden="true"></i>
                        </div>
-                       <input class="form-control" type="text" name="txtMotherTelnum" id="txtMotherTelnum">
+                       <input class="form-control" type="text" name="txtMotherTelnum" id="txtMotherTelnum" required>
                      </div>
                    </div>
                  </div>
@@ -854,34 +855,34 @@
              <!-- edit form column -->
              <div class="col-md-9 personal-info">
 
-        <div class="form-group" style="margin-bottom:7%;">
-                   <label class="col-lg-2 control-label left">Parent Status:</label>
-                   <div class="col-lg-8">
-                   <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkParentStat" id="chkParentStat">
-                           <option value="Parents Married">Parents Married</option>
-                           <option value="Father Deceased">Father Deceased</option>
-                           <option value="Father Remarried">Father Remarried</option>
-                           <option value="Mother Deceased">Mother Deceased</option>
-                           <option value="Mother Remarried">Mother Remarried</option>
-                           <option value="Applicant Adopted">Applicant Adopted</option>
-                           <option value="Single Parent">Single Parent</option>
-                           <option value="Parents Separated/Divorced">Parents Separated/Divorced</option>
-                     </select>
-                   </div>
-                 </div>
-         <div class="form-group" style="margin-bottom:13%;">
-                   <label class="col-lg-2 control-label left">Applicant Lives With:</label>
-                   <div class="col-lg-8">
-                     <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
-                       <option value="Father and Mother">Father and Mother</option>
-                       <option value="Stepfather and Mother">Stepfather and Mother</option>
-                       <option value="Father">Father</option>
-                       <option value="Stepmother and Father">Stepmother and Father</option>
-                       <option value="Mother">Mother</option>
-                       <option value="Relative/s">Relative/s</option>
-                     </select>
-                   </div>
-                 </div>
+               <div class="form-group" style="margin-bottom:7%;">
+                          <label class="col-lg-2 control-label left">Parent Status: <span style="color:red; padding:5%;">*</span></label>
+                          <div class="col-lg-7">
+                          <select required="required" multiple="multiple" class="select2" placeholder="Select" style="width: 50%" name="chkParentStat" id="chkParentStat">
+                                  <option value="Parents Married">Parents Married</option>
+                                  <option value="Father Deceased">Father Deceased</option>
+                                  <option value="Father Remarried">Father Remarried</option>
+                                  <option value="Mother Deceased">Mother Deceased</option>
+                                  <option value="Mother Remarried">Mother Remarried</option>
+                                  <option value="Applicant Adopted">Applicant Adopted</option>
+                                  <option value="Single Parent">Single Parent</option>
+                                  <option value="Parents Separated/Divorced">Parents Separated/Divorced</option>
+                            </select>
+                          </div>
+                        </div>
+                <div class="form-group" style="margin-bottom:13%;">
+                          <label class="col-lg-2 control-label left">Applicant Lives With: <span style="color:red; padding:5%;">*</span></label>
+                          <div class="col-lg-7">
+                            <select required="required" multiple="multiple" class="select2 validate[required]" placeholder="Select" style="width: 50%" name="chkLivesWith" id="chkLivesWith">
+                              <option value="Father and Mother">Father and Mother</option>
+                              <option value="Stepfather and Mother">Stepfather and Mother</option>
+                              <option value="Father">Father</option>
+                              <option value="Stepmother and Father">Stepmother and Father</option>
+                              <option value="Mother">Mother</option>
+                              <option value="Relative/s">Relative/s</option>
+                            </select>
+                          </div>
+                        </div>
 
                  </div>
                  </div>
@@ -925,7 +926,7 @@
                        <!-- edit form column -->
                        <div class="col-md-9 personal-info">
                          <h3>Other members of the Household</h3>
-                         <div class= "right" style="margin-bottom: 5%">
+                         <div class= "right" style="margin-bottom: 7%">
                                 <a href="#"><span class="btn btn-info" id="relativebutton" style="float: right" onclick="addRelative();" >ADD</span></a>
                          </div>
 
@@ -950,7 +951,7 @@
                    </div>
                  </div>
 
-               <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;">Next</button>
+               <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;"  onclick="scrollWin()">Next</button>
     </div>
     </div>
   </div>
@@ -1256,7 +1257,7 @@
 
   <script>
   function scrollWin() {
-      window.scrollTo(300, 500);
+      window.scrollTo(0, -5000);
   }
   </script>
 

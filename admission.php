@@ -1,6 +1,6 @@
 <?php
-   include('session.php'); 
-   include('db_connect.php'); 
+   include('session.php');
+   include('db_connect.php');
    $x=substr($login_session,0,1);
    if($x=="P")
    {
@@ -54,8 +54,8 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="formwizard2.css">
-    <link href="css/multiple-select.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="formwizard2.css"><!-- 
+    <link href="css/multiple-select.css" rel="stylesheet"/> -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <style>
       body {
@@ -64,10 +64,10 @@
       }
     </style>
     <script>
-    function disabledReason() {
-    var txtHealthReason = document.getElementById('txtHealthReason');
-    txtHealthReason.readOnly = true;
-    }
+    // function disabledReason() {
+    // var txtHealthReason = document.getElementById('txtHealthReason');
+    // txtHealthReason.readOnly = true;
+    // }
     function disabledEmergency() {
     var txtHealthDoctor = document.getElementById('txtHealthDoctor');
     var txtHealthHospital = document.getElementById('txtHealthHospital');
@@ -355,7 +355,7 @@
 
                                       <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
 
-                                         
+
 
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
@@ -422,8 +422,16 @@
           </div>
           <div class="form-group" style="margin-bottom:37%;">
             <label class="col-lg-2 control-label left">Nationality:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-4">
               <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
+            </div>
+            <label class="col-lg-1 control-label left">Gender:</label>
+            <div class="col-lg-3">
+              <select class="form-control" type="text" name="txtStudGender" id="txtStudGender">
+                <option selected disabled>--Select Gender--</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:43%;">
@@ -732,7 +740,7 @@
  <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">Parent Status:</label>
             <div class="col-lg-8">
-            <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkParentStat" id="chkParentStat">
+              <select class="form-control choose" multiple="multiple" data-placeholder="Select a status" name="chkParentStat" id="chkParentStat" style="width: 100%">
                     <option value="Parents Married">Parents Married</option>
                     <option value="Father Deceased">Father Deceased</option>
                     <option value="Father Remarried">Father Remarried</option>
@@ -747,7 +755,7 @@
   <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Applicant Lives With:</label>
             <div class="col-lg-8">
-              <select multiple="multiple" class="select2" placeholder="Select" style="width: 100%" name="chkLivesWith" id="chkLivesWith">
+              <select class="form-control choose" multiple="multiple" data-placeholder="Select a status" name="chkLivesWith" id="chkLivesWith" style="width: 100%">
                 <option value="Father and Mother">Father and Mother</option>
                 <option value="Stepfather and Mother">Stepfather and Mother</option>
                 <option value="Father">Father</option>
@@ -1095,8 +1103,8 @@
   <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
   <script src="js/select2.full.min.js"></script>
   <script type="text/javascript" src="formwizard.js"></script>
-  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-  <script src="js/multiple-select.js"></script>
+  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script><!-- 
+  <script src="js/multiple-select.js"></script> -->
   <script>
     $(function () {
       $("#datatable").DataTable();
@@ -1115,11 +1123,18 @@
 	    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 	  });
 
-  window.onload = function() {
-        document.getElementById("txtStudBday").onblur = function() {
-            ageCount(this.value);
+    window.onload = function() {
+          document.getElementById("txtStudBday").onblur = function() {
+              ageCount(this.value);
+          }
+  	}
+
+    $(".minimal").click(function() {
+        $("#txtHealthReason").attr("disabled", true);
+        if ($("input[name=h2]:checked").val() == "Y") {
+            $("#txtHealthReason").attr("disabled", false);
         }
-	}
+    });
 
     function ageCount(dob) {
 		var date1 = new Date();
