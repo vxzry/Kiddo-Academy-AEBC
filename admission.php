@@ -64,6 +64,12 @@
       }
     </style>
     <script>
+    //   $(".minimal").click(function() {
+    //     $("#txtHealthReason").attr("disabled", true);
+    //     if ($("input[name=h2]:checked").val() == "Y") {
+    //         $("#txtHealthReason").attr("disabled", false);
+    //     }
+    // });
     // function disabledReason() {
     // var txtHealthReason = document.getElementById('txtHealthReason');
     // txtHealthReason.readOnly = true;
@@ -1113,46 +1119,40 @@
       $("#datatable3").DataTable();
       $("#datatable4").DataTable();
     });
+
     $(document).ready(function() {
       $(".choose").select2();
     });
-    $('.select2').multipleSelect();
-   	//Datemask dd/mm/yyyy
+
+   //Datemask dd/mm/yyyy
     $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
     $(window).load(function(){
-	    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-	  });
+    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+  });
 
-    window.onload = function() {
-          document.getElementById("txtStudBday").onblur = function() {
-              ageCount(this.value);
-          }
-  	}
-
-    $(".minimal").click(function() {
-        $("#txtHealthReason").attr("disabled", true);
-        if ($("input[name=h2]:checked").val() == "Y") {
-            $("#txtHealthReason").attr("disabled", false);
+  window.onload = function() {
+        document.getElementById("txtStudBday").onblur = function() {
+            ageCount(this.value);
         }
-    });
+  }
 
     function ageCount(dob) {
-		var date1 = new Date();
-		var date2 = new Date(dob);
-		var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/; //Regex to validate date format (dd/mm/yyyy)
-		if(pattern.test(dob)) {
-			var y1 = date1.getFullYear(); //getting current year
-			var y2 = date2.getFullYear(); //getting dob year
-			var age = y1 - y2;           //calculating age
-			document.getElementById("agecalc").innerHTML = "Age: " + age;
-			return true;
-		}
-		else {
-			alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
-			return false;
-		}
+    var date1 = new Date();
+    var date2 = new Date(dob);
+    var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/; //Regex to validate date format (dd/mm/yyyy)
+    if(pattern.test(dob)) {
+      var y1 = date1.getFullYear(); //getting current year
+      var y2 = date2.getFullYear(); //getting dob year
+      var age = y1 - y2;           //calculating age
+      document.getElementById("agecalc").innerHTML = "Age: " + age;
+      return true;
+    }
+    else {
+      alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
+      return false;
+    }
 
-	}
+  }
   </script>
 
   </body>
