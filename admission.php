@@ -1125,36 +1125,6 @@
       $(".choose").select2();
     });
 
-  //  //Datemask dd/mm/yyyy
-  //   $("#datemask").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-  //   $(window).load(function(){
-  //   $("#txtStudBday").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-  // });
-
-  // window.onload = function() {
-  //       document.getElementById("txtStudBday").onblur = function() {
-  //           ageCount(this.value);
-  //       }
-  // }
-
-  //   function ageCount(dob) {
-  //   var date1 = new Date();
-  //   var date2 = new Date(dob);
-  //   var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/;
-  //   if(pattern.test(dob)) {
-  //     var y1 = date1.getFullYear(); //getting current year
-  //     var y2 = date2.getFullYear(); //getting dob year
-  //     var age = y1 - y2;           //calculating age
-  //     document.getElementById("agecalc").innerHTML = "Age: " + age;
-  //     return true;
-  //   }
-  //   else {
-  //     alert("Invalid date format. Please Input in (mm/dd/yyyy) format!");
-  //     return false;
-  //   }
-
-  // }
-
   function getAge(){
     var dob = document.getElementById('date').value;
     dob = new Date(dob);
@@ -1163,7 +1133,6 @@
     document.getElementById('age').value=age;
 }
   </script>
-
   </body>
 
 </html>

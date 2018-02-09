@@ -61,6 +61,13 @@ $x=substr($login_session,0,1);
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        padding-right: 0 !important }
+    </style>
   <script>
   function changetblSOA()
   {
@@ -77,144 +84,126 @@ $x=substr($login_session,0,1);
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="home.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><image src="logo.ico" style="width: 50px; padding: 3px"></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><image src="logo.png" style="width: 200px; padding: 3px;"></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+        <!-- Logo -->
+        <a href="dashboard.php" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><image src="images/School Logo/logo.ico" style="width: 50px; padding: 3px"></span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><image src="images/School Logo/logo.png" style="width: 200px; padding: 3px;"></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="admin.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Kim Shook Jin</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="admin.jpg" class="img-circle" alt="User Image">
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $namess ?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
-                <p>
-                  Kim Shook Jin
-                  <small>Head Teacher</small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Logout</a>
-                </div>
+                    <p>
+                      <?php echo $namess ?>
+                      <small><?php echo $rolename ?></small>
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                    </div>
+                  </li>
+                </ul>
               </li>
             </ul>
-          </li>
-           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="admin.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info" style="margin-top: 3%">
-          <p>Kim Shook Jin<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header" style="color: white">Welcome!</li>
-        <li class="treeview active">
-              <a href="ParentMessage.html">
-                <i class="fa fa-envelope-o"></i> <span>Message <?php echo $namess ?></span>
-              </a>
-            </li>
-         <?php 
-        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
-        $result=mysqli_query($con, $query);
-        $row=mysqli_fetch_array($result);
-          $rolename=$row['tblRoleName'];
-          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
-          {
-            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
-            $result1=mysqli_query($con, $query1);
-            while($row1=mysqli_fetch_array($result1))
-            {
-              $modulename=$row1['tblModuleType'];
+          </div>
+        </nav>
+      </header>
 
-        ?>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+            </div>
 
-        <li class="treeview"> 
-          <a href="#">
-            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
+            <div class="pull-left info" style="margin-top: 3%">
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+            </div>
+          </div>
+
+          <ul class="sidebar-menu" style="font-size:15px;">
+            <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
            <?php
-              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
-              $result2=mysqli_query($con, $query2);
-              while($row2=mysqli_fetch_array($result2)):
+            $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+            $result=mysqli_query($con, $query);
+            $row=mysqli_fetch_array($result);
+              $rolename=$row['tblRoleName'];
+              if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+              {
+                $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+                $result1=mysqli_query($con, $query1);
+                while($row1=mysqli_fetch_array($result1))
+                {
+                  $modulename=$row1['tblModuleType'];
+
             ?>
-            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
-            <?php endwhile; ?>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+             <?php
+                $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+                $result2=mysqli_query($con, $query2);
+                while($row2=mysqli_fetch_array($result2)):
+              ?>
+              <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+              <?php endwhile; ?>
+            </ul>
+          </li>
+            <?php
+            }//while
+            }else
+            {
+                    $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
+                    $result=mysqli_query($con, $query);
+                    while($row=mysqli_fetch_array($result)):
+            ?>
+                 <li class="treeview">
+                    <a href="<?php echo $row['tblModuleLinks'] ?>">
+                      <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
+                    </a>
+                  </li>
+            <?php
+             endwhile; }
+            ?>
           </ul>
-        </li>
-      <?php 
-      }//while
-      }else
-      {
-              $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
-              $result=mysqli_query($con, $query);
-              while($row=mysqli_fetch_array($result)):
-      ?>
-           <li class="treeview">
-              <a href="<?php echo $row['tblModuleLinks'] ?>">
-                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
-              </a>
-            </li>
-      <?php
-       endwhile; } 
-      ?>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

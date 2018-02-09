@@ -207,7 +207,11 @@ include('session.php');
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-    <h3>View Faculty</h3>
+    <h3>View Daily Collection</h3>
+
+    <small>
+      Date: <?php $date = new DateTime();
+        echo $date->format('Y-m-d'); ?></small>
     </section>
 
     <!-- Main content -->
@@ -232,19 +236,26 @@ include('session.php');
               <table id="datatable1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Faculty ID</th>
-                  <th>Faculty Name</th>
+                  <th>Recieved from</th>
+                  <th>Payment for</th> 
+                  <th>Official Receipt #</th>
+                  <th>Provisional Reciept #</th>
+                  <th>Amount</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyFlag=1";
+                $tDate=date('Y-m-d');             
+                $query ="Select a.tblStudentId, concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname, fe.tblFeeName, ac.tblAccOR, ac.tblAccPR, ac.tblAccCredit FROM tblstudent a, tblstudentinfo ti, tblfee fe, tblscheme sc, tblaccount ac, tblstudscheme ssc WHERE a.tblStudentId = ti.tblStudInfo_tblStudentId AND a.tblStudentId=ssc.tblStudScheme_tblStudentId AND fe.tblFeeId=ssc.tblStudScheme_tblFeeId AND ssc.tblStudScheme_tblSchemeId=sc.tblSchemeId AND ac.tblAcc_tblStudSchemeId=ssc.tblStudScheme_tblFeeId and ac.tblAccPaymentDate='".$tDate."'";
                 $result=mysqli_query($con, $query);
                 while($row=mysqli_fetch_array($result)):
                 ?>
                 <tr>
-                  <td><?php echo $row['tblFacultyId'] ?></td>
-                  <td><?php echo $row['facultyname'] ?></td>
+                 <td><?php echo $row['studentname'] ?></td>
+                  <td><?php echo $row['tblFeeName'] ?></td>
+                  <td><?php echo $row['tblAccOR'] ?></td>
+                  <td><?php echo $row['tblAccPR'] ?></td>
+                  <td><?php echo $row['tblAccCredit'] ?></td>
                   </tr>
                 <?php endwhile; ?>
                   </tbody>

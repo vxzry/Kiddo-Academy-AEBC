@@ -92,7 +92,7 @@
       body {
         font-family: 'Noto Sans', sans-serif;
         font-weight: bold;
-      }
+        padding-right: 0 !important }
     </style>
 
     </head>
@@ -268,7 +268,7 @@ function run(){
                             <div class="box-body" style="margin-top: 3%">
                          
                             
-                             <table id="datatable" class="table table-bordered table-striped">
+                             <table id="datatable1" class="table table-bordered table-striped">
                              <thead>
                               <tr>
                                 <th>Student ID</th>

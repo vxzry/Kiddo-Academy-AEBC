@@ -59,7 +59,13 @@ $syid=$row['tblSchoolYrId'];
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="css/select2.min.css">
   <link rel="stylesheet" type="text/css" href="formwizard2.css">
-
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        padding-right: 0 !important }
+    </style>
   <script>
   function changetblApplicant()
   {
@@ -98,13 +104,13 @@ $syid=$row['tblSchoolYrId'];
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="images/Employees/admin.jpg" class="user-image" alt="User Image">
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
                   <span class="hidden-xs"><?php echo $namess ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="images/Employees/admin.jpg" class="img-circle" alt="User Image">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
                       <?php echo $namess ?>
@@ -126,6 +132,7 @@ $syid=$row['tblSchoolYrId'];
           </div>
         </nav>
       </header>
+
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -133,66 +140,64 @@ $syid=$row['tblSchoolYrId'];
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="images/Employees/admin.jpg" class="img-circle" alt="User Image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
 
             <div class="pull-left info" style="margin-top: 3%">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
             </div>
           </div>
-         
-          <!-- /.search form -->
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
+
+          <ul class="sidebar-menu" style="font-size:15px;">
             <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
-           <?php 
-        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
-        $result=mysqli_query($con, $query);
-        $row=mysqli_fetch_array($result);
-          $rolename=$row['tblRoleName'];
-          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
-          {
-            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
-            $result1=mysqli_query($con, $query1);
-            while($row1=mysqli_fetch_array($result1))
-            {
-              $modulename=$row1['tblModuleType'];
-
-        ?>
-
-        <li class="treeview"> 
-          <a href="#">
-            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
            <?php
-              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
-              $result2=mysqli_query($con, $query2);
-              while($row2=mysqli_fetch_array($result2)):
+            $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+            $result=mysqli_query($con, $query);
+            $row=mysqli_fetch_array($result);
+              $rolename=$row['tblRoleName'];
+              if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+              {
+                $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+                $result1=mysqli_query($con, $query1);
+                while($row1=mysqli_fetch_array($result1))
+                {
+                  $modulename=$row1['tblModuleType'];
+
             ?>
-            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
-            <?php endwhile; ?>
-          </ul>
-        </li>
-      <?php 
-      }//while
-      }else
-      {
-              $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
-              $result=mysqli_query($con, $query);
-              while($row=mysqli_fetch_array($result)):
-      ?>
-           <li class="treeview">
-              <a href="<?php echo $row['tblModuleLinks'] ?>">
-                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
-              </a>
-            </li>
-      <?php
-       endwhile; } 
-      ?>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+             <?php
+                $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+                $result2=mysqli_query($con, $query2);
+                while($row2=mysqli_fetch_array($result2)):
+              ?>
+              <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+              <?php endwhile; ?>
+            </ul>
+          </li>
+            <?php
+            }//while
+            }else
+            {
+                    $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
+                    $result=mysqli_query($con, $query);
+                    while($row=mysqli_fetch_array($result)):
+            ?>
+                 <li class="treeview">
+                    <a href="<?php echo $row['tblModuleLinks'] ?>">
+                      <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
+                    </a>
+                  </li>
+            <?php
+             endwhile; }
+            ?>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -248,10 +253,10 @@ $syid=$row['tblSchoolYrId'];
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <!-- <tr>
                   <td>1234-5678</td>
                   <td>Last, First</td>
-                  </tr>
+                  </tr> -->
                   </tbody>
               </table>
             </div>    
