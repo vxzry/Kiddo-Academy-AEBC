@@ -34,7 +34,7 @@ if(isset($_POST['btnUpd']))
 	if (!$query = mysqli_query($con, $query)) {
     	exit(mysqli_error($con));
 	}else{
-    	header('location:profilev2.php?message=4');
+    	header('location:profile.php?message=4');
 	}
 }
 ?>

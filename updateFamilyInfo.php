@@ -45,11 +45,28 @@ if(isset($_POST['btnSubmit']))
 	$result = mysqli_query($con, $query);
 	$query = "update tblparent set tblParentFname = '$motherfname', tblParentLname='$motherlname', tblParentMname = '$mothermname', tblParentAddSt = '$motheraddst', tblParentAddBrgy = '$motheraddbrgy', tblParentAddCity = '$motheraddcity', tblParentAddCountry = '$motheraddcountry', tblParentTelNo= '$mothertelno', tblParentCpNo= '$mothercpno', tblParentOccupation= '$motherjob', tblParentCompany= '$mothercompany', tblParentComAddSt= '$mothercompanyaddst', tblParentComAddBrgy= '$mothercompanyaddbrgy', tblParentComAddCity= '$mothercompanyaddcity', tblParentComAddCountry= '$mothercompanyaddcountry', tblParentWorkNo= '$motherworkno', tblParentEmail= '$motheremail' where tblParentId = '$mid' and tblParentRelation='Mother' and tblParentFlag=1";
 	$result = mysqli_query($con, $query);
-	if (!$query = mysqli_query($con, $query)) {
-	        exit(mysqli_error($con));
-	    }else{
-	        header('location:profile.php');
-	    }
-		
+
+  $name = $_FILES['fatherfile']['name'];
+ $target_dir = "upload/";
+ $target_file = $target_dir . basename($_FILES["fatherfile"]["name"]);
+
+ // Select file type
+ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+ // Valid file extensions
+ $extensions_arr = array("jpg","jpeg","png","gif");
+
+ // Check extension
+ if( in_array($imageFileType,$extensions_arr) ){
+ 
+  // Insert record
+  $query = "update tblparent set tblParentImage='".$name."' where tblParentId='$fatherid')";
+  mysqli_query($con,$query);
+  
+  // Upload file
+  move_uploaded_file($_FILES['fatherfile']['tmp_name'],$target_dir.$name);
+
+ }	
+
 }
 ?>

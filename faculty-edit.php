@@ -199,6 +199,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
+        <form class="form-horizontal" role="form" method="post" action="updateFacultyProfile.php">
         <div class="col-md-12">
           <!-- Custom Tabs -->
           <div class="box box-primary" style="margin-top: 3%">
@@ -207,13 +208,13 @@
     <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="text-center" style="margin-top: 7%;">
                             <img src="//placehold.it/200" id="profile-img-tag" class="avatar img-thumbnail" width="200px" />
-                            <input type="file" class="text-center center-block well well-sm" name="file" id="profile-img" accept="image/*" style="margin-top:3%;">
+                            <input type="file" class="text-center center-block well well-sm" name="file" id="file" accept="image/*" style="margin-top:3%;">
                             </div>
                           </div>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
      
-      <form class="form-horizontal" role="form" method="post" action="updateFacultyProfile.php">
+      
       <?php
       $id=$_POST['txtFacultyId'];
       $query="select * from tblfaculty where tblFacultyId='$id' and tblFacultyFlag=1";
@@ -305,12 +306,13 @@
        <div class="btn-group" style="margin-top: 5%; float: right">
         <button type="submit" class="btn btn-info" name="btnUpd" id="btnUpd">Save</button>
       </div>
-      </form>
+      
       </div>
   
           </div>
           </div>
           </div>
+          </form>
           </div>
       <!-- /.row -->
     </section>
