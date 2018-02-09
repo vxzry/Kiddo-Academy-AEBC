@@ -1,4 +1,4 @@
-<?php
+<?php 
    include('session.php');
    include('db_connect.php');
    $x=substr($login_session,0,1);
@@ -254,11 +254,22 @@
       <div class="box-body">  
   <!-- left column -->
   <form class="form-horizontal" role="form" method="post" action="updatePersonalInfo.php" enctype="multipart/form-data">
-         <?php
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+        <img src="admin.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+        <h6>Upload new photo</h6>
+        <input type="file" class="text-center center-block well well-sm" name="file" id="file">
+      </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
+     
+            <?php
       if(isset($_POST['btnStud']))
       {
         $id = $_POST['txtStudId'];
-        $query="select si.tblStudInfoImage, si.tblStudInfoFname, si.tblStudInfoLname, si.tblStudInfoMname, si.tblStudInfoBday, si.tblStudInfoBplace, si.tblStudInfoAddSt, si.tblStudInfoAddBrgy, si.tblStudInfoAddCity, si.tblStudInfoAddCountry, si.tblStudInfoGender, si.tblStudInfoReligion, si.tblStudInfoNationality, si.tblStudInfoLang1, si.tblStudInfoLang2 from tblstudent s, tblstudentinfo si where s.tblStudentId = '$id' and s.tblStudentId = si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
+        $query="select si.tblStudInfoFname, si.tblStudInfoLname, si.tblStudInfoMname, si.tblStudInfoBday, si.tblStudInfoBplace, si.tblStudInfoAddSt, si.tblStudInfoAddBrgy, si.tblStudInfoAddCity, si.tblStudInfoAddCountry, si.tblStudInfoGender, si.tblStudInfoReligion, si.tblStudInfoNationality, si.tblStudInfoLang1, si.tblStudInfoLang2 from tblstudent s, tblstudentinfo si where s.tblStudentId = '$id' and s.tblStudentId = si.tblStudInfo_tblStudentId and s.tblStudentFlag = 1";
         $result = mysqli_query($con, $query);
         $row = mysqli_fetch_array($result);
         $fname = $row['tblStudInfoFname'];
@@ -275,20 +286,8 @@
         $nationality = $row['tblStudInfoNationality'];
         $lang1 = $row['tblStudInfoLang1'];
         $lang2 = $row['tblStudInfoLang2'];
-        $image_src = $row['tblStudInfoImage'];
         $arrStud = array($fname, $lname, $mname, $bday, $bplace, $gender, $addst, $addbrgy, $addcity, $addcountry, $religion, $nationality, $lang1, $lang2);
         ?>
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="text-center">
-        <img src="<?php echo $image_src ?>" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>Upload new photo</h6>
-        <input type="file" class="text-center center-block well well-sm" name="file" id="file">
-      </div>
-    </div>
-    <!-- edit form column -->
-    <div class="col-md-8 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
-     
-       
         <input type="hidden" name="txtPerId" id="txtPerId" value="<?php echo $id ?>"/>
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>

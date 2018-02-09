@@ -178,7 +178,7 @@ $result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);
 $infoid = $row['tblStudInfoId'];
 $infoid ++;
-$query="insert into tblstudentinfo(tblStudInfoId, tblStudInfoFname, tblStudInfoLname, tblStudInfoMname, tblStudInfoBday, tblStudInfoBplace, tblStudInfoGender, tblStudInfoNationality, tblStudInfoReligion, tblStudInfoLang1, tblStudInfoLang2, tblStudInfo_tblStudentId, tblStudInfoAddBldg, tblStudInfoAddSt, tblStudInfoAddBrgy, tblStudInfoAddCity, tblStudInfoAddCountry) values ('$infoid', '$fname', '$lname', '$mname', '$bday', '$bplace', '$gender' '$nat', '$religion', '$lang1', '$lang2', '$studentid', '$addBldg', '$addSt', '$addBrgy', '$addCity', '$addCountry')";
+$query="insert into tblstudentinfo(tblStudInfoId, tblStudInfoFname, tblStudInfoLname, tblStudInfoMname, tblStudInfoBday, tblStudInfoBplace, tblStudInfoGender, tblStudInfoNationality, tblStudInfoReligion, tblStudInfoLang1, tblStudInfoLang2, tblStudInfo_tblStudentId, tblStudInfoAddBldg, tblStudInfoAddSt, tblStudInfoAddBrgy, tblStudInfoAddCity, tblStudInfoAddCountry) values ('$infoid', '$fname', '$lname', '$mname', '$bday', '$bplace', '$gender', '$nat', '$religion', '$lang1', '$lang2', '$studentid', '$addBldg', '$addSt', '$addBrgy', '$addCity', '$addCountry')";
 if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 	}

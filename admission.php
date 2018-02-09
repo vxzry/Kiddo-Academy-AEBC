@@ -70,10 +70,10 @@
     //         $("#txtHealthReason").attr("disabled", false);
     //     }
     // });
-    // function disabledReason() {
-    // var txtHealthReason = document.getElementById('txtHealthReason');
-    // txtHealthReason.readOnly = true;
-    // }
+    function disabledReason() {
+    var txtHealthReason = document.getElementById('txtHealthReason');
+    txtHealthReason.readOnly = true;
+    }
     function disabledEmergency() {
     var txtHealthDoctor = document.getElementById('txtHealthDoctor');
     var txtHealthHospital = document.getElementById('txtHealthHospital');
