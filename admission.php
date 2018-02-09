@@ -413,12 +413,13 @@
             <form>
             <label class="col-lg-2 control-label left">Birthday:</label>
             <div class="col-lg-4">
-              <input class="form-control" type="text" name="txtStudBday" id="txtStudBday" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+              <input class="form-control" type="date" id="date" name="dob" name="txtStudBday" id="txtStudBday" placeholder="mm/dd/yyyy" onblur="getAge();"/>
             </div>
+            <label class="col-lg-2 control-label left">Age:</label>
             <div class="col-lg-2">
-              <span id="agecalc"> </span>
+              <input type="text" id="age" name="age" value="" class="form-control" placeholder="Age" disabled>
             </div>
-            </form>
+            </form>       
           </div>
           <div class="form-group" style="margin-bottom:31%;">
             <label class="col-lg-2 control-label left">Birthplace:</label>
@@ -1124,35 +1125,43 @@
       $(".choose").select2();
     });
 
-   //Datemask dd/mm/yyyy
-    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-    $(window).load(function(){
-    $("#txtStudBday").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-  });
+  //  //Datemask dd/mm/yyyy
+  //   $("#datemask").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+  //   $(window).load(function(){
+  //   $("#txtStudBday").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+  // });
 
-  window.onload = function() {
-        document.getElementById("txtStudBday").onblur = function() {
-            ageCount(this.value);
-        }
-  }
+  // window.onload = function() {
+  //       document.getElementById("txtStudBday").onblur = function() {
+  //           ageCount(this.value);
+  //       }
+  // }
 
-    function ageCount(dob) {
-    var date1 = new Date();
-    var date2 = new Date(dob);
-    var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/; //Regex to validate date format (dd/mm/yyyy)
-    if(pattern.test(dob)) {
-      var y1 = date1.getFullYear(); //getting current year
-      var y2 = date2.getFullYear(); //getting dob year
-      var age = y1 - y2;           //calculating age
-      document.getElementById("agecalc").innerHTML = "Age: " + age;
-      return true;
-    }
-    else {
-      alert("Invalid date format. Please Input in (dd/mm/yyyy) format!");
-      return false;
-    }
+  //   function ageCount(dob) {
+  //   var date1 = new Date();
+  //   var date2 = new Date(dob);
+  //   var pattern = /(0\d{1}|1[0-2])\/([0-2]\d{1}|3[0-1])\/(19|20)\d{2}/;
+  //   if(pattern.test(dob)) {
+  //     var y1 = date1.getFullYear(); //getting current year
+  //     var y2 = date2.getFullYear(); //getting dob year
+  //     var age = y1 - y2;           //calculating age
+  //     document.getElementById("agecalc").innerHTML = "Age: " + age;
+  //     return true;
+  //   }
+  //   else {
+  //     alert("Invalid date format. Please Input in (mm/dd/yyyy) format!");
+  //     return false;
+  //   }
 
-  }
+  // }
+
+  function getAge(){
+    var dob = document.getElementById('date').value;
+    dob = new Date(dob);
+    var today = new Date();
+    var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+    document.getElementById('age').value=age;
+}
   </script>
 
   </body>
