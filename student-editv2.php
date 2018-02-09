@@ -90,88 +90,76 @@
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="home.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><image src="logo.ico" style="width: 50px; padding: 3px"></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><image src="logo.png" style="width: 200px; padding: 3px;"></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="admin.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Kim Shook Jin</span>
+          <!-- Logo -->
+          <a href="dashboard.php" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><image src="images/School Logo/logo.ico" style="width: 50px; padding: 3px"></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><image src="images/School Logo/logo.png" style="width: 200px; padding: 3px;"></span>
+          </a>
+          <!-- Header Navbar: style can be found in header.less -->
+          <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="admin.jpg" class="img-circle" alt="User Image">
 
-                <p>
-                  Kim Shook Jin
-                  <small>Head Teacher</small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
-                </div>
+            <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $namess ?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+
+                    <p>
+                      <?php echo $namess ?>
+                      <small><?php echo $rolename ?></small>
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
+                    </div>
+                  </li>
+                </ul>
               </li>
             </ul>
-          </li>
-           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="admin.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info" style="margin-top: 3%">
-          <p>Kim Shook Jin<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header" style="color: white">Welcome!</li>
-        <?php 
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel"  style="margin-top: 8%">
+            <div class="pull-left image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+            </div>
+
+            <div class="pull-left info">
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+            </div>
+          </div>
+
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu" style="font-size:17px;">
+            <li class="header" style="color: black; font-size: 15px; margin-top: 3%">Welcome!</li>
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -186,7 +174,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -203,7 +191,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -217,26 +205,22 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header" style="margin-bottom: -25px;">
-    <h5>
-      <ol class="breadcrumb">
-        <li><a href="#" style="color: black;"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#" style="color: black;">Maintenance</a></li>
-        <li><a href="profilev2.php" style="color: black;">Profile</a></li>
-        <li class="active">Student Profile</li>
-      </ol>
-    </h5>
-    </section>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+          <section class="content-header">
+            <ol class="breadcrumb" style="font-size:15px;">
+              <li><a href="#" style="color: black;"><i class="fa fa-envelope-o"></i> Home</a></li>
+              <li class="active">Edit Profile</li>
+            </ol>
+          </section>
 
     <!-- Main content -->
     <section class="content" style="margin-top: 3%">
