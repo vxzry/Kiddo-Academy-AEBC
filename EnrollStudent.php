@@ -37,7 +37,15 @@ if(isset($_POST['btnProceed']))
 	   exit(mysqli_error($con));
 		}
 	}
-
+	if($feeId1 != '')
+	{
+	foreach($feeId1 as $mfee)
+	{
+		$query="select * from tblscheme where tblScheme_tblFeeId='$mfee' and tblSchemeFlag=1";
+		$result=mysqli_fetch_array(mysqli_query($con, $query));
+		$q=$result['tblSchemeId'];
+		if(!empty($q))
+		{
 	foreach($schemem as $val)
 	{
 		$query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
@@ -53,7 +61,15 @@ if(isset($_POST['btnProceed']))
 		if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 		}
+	}}else if((empty($q)))
+	{
+		$query8="insert into tblstudscheme(tblStudScheme_tblFeeId, tblStudScheme_tblStudentId, tblStudSchemeFlag, tblStudScheme_tblSchoolYrId) value ('$mfee', '$studid', 1, '$syid')";
+			if (!$query8 = mysqli_query($con, $query8)){
+    			exit(mysqli_error($con));
+    					
+			}
 	}
+	}}
 	
 	if($feeId != 'None')
 	{
