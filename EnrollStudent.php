@@ -134,7 +134,7 @@ if(isset($_POST['btnProceed']))
 		}
 	endwhile;
 	
-	$query="update tblstudent set tblStudentPreferSession='$session' where tblStudentId='$studid' and tblStudentFlag=1";
+	$query="update tblstudent set tblStudentPreferSession='$session' where tblStudentId='$studid' and tblStudentFlag=1 and tblStudentType='OFFICIAL'";
 	if (!$query = mysqli_query($con, $query)) {
 				exit(mysqli_error($con));
 	}else
