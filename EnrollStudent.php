@@ -17,7 +17,7 @@ if(isset($_POST['btnProceed']))
 	$row=mysqli_fetch_array($result);
 	$lvlid=$row['tblStudent_tblLevelId'];
 	
-	$query9="select * from tblstudenroll where tblStudEnroll_tblStudentId='$studid'";
+	$query9="select * from tblstudenroll where tblStudEnroll_tblStudentId='$studid' and tblStudEnroll_tblSchoolYrId='$syid'";
 	$result9=$con->query($query9);
 	if($result9->num_rows == 0)
 	{
@@ -26,13 +26,13 @@ if(isset($_POST['btnProceed']))
 	$row = mysqli_fetch_assoc($result);
 	$enrollid = $row['tblStudEnrollId'];
 	$enrollid++;
-	$query="insert into tblstudenroll(tblStudEnrollId, tblStudEnrollPreferedSession, tblStudEnroll_tblStudentId) values ('$enrollid', '$session', '$studid')";
+	$query="insert into tblstudenroll(tblStudEnrollId, tblStudEnrollPreferedSession, tblStudEnroll_tblStudentId, tblStudEnroll_tblSchoolYrId) values ('$enrollid', '$session', '$studid', '$syid')";
 	if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 		}
 	}else if($result9->num_rows >= 1)
 	{
-		$query="update tblstudenroll set tblStudEnrollPreferedSession = '$session', tblStudEnroll_tblStudentId='$studid'";
+		$query="update tblstudenroll set tblStudEnrollPreferedSession = '$session' where  tblStudEnroll_tblStudentId='$studid' and tblStudEnroll_tblSchoolYrId='$syid'";
 		if (!$query = mysqli_query($con, $query)) {
 	   exit(mysqli_error($con));
 		}
@@ -142,7 +142,7 @@ if(isset($_POST['btnProceed']))
 		
 		header("location:collection2.php?studentid=$studid");
 		}
-	}
+	
 	
 }//btnProceed
 ?>

@@ -239,7 +239,7 @@ function run(){
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs" id="myTab">
                           <li class="active"><a href="#tab_1" data-toggle="tab">Sectioning by Section</a></li>
-                          <li><a href="#tab_2" data-toggle="tab">Sectioning by Students</a></li>
+                         <!--  <li><a href="#tab_2" data-toggle="tab">Sectioning by Students</a></li> -->
                         </ul>
                       
 
@@ -342,7 +342,7 @@ function run(){
                                     <td hidden><?php echo $row1['tblFacultyId'] ?></td>
                                     <td><?php echo $row1['facultyname'] ?></td>
                                     <td style="width: 25%"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mdlFillSection">Fill Section</button>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button>
+                                    <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button> -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button></td>
                                   </tr>
                                 <?php endwhile; ?>
@@ -397,7 +397,7 @@ function run(){
                                         <label class="col-sm-4" style="text-align: right">Faculty-In-Charge:</label>
                                         <div class="col-sm-7 selectContainer">
                                         <select class="form-control" style="width: 100%;" name="selFaculty" id="selFaculty">
-                                        <option selected="selected" disabled>--Select Faculty-in-charge--</option>
+                                        <option selected disabled>--Select Faculty-in-charge--</option>
                                             <?php
                                             $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblFaculty where tblFacultyFlag=1";
                                             $result=mysqli_query($con, $query);
@@ -458,7 +458,7 @@ function run(){
                           </div>
                   </div>
                       
-                      <div class="tab-pane" id="tab_2" style="padding: 3%">
+                      <!-- <div class="tab-pane" id="tab_2" style="padding: 3%">
                           <form>
                             <table id="datatable2" class="table table-bordered table-striped">
                               <thead>
@@ -488,7 +488,7 @@ function run(){
                                 
                          <div class="modal fade" id="mdlSectionStudent" role="dialog">
                             <div class="modal-dialog">
-                              <!-- Modal content-->
+                              
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h3 class="modal-title" style="font-style: bold">Section Student</h3>
@@ -533,7 +533,7 @@ function run(){
                               </div> <!-- modal content -->
                             </div> <!-- modal dialog -->
                           </div> <!-- modal fade -->
-                    </div> <!-- tab pane tab_2 -->
+                    </div>  -->
                    
                    </div> <!-- tab content -->
                   </div><!-- nav tabs custom -->

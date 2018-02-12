@@ -301,6 +301,7 @@
                                 <div class="modal-header">
                                   <h3 class="modal-title" style="font-style: bold">Enroll Student</h3>
                                 </div>
+                                 <div class="modal-body">
                                 <form method="post" action="enrollmentv2.php"/>
                                   <input type="hidden" name="txtStudentId" id="txtStudentId"/>
 
@@ -315,7 +316,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" style="margin-top: 5%">  
+                                <div class="form-group">  
                                     <div class="col-sm-6">
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
                                         <fieldset style="margin-top: 2%; margin-left: 2%">
@@ -348,7 +349,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                                          </div>
                                 <div class="modal-footer" style="margin-top: 25%; float: center">
                                   <button type="submit" class="btn btn-danger" name="btnProceed" id="btnProceed">OK</button>
                                   <button type="button" class="btn btn-info" data-dismiss="modal">CANCEL</button>
@@ -358,7 +359,7 @@
                             </div> <!-- modal dialog -->
                           </div> <!-- modal fade -->
                             </div> <!-- box body tab_1 -->
-                          </form>
+                          
 
                           
                         </div> <!-- box body tab_! -->
