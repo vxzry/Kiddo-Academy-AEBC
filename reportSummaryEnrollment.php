@@ -3,11 +3,12 @@ require ("fpdf.php");
 // $con  = mysqli_connect("localhost","root","");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
-$sect=$_POST['txtsect'];
+$sy=$_POST['txtsy'];
 
-$query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
+$query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrId = '$sy' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
-$syid = $row['tblSchoolYrId'];
+$syname = $row['tblSchoolYrYear'];
+
 class PDF extends FPDF
 {
 // Page header
@@ -33,21 +34,20 @@ function Header()
 
     $this->SetFont('Arial','B',10);
     $this->SetXY(30,50);//X-Left, Y- Down
-    $this->Cell(10,10,'Level: ',0,0,'');
-    $this->SetXY(150,50);
-    $this->Cell(10,10,"Section:",0,0,'');
+    $this->Cell(10,10,'School Year: ',0,0,'');
     $this->SetXY(30,55);
-    $this->Cell(10,10,"Teacher:",0,0,'');
+    $this->Cell(10,10,"Total Number of Enrollees:",0,0,'');
 
 
     $this->SetXY(105,65);
     $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"Class List",0,0,'C');
+    $this->Cell(10,10,"Summary of Student Enrollees",0,0,'C');
 
     $this->SetXY(40,80);
     $this->SetFont('Arial','B',8);
     $this->Cell(40,5,"Student Id",1,0,'C');
-    $this->Cell(100,5,"Student Name",1,1,'C');
+    $this->Cell(70,5,"Student Name",1,0,'C');
+    $this->Cell(40,5,"Student Name",1,1,'C');
 
 }
 
@@ -71,19 +71,15 @@ function Footer()
     $pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
 
-   $query = mysqli_query($con, "select * from tblsectionstud where tblSectStud_tblSectionId='$sect' and tblSectStud_tblSchoolYrId='$syid'");
-    while($row=mysqli_fetch_array($query)):
-        $studid=$row['tblSectStud_tblStudentId'];
-        $query1=mysqli_query($con, "select concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname, s.tblStudentId from tblstudent s, tblstudentinfo ti where ti.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentId='$studid'");
+   $query = mysqli_query($con, "Select a.tblStudentId, concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname , tblLevelName FROM tblstudent a, tblstudentinfo ti, tblstudenroll se, tbllevel l WHERE a.tblStudentId = ti.tblStudInfo_tblStudentId AND se.tblStudEnroll_tblStudentId=a.tblStudentId and a.tblStudent_tblLevelId=l.tblLevelId and se.tblStudEnroll_tblSchoolYrId='$sy'");
 
-while($row3=mysqli_fetch_array($query1)){
-
-    $pdf->SetXY(40,85);
+while($row3=mysqli_fetch_array($query)){
+    $pdf->SetX(40);
     $pdf->Cell(40, 5, $row3['tblStudentId'], 1, 0);
-    $pdf->Cell(100, 5, $row3['studentname'], 1, 1);
-    // $pdf->SetXY(50,55);
-    // $pdf->Cell(10, 10, 'STANDBY', 0, 0);
-} endwhile;
+    $pdf->Cell(70, 5, $row3['studentname'], 1, 0);
+    $pdf->Cell(40, 5, $row3['tblLevelName'], 1, 1);
+    
+}
 
   
     $pdf->SetFont('Arial','',10);

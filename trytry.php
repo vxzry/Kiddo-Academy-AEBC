@@ -23,7 +23,7 @@ foreach($id as $x)
 }
 if($num == 1)
 {
-	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'"
+	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'";
 	$row1=mysqli_fetch_array(mysqli_query($con, $query1));
 	$studtype=$row1['tblStudentType'];
 	if($studtype=='APPLICANT')

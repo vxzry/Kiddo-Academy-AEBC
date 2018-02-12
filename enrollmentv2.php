@@ -294,7 +294,7 @@ if(isset($_POST['btnProceed']))
                                           $feeid=$row['tblFeeId'];
                                           $query3="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
                                           $result3=$con->query($query3);
-                                          if($result->num_rows > 0):
+                                          if($result3->num_rows > 0):
                                           ?>
                                           <select class="form-control" style="width: 50%;" name="selSchemeMand[]" id="selSchemeMand" >
                                             <option selected="selected" readonly value="None">--CHOOSE SCHEME--</option>
@@ -325,7 +325,7 @@ if(isset($_POST['btnProceed']))
                                       <td>
                                         <?php
                                           $feeid=$row['tblFeeId'];
-                                          $query3="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
+                                          $query3="select * from tblScheme where tblScheme_tblFeeId='$val' and tblSchemeFlag=1";
                                           $result3=$con->query($query3);
                                           if($result3->num_rows > 0):
                                           ?>
