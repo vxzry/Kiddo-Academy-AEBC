@@ -72,6 +72,15 @@
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
 
     }
+    function addField()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","billAdd.php?billAdd="+document.getElementById("billAdd").value,false);
+      xmlhttp.send(null);
+      
+      document.getElementById("fg").innerHTML=xmlhttp.responseText;
+
+    }
     </script>
   </head>
 
@@ -214,6 +223,12 @@
             <div class="col-md-12">
               <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
+                  <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs" id="myTab">
+                      <li><a href="#tab_1" data-toggle="tab">Billing</a></li>
+                      <li><a href="#tab_2" data-toggle="tab">Billing by Level</a></li>
+                      <li class="active"><a href="#tab_3" data-toggle="tab">Billing by Student</a></li>
+                    </ul>
                   <div class="box-header with-border">
                     <h2 class="box-title" style="font-size:25px; margin-top: 10px">BILLING</h2>
                   </div>
@@ -221,7 +236,7 @@
 
                   <div class="tab-content">
 
-                    <div class="tab-pane active" id="tab_1">
+                    <div class="tab-pane fade in active" id="tab_3">
                           
                           <div class="box-body">
                             <div class="col-md-6"  style="margin-top: 3%">
@@ -269,8 +284,41 @@
                               </div> <!-- col-md-12 -->
                             </div> <!-- box body -->
                           
-                    </div> <!--tab pane tab_1 -->
+                    </div> <!--tab pane tab_3 -->
+                    <div class="tab-pane" id="tab_1">
+                          
+                          <div class="box-body">
+                            <div class="col-md-6"  style="margin-top: 3%">
+                              <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
+                              
+                              <div class="form-group" name="fg" id="fg">
+                                <label>Select Fee: </label>
+                              <select>
+                                <option disabled selected>--Select Fee--</option>
+                                <?php
+                                $query=mysqli_query($con,"select * from tblfee where tblFeeFlag=1 and tblFeeMandatory='N'");
+                                while($row=mysqli_fetch_array($query)):
+                                ?>
+                                <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeCode'] ?></option>
+                              <?php endwhile; ?>
+                              </select>
+                              </div>
+                            </div>
+                          </div>
+                    </div> <!-- tab_1 -->
+                    <div class="tab-pane" id="tab_2">
+                          
+                          <div class="box-body">
+                            <div class="col-md-6"  style="margin-top: 3%">
+                              <div class="form-group">
+                                <p>hi</p>
+                              </div>
+                            </div>
+                          </div>
+                    </div><!-- tab_2 -->
                   </div> <!-- tab content -->
+                  </div>
+                </div> <!-- nav -->
                 </div> <!-- box body -->
               </div> <!-- box- box-default-->
             </div> <!-- col-md-12 -->
