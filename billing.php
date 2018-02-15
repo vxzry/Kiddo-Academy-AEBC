@@ -72,13 +72,13 @@
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
 
     }
-    function addField()
+    function addFields()
     {
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","billAdd.php?billAdd="+document.getElementById("billAdd").value,false);
+      xmlhttp.open('GET','billAdd.php?type='+document.querySelector('input[name="r1"]:checked').value+'&selFee='+document.getElementById('selFee').value,false); 
       xmlhttp.send(null);
       
-      document.getElementById("fg").innerHTML=xmlhttp.responseText;
+      document.getElementById("fg1").innerHTML=xmlhttp.responseText;
 
     }
     </script>
@@ -291,23 +291,36 @@
                             <div class="col-md-6"  style="margin-top: 3%">
                               <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
                               
-                              <div class="form-group" name="fg" id="fg">
+                                  <div>
+                                  <label>Select Billing Type: </label>
+                                  <input type="radio" name="r1" id="r1" value="1" onclick="addFields()"/> General
+                                  <input type="radio" name="r1" id="r1" value="0" onclick="addFields()"/> Per Level
+                                </div>
                                 <label>Select Fee: </label>
-                              <select>
-                                <option disabled selected>--Select Fee--</option>
+                              <select name="selFee" id="selFee" onclick="addFields()">
+                                <option disabled selected value="0">--Select Fee--</option>
                                 <?php
                                 $query=mysqli_query($con,"select * from tblfee where tblFeeFlag=1 and tblFeeMandatory='N'");
                                 while($row=mysqli_fetch_array($query)):
                                 ?>
-                                <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeCode'] ?></option>
+                                <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeCode'] ?>: <?php echo $row['tblFeeName'] ?></option>
                               <?php endwhile; ?>
                               </select>
+                              <form method="post" action="billingGeneral.php"/>
+                              <div class="fieldset" id="fg1" name="fg1"></div>
+                              <div>
+                              <button type="submit" class="btn btn-success" name="btnAdd" id="btnAdd"><i class="fa fa-edit"></i>Proceed</button>
                               </div>
+                            </form>
+                            
+                             
                             </div>
                           </div>
                     </div> <!-- tab_1 -->
                     <div class="tab-pane" id="tab_2">
-                          
+                          <h2> Client example </h2>
+                          <h3>Output: </h3>
+                          <div id="output">this element will be accessed by jquery and this text replaced</div>
                           <div class="box-body">
                             <div class="col-md-6"  style="margin-top: 3%">
                               <div class="form-group">
@@ -397,7 +410,7 @@
       <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- jQuery 2.2.3 -->
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
