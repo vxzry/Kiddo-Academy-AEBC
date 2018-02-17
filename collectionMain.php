@@ -1,3 +1,45 @@
+<?php
+   include('session.php');
+   include('db_connect.php');
+   $x=substr($login_session,0,1);
+   if($x=="P")
+   {
+    $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblParentId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+   }else if($x=="F")
+   {
+    $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as names from tblfaculty where tblFaculty_tblUserId='$user_id' and tblFacultyFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $id=$row['tblFacultyId'];
+    $namess=$row['names'];
+    $query1="select * from tbluser where tblUserId='$user_id' and tblUserFlag=1";
+    $result1=mysqli_query($con, $query1);
+    $row1=mysqli_fetch_array($result1);
+    $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
+   }
+
+$studid=$_POST['txtStudId'];
+$query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE'";
+$result=mysqli_query($con, $query);
+$row=mysqli_fetch_array($result);
+$syid=$row['tblSchoolYrId'];
+$query="select * from tblstudent where tblStudentId='$studid' and tblStudentFlag=1";
+$result=mysqli_query($con, $query);
+$row=mysqli_fetch_array($result);
+$lvlid=$row['tblStudent_tblLevelId'];
+?>
 <!DOCTYPE html>
 
 <html>
@@ -24,7 +66,15 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
-
+     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        font-size: 12px;
+      }
+    </style>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -52,17 +102,17 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="images/Employees/registrar.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Park Chanyeol</span>
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $namess ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="images/Employees/registrar.jpg" class="img-circle" alt="User Image">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      Park Chanyeol
-                      <small>Registrar</small>
+                      <?php echo $namess ?>
+                      <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
@@ -76,10 +126,6 @@
                   </li>
                 </ul>
               </li>
-               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
             </ul>
           </div>
         </nav>
@@ -91,51 +137,66 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="images/Employees/registrar.jpg" class="img-circle" alt="User Image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
+
             <div class="pull-left info" style="margin-top: 3%">
-              <p>Park Chanyeol<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
             </div>
           </div>
-          <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-                  <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                  </span>
-            </div>
-          </form>
+         
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: white">Welcome!</li>
-            <li class="treeview">
-              <a href="RegistrarMessage.html">
-                <i class="fa fa-envelope-o"></i> <span>Message</span>
-              </a>
-            </li>
+          <ul class="sidebar-menu" style="font-size:15px;">
+            <li class="header" style="color: black; font-size: 15px; margin-top: 3%">Welcome!</li>
+            <?php 
+        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+        $result=mysqli_query($con, $query);
+        $row=mysqli_fetch_array($result);
+          $rolename=$row['tblRoleName'];
+          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+          {
+            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+            $result1=mysqli_query($con, $query1);
+            while($row1=mysqli_fetch_array($result1))
+            {
+              $modulename=$row1['tblModuleType'];
+
+        ?>
+
+        <li class="treeview"> 
+          <a href="#">
+            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+           <?php
+              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+              $result2=mysqli_query($con, $query2);
+              while($row2=mysqli_fetch_array($result2)):
+            ?>
+            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+            <?php endwhile; ?>
+          </ul>
+        </li>
+      <?php 
+      }//while
+      }else
+      {
+              $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
+              $result=mysqli_query($con, $query);
+              while($row=mysqli_fetch_array($result)):
+      ?>
            <li class="treeview">
-              <a href="admissionV2.html">
-                <i class="fa fa-users"></i> <span>Admission</span>
+              <a href="<?php echo $row['tblModuleLinks'] ?>">
+                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="enrolment.html">
-                <i class="fa fa-child"></i> <span>Enrollment</span>
-              </a>
-            </li>
-            <li class="treeview active">
-              <a href="billing2.html">
-                <i class="fa fa-calculator"></i> <span>Billing</span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="registrar-profile.html">
-                <i class="fa fa-user"></i> <span>Profile</span>
-              </a>
-            </li>
+      <?php
+       endwhile; } 
+      ?>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -145,10 +206,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <ol class="breadcrumb" style="font-size:15px;">
-            <li><a href="RegistrarMessage.html" style="color: black;"><i class="fa fa-envelope-o"></i> Message</a></li>
-            <li class="active">Billing</li>
-          </ol>
+      
         </section>
 
         <!-- Main content -->
@@ -159,7 +217,7 @@
                 <div class="box-header with-border"></div>
                 <div class="box-body">
                   <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px;">Billing</h2>
+                    <h2 class="box-title" style="font-size:20px;">Collection</h2>
                     <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                   </div>
 
@@ -169,30 +227,22 @@
                       <div class="box">
                         <div class="box-header"></div>
                         <div class="box-body">
-                          <form role="form">
-                            <div class="box-body">
-                            <div class="col-md-6">
-                              <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Avail fees</button>
-                              <a href="collection2.html"><button type="button" class="btn btn-success" style="margin-bottom: 3%">Proceed to Collection</button></a>
-                              </div>
-
-                              <div class="col-md-12">
+                          
+                            <div class="col-md-12" style="margin-top: 5%">
                                 <table id="datatable1" class="table table-bordered table-striped">
                                   <thead>
-                                    <tr>
-                                      <th></th>
-                                      <th>Fee Code</th>
-                                      <th>Fee Description</th>
-                                      <th>Payment Scheme</th>
-                                      <th>Payment Order</th>
-                                      <th>Due Date</th>
-                                      <th>Penalty</th>
-                                      <th>Amount</th>
-                                    </tr>
+                                   <tr>
+                                       <th>Student ID</th>
+                                       <th>Student Name</th>
+                                       <th>Check #</th>
+                                       <th>Amount</th>
+                                       <th>Bank Name</th>
+                                       <th>Payment Date</th>
+                                       <th>Action</th>
+                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr>
-                                      <td><input type="checkbox" name="checkbills"></td>
                                       <td></td>
                                       <td></td>
                                       <td></td>
@@ -200,63 +250,9 @@
                                       <td></td>
                                       <td></td>
                                       <td></td>
-                                     
                                     </tr>
                                   </tbody>
                                 </table>
-                              </div> <!-- col-md-12 -->
-                            </div> <!-- box body -->
-                          </form>
-
-
-            <!-- Modal starts here-->
-  <div class="modal fade" id="addFeesModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" style="font-style: bold">Additional Fees</h3>
-        </div>
-        <form autocomplete="off" method="post" data-toggle="validator" role="form">
-        <div class="modal-body">
-         
-        <div class="form-group" style="margin-top: 5%">
-                <label class="col-sm-4" style="text-align: right">Fee Description</label>
-                <div class="col-sm-7 selectContainer">
-                 <select class="form-control choose" style="width: 100%;">
-                  <option>UNIFORM FEE</option>
-                </select>
-                </div>
-        </div> 
-        <div class="form-group" style="margin-top: 15%">
-                <label class="col-sm-4" style="text-align: right">Payment Scheme</label>
-                <div class="col-sm-7 selectContainer">
-                <select class="form-control choose" style="width: 100%;">
-                <option>SCHEME 1</option>
-                </select>
-                </div>
-        </div> 
-        <div class="form-group" style="margin-top: 25%">
-                <label class="col-sm-4" style="text-align: right">Due Date</label>
-                <div class="col-sm-7 selectContainer">
-                <input type="date" class="form-control">
-                </div>       
-        </div>
-        <div class="form-group" style="margin-top: 35%">
-                <label class="col-sm-4" style="text-align: right">Amount</label>
-                <div class="col-sm-7 selectContainer">
-                <input type="text" class="form-control" disabled placeholder="320">
-                </div>       
-        </div>
-            <div class="modal-footer" style="margin-top: 50%">
-            <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-      </form>
-      </div>    
-    </div>
-  </div>
 
                         </div> <!-- box-body -->
                       </div> <!-- box-->

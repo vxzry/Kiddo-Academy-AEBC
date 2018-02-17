@@ -309,6 +309,30 @@ $acc=$_POST['chkbills'];
                 </div>
             </div>        
         </div> <!-- / panel preview -->
+
+         <!-- checkbox -->
+                            <div class="form-group col-md-9" style="margin-top: 5%">
+                              <label class="col-md-3">Cash Amount:</label>
+                              <label>
+                                <input type="checkbox"> Check
+                              </label>
+                              <label style="margin-left: 15px;">
+                                <input type="checkbox">Cash
+                            </div>
+                            <div class="col-md-12">
+                              <label class="col-md-2">Cash Amount:</label>
+                              <input type="number" name="" class="col-md-3">
+                            </div>
+                            <div class="col-md-12" style="margin-top: 3%">
+                              <label class="col-md-2">Check Amount:</label>
+                              <input type="number" name="" class="col-md-3">
+                              <label class="col-md-2" style="text-align: right">Date:</label>
+                              <input type="date" name="" class="col-md-3">
+                            </div>
+                            <div class="col-md-12" style="margin-top: 3%">
+                              <label class="col-md-2">Bank Name:</label>
+                              <input type="text" name="" class="col-md-8">
+                            </div>
          <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
     </form> 
   </div>
