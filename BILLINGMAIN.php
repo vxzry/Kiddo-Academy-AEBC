@@ -245,7 +245,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                           <form action="collection.php" method="post">
                             <div class="box-body">
                             <div class="col-md-6" style="margin-top: 2%">
-                              <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Avail fees</button>
+                              <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Add Bill</button>
                               <button type="submit" class="btn btn-success" id="proceed" name="proceed" disabled style="margin-bottom: 3%">Proceed to Collection</button>
                             </div>
 
@@ -318,7 +318,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                               <!-- Modal content-->
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h3 class="modal-title" style="font-style: bold">Additional Fees</h3>
+                                  <h3 class="modal-title" style="font-style: bold">Add Bill</h3>
                                 </div>
                                 <form autocomplete="off" method="post" data-toggle="validator" role="form" action="addFees.php">
                                 <div class="modal-body">
