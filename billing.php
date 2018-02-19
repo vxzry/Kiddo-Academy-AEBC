@@ -226,7 +226,7 @@
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs" id="myTab">
                       <li><a href="#tab_1" data-toggle="tab">Billing</a></li>
-                      <li><a href="#tab_2" data-toggle="tab">Billing by Level</a></li>
+                      
                       <li class="active"><a href="#tab_3" data-toggle="tab">Billing by Student</a></li>
                     </ul>
                   <div class="box-header with-border">
@@ -263,7 +263,7 @@
                                       <th>Student Name</th>
                                       <th>Action</th>
                                     </tr>
-                                  </thead>
+                                  </thead> 
                                   <tbody>
                                   <?php
                                     $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1;";
