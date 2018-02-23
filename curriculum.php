@@ -450,7 +450,7 @@
                   <div class="modal fade" id="addModalOne" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form autocomplete="off" data-toggle="validator" method="post" action="saveCurriculum.php" name="addCurriculum" id="addCurriculum" class="form-horizontal">
+                        <form autocomplete="off" data-toggle="validator" method="post" action="actionCurriculum.php" name="addCurriculum" id="addCurriculum" class="form-horizontal">
                           <div class="modal-header">
                               <h4 class="modal-title" id="myModalLabel"> ADD CURRICULUM </h4>
                           </div>
@@ -480,7 +480,7 @@
                   <div class="modal fade" id="updateModalOne">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form autocomplete="off" data-toggle="validator" method="post" action="updateCurriculum.php" name="UpdCurriculum" id="UpdCurriculum" class="form-horizontal">
+                        <form autocomplete="off" data-toggle="validator" method="post" action="actionCurriculum.php" name="UpdCurriculum" id="UpdCurriculum" class="form-horizontal">
                           <div class="modal-header">
                               <h4 class="modal-title" id="myModalLabel"> UPDATE CURRICULUM </h4>
                           </div>
@@ -522,7 +522,7 @@
 
                       <!-- Modal content-->
                       <div class="modal-content">
-                        <form method="POST" action="deleteCurriculum.php" class="form-horizontal">
+                        <form method="POST" action="actionCurriculum.php" class="form-horizontal">
                           <div class="modal-header">
                             <h4 class="modal-title" id="deleteModalOne"> DELETE CURRICULUM </h4>
                           </div>
@@ -557,7 +557,7 @@
 
                       <!-- Modal content-->
                       <div class="modal-content">
-                        <form method="POST" action="updateDetail.php" class="form-horizontal">
+                        <form method="POST" action="actionCurriculum.php" class="form-horizontal">
                           <div class="modal-header">
                             <h4 class="modal-title"> UPDATE CURRICULUM DETAILS</h4>
                           </div>
@@ -582,7 +582,7 @@
                           </div>
 
                           <div class="modal-footer" style="margin-top: 5%; float: center">
-                            <button type="submit" class="btn btn-success" name="btnDetCurr" id="btnDetCurr">Update</button>
+                            <button type="submit" class="btn btn-success" name="btnUpdDet" id="btnUpdDet">Update</button>
                             <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                           </div>
                         </form>

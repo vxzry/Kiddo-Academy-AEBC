@@ -1,5 +1,5 @@
 <?php 
-   include('session.php');
+   include('session.php'); 
    include('db_connect.php');
    $x=substr($login_session,0,1);
    if($x=="P")
@@ -398,7 +398,7 @@ function showTblMonth()
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Add School Year</h3>
         </div>
-        <form data-toggle="validator" role="form" method="post" action="saveSchoolYear.php" name="addSchoolYr" id="addSchoolYr">
+        <form data-toggle="validator" role="form" method="post" action="actionSchoolYear.php" name="addSchoolYr" id="addSchoolYr">
         <div class="modal-body inline">
          
         <div class="form-group">
@@ -446,7 +446,7 @@ function showTblMonth()
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Update School Year</h3>
         </div>
-        <form data-toggle="validation" role="form" method="post" action="updateSchoolYear.php" name="UpdSchoolYr" id="UpdSchoolYr">
+        <form data-toggle="validation" role="form" method="post" action="actionSchoolYear.php" name="UpdSchoolYr" id="UpdSchoolYr">
         <div class="modal-body">
         <div class="form-group">
             <div><input type="hidden" id="txtUpdSyId" name="txtUpdSyId">
@@ -498,7 +498,7 @@ function showTblMonth()
         </div>       
         </div>
         <div class="modal-footer" style="margin-top: 10%">
-        <button type="submit" class="btn btn-info" name="btnUpdReq" id="btnUpdReq">Save</button>
+        <button type="submit" class="btn btn-info" name="btnUpdSy" id="btnUpdSy">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         </form>
@@ -515,7 +515,7 @@ function showTblMonth()
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Delete Requirement</h3>
         </div>
-        <form action="deleteSchoolYear.php" method="post">
+        <form action="actionSchoolYear.php" method="post">
         <div class="modal-body">
         <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
               <div><input type="hidden" name="txtDelSyId" id="txtDelSyId"/></div>

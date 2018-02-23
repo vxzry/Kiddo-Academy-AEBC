@@ -65,6 +65,18 @@ $acc=$_POST['chkbills'];
         color:#ff8080;
       }
     </style>
+    <script>
+      function showCheck()
+      {
+        if(document.getElementById('check').checked) {
+            $("#txtAmount").prop('disabled', false);
+            $("#txtBankName").prop('disabled', false);
+        } else {
+            $("#txtAmount").prop('disabled', true);
+            $("#txtBankName").prop('disabled', true);
+        }
+      }
+    </script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -314,24 +326,18 @@ $acc=$_POST['chkbills'];
                             <div class="form-group col-md-9" style="margin-top: 5%">
                               <label class="col-md-3">Cash Amount:</label>
                               <label>
-                                <input type="checkbox"> Check
+                                <input type="checkbox" name="check" id="check" onchange="showCheck()"> Check
                               </label>
-                              <label style="margin-left: 15px;">
-                                <input type="checkbox">Cash
-                            </div>
-                            <div class="col-md-12">
-                              <label class="col-md-2">Cash Amount:</label>
-                              <input type="number" name="" class="col-md-3">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
-                              <input type="number" name="" class="col-md-3">
+                              <input type="number" name="txtAmount" id="txtAmount" class="col-md-3" disabled>
                               <label class="col-md-2" style="text-align: right">Date:</label>
-                              <input type="date" name="" class="col-md-3">
+                              <input type="date" name="txtDate" id="txtDate" class="col-md-3" value="<?php echo date('Y-m-d') ?>" disabled>
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
-                              <input type="text" name="" class="col-md-8">
+                              <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled>
                             </div>
          <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
     </form> 

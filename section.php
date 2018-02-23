@@ -318,7 +318,7 @@
                   <div class="modal fade" id="addModalOne" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form class="form-horizontal" data-toggle="validation" role="form" method="post" action="saveSection.php" name="formAdd" id="formAdd" autocomplete="off">
+                        <form class="form-horizontal" data-toggle="validation" role="form" method="post" action="actionSection.php" name="formAdd" id="formAdd" autocomplete="off">
                           <div class="modal-header">
                               <h4 class="modal-title" id="myModalLabel"> ADD SECTION </h4>
                           </div>
@@ -418,7 +418,7 @@
                             </div>
 
                             <div class="modal-footer" style="margin-top: 7%">
-                              <button type="submit" class="btn btn-info" name="addSectBtn" id="addSectBtn">Save</button>
+                              <button type="submit" class="btn btn-info" name="btnAddSect" id="btnAddSect">Save</button>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                           </div>
@@ -431,7 +431,7 @@
                   <div class="modal fade" id="updateModalOne" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form autocomplete="off" id = "updSection" name="updSection" role="form" method="POST" action="updateSection.php" class="form-horizontal">
+                        <form autocomplete="off" id = "updSection" name="updSection" role="form" method="POST" action="actionSection.php" class="form-horizontal">
                           <div class="modal-header">
                             <h4 class="modal-title" id="updateModalOne"> UPDATE SECTION </h4>
                           </div>
@@ -526,7 +526,7 @@
                             </div>
 
                             <div class="modal-footer" style="margin-top: 7%">
-                              <button type="submit" class="btn btn-info" name="updSectBtn" id="updSectBtn">Save</button>
+                              <button type="submit" class="btn btn-info" name="btnUpdSect" id="btnUpdSect">Save</button>
                               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                           </div>
@@ -541,7 +541,7 @@
 
                       <!-- Modal content-->
                       <div class="modal-content">
-                        <form method="POST" action="deleteSection.php" class="form-horizontal">
+                        <form method="POST" action="actionSection.php" class="form-horizontal">
                           <div class="modal-header">
                             <h4 class="modal-title" id="deleteModalOne"> DELETE SECTION </h4>
                           </div>
@@ -561,7 +561,7 @@
                           </div>
 
                           <div class="modal-footer" style="margin-top: 5%; float: center">
-                            <button type="submit" class="btn btn-danger" name="delSectBtn" id="delSectBtn">Yes</button>
+                            <button type="submit" class="btn btn-danger" name="btnDelSect" id="btnDelSect">Yes</button>
                             <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
                           </div>
                         </form>

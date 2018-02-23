@@ -18,6 +18,6 @@ if(isset($_POST['btnUpdReq']))
 	}else{
 	   header('location:requirement.php?message=4');
 	}
-}
+	}
 }
 ?>

@@ -291,7 +291,7 @@ function run(){
                       <div class="modal fade" id="addModalOne" role="dialog">
                         <div class="modal-dialog">
                           <div class="modal-content">
-                            <form class="form-horizontal" data-toggle="validation" role="form" method="POST" action="saveRequirement.php" name="addReq" id="addReq" autocomplete="off">
+                            <form class="form-horizontal" data-toggle="validation" role="form" method="POST" action="actionRequirement.php" name="addReq" id="addReq" autocomplete="off">
                               <div class="modal-header">
                                   <h4 class="modal-title" id="myModalLabel"> ADD REQUIREMENT </h4>
                               </div>
@@ -363,7 +363,7 @@ function run(){
                       <div class="modal fade" id="updateModalOne" role="dialog">
                         <div class="modal-dialog">
                           <div class="modal-content">
-                            <form autocomplete="off" id = "UpdReq" name="UpdReq" role="form" method="POST" action="updateRequirement.php" class="form-horizontal">
+                            <form autocomplete="off" id = "UpdReq" name="UpdReq" role="form" method="POST" action="actionRequirement.php" class="form-horizontal">
                               <div class="modal-header">
                                 <h4 class="modal-title" id="updateModalOne"> UPDATE REQUIREMENT </h4>
                               </div>
@@ -447,7 +447,7 @@ function run(){
 
                           <!-- Modal content-->
                           <div class="modal-content">
-                            <form method="POST" action="deleteRequirement.php" class="form-horizontal">
+                            <form method="POST" action="actionRequirement.php" class="form-horizontal">
                               <div class="modal-header">
                                 <h4 class="modal-title" id="deleteModalOne"> DELETE REQUIREMENT </h4>
                               </div>
