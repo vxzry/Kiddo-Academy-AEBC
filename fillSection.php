@@ -12,6 +12,7 @@ $query="select * from tblsection where tblSectionId='$sectid' and tblSectionFlag
 $result=mysqli_query($con, $query);
 $row=mysqli_fetch_array($result);
 $max=$row['tblSectionMaxCap'];
+$lvl=$row['tblSection_tblLevelId'];
 
 $query="select count(tblSectStudId) as count from tblsectionstud where tblSectStud_tblSectionId='$sectid' and tblSectStudFlag=1";
 $result=mysqli_query($con, $query);
@@ -24,7 +25,7 @@ if($sectcnt < $max)
 	$query="select s.tblStudentId,  concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name
 from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId 
 and s.tblStudentType='OFFICIAL'
-and s.tblStudentFlag=1 order by tblStudentId";
+and s.tblStudentFlag=1 order by tblStudentId and s.tblStudent_tblLevelId='$lvl'";
 $result=mysqli_query($con, $query);
 while($row=mysqli_fetch_array($result)):
 	$studid=$row['tblStudentId'];
