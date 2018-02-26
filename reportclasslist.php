@@ -77,8 +77,7 @@ function Footer()
         $query1=mysqli_query($con, "select concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname, s.tblStudentId from tblstudent s, tblstudentinfo ti where ti.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentId='$studid'");
 
 while($row3=mysqli_fetch_array($query1)){
-
-    $pdf->SetXY(40,85);
+    $pdf->SetX(40);
     $pdf->Cell(40, 5, $row3['tblStudentId'], 1, 0);
     $pdf->Cell(100, 5, $row3['studentname'], 1, 1);
     // $pdf->SetXY(50,55);
