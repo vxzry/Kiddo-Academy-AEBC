@@ -431,7 +431,7 @@
                       <li class="active"><a href="#tab_1" data-toggle="tab">Curriculum</a></li>
                       <li><a href="#tab_2" data-toggle="tab">Level</a></li>
                       <li><a href="#tab_3" data-toggle="tab">Subject</a></li>
-                      <li><a href="#tab_4" data-toggle="tab">Curriculum Details</a></li>
+                      <!-- <li><a href="#tab_4" data-toggle="tab">Curriculum Details</a></li> -->
                     </ul>
 
 
@@ -637,7 +637,7 @@
                   <div class="modal fade" id="addModalFour" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form autocomplete="off" id = "addLevel" name="addLevel" role="form" method="POST" action="saveLevel.php" class="form-horizontal">
+                        <form autocomplete="off" id = "addLevel" name="addLevel" role="form" method="POST" action="actionCurriculum.php" class="form-horizontal">
                           <div class="modal-header">
                             <h4 class="modal-title" id="addModalFour"> ADD LEVEL </h4>
                           </div>
@@ -689,7 +689,7 @@
                   <div class="modal fade" id="updateModalFour">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <form autocomplete="off" data-toggle="validator" role="form" action="updateLevel.php" method="post" name="UpdLevel" id="UpdLevel" class="form-horizontal">
+                        <form autocomplete="off" data-toggle="validator" role="form" action="actionCurriculum.php" method="post" name="UpdLevel" id="UpdLevel" class="form-horizontal">
                           <div class="modal-header">
                               <h4 class="modal-title" id="myModalLabel"> UPDATE LEVEL </h4>
                           </div>
@@ -756,7 +756,7 @@
 
                       <!-- Modal content-->
                       <div class="modal-content">
-                         <form method = "post" action = "deleteLevel.php">
+                         <form method = "post" action = "actionCurriculum.php">
                           <div class="modal-header">
                             <h4 class="modal-title" id="myModalLabel"> DELETE LEVEL </h4>
                           </div>
@@ -830,7 +830,7 @@
 
                         <!-- Modal content-->
                         <div class="modal-content">
-                          <form autocomplete="off" method="post" action="saveSubject.php" data-toggle="validator" role="form" name="addSubject" id="addSubject" class="form-horizontal">
+                          <form autocomplete="off" method="post" action="actionCurriculum.php" data-toggle="validator" role="form" name="addSubject" id="addSubject" class="form-horizontal">
                                 <div class="modal-content col-sm-12">
                                   <div class="modal-header">
                                     <h4 class="modal-title"> ADD SUBJECT </h4>
@@ -870,7 +870,7 @@
                                     </div>
 
                                     <div class="modal-footer" style="margin-top:7%;">
-                                      <button type="submit" class="btn btn-info" name="btnAddLvl" id="btnAddLvl">Save</button>
+                                      <button type="submit" class="btn btn-info" name="btnAddSubj" id="btnAddSubj">Save</button>
                                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -883,7 +883,7 @@
                       <div class="modal fade" id="updateModalFive">
                         <div class="modal-dialog">
                           <div class="modal-content">
-                            <form autocomplete="off" method="post" action="updateSubject.php" name="UpdSubject" id="UpdSubject" class="form-horizontal">
+                            <form autocomplete="off" method="post" action="actionCurriculum.php" name="UpdSubject" id="UpdSubject" class="form-horizontal">
                               <div class="modal-header">
                                   <h4 class="modal-title" id="myModalLabel"> UPDATE SUBJECT </h4>
                               </div>
@@ -950,7 +950,7 @@
 
                           <!-- Modal content-->
                           <div class="modal-content">
-                             <form method = "post" action = "deleteSubject.php">
+                             <form method = "post" action = "actionCurriculum.php">
                               <div class="modal-header">
                                 <h4 class="modal-title" id="myModalLabel"> DELETE SUBJECT </h4>
                               </div>
