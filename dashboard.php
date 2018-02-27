@@ -82,7 +82,6 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-
        <div class="navbar-custom-menu">
          <ul class="nav navbar-nav">
            <!-- User Account: style can be found in dropdown.less -->
@@ -114,6 +113,8 @@
            </li>
          </ul>
        </div>
+          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+       
      </nav>
    </header>
    <!-- Left side column. contains the logo and sidebar -->

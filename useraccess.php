@@ -165,6 +165,8 @@
               </li>
             </ul>
           </div>
+          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+          
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->

@@ -3,6 +3,9 @@ include "db_connect.php";
 $or=$_POST['txtOR'];
 $id=$_POST['txtAccId'];
 $pr=$_POST['txtPR'];
+$camnt=$_POST['amount'];
+$bank=$_POST['bank'];
+$chknum=$_POST['num'];
 $i=0;
 foreach($id as $x)
 {
@@ -21,6 +24,13 @@ foreach($id as $x)
 	}
 	$i++;
 }
+if($camnt!="")
+{
+	$query="insert into tblcheck(tblChkAmount, tblChkBank, tblChkDate, tblChk_tblStudentId, tblChk_tblSchoolYrId, tblChkRTag, tblChkNum) values ('$camnt', '$bank', '$datenow', '$studid', '$syid', 'PENDING', '$chknum')";
+	if (!$query = mysqli_query($con, $query)) {
+		exit(mysqli_error($con));
+	}
+}
 if($num == 1)
 {
 	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'";
@@ -35,7 +45,7 @@ if($num == 1)
 	{
 		header("location:createParentUser.php?studentid=$studid");
 	}
-	}else if($studtype=='PROMOTED')
+	}else if($studtype=='PROMOTED') 
 	{
 		$query="update tblstudent set tblStudentType='OFFICIAL' where tblStudentId='$studid' and tblStudentFlag=1";
 		if (!$query = mysqli_query($con, $query)) {
@@ -48,6 +58,6 @@ if($num == 1)
 	
 }else if($num != 1)
 {
-	header("location:billing.php"); 
+	header("location:billing.php");
 }
 ?>

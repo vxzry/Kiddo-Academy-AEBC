@@ -265,7 +265,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                   </thead>
                                   <tbody>
                                   <?php
-                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=1 and a.tblAccPaid!='PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
+                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId=1 and a.tblAccPaid<>'PAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
                                       $payment=$row['tblAccCredit'];
@@ -350,7 +350,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                 <div class="form-group" style="margin-top: 25%">
                                         <label class="col-sm-4" style="text-align: right">Due Date</label>
                                         <div class="col-sm-7 selectContainer" name="divDate" id="divDate">
-                                        <input type="date" class="form-control" disabled>
+                                        <input type="date" class="form-control" disabled value="<?php echo date('Y-m-d') ?>">
                                         </div>       
                                 </div>
                                 <div class="form-group" style="margin-top: 35%">

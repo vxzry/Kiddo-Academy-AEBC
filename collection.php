@@ -1,4 +1,4 @@
-<?php
+<?php 
    include('session.php');
    include('db_connect.php');
    $x=substr($login_session,0,1);
@@ -312,27 +312,19 @@ $acc=$_POST['chkbills'];
 
          <!-- checkbox -->
                             <div class="form-group col-md-9" style="margin-top: 5%">
-                              <label class="col-md-3">Cash Amount:</label>
-                              <label>
-                                <input type="checkbox"> Check
-                              </label>
-                              <label style="margin-left: 15px;">
-                                <input type="checkbox">Cash
-                            </div>
-                            <div class="col-md-12">
-                              <label class="col-md-2">Cash Amount:</label>
-                              <input type="number" name="" class="col-md-3">
+                              <div class="col-md-12" style="margin-top: 3%">
+                              <label class="col-md-2">Check Number:</label>
+                              <input type="text" name="num" id="num" class="col-md-8">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
-                              <input type="number" name="" class="col-md-3">
-                              <label class="col-md-2" style="text-align: right">Date:</label>
-                              <input type="date" name="" class="col-md-3">
+                              <input type="number" name="amount" id="amount" class="col-md-3">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
-                              <input type="text" name="" class="col-md-8">
+                              <input type="text" name="bank" id="bank" class="col-md-8">
                             </div>
+                          </div>
          <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
     </form> 
   </div>

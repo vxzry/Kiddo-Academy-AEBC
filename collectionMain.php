@@ -30,15 +30,15 @@
     $rolename=$row['tblRoleName'];
    }
 
-$studid=$_POST['txtStudId'];
-$query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE'";
-$result=mysqli_query($con, $query);
-$row=mysqli_fetch_array($result);
-$syid=$row['tblSchoolYrId'];
-$query="select * from tblstudent where tblStudentId='$studid' and tblStudentFlag=1";
-$result=mysqli_query($con, $query);
-$row=mysqli_fetch_array($result);
-$lvlid=$row['tblStudent_tblLevelId'];
+// $studid=$_POST['txtStudId'];
+// $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE'";
+// $result=mysqli_query($con, $query);
+// $row=mysqli_fetch_array($result);
+// $syid=$row['tblSchoolYrId'];
+// $query="select * from tblstudent where tblStudentId='$studid' and tblStudentFlag=1";
+// $result=mysqli_query($con, $query);
+// $row=mysqli_fetch_array($result);
+// $lvlid=$row['tblStudent_tblLevelId'];
 ?>
 <!DOCTYPE html>
 
@@ -128,6 +128,8 @@ $lvlid=$row['tblStudent_tblLevelId'];
               </li>
             </ul>
           </div>
+          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+          
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -242,22 +244,63 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                      </tr>
                                   </thead>
                                   <tbody>
+                                    <?php
+                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, tblChkId, tblChkAmount, tblChkBank, tblChkDate, ca.tblChkNum from tblstudent s, tblstudentinfo si, tblcheck ca where ca.tblChk_tblStudentId=s.tblStudentId and s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1 and ca.tblChkRTag!='PAID'";
+                                    $result=mysqli_query($con, $query);
+                                    while($row=mysqli_fetch_array($result)):
+                                    ?>
                                     <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
+                                      <td><?php echo $row['tblStudentId'] ?></td>
+                                      <td><?php echo $row['studentname'] ?></td>
+                                      <td><?php echo $row['tblChkNum'] ?></td>
+                                      <td><?php echo $row['tblChkAmount'] ?></td>
+                                      <td><?php echo $row['tblChkBank'] ?></td>
+                                      <td><?php echo $row['tblChkDate'] ?></td>
+                                      <td><form method="post" action="tagCheck.php"><input type="hidden" name="txtChkId" id="txtChkId" value="<?php echo $row['tblChkId'] ?>"/><input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $row['tblStudentId'] ?>"/><button type="submit" class="btn btn-success" name="btnStud" id="btnStud">Tag Check as Paid</button></form></td>
                                     </tr>
+                                    <?php
+                                    endwhile;
+                                     ?>
                                   </tbody>
                                 </table>
 
                         </div> <!-- box-body -->
+                      
                       </div> <!-- box-->
                     </div> <!--tab pane tab_1 -->
                   </div> <!-- tab content -->
+                  <div class="modal fade" id="deleteModalOne" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <form method="POST" action="deleteRequirement.php" class="form-horizontal">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="deleteModalOne"> DELETE REQUIREMENT </h4>
+                              </div>
+
+                              <div class="modal-body">
+                                <div class="form-group" style="display: none;">
+                                  <label class="col-sm-4 control-label">Requirement ID</label>
+                                  <div class="col-sm-5 input-group">
+                                    <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                                    <input type="text" name="txtDelReqId" id="txtDelReqId" readonly=""/>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                                </div>
+                              </div>
+
+                              <div class="modal-footer" style="margin-top: 5%; float: center">
+                                <button type="submit" class="btn btn-danger" name="btnDelReq" id="btnDelReq">Yes</button>
+                                <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
                 </div> <!-- box body -->
               </div> <!-- box- box-default-->
             </div> <!-- col-md-12 -->

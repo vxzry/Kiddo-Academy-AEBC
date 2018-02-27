@@ -8,6 +8,10 @@ $result=mysqli_query($con, $query);
 $row=mysqli_fetch_array($result);
 $syid=$row['tblSchoolYrId'];
 
+$query="select * from tblstudent where tblStudentId='$studid' and tblStudentFlag=1";
+$row=mysqli_fetch_array(mysqli_query($con, $query));
+$lvlid=$row['tblStudent_tblLevelId'];
+
 $query="select * from tblstudscheme order by tblStudSchemeId desc limit 0, 1";
 $result=mysqli_query($con, $query);
 $row=mysqli_fetch_array($result);
@@ -35,7 +39,7 @@ if(empty($schemeid))
 	}
 }else if(!empty($schemeid))
 {
-	$query4="select * from tblschemedetail where tblSchemeDetail_tblScheme='$schemeId' and tblSchemeDetail_tblLevel='$lvlid' and tblSchemeDetailFlag=1";
+	$query4="select * from tblschemedetail where tblSchemeDetail_tblScheme='$schemeid' and tblSchemeDetail_tblLevel='$lvlid' and tblSchemeDetailFlag=1";
 	$result3=mysqli_query($con, $query4);
 	while($row3=mysqli_fetch_array($result3))
 	{
@@ -53,4 +57,6 @@ if(empty($schemeid))
 		}
 	}
 }
+header("location:billing.php");
+
 ?>
