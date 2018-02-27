@@ -54,7 +54,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="formwizard2.css"><!-- 
+    <link rel="stylesheet" type="text/css" href="formwizard2.css"><!--
     <link href="css/multiple-select.css" rel="stylesheet"/> -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <style>
@@ -256,14 +256,9 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
           <!-- Content Header (Page header) -->
-          <section class="content-header">
-            <ol class="breadcrumb" style="font-size:15px;">
-              <li><a href="#" style="color: black;"><i class="fa fa-envelope-o"></i> Home</a></li>
-              <li class="active">Admission</li>
-            </ol>
-          </section>
+          <section class="content-header"></section>
           <!-- Main content -->
-          <section class="content" style="margin-top: 3%">
+          <section class="content">
             <div class="row">
                 <div class="col-md-12">
                   <div class="box box-default">
@@ -325,12 +320,12 @@
                             <div class="tab-content">
 
                               <div class="tab-pane active" role="tabpanel" id="step1">
-                                <h3 style="margin-bottom: 3%; margin-left: 3%">Check Requirements</h3>
+                                <center><h3 style="margin-bottom: 3%; margin-left: 3%">Check Requirements</h3></center>
                                 <hr>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
 
                                       <!-- radio -->
-                                      <div class="form-group" style="margin-top: 3%">
+                                      <div class="form-group" style="margin-top: 3%; margin-left: 10%">
                                         <div class="radio">
                                           <label>
                                             <input type="radio" name="r3" id="r3" value="NEW STUDENT" onchange="changeRequirement()">New Student
@@ -342,7 +337,7 @@
                                           </label>
                                         </div>
                                         </div>
-                                      <div class="form-group" style="margin-top: 3%">
+                                      <div class="form-group" style="margin-top: 3%; margin-left: 10%">
                                         <label style="width: 35%">Admission for:</label>
                                         <div>
                                           <select class="form-control" style="width: 35%;" name="selLevel" id="selLevel">
@@ -373,17 +368,17 @@
                               </div> <!-- tab pane step1 -->
 
                                   <div class="tab-pane" role="tabpanel" id="step2">
-                                    <h3 style="margin-bottom: 3%; margin-left: 3%">Student's Personal Information</h3>
+                                    <center><h3 style="margin-bottom: 3%; margin-left: 3%">Student's Personal Information</h3></center>
                                     <div class="container">
     <hr>
   <div class="row">
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
+          <img src="//placehold.it/100" class="avatar img-circle" alt="Student's Photo">
+          <h6>Upload photo...</h6>
 
-          <input type="file" class="form-control">
+          <input type="file" class="form-control" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
         </div>
       </div>
 
@@ -392,44 +387,44 @@
 
 
           <div class="form-group" style="margin-bottom:7%;">
-            <label class="col-lg-2 control-label left">First name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname">
+            <label class="col-lg-2 control-label left">First name:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%;">
+              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Middle name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:30%">
               <input class="form-control" type="text" name="txtStudMname" id="txtStudMname">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:19%;">
-            <label class="col-lg-2 control-label left">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname">
+            <label class="col-lg-2 control-label left">Last name:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%">
+              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:25%;">
             <form>
-            <label class="col-lg-2 control-label left">Birthday:</label>
-            <div class="col-lg-4">
-              <input class="form-control" type="date" id="date" name="dob" name="txtStudBday" id="txtStudBday" placeholder="mm/dd/yyyy" onblur="getAge();"/>
+            <label class="col-lg-2 control-label left">Birthday:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-4" style="width:23%">
+              <input class="form-control" type="date" id="date" name="dob" name="txtStudBday" id="txtStudBday" placeholder="mm/dd/yyyy" onblur="getAge();" required/>
             </div>
-            <label class="col-lg-2 control-label left">Age:</label>
-            <div class="col-lg-2">
+            <label class="col-lg-1 control-label left">Age:</label>
+            <div class="col-lg-2" style="width:23%">
               <input type="text" id="age" name="age" value="" class="form-control" placeholder="Age" disabled>
             </div>
-            </form>       
+            </form>
           </div>
           <div class="form-group" style="margin-bottom:31%;">
-            <label class="col-lg-2 control-label left">Birthplace:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtStudBplace" id="txtStudBplace">
+            <label class="col-lg-2 control-label left">Birthplace:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%;">
+              <input class="form-control" type="text" name="txtStudBplace" id="txtStudBplace" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:37%;">
             <label class="col-lg-2 control-label left">Nationality:</label>
-            <div class="col-lg-4">
+            <div class="col-lg-4" style="width:27%;">
               <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
             </div>
             <label class="col-lg-1 control-label left">Gender:</label>
@@ -443,7 +438,7 @@
           </div>
           <div class="form-group" style="margin-bottom:43%;">
             <label class="col-lg-2 control-label left">Religion:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:27%;">
               <input class="form-control" type="text" name="txtStudReligion" id="txtStudReligion">
             </div>
           </div>
@@ -460,24 +455,24 @@
             </div>
           </div>
           <div class="form-group" style="margin-bottom:55%;">
-            <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
-              <input class="form-control" type="text" placeholder="City/Municipality" name="txtStudAddCity" id="txtStudAddCity">
+            <label class="col-lg-2 control-label left"><span style="color:red; padding:100%;">*</span></label>
+            <div class="col-lg-6" style="width:27%;">
+              <input class="form-control" type="text" placeholder="City/Municipality" name="txtStudAddCity" id="txtStudAddCity" required>
             </div>
             <div class="col-lg-2">
               <input class="form-control" type="text" value="Philippines" name="txtStudAddCountry" id="txtStudAddCountry">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:61%;">
-          <label class="col-lg-2 control-label">First Language:</label>
-          <div class="col-lg-8">
-          <input class="form-control" type="text" name="txtStudLang1" id="txtStudLang1">
+          <label class="col-lg-2 control-label">Spoken Language:</label>
+          <div class="col-lg-8" style="width:27%;">
+          <input class="form-control" type="text" name="txtStudLang1" id="txtStudLang1" placeholder="First Language">
           </div>
           </div>
           <div class="form-group">
-          <label class="col-lg-2 control-label">Second Language:</label>
-          <div class="col-lg-8">
-          <input class="form-control" type="text" name="txtStudLang2" id="txtStudLang2">
+          <label class="col-lg-2 control-label"></label>
+          <div class="col-lg-8" style="width:27%;">
+          <input class="form-control" type="text" name="txtStudLang2" id="txtStudLang2" placeholder="Second Language">
           </div>
           </div>
 
@@ -493,17 +488,17 @@
                                   </div> <!-- tab pane step2-->
 
                                   <div class="tab-pane" role="tabpanel" id="step3">
-                                    <h3 style="margin-bottom: 3%; margin-left: 3%">Family Information</h3>
+                                    <center><h3 style="margin-bottom: 3%; margin-left: 3%">Family Information</h3></center>
 <div class="container">
     <hr>
   <div class="row">
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
+          <img src="//placehold.it/100" class="avatar img-circle" alt="Guardian's Photo">
+          <h6>Upload photo...</h6>
 
-          <input type="file" class="form-control">
+          <input type="file" class="text-center center-block well well-sm" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
         </div>
       </div>
 
@@ -513,33 +508,33 @@
 
 
           <div class="form-group" style="margin-bottom:7%;">
-            <label class="col-lg-2 control-label left">First name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtFatherFname" id="txtFatherFname">
+            <label class="col-lg-2 control-label left">First name:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%">
+              <input class="form-control" type="text" name="txtFatherFname" id="txtFatherFname" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Middle name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:30%">
               <input class="form-control" type="text" name="txtFatherMname" id="txtFatherMname">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:19%;">
-            <label class="col-lg-2 control-label left">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtFatherLname" id="txtFatherLname">
+            <label class="col-lg-2 control-label left">Last name:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%">
+              <input class="form-control" type="text" name="txtFatherLname" id="txtFatherLname" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:25%;">
-            <label class="col-lg-2 control-label left">Mobile Number:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtFatherNum" id="txtFatherNum">
+            <label class="col-lg-2 control-label left">Mobile Number:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:20%">
+              <input class="form-control" type="text" name="txtFatherNum" id="txtFatherNum" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:31%;">
-            <label class="col-lg-2 control-label left">E-mail Address:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="email" name="txtFatherEmail" id="txtFatherEmail">
+            <label class="col-lg-2 control-label left">E-mail Address:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:27%">
+              <input class="form-control" type="email" name="txtFatherEmail" id="txtFatherEmail" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:37%;">
@@ -555,29 +550,29 @@
             </div>
           </div>
           <div class="form-group" style="margin-bottom:43%;">
-            <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
-              <input class="form-control" type="text" placeholder="City/Municipality" name="txtFatherAddCity" id="txtFatherAddCity">
+            <label class="col-lg-2 control-label left"><span style="color:red; padding:100%;">*</span></label>
+            <div class="col-lg-6" style="width:27%;">
+              <input class="form-control" type="text" placeholder="City/Municipality" name="txtFatherAddCity" id="txtFatherAddCity" required>
             </div>
             <div class="col-lg-2">
               <input class="form-control" type="text" value="Philippines" name="txtFatherAddCountry" id="txtFatherAddCountry">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:49%;">
-            <label class="col-lg-2 control-label left">Home Tel. Number:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtFatherTelnum" id="txtFatherTelnum">
+            <label class="col-lg-2 control-label left">Home Tel. Number:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:17%">
+              <input class="form-control" type="text" name="txtFatherTelnum" id="txtFatherTelnum" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:55%;">
             <label class="col-lg-2 control-label left">Occupation/Title:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:35%;">
               <input class="form-control" type="text" name="txtFatherJob" id="txtFatherJob">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:61%;">
             <label class="col-lg-2 control-label left">Company Name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:35%">
               <input class="form-control" type="text" name="txtFatherCompany" id="txtFatherCompany">
             </div>
           </div>
@@ -595,7 +590,7 @@
           </div>
           <div class="form-group" style="margin-bottom:73%;">
             <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="width:27%">
               <input class="form-control" type="text" placeholder="City/Municipality" name="txtFatherComAddCity" id="txtFatherComAddCity">
             </div>
             <div class="col-lg-2">
@@ -604,7 +599,7 @@
           </div>
           <div class="form-group" style="margin-bottom:79%;">
             <label class="col-lg-2 control-label left">Work Phone Number:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:20%">
               <input class="form-control" type="text" name="txtFatherComNum" id="txtFatherComNum">
             </div>
           </div>
@@ -620,10 +615,10 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
+          <img src="//placehold.it/100" class="avatar img-circle" alt="Guardian's Photo">
+          <h6>Upload photo...</h6>
 
-          <input type="file" class="form-control">
+          <input type="file" class="form-control" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
         </div>
       </div>
 
@@ -633,33 +628,33 @@
 
 
           <div class="form-group" style="margin-bottom:7%;">
-            <label class="col-lg-2 control-label left">First name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtMotherFname" id="txtMotherFname">
+            <label class="col-lg-2 control-label left">First name:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%">
+              <input class="form-control" type="text" name="txtMotherFname" id="txtMotherFname" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Middle name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:30%">
               <input class="form-control" type="text" name="txtMotherMname" id="txtMotherMname">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:19%;">
-            <label class="col-lg-2 control-label left">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtMotherLname" id="txtMotherLname">
+            <label class="col-lg-2 control-label left">Last name:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:30%">
+              <input class="form-control" type="text" name="txtMotherLname" id="txtMotherLname" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:25%;">
-            <label class="col-lg-2 control-label left">Mobile Number:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtMotherNum" id="txtMotherNum">
+            <label class="col-lg-2 control-label left">Mobile Number:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:20%">
+              <input class="form-control" type="text" name="txtMotherNum" id="txtMotherNum" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:31%;">
-            <label class="col-lg-2 control-label left">E-mail Address:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="email" name="txtMotherEmail" id="txtMotherEmail">
+            <label class="col-lg-2 control-label left">E-mail Address:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:27%">
+              <input class="form-control" type="email" name="txtMotherEmail" id="txtMotherEmail" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:37%;">
@@ -675,8 +670,8 @@
             </div>
           </div>
           <div class="form-group" style="margin-bottom:43%;">
-            <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
+            <label class="col-lg-2 control-label left"><span style="color:red; padding:100%;">*</span></label>
+            <div class="col-lg-6" style="width:27%">
               <input class="form-control" type="text" placeholder="City/Municipality" name="txtMotherAddCity" id="txtMotherAddCity">
             </div>
             <div class="col-lg-2">
@@ -684,20 +679,20 @@
             </div>
           </div>
           <div class="form-group" style="margin-bottom:49%;">
-            <label class="col-lg-2 control-label left">Home Tel. Number:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="txtMotherTelnum" id="txtMotherTelnum">
+            <label class="col-lg-2 control-label left">Home Tel. Number:<span style="color:red; padding:5%;">*</span></label>
+            <div class="col-lg-8" style="width:17%">
+              <input class="form-control" type="text" name="txtMotherTelnum" id="txtMotherTelnum" required>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:55%;">
             <label class="col-lg-2 control-label left">Occupation/Title:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:35%">
               <input class="form-control" type="text" name="txtMotherJob" id="txtMotherJob">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:61%;">
             <label class="col-lg-2 control-label left">Company Name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:35%">
               <input class="form-control" type="text" name="txtMotherCompany" id="txtMotherCompany">
             </div>
           </div>
@@ -715,7 +710,7 @@
           </div>
           <div class="form-group" style="margin-bottom:73%;">
             <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="width:27%">
               <input class="form-control" type="text" placeholder="City/Municipality" name="txtMotherComAddCity" id="txtMotherComAddCity">
             </div>
             <div class="col-lg-2">
@@ -724,7 +719,7 @@
           </div>
           <div class="form-group" style="margin-bottom:79%;">
             <label class="col-lg-2 control-label left">Work Phone Number:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width:17%">
               <input class="form-control" type="text" name="txtMotherComNum" id="txtMotherComNum">
             </div>
           </div>
@@ -745,7 +740,7 @@
       <div class="col-md-9 personal-info">
 
  <div class="form-group" style="margin-bottom:7%;">
-            <label class="col-lg-2 control-label left">Parent Status:</label>
+            <label class="col-lg-2 control-label left">Parent Status:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-8">
               <select class="form-control choose" multiple="multiple" data-placeholder="Select a status" name="chkParentStat" id="chkParentStat" style="width: 100%">
                     <option value="Parents Married">Parents Married</option>
@@ -760,7 +755,7 @@
             </div>
           </div>
   <div class="form-group" style="margin-bottom:13%;">
-            <label class="col-lg-2 control-label left">Applicant Lives With:</label>
+            <label class="col-lg-2 control-label left">Applicant Lives With:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-8">
               <select class="form-control choose" multiple="multiple" data-placeholder="Select a status" name="chkLivesWith" id="chkLivesWith" style="width: 100%">
                 <option value="Father and Mother">Father and Mother</option>
@@ -783,25 +778,25 @@
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <h3>Siblings</h3>
-        <div class= "right" style="margin-bottom:5%">
+        <div class= "right" style="margin-bottom:7%">
                <a href="#"><span class="btn btn-info" id="siblingbutton" style="float: right;" onclick="addSibling();" >ADD</span></a>
         </div>
         <div class="form-group" id="sibling">
 
             <label class="col-lg-4 control-label left">Name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%; width:45%;">
               <input class="form-control" type="text" name="txtSiblName[]" id="txtSiblName">
             </div>
             <label class="col-lg-4 control-label left">Age:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%; width:45%;">
               <input class="form-control" type="text" name="txtSiblAge[]" id="txtSiblAge">
             </div>
             <label class="col-lg-4 control-label left">Grade/Level:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%;width:45%;">
               <input class="form-control" type="text" name="txtSiblGrd[]" id="txtSiblGrd">
             </div>
             <label class="col-lg-4 control-label left">School:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%;width:45%;">
               <input class="form-control" type="text" name="txtSiblSchool[]" id="txtSiblSchool">
           </div>
        </div>
@@ -815,23 +810,23 @@
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <h3>Other members of the Household</h3>
-        <div class= "right" style="margin-bottom: 5%">
+        <div class= "right" style="margin-bottom: 7%">
                <a href="#"><span class="btn btn-info" id="relativebutton" style="float: right" onclick="addRelative();" >ADD</span></a>
         </div>
 
           <div class="form-group" id="relative">
             <label class="col-lg-4 control-label left">Name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%;width:45%;">
               <input class="form-control" type="text" name="txtRelName[]" id="txtRelName">
             </div>
 
             <label class="col-lg-4 control-label left">Age:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%;width:45%;">
               <input class="form-control" type="text" name="txtRelAge[]" id="txtRelAge">
             </div>
 
             <label class="col-lg-4 control-label left">Relation:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="margin-bottom:2%;width:45%;">
               <input class="form-control" type="text" name="txtRelRelation[]" id="txtRelRelation">
             </div>
           </div>
@@ -852,34 +847,34 @@
                                   <div class="tab-pane" role="tabpanel" id="step4">
 
                                     <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
-                                    <h3 style="margin-left: 3%">Health History</h3>
+                                    <center><h3 style="margin-left: 3%">Health History</h3></center>
                                     <hr>
                                       <!-- <h3>Health History</h3> -->
 
                                           <div class="form-group">
                                             <label class="col-lg-2 control-label">Allergies:</label>
-                                            <div class="col-lg-7">
+                                            <div class="col-lg-7" style="width:45%;">
                                               <input class="form-control" type="text" name="txtHealthAllergies" id="txtHealthAllergies">
                                             </div>
                                           </div>
 
                                           <div class="form-group" style="margin-top: 6%">
                                             <label class="col-lg-2">Illness or Disability:</label>
-                                            <div class="col-lg-7">
+                                            <div class="col-lg-7" style="width:45%;">
                                               <input class="form-control" type="text" name="txtHealthIllness" id="txtHealthIllness">
                                             </div>
                                           </div>
 
                                           <div class="form-group" style="margin-top: 10%">
                                             <label class="col-lg-2 control-label">Medication:</label>
-                                            <div class="col-lg-7">
+                                            <div class="col-lg-7" style="width:45%;">
                                               <input class="form-control" type="text" name="txtHealthMeds" id="txtHealthMeds">
                                             </div>
                                           </div>
 
                                           <div class="form-group" style="margin-top: 14%">
                                             <label class="col-lg-2 control-label">Blood Type:</label>
-                                              <div class="col-lg-7">
+                                              <div class="col-lg-7" style="width:10%;">
                                                 <select class="form-control choose" style="width: 100%;" name="selHealthBtype" id="selHealthBtype">
                                                   <option value="A">A</option>
                                                   <option value="B">B</option>
@@ -905,6 +900,7 @@
                                                 <label class="col-lg-2 control-label">Reason:</label>
                                                 <div class="col-lg-7">
                                                   <input class="form-control" type="text" name="txtHealthReason" id="txtHealthReason">
+                                                  <!-- <textarea rows="2" cols="20" class="form-control" type="text" name="txtHealthReason" id="txtHealthReason"></textarea> -->
                                                 </div>
                                               </div>
 
@@ -921,21 +917,21 @@
 
                                               <div class="form-group" style="margin-top: 29%">
                                                 <label class="col-lg-2 control-label">Doctor's Name:</label>
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-7" style="width: 30%;">
                                                   <input class="form-control" type="text" name="txtHealthDoctor" id="txtHealthDoctor">
                                                 </div>
                                               </div>
 
                                               <div class="form-group" style="margin-top: 33%">
                                                 <label class="col-lg-2 control-label">Hospital:</label>
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-7" style="width: 35%;">
                                                   <input class="form-control" type="text" name="txtHealthHospital" id="txtHealthHospital">
                                                 </div>
                                               </div>
 
                                               <div class="form-group" style="margin-top: 37%">
                                                 <label class="col-lg-2 control-label">Tel/Mobile #:</label>
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-7" style="width: 17%;">
                                                   <input class="form-control" type="text" name="txtHealthHosNum" id="txtHealthHosNum">
                                                 </div>
                                               </div>
@@ -954,7 +950,7 @@
                                               </div>
           <div class="form-group" style="margin-top: 46%;">
             <label class="col-lg-2 control-label left"></label>
-            <div class="col-lg-5">
+            <div class="col-lg-5" style="width: 27%;">
               <input class="form-control" type="text" placeholder="City/Municipality" name="txtHealthAddCity" id="txtHealthAddCity">
             </div>
             <div class="col-lg-2">
@@ -970,25 +966,25 @@
       <div class="col-md-9 personal-info">
       	<h4 style="font-weight: bold">Emergency Contact</h4>
         <h5>Other person(s) to contact in case of emergency</h5>
-        <div class= "right" style="margin-bottom:5%">
+        <div class= "right" style="margin-bottom:7%">
                <a href="#"><span class="btn btn-info" id="emcontactbutton" style="float: right" onclick="addEmergencyContact();" >ADD</span></a>
         </div>
         <div class="form-group" id="sibling">
 
             <label class="col-lg-4 control-label">Name:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width: 45%; margin-bottom:1%;">
               <input class="form-control" type="text" name="txtEmName[]" id="txtEmName">
             </div>
             <label class="col-lg-4 control-label">Relation to Student:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width: 45%; margin-bottom:1%;">
               <input class="form-control" type="text" name="txtReltoStud[]" id="txtReltoStud">
             </div>
             <label class="col-lg-4 control-label">Tel/Mobile Number:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width: 45%; margin-bottom:1%;">
               <input class="form-control" type="text" name="txtEmNum[]" id="txtEmNum">
             </div>
             <label class="col-lg-4 control-label">Address:</label>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="width: 45%;">
               <input class="form-control" type="text" name="txtEmAdress[]" id="txtEmAdress">
           </div>
        </div>
@@ -1110,7 +1106,7 @@
   <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
   <script src="js/select2.full.min.js"></script>
   <script type="text/javascript" src="formwizard.js"></script>
-  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script><!-- 
+  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script><!--
   <script src="js/multiple-select.js"></script> -->
   <script>
     $(function () {

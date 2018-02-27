@@ -273,7 +273,7 @@ function run(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Add Section</h3>
         </div>
-        <form data-toggle="validation" role="form" method="post" action="saveSection.php" name="formAdd" id="formAdd">
+        <form data-toggle="validation" role="form" method="post" action="actionSection.php" name="formAdd" id="formAdd">
         <div class="modal-body">
         <div class="form-group">
         
@@ -330,7 +330,7 @@ function run(){
         </div> 
         </div>
         <div class="modal-footer" style="margin-top: 10%">
-        <button type="submit" class="btn btn-info" name="addSectBtn" id="addSectBtn">Save</button>
+        <button type="submit" class="btn btn-info" name="btnAddSect" id="btnAddSect">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         
@@ -348,7 +348,7 @@ function run(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Update Section</h3>
         </div>
-        <form data-toggle="validation" role="form" action="updateSection.php" method="post" name="updSection" id="updSection">
+        <form data-toggle="validation" role="form" action="actionSection.php" method="post" name="updSection" id="updSection">
         <div class="modal-body">
         
         <div class="form-group">
@@ -398,7 +398,7 @@ function run(){
         </div>        
         </div>
         <div class="modal-footer" style="margin-top: 10%">
-        <button type="submit" class="btn btn-info" name="updSectBtn" id="updSectBtn">Save</button>
+        <button type="submit" class="btn btn-info" name="btnUpdSect" id="btnUpdSect">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         </form>
@@ -415,7 +415,7 @@ function run(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h3 class="modal-title" style="font-style: bold">Delete Section</h3>
         </div>
-        <form action="deleteSection.php" method="post">
+        <form action="actionSection.php" method="post">
         <div class="modal-body">
         <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
           <div><input type="hidden" name="txtDelSectId" id="txtDelSectId"/></div>
@@ -425,7 +425,7 @@ function run(){
         </div>
         </div>
         <div class="modal-footer" style="margin-top: 5%; float: center">
-        <button type="submit" class="btn btn-danger" name="delSectBtn" id="delSectBtn">Yes</button>
+        <button type="submit" class="btn btn-danger" name="btnDelSect" id="btnDelSect">Yes</button>
           <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
         </div>
         </form>

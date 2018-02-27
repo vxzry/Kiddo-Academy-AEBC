@@ -89,10 +89,13 @@ function run(){
     var f2=document.getElementById('txtSectionId');
     var f3=document.getElementById('txtSlot');
     var f4=document.getElementById('selFaculty');
+    var f5=document.getElementById('txtSession');
     f1.value=cells[0].innerHTML;
     f2.value=cells[0].innerHTML;
     f3.value=cells[5].innerHTML;
     f4.value=cells[7].innerHTML;
+    f5.value=cells[4].innerHTML;
+    
   };
 }})();
     </script>
@@ -395,6 +398,7 @@ function run(){
                                 <div class="modal-body">
                                 <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
                                   <div><input type="hidden" name="txtSectionId" id="txtSectionId"/></div>
+                                  <div><input type="hidden" name="txtSession" id="txtSession"/></div>
                                 <div class="form-group" style="margin-top: 5%">
                                         <label class="col-sm-4" style="text-align: right">Faculty-In-Charge:</label>
                                         <div class="col-sm-7 selectContainer">
@@ -405,13 +409,10 @@ function run(){
                                             $result=mysqli_query($con, $query);
                                             while($row=mysqli_fetch_array($result)):
                                               $facultyid=$row['tblFacultyId'];
-                                              $query1="select * from tblsection where tblSection_tblFacultyId='$facultyid' and tblSectionFlag=1";
-                                              $result1 = $con->query($query1);
-                                              if($result1->num_rows == 0)
-                                              {
-                                            ?>
-                                            <option value="<?php echo $row['tblFacultyId'] ?>"><?php echo $row['facultyname'] ?></option>
-                                            <?php }; endwhile; ?>
+                                              
+                                              ?>
+                                              <option value="<?php echo $row['tblFacultyId'] ?>"><?php echo $row['facultyname'] ?></option>
+                                              <?php endwhile; ?>
                                         </select>
                                         </div>
                                 </div>

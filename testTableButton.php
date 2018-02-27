@@ -22,18 +22,18 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <script>
+      function changeLabel()
+      {
+        document.getElementById('lbl').innerHTML = document.getElementById('txt').value;
+        document.getElementById('txt1').value = document.getElementById('txt').value;
+      }
+    </script>
 </head>
 <body>
-<table id="datatable">
-<thead>
-<th>id</th>
-<th>action</th>
-</thead>
-<tbody>
-<td></td>
-<td></td>
-</tbody>
-</table>
+<label id="lbl" name="lbl"></label>
+<input type="text" name="txt" id="txt" onkeypress="changeLabel()" />
+<input type="text" name="txt1" id="txt1" onkeypress="changeLabel()" />
 <!-- jQuery 2.2.3 -->
   <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
   <!-- Bootstrap 3.3.6 -->

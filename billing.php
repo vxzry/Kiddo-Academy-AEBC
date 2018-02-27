@@ -228,7 +228,6 @@
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs" id="myTab">
                       <li><a href="#tab_1" data-toggle="tab">General Billing</a></li>
-                      
                       <li class="active"><a href="#tab_3" data-toggle="tab">Billing by Student</a></li>
                     </ul>
                   <div class="box-header with-border">
