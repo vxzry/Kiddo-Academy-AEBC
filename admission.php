@@ -179,6 +179,8 @@
 		          </li>
 		        </ul>
 		      </div>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
+
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
