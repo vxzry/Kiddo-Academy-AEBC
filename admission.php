@@ -195,6 +195,7 @@
 
             <div class="pull-left info">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px;"><?php echo $rolename ?></p>
             </div>
           </div>
 
@@ -216,6 +217,7 @@
               $modulename=$row1['tblModuleType'];
 
         ?>
+
 
         <li class="treeview">
           <a href="#">
