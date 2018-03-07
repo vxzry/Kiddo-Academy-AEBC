@@ -43,9 +43,25 @@ function Header()
     $this->SetFont('Arial','',11);
     $this->Cell(5,10,"We congratulate and inform you that you are now admitted to Kiddo Academy and",0,0,'C');
 
-    $this->SetXY(90,100);
+    $this->SetXY(102,100);
     $this->SetFont('Arial','',11);
-    $this->Cell(5,5,"Development Center as a Grade __ student, Section ____________, under the",0,0,'C');
+    $this->Cell(5,10,"Development Center as a Grade __ student. You are requested to settle your bill and present ",0,0,'C');
+
+    $this->SetXY(68,110);
+    $this->SetFont('Arial','',11);
+    $this->Cell(5,10,"with the following documents at the time of admission:",0,0,'C');
+
+    $this->SetXY(108,180);
+    $this->SetFont('Arial','',11);
+    $this->Cell(5,10,"For further information, contact the management or go through the guidelines in",0,0,'C');
+
+    $this->SetXY(60,190);
+    $this->SetFont('Arial','',11);
+    $this->Cell(5,10,"the website (https://kiddoacademy.com).",0,0,'C');
+
+    $this->SetXY(50,200);
+    $this->SetFont('Arial','',11);
+    $this->Cell(5,10,"Thank you.",0,0,'C');
 }
 
 
@@ -69,12 +85,12 @@ function Footer()
     //$pdf -> SetFont('Arial','',8);
 
   
-    $pdf->SetFont('Arial','',10);
-    $pdf->SetXY(30,230);//X-Left, Y- Down
-    $pdf->Cell(10,10,'Aimee Tayag-Ang',0,0,'');
-    $pdf->SetFont('Arial','',8);
-    $pdf->SetXY(30,235);//X-Left, Y- Down
-    $pdf->Cell(10,10,'School-Head',0,0,'');
+    // $pdf->SetFont('Arial','',10);
+    // $pdf->SetXY(30,230);//X-Left, Y- Down
+    // $pdf->Cell(10,10,'Aimee Tayag-Ang',0,0,'');
+    // $pdf->SetFont('Arial','',8);
+    // $pdf->SetXY(30,235);//X-Left, Y- Down
+    // $pdf->Cell(10,10,'School-Head',0,0,'');
 
 
 
@@ -83,7 +99,7 @@ function Footer()
     $pdf->Cell(10,10,'Aimee Tayag-Ang',0,0,'');
     $pdf->SetFont('Arial','',8);
     $pdf->SetXY(150,235);//X-Left, Y- Down
-    $pdf->Cell(10,10,'Teacher',0,0,'');
+    $pdf->Cell(10,10,'School-Head',0,0,'');
 
 
 
