@@ -1,7 +1,7 @@
 <?php
 require ("fpdf.php");
 include "db_connect.php";
-$sect=$_POST['txtsect'];
+$type=$_POST['txttype'];
 
 class PDF extends FPDF
 {
@@ -28,14 +28,14 @@ function Header()
 
     $this->SetXY(100,55);
     $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"CLASS RANKING",0,0,'C');
+    $this->Cell(10,10,"Deficient Students",0,0,'C');
 
     $this->Ln(15);// Line break
     $this->SetFont('Arial','',8);
     $this->Cell(20,5,"Student Id",1,0,'C');
     $this->Cell(50,5,"Student Name",1,0,'C');
-    $this->Cell(95,5,"Student Level",1,0,'C');
-    $this->Cell(30,5,"Reason",1,0,'C');
+    $this->Cell(30,5,"Student Level",1,0,'C');
+    $this->Cell(95,5,"Reason",1,0,'C');
 
 
 }
@@ -65,14 +65,17 @@ function Footer()
     $row=mysqli_fetch_array($query);
     $syid=$row['tblSchoolYrId'];
     $x=1;
-    $query=mysqli_query($con, "select avg(ga.tblGenAverage) as average,concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudentId from tblgradeave ga, tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and ga.tblGenAve_tblStudentId=s.tblStudentId and s.tblStudent_tblSectionId='$sect' and ga.tblGenAveFlag=1 and ga.tblGenAve_tblSchoolYrId='$syid' group by s.tblStudentId");
+    $query=mysqli_query($con, "select concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudentId, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentType='$type' group by s.tblStudentId");
     while($row=mysqli_fetch_array($query)):
-        
+        $lvlid=$row['tblStudent_tblLevelId'];
+        $query1=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
+        $row1=mysqli_fetch_array($query1);
+        $lvlname=$row1['tblLevelName'];
         $pdf->Ln(5);
-        $pdf->Cell(20, 5, $x, 1, 0);
-        $pdf->Cell(50,5,$row['tblStudentId'],1,0);
-        $pdf->Cell(95,5,$row['studentname'],1,0);
-        $pdf->Cell(30,5,$row['average'],1,0);
+        $pdf->Cell(20, 5, $row['tblStudentId'], 1, 0);
+        $pdf->Cell(50,5,$row['studentname'],1,0);
+        $pdf->Cell(30,5,$lvlname,1,0);
+        $pdf->Cell(95,5,'sample',1,0);
         $x++;
     endwhile;
 

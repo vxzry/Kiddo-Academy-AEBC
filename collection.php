@@ -236,11 +236,12 @@ $acc=$_POST['chkbills'];
         <div class="col-sm-11">
             <legend style="font-weight: bold;">Student Name: Kwon Soonyoung</legend>
         </div>
+        <form action="trytry.php" method="post">
         <div class="col-sm-10">
             <h4>Evaluation:</h4>
             <div class="row">
                 <div class="col-xs-12">
-                <form action="trytry.php" method="post">
+                
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
@@ -324,7 +325,7 @@ $acc=$_POST['chkbills'];
 
          <!-- checkbox -->
                             <div class="form-group col-md-9" style="margin-top: 5%">
-<<<<<<< HEAD
+
                               <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Number:</label>
                               <input type="text" name="num" id="num" class="col-md-8">
@@ -336,7 +337,7 @@ $acc=$_POST['chkbills'];
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
                               <input type="text" name="bank" id="bank" class="col-md-8">
-=======
+
                               <label class="col-md-3">Cash Amount:</label>
                               <label>
                                 <input type="checkbox" name="check" id="check" onchange="showCheck()"> Check
@@ -351,10 +352,11 @@ $acc=$_POST['chkbills'];
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
                               <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled>
->>>>>>> bf7afb05df06de63b8d4acda66ab33be2118c3f6
+
                             </div>
                           </div>
          <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
+         <button type="button" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%" onclick="window.open('reportreceipt.php', '_blank');">Get Receipt</button>
     </form> 
   </div>
 </div>

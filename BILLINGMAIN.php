@@ -227,7 +227,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
               <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
                   <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">BILLING</h2>
+                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">Collection</h2>
                     <hr>
                     <?php
                             $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
@@ -245,8 +245,8 @@ $lvlid=$row['tblStudent_tblLevelId'];
                           <form action="collection.php" method="post">
                             <div class="box-body">
                             <div class="col-md-6" style="margin-top: 2%">
-                              <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Add Bill</button>
-                              <button type="submit" class="btn btn-success" id="proceed" name="proceed" disabled style="margin-bottom: 3%">Proceed to Collection</button>
+                              <!-- <button type="button" class="btn btn-info" data-toggle="modal" value="Reset form" data-target="#addFeesModal" style="margin-bottom: 3%">Add Bill</button> -->
+                              <button type="submit" class="btn btn-success" id="proceed" name="proceed" disabled style="margin-bottom: 3%">Proceed to Payment</button>
                             </div>
 
                               <div class="col-md-12" style="margin-top: 5%">
