@@ -265,6 +265,10 @@ $acc=$_POST['chkbills'];
                                 $result=mysqli_query($con, $query);
                                 $row=mysqli_fetch_array($result);
                                 $studschemeid=$row['tblAcc_tblStudSchemeId'];
+                                $studid=$row['tblAcc_tblStudentId'];
+                                $query2=mysqli_query($con, "select  concat(tblStudInfoLname, ', ', tblStudInfoFname, ' ', tblStudInfoMname) as studentname from tblstudentinfo where tblStudInfo_tblStudentId='$studid'");
+                                $row2=mysqli_fetch_array($query2);
+                                $studname=$row2['studentname'];
                                 $query1="select * from tblstudscheme s, tblfee f where f.tblFeeId=s.tblStudScheme_tblFeeId and s.tblStudSchemeId='$studschemeid' and s.tblStudSchemeFlag=1 and f.tblFeeFlag=1";
                                 $result1=mysqli_query($con, $query1);
                                 $row1=mysqli_fetch_array($result1);
@@ -356,8 +360,13 @@ $acc=$_POST['chkbills'];
                             </div>
                           </div>
          <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
-         <button type="button" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%" onclick="window.open('reportreceipt.php', '_blank');">Get Receipt</button>
+         
     </form> 
+    <form method="post" action="reportreceipt.php" target="_blank">
+      <input type="text" value="<?php echo $totalamountpaid ?>" id="amnt" name="amnt" />
+      <input type="text" value="<?php echo $studname ?>" id="name" name="name" />
+      <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
+    </form>
   </div>
 </div>
                           

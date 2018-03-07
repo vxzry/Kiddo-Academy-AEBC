@@ -1,7 +1,8 @@
 <?php
 require ("fpdf.php");
 include "db_connect.php";
-
+$amnt=$_POST['amnt'];
+$studname=$_POST['name'];
 class PDF extends FPDF
 {
 // Page header
@@ -61,7 +62,7 @@ function Footer()
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(30,80);//X-Left, Y- Down
     $pdf->Cell(10,5,'Received from',0,0,'');
-    $pdf->Line(55,85,180,85);
+    $pdf->Cell(80,5,0,0,'');
     $pdf->SetXY(30,90);
     $pdf->Cell(10,5,'with address at ',0,0,'');
     $pdf->Line(57,95,180,95);
