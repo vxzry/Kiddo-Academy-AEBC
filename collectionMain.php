@@ -121,7 +121,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -217,15 +217,20 @@
             <div class="col-md-12">
               <div class="box box-default">
                 <div class="box-header with-border"></div>
-                <div class="box-body">
-                  <div class="box-header with-border">
+                <div class="box-header with-border">
                     <h2 class="box-title" style="font-size:20px;">Collection</h2>
                     <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                   </div>
+                <div class="box-body">
+                  <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs" id="myTab">
+                      <li class="active"><a href="#tab_1" data-toggle="tab">Student's Payment</a></li>
+                      <li><a href="#tab_2" data-toggle="tab">Checks</a></li>
+                    </ul>
 
                   <div class="tab-content">
 
-                    <div class="tab-pane active" id="tab_1">
+                    <div class="tab-pane" id="tab_2">
                       <div class="box">
                         <div class="box-header"></div>
                         <div class="box-body">
@@ -268,39 +273,59 @@
                       
                       </div> <!-- box-->
                     </div> <!--tab pane tab_1 -->
-                  </div> <!-- tab content -->
-                  <div class="modal fade" id="deleteModalOne" role="dialog">
-                        <div class="modal-dialog">
-
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <form method="POST" action="deleteRequirement.php" class="form-horizontal">
-                              <div class="modal-header">
-                                <h4 class="modal-title" id="deleteModalOne"> DELETE REQUIREMENT </h4>
-                              </div>
-
-                              <div class="modal-body">
-                                <div class="form-group" style="display: none;">
-                                  <label class="col-sm-4 control-label">Requirement ID</label>
-                                  <div class="col-sm-5 input-group">
-                                    <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
-                                    <input type="text" name="txtDelReqId" id="txtDelReqId" readonly=""/>
-                                  </div>
-                                </div>
-
-                                <div class="form-group">
-                                  <h4 align="center" style="margin-top: 5%">Are you sure you want to delete this record?</h4>
+                  </div>
+                    <div class="tab-pane active" id="tab_1">
+                      <div class="box">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                            <div class="col-md-6"  style="margin-top: 3%">
+                              <div class="form-group">
+                                  <label>Level</label>
+                                  <select class="form-control" style="width: 50%;" onchange="changeBillingLevel()" name="selLevel" id="selLevel">
+                                    <option selected="selected" disabled>--Select Level--</option>
+                                    <?php
+                                    $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
+                                    $result = mysqli_query($con, $query);
+                                    while($row=mysqli_fetch_array($result)):
+                                    ?>
+                                    <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
+                                    <?php endwhile ?>
+                                  </select>
                                 </div>
                               </div>
 
-                              <div class="modal-footer" style="margin-top: 5%; float: center">
-                                <button type="submit" class="btn btn-danger" name="btnDelReq" id="btnDelReq">Yes</button>
-                                <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
+                              <div class="col-md-12" style="margin-top: 3%">
+                                <table id="datatable1" class="table table-bordered table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>Student ID</th>
+                                      <th>Student Name</th>
+                                      <th>Action</th>
+                                    </tr>
+                                  </thead> 
+                                  <tbody>
+                                  <?php
+                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1;";
+                                    $result=mysqli_query($con, $query);
+                                    while($row=mysqli_fetch_array($result)):
+                                  ?>
+                                    <tr>
+                                      <td><?php echo $row['tblStudentId'] ?></td>
+                                      <td><?php echo $row['studentname'] ?></td>
+                                      <td>
+                                      <form action="BILLINGMAIN.php" method="post">
+                                      <input type="hidden" value="<?php echo $row['tblStudentId'] ?>" name="txtStudId" id="txtStudId"/>
+                                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Proceed to Billing</button></form></td>
+                                    </tr>
+                                  <?php endwhile; ?>
+                                  </tbody>
+                                </table>
+                              </div> <!-- col-md-12 -->
+                            </div> <!-- box body -->
+                      
+                      </div> <!-- box-->
+                    </div>
+                    </div><!-- <div class="nav-tabs-custom"> -->
                 </div> <!-- box body -->
               </div> <!-- box- box-default-->
             </div> <!-- col-md-12 -->

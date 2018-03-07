@@ -243,13 +243,10 @@ $x=substr($login_session,0,1);
                               <table id="datatable" name="datatable" class="table table-bordered table-striped">
                               <thead>
                                 <tr>
-                                  <th>Subject</th>
-                                  <th>1st Grading</th>
-                                  <th>2nd Grading</th>
-                                  <th>3rd Grading</th>
-                                  <th>4th Grading</th>
-                                  <th>Final</th>
-                                  <th>Status</th>
+                                  <th>Student Id</th>
+                                  <th>Student Name</th>
+                                  <th>Student Level</th>
+                                  <th>Action</th>
                                 </tr>
                                 </thead>
 

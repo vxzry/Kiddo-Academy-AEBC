@@ -98,7 +98,7 @@ $x=substr($login_session,0,1);
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -206,9 +206,9 @@ $x=substr($login_session,0,1);
                                 <tr>
                                   <td><?php echo $row['tblSectionId'] ?></td>
                                   <td><?php echo $row['tblSectionName'] ?></td>
-                                  <td><a href = "grade(faculty).php"><form method="post" action="grade(faculty).php">
+                                  <td><form method="post" action="grade(faculty).php">
                                   <input type="hidden" name="txtSectId" id="txtSectId" value="<?php echo $row['tblSectionId'] ?>"/>
-                                  <button type="submit" class="btn btn-success" name="btnSect" id="btnSect"><i class="fa fa-edit"></i>View Section List</button></form></a></td>
+                                  <button type="submit" class="btn btn-success" name="btnSect" id="btnSect"><i class="fa fa-edit"></i>View Section List</button></form></td>
                                 </tr>
                               <?php endwhile; ?>
                                 </tbody>

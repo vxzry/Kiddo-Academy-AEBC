@@ -39,7 +39,7 @@ function Header()
     $this->Ln(15);// Line break
     $this->SetFont('Arial','',8);
     $this->Cell(55,5,"Receive from",1,0,'C');
-    $this->Cell(40,5,"Payment for",1,0,'C');
+    $this->Cell(40,5,"Payment Date",1,0,'C');
     $this->Cell(35,5,"Official Receipt #",1,0,'C');
     $this->Cell(35,5,"Provisional Receipt #",1,0,'C');
     $this->Cell(30,5,"Amount",1,1,'C');

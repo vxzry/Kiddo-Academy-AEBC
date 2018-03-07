@@ -226,67 +226,15 @@
               <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
                   <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs" id="myTab">
-                      <li><a href="#tab_1" data-toggle="tab">General Billing</a></li>
-                      <li class="active"><a href="#tab_3" data-toggle="tab">Billing by Student</a></li>
-                    </ul>
-                  <div class="box-header with-border">
+                                      <div class="box-header with-border">
                     <h2 class="box-title" style="font-size:25px; margin-top: 10px">BILLING</h2>
                   </div>
 
 
                   <div class="tab-content">
 
-                    <div class="tab-pane fade in active" id="tab_3">
-                          
-                          <div class="box-body">
-                            <div class="col-md-6"  style="margin-top: 3%">
-                              <div class="form-group">
-                                  <label>Level</label>
-                                  <select class="form-control" style="width: 50%;" onchange="changeBillingLevel()" name="selLevel" id="selLevel">
-                                    <option selected="selected" disabled>--Select Level--</option>
-                                    <?php
-                                    $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
-                                    $result = mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                    ?>
-                                    <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
-                                    <?php endwhile ?>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div class="col-md-12" style="margin-top: 3%">
-                                <table id="datatable1" class="table table-bordered table-striped">
-                                  <thead>
-                                    <tr>
-                                      <th>Student ID</th>
-                                      <th>Student Name</th>
-                                      <th>Action</th>
-                                    </tr>
-                                  </thead> 
-                                  <tbody>
-                                  <?php
-                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1;";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                  ?>
-                                    <tr>
-                                      <td><?php echo $row['tblStudentId'] ?></td>
-                                      <td><?php echo $row['studentname'] ?></td>
-                                      <td>
-                                      <form action="BILLINGMAIN.php" method="post">
-                                      <input type="hidden" value="<?php echo $row['tblStudentId'] ?>" name="txtStudId" id="txtStudId"/>
-                                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Proceed to Billing</button></form></td>
-                                    </tr>
-                                  <?php endwhile; ?>
-                                  </tbody>
-                                </table>
-                              </div> <!-- col-md-12 -->
-                            </div> <!-- box body -->
-                          
-                    </div> <!--tab pane tab_3 -->
-                    <div class="tab-pane" id="tab_1">
+                  
+                    <div class="tab-pane active" id="tab_1">
                           
                           <div class="box-body">
                             <div class="col-md-6"  style="margin-top: 3%">
@@ -296,6 +244,7 @@
                                   <label>Select Billing Type: </label>
                                   <input type="radio" name="r1" id="r1" value="1" onclick="addFields()"/> General
                                   <input type="radio" name="r1" id="r1" value="0" onclick="addFields()"/> Per Level
+                                  <input type="radio" name="r1" id="r1" value="2" onclick="addFields()"/> Per Student
                                 </div>
                                 <label>Select Fee: </label>
                               <select name="selFee" id="selFee" onclick="addFields()">
