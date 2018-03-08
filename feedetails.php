@@ -273,91 +273,47 @@
                                 </div>
                           </div>
                         <!-- edit form column -->
-                        <div class="col-md-8 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
+                        <form class="form-horizontal" role="form" method="post" action="saveFeeDetail.php">
+                        <div class="col-md-4 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">
 
-                          <form class="form-horizontal" role="form" method="post" action="">
+                          
                             <div class="form-group">
-                              <label class="col-lg-3 control-label">Fee name:</label>
+                              <label class="col-lg-3 control-label">Fee Detail name:</label>
                               <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtFname" id="txtFname">
+                                <input class="form-control" type="text" style="width:200px" name="txtFeeDet" id="txtFeeDet">
+                                <input class="form-control" type="hidden" style="width:200px" name="txtFeeDetFee" id="txtFeeDetFee" value="<?php echo $feeid ?>">
                               </div>
                             </div>
                             <div class="form-group">
-                              <label class="col-lg-3 control-label">Last name:</label>
+                              <h3>Amount:</h3>
+                              <?php
+                              $query=mysqli_query($con, "select * from tbllevel where tblLevelFlag=1");
+                              while($row=mysqli_fetch_array($query)):
+                              ?>
                               <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtLname" id="txtLname">
+                                <label><?php echo $row['tblLevelName'] ?></label>
+                                <input class="form-control" style="width:200px" type="text" name="txtAmount[]" id="txtAmount">
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-3 control-label">Middle name:</label>
-                              <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtMname" id="txtMname">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                                    <label class="col-lg-3 control-label">Birthday:</label>
-                                    <div class="col-lg-7">
-                                      <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtBday" id="txtBday">
-                                    </div>
-                           </div>
-                            <div class="form-group">
-                              <label class="col-lg-3 control-label">Birthplace:</label>
-                              <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtBplace" id="txtBplace">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                            <label class="col-lg-3 control-label">Gender:</label>
-                              <div class="col-lg-7">
-                                <label class="radio-inline">
-                                  <input type="radio" name="optradio" value="M">Male
-                                </label>
-                                <label class="radio-inline">
-                                  <input type="radio" name="optradio" value="F">Female
-                                </label>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-3 control-label">Home Address:</label>
-                              <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtAdd" id="txtAdd">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-3 control-label">Phone:</label>
-                              <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtNo" id="txtNo" maxlength="11">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="col-lg-3 control-label">E-mail:</label>
-                              <div class="col-lg-7">
-                                <input class="form-control" type="text" name="txtEmail" id="txtEmail">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                            <label class="col-lg-3 control-label">Position:</label>
-                                  <div class="col-sm-7">
-                                    <select class="form-control choose" style="width: 100%;" name="selPosition" id="selPosition">
-                                      <option selected="selected" disabled>--Select position--</option>
-                                      <option value="TEACHER">TEACHER</option>
-                                      <option value="REGISTRAR">REGISTRAR</option>
-                                      <option value="SCHOOL HEAD">SCHOOL HEAD</option>
-
-                                    </select>
-                                  </div>
+                            <?php endwhile; ?>
                             </div>
                           </div>
-                           <div class="btn-group" style="margin-top: 5%; float: right">
+                           <div class="btn-group" style="margin-top: 50%; float: right">
                               <button type="submit" class="btn btn-info" name="btnAdd" id="btnAdd">Save</button>
                             </div>
                           </form>
                           </div>
 
                               </div>
+                              <!-- box -->
                               </div>
+                              <!-- tab_1 -->
                               </div>
+                              <!-- tab content -->
                               </div>
+                              <!-- box-body -->
+                            </div>
+                          </div>
+                        </div>;
                           <!-- /.row -->
                         </section>
                         <!-- /.content -->

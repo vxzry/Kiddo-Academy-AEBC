@@ -9,7 +9,7 @@
 	{
 		$j = $i;
 		$j++;
-		$val = $_POST['txtName'][$i];
+		$val = $_POST['txtAmount'][$i];
 		$query="select * from tblfeedetail order by tblFeeDetailId desc limit 0, 1";
 		$result = mysqli_query($con, $query);
 		$row = mysqli_fetch_assoc($result);

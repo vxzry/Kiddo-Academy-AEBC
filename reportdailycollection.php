@@ -34,7 +34,7 @@ function Header()
 
     $this->SetXY(100,60);
     $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"DAILY COLLECTION REPORT",0,0,'C');
+    $this->Cell(10,10,"Accounts Receivable",0,0,'C');
 
     $this->Ln(15);// Line break
     $this->SetFont('Arial','',8);

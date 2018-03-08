@@ -306,12 +306,12 @@ $acc=$_POST['chkbills'];
                             <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" id="amount" name="amount" disabled>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
@@ -326,7 +326,7 @@ $acc=$_POST['chkbills'];
          <!-- checkbox -->
                             <div class="form-group col-md-9" style="margin-top: 5%">
 
-                              <div class="col-md-12" style="margin-top: 3%">
+                              <!-- <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Number:</label>
                               <input type="text" name="num" id="num" class="col-md-8">
                             </div>
@@ -339,7 +339,7 @@ $acc=$_POST['chkbills'];
                               <input type="text" name="bank" id="bank" class="col-md-8">
 
                               <label class="col-md-3">Cash Amount:</label>
-                              <label>
+                              <label> -->
                                 <input type="checkbox" name="check" id="check" onchange="showCheck()"> Check
                               </label>
                             </div>

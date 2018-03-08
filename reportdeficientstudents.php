@@ -26,6 +26,9 @@ function Header()
     $this->SetX(111);
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
 
+    $this->SetFont('Arial','B',10);
+    $this->SetXY(175,50);//X-Left, Y- Down
+    $this->Cell(100,10,'Date: '.date("Y-m-d").'',0,0,'');
     $this->SetXY(100,55);
     $this->SetFont('Arial','B',15);
     $this->Cell(10,10,"Deficient Students",0,0,'C');

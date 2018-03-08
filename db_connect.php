@@ -14,9 +14,10 @@ if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }else
 {
-	$query="select tblSchoolYrId from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+	$query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
 	$row=mysqli_fetch_array(mysqli_query($con, $query));
 	$syid=$row['tblSchoolYrId'];
+	$sy=$row['tblSchoolYrYear'];
 }
  
 ?>

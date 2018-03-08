@@ -321,12 +321,12 @@
                             <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" id="amount" name="amount" disabled>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">

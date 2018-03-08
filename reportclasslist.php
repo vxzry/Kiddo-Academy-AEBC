@@ -5,9 +5,17 @@ require ("fpdf.php");
 include "db_connect.php";
 $sect=$_POST['txtsect'];
 
-$query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
+$query=mysqli_query($con, "Select * FROM tblsection WHERE tblSectionId='$sect' AND tblSectionFlag = 1");
 $row=mysqli_fetch_array($query);
-$syid = $row['tblSchoolYrId'];
+$lvlid = $row['tblSection_tblLevelId'];
+$faculty=$row['tblSection_tblFacultyId'];
+$sectname=$row['tblSectionName'];
+$query1=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
+$row1=mysqli_fetch_array($query1);
+$lvlname=$row1['tblLevelName'];
+$query2=mysqli_query($con, "select concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facultyname from tblfaculty where tblFacultyId='$faculty'");
+$row2=mysqli_fetch_array($query2);
+$facultyname=$row2['facultyname'];
 class PDF extends FPDF
 {
 // Page header

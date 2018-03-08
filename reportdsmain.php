@@ -118,7 +118,7 @@ $x=substr($login_session,0,1);
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Logout</a>
+                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                 </div>
               </li>
             </ul>
@@ -265,7 +265,7 @@ $x=substr($login_session,0,1);
                   ?>
                   <tr>
                   <td><?php echo $stat ?></td>
-                  <td><input type="text" name="txttype" id="txttype" value="<?php echo $stat ?>"/><button type="submit" class="btn btn-info">Generate Report</button></td>
+                  <td><input type="hidden" name="txttype" id="txttype" value="<?php echo $stat ?>"/><button type="submit" class="btn btn-info">Generate Report</button></td>
                   </tr>
                   <?php
                   $i++;
