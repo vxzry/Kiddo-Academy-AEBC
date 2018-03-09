@@ -1032,18 +1032,18 @@
 </div>
 
 
-              <ul class="list-inline pull-right" style="margin-top: 5%">
-                 <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-              </ul>
               <div class="btn-group" style="margin-top: 5%; float: right">                                     
-                <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php">Save Applicant</button>
+                <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="margin-right: 15px; ">Save Applicant</button>
               </div>                                      
         </form> <!-- main form -->
           <form method="post" action="outputAdmissionNotice.php" target="_blank">
                 <input type="hidden" id="fname" name="fname" />
                 <input type="hidden" id="mname" name="mname" />
                 <input type="hidden" id="lname" name="lname" />
-          <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 5%; float: right">Get Notice of Admission</button>
+          <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 5%; float: right;margin-right: 7px; ">Get Notice of Admission</button>
+             <ul class="list-inline pull-right" style="margin-top: 5%">
+                 <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
+              </ul>
           </form>
                                   </div> <!-- tab pane step4 -->
 
