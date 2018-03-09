@@ -218,4 +218,43 @@ if(isset($_POST['btnAddCurr']))
         header('location:curriculum.php?message=8');
     }
 }
+elseif (isset($_POST['btnAddDiv'])) {
+	
+	$divName = strtoupper($_POST['txtAddDiv']);
+	$divActive = $_POST['selAddDivAct'];
+
+	$query = "select * from tbldivision order by tblDivisionId desc limit 0, 1";
+	$result = mysqli_query($con, $query);
+	$row = mysqli_fetch_array($result);
+	$divid = $row['tblDivisionId'];
+	$divid ++;
+	$query = "insert into tbldivision(tblDivisionId, tblDivisionName, tblDivisionActive, tblDivisionFlag) values ('$divid', '$divName', '$divActive', 1)";
+	if (!$query = mysqli_query($con, $query)) {
+	    exit(mysqli_error($con));
+	}else{
+	    header('location:division.php?message=2');
+	}
+}
+elseif (isset($_POST['btnUpdDiv'])) {
+	
+	$divUpdName = strtoupper($_POST['txtUpdDiv']);
+	$divUpdActive = $_POST['selUpdDivAct'];
+
+	$query = "update tbldivision set tblDivisionName = '$divUpdName', tblDivisionActive= '$divUpdActive'";
+	if (!$query = mysqli_query($con, $query)) {
+	    exit(mysqli_error($con));
+	}else{
+	    header('location:division.php?message=4');
+	}
+}
+else if(isset($_POST['btnDelDivision']))
+{
+	$divid = $_POST['txtDelId'];
+	$query="update tbldivision set tblDivisionFlag = 0 where tblDivisionId = '$divid'";
+	if (!$query = mysqli_query($con, $query)) {
+	   exit(mysqli_error($con));
+	}else{
+	   header('location:division.php?message=6');
+	}
+}
 ?>
