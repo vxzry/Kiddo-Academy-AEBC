@@ -1008,8 +1008,8 @@ type="button" class="btn btn-default prev-step">Previous</button></li>
 type="submit" class="btn btn-info" name="btnSave" id="btnSave"
 href="saveadmission.php">Save Applicant</button>
 </div>                                      </form> <!-- main form -->
-<form method="post" action="outputAdmissionNotice.php">
-<button type="submit" class="btn btn-success" name="btnSave" id="btnSave" target="_blank" style="margin-top: 5%; float:
+<form method="post" action="outputAdmissionNotice.php" target="_blank">
+<button type="submit" class="btn btn-success" name="btnSave" id="btnSave" style="margin-top: 5%; float:
 right">Get Notice of Admission</button>
 </form>
                                   </div> <!-- tab pane step4 -->

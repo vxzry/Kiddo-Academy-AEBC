@@ -319,13 +319,14 @@ $acc=$_POST['chkbills'];
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Due</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled value="<?php echo $totalamountdue ?>">
+                            <input type="number" class="form-control" id="amountd" name="amountd" disabled value="<?php echo $totalamountdue ?>">
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Paid</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" value="<?php echo $totalamountpaid ?>">
+                            <input type="number" class="form-control" id="amountp" name="amountp" value="<?php echo $totalamountpaid ?>">
+                            
                         </div>
                     </div>
                     <!-- <div class="form-group">

@@ -1,8 +1,9 @@
 <?php
 require ("fpdf.php");
 include "db_connect.php";
-$studid=$_POST['txtstud'];
-
+$sysy=$_POST['txtsy'];
+$cstat=$_POST['txtstat'];
+$lvlid=$_POST['lvlid'];
 class PDF extends FPDF
 {
 // Page header
@@ -34,16 +35,15 @@ function Header()
 
     $this->SetXY(100,60);
     $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"Accounts Receivable (Receipts)",0,0,'C');
-
+    $this->Cell(10,10,"Accounts Receivable (Checks)",0,0,'C');
 
     $this->Ln(15);// Line break
-    $this->setX(20);
     $this->SetFont('Arial','',8);
-    $this->Cell(35,5,"Student Id",1,0,'C');
-    $this->Cell(65,5,"Student Name",1,0,'C');
-    $this->Cell(45,5,"Payment Amount",1,0,'C');
-    $this->Cell(35,5,"Payment Date",1,1,'C');
+    $this->Cell(55,5,"Receive from",1,0,'C');
+    $this->Cell(40,5,"Check Number",1,0,'C');
+    $this->Cell(35,5,"Payment Amount",1,0,'C');
+    $this->Cell(35,5,"Bank",1,0,'C');
+    $this->Cell(30,5,"Payment Date",1,1,'C');
     
 }
 
@@ -70,17 +70,17 @@ function Footer()
 
     //$query = mysqli_query(query)
     $tDate=date('Y-m-d');
-  $query = mysqli_query($con, "Select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, r.tblRecAmount, r.tblRecDate from tblstudent s, tblstudentinfo si, tblreceipt r where si.tblStudInfo_tblStudentId=s.tblStudentId and r.tblRec_tblStudentId=s.tblStudentId and s.tblStudentId='$studid' and s.tblStudentFlag=1");
+    $query = mysqli_query($con, "select concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudentId, c.tblChkNum, c.tblChkAmount, c.tblChkDate, c.tblChkBank from tblstudent s, tblstudentinfo si, tbllevel l, tblcheck c where si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudent_tblLevelId=l.tblLevelId and c.tblChk_tblStudentId=s.tblStudentId and l.tblLevelId='$lvlid' and c.tblChk_tblSchoolYrId='$sysy' and c.tblChkRTag='$cstat'");
 
-while($row3=mysqli_fetch_array($query)){
+    while($row3=mysqli_fetch_array($query)){
 
-    $pdf->SetX(10);
-    $pdf->setX(20);
-    $pdf->Cell(35, 5, $row3['tblStudentId'], 1, 0);
-    $pdf->Cell(65, 5, $row3['studentname'], 1, 0);
-    $pdf->Cell(45, 5, $row3['tblRecAmount'], 1, 0);
-    $pdf->Cell(35, 5, $row3['tblRecDate'], 1, 1);
-}
+        $pdf->SetX(10);
+        $pdf->Cell(55, 5, $row3['studentname'], 1, 0);
+        $pdf->Cell(40, 5, $row3['tblChkNum'], 1, 0);
+        $pdf->Cell(35, 5, $row3['tblChkAmount'], 1, 0);
+        $pdf->Cell(35, 5, $row3['tblChkBank'], 1, 0);
+        $pdf->Cell(30, 5, $row3['tblChkDate'], 1, 1);
+    }
 
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(30,225);//X-Left, Y- Down
