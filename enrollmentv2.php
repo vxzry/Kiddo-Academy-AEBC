@@ -370,7 +370,7 @@ if(isset($_POST['btnProceed']))
       <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <input type="hidden" value="<?php echo $session ?>" id="session" name="session" />
 
-      <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
+      <button type="submit" class="btn btn-info btn-block" style="width: 20%; float: right; margin-top: 5%; margin-right: 2px">Get Enrollment Voucher</button>
     </form>
                       </div> <!-- box tab_1 -->
                     </div> <!-- tab pane tab_1 -->

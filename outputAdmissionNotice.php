@@ -87,7 +87,6 @@ function Footer()
 
     $pdf->SetXY(42,120);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(50,10,$r3,0,0,'C');
 
     $pdf->SetXY(108,180);
     $pdf->SetFont('Arial','',11);

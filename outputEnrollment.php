@@ -78,7 +78,7 @@ function Footer()
     $pdf->SetXY(155, 67);
     $pdf->SetFont('Arial','B',11);
     $pdf->Cell(5,10,"Session:",0,0,'C'); 
-    $pdf->Cell(32,10,$session,0,0,'C');     
+    $pdf->Cell(37,10,$session,0,0,'C');     
 
     $pdf->Ln(15);// Line break
     $pdf->SetFont('Arial','',8);
