@@ -320,7 +320,7 @@
                             </ul>
                           </div>
 
-                          <form method="post" action="saveadmission.php">
+                          <form method="post" action="saveadmission.php" id="form1">
                             <div class="tab-content">
 
                               <div class="tab-pane active" role="tabpanel" id="step1">
@@ -1002,7 +1002,7 @@
                                         <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                                     </ul>
                                     <div class="btn-group" style="margin-top: 5%; float: right">
-                                    <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button>
+                                    <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" ><a href="outputAdmissionNotice.php" target="_blank">Save Applicant</a></button>
                                     </div>
                                   </div> <!-- tab pane step4 -->
                                 <div class="clearfix"></div>
