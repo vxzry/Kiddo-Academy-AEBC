@@ -76,6 +76,16 @@ $acc=$_POST['chkbills'];
             $("#txtBankName").prop('disabled', true);
         }
       }
+      function checkamnt()
+      {
+        var val=document.getElementById("txtAmount").value;
+        document.getElementById("checkamount").value=val;
+      }
+      function bank()
+      {
+        var val=document.getElementById("txtBankName").value;
+        document.getElementById("bankname").value=val;
+      }
     </script>
   </head>
 
@@ -349,13 +359,13 @@ $acc=$_POST['chkbills'];
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
-                              <input type="number" name="txtAmount" id="txtAmount" class="col-md-3" disabled>
+                              <input type="number" name="txtAmount" id="txtAmount" class="col-md-3" disabled onkeypress="checkamnt()">
                               <label class="col-md-2" style="text-align: right">Date:</label>
                               <input type="date" name="txtDate" id="txtDate" class="col-md-3" value="<?php echo date('Y-m-d') ?>" disabled>
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
-                              <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled>
+                              <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled onkeypress="bank()">
 
                             </div>
                           </div>
@@ -365,6 +375,10 @@ $acc=$_POST['chkbills'];
     <form method="post" action="reportreceipt.php" target="_blank">
       <input type="text" value="<?php echo $totalamountpaid ?>" id="amnt" name="amnt" />
       <input type="text" value="<?php echo $studname ?>" id="name" name="name" />
+      <input type="text" value="<?php echo $studid ?>" id="student" name="student" />
+      <input type="text" id="checkamount" name="checkamount" />
+      <input type="text" id="bankname" name="bankname" />
+      <input type="text" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
     </form>
   </div>

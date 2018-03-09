@@ -3,6 +3,13 @@ require ("fpdf.php");
 include "db_connect.php";
 $amnt=$_POST['amnt'];
 $studname=$_POST['name'];
+$studid=$_POST['student'];
+$checkamnt=$_POST['checkamount'];
+$bankname=$_POST['bankname'];
+$date=$_POST['date'];
+$query=mysqli_query($con, "select * from tblstudentinfo where tblStudInfo_tblStudentId='$studid'");
+$row=mysqli_fetch_array($query);
+$address=$row['tblStudInfoAddSt']." ".$row['tblStudInfoAddBrgy']." ".$row['tblStudInfoAddCity']." ".$row['tblStudInfoAddCountry'];
 class PDF extends FPDF
 {
 // Page header
@@ -28,10 +35,10 @@ function Header()
 
     $this->SetXY(35,55);
     $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"RECEIPT",0,0);
+    $this->Cell(150,3,"RECEIPT",0,0,'C');
     $this->SetFont('Arial','',10);
     $this->SetX(145);
-    $this->Cell(10,10,'Date: ',0,0);
+    $this->Cell(10,10,'Date: '.date('Y-m-d'),0,0);
     
 }
 
@@ -62,14 +69,16 @@ function Footer()
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(30,80);//X-Left, Y- Down
     $pdf->Cell(10,5,'Received from',0,0,'');
-    $pdf->Cell(80,5,0,0,'');
+    $pdf->Line(55,85,180,85);
+    $pdf->Cell(100,5,$studname,0,0,'C');
     $pdf->SetXY(30,90);
     $pdf->Cell(10,5,'with address at ',0,0,'');
     $pdf->Line(57,95,180,95);
-    $pdf->Cell(176,95,',',0,0,'');
+    $pdf->Cell(100,5,$address,0,0,'C');
     $pdf->SetXY(30,100);//X-Left, Y- Down
     $pdf->Cell(10,10,'the sum of P ',0,0,'');
     $pdf->Line(53,106,83,106);
+    $pdf->Cell(50,8,$amnt,0,0,'C');
     $pdf->SetXY(84,100);//X-Left, Y- Down
     $pdf->Cell(10,10,'in partial/full payment of ',0,0,'');
     $pdf->Line(123,106,180,106);
@@ -81,12 +90,16 @@ function Footer()
     $pdf->SetXY(30,135);
     $pdf->Cell(10,5,'Amount:',0,0,'');
     $pdf->Line(53,140,83,140);
+    $pdf->Cell(50,5,$checkamnt,0,0,'C');
     $pdf->SetXY(30,140);
     $pdf->Cell(10,5,'Bank: ',0,0,'');
     $pdf->Line(53,145,83,145);
+    $pdf->Cell(50,5,$bankname,0,0,'C');
     $pdf->SetXY(30,145);
     $pdf->Cell(10,5,'Date:',0,0,'');
     $pdf->Line(53,150,83,150);
+    $pdf->Cell(50,5,$date,0,0,'C');
+
 
 
 
