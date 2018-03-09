@@ -1040,9 +1040,9 @@ type="submit" class="btn btn-info" name="btnSave" id="btnSave"
 href="saveadmission.php">Save Applicant</button>
 </div>                                      </form> <!-- main form -->
 <form method="post" action="outputAdmissionNotice.php" target="_blank">
-      <input type="text" id="fname" name="fname" />
-      <input type="text" id="mname" name="mname" />
-      <input type="text" id="lname" name="lname" />
+      <input type="hidden" id="fname" name="fname" />
+      <input type="hidden" id="mname" name="mname" />
+      <input type="hidden" id="lname" name="lname" />
 <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 5%; float:
 right">Get Notice of Admission</button>
 </form>
