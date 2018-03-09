@@ -80,14 +80,16 @@ $x=substr($login_session,0,1);
     
     document.getElementById("datatable").innerHTML=xmlhttp.responseText;
   }
-  function changeTblCheck()
+  function enabledButton()
   {
-    // var lvl = document.getElementById("selSect").value;
-    var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeTblCheck.php?selSect="+document.getElementById("selSect").value,false);
-    xmlhttp.send(null);
-    
-    document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+    var x = document.getElementById("selsy").value;
+    var y = document.getElementById("selstat").value;
+    if(x != 0 && y != 0)
+    {
+      document.getElementById("txtsy").value=x;
+      document.getElementById("txtstat").value=y;
+      $('.btngen').removeAttr('disabled');
+    }
   }
   </script>
 </head>
@@ -270,6 +272,7 @@ $x=substr($login_session,0,1);
 
                   <div class="tab-pane fade in active" id="tab_1" style="padding: 3% 3%;">
                     <h4>Filters:</h4>
+                    <label>Level: </label>
                  <select name="selLvl" id="selLvl" onchange="changeTblTab1()">
                   <option disabled selected>--Select Level--</option>
                   <?php
@@ -279,10 +282,11 @@ $x=substr($login_session,0,1);
                   <option value="<?php echo $row['tblLevelId'] ?>" /><?php echo $row['tblLevelName'] ?></option>
                 <?php endwhile; ?>
                  </select>
+                 <label>Section: </label>
                  <select name="selSect" id="selSect" onchange="changeTblTab2()">
                   <option disabled selected>--Select Section--</option>
                  </select>  
-                 <form action="reportor.php" method="post">
+                 
                   <table id="datatable" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -300,39 +304,49 @@ $x=substr($login_session,0,1);
                       </tr>
                     </tbody>
                   </table>
-                </form>
+                
                   </div><!-- /.tab-pane tab_1 -->
-
+                  
                    <div class="tab-pane fade" id="tab_2" style="padding: 3% 3%;">
-                    <select name="selLvl" id="selLvl" onchange="changeTblTab1()">
-                  <option disabled selected>--Select Level--</option>
-                  <?php
-                  $query=mysqli_query($con, "select * from tbllevel where tblLevelFlag=1");
-                  while($row=mysqli_fetch_array($query)):
-                  ?>
-                  <option value="<?php echo $row['tblLevelId'] ?>" /><?php echo $row['tblLevelName'] ?></option>
-                <?php endwhile; ?>
-                 </select>
-                 <select name="selSect" id="selSect" onchange="changeTblCheck()">
-                  <option disabled selected>--Select Section--</option>
-                 </select>  
-                 
+                    
+                    <h4>Filter: </h4>
+                    <label>School Year: </label>
+                    <select name="selsy" id="selsy" onchange="enabledButton()">
+                    <option disabled selected value="0">--Select School Year--</option>
+                    <?php
+                    $query=mysqli_query($con, "select * from tblschoolyear where tblSchoolYearFlag=1");
+                    while($row=mysqli_fetch_array($query)):
+                    ?>
+                    <option value="<?php echo $row['tblSchoolYrId'] ?>"><?php echo $row['tblSchoolYrYear'] ?></option>
+                    <?php endwhile; ?>
+                </select>
+                    <label>Check Status: </label>
+                    <select name="selstat" id="selstat" onchange="enabledButton()">
+                  <option disabled selected value="0">--Select Check Status--</option>
+                  <option value="PAID">PAID</option>
+                  <option value="PENDING">PENDING</option>
+                </select>
                   <table id="datatable1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
+                        <th>School Year</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
 
                     <tbody>
+                      <?php
+                      $query=mysqli_query($con, "select * from tbllevel where tblLevelFlag=1");
+                      while($row=mysqli_fetch_array($query)):
+                      ?>
                       <tr>
-                       <td></td>
-                       <td></td>
+                       <td><?php echo $row['tblLevelName'] ?></td>
+                       <td><form method="post" action="reportarc.php"><input type="text" value="<?php echo $row['tblLevelId'] ?>" name="lvlid" id="lvlid"/><input type="text" name="txtsy" id="txtsy"/><input type="text" name="txtstat" id="txtstat"/><button type="submit" class="btn btn-success btngen" name="btngenerate" id="btngenerate">Generate Report</button></form></td>
                       </tr>
+                    <?php endwhile; ?>
                     </tbody>
                   </table>
-
+                  
                   </div><!-- /.tab-pane tab_1 -->
                   </div>  
             </div>

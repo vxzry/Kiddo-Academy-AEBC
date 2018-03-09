@@ -3,10 +3,13 @@ require ("fpdf.php");
 // $con  = mysqli_connect("localhost","root","");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
+$session=$_POST['session'];
+$date=$_POST['date'];
 
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syid = $row['tblSchoolYrId'];
+$syname = $row['tblSchoolYrYear'];
 class PDF extends FPDF
 {
 // Page header
@@ -31,44 +34,7 @@ function Header()
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
 
 
-    $this->SetXY(105,50);
-    $this->SetFont('Arial','B',12);
-    $this->Cell(5,10,"Enrollment Voucher (S.Y. 20**-20**)",0,0,'C');
-
-    $this->SetXY(35,60);
-    $this->SetFont('Arial','B',11);
-    $this->Cell(5,10,"Name:",0,0,'C');  
-
-    $this->SetXY(152,60);
-    $this->SetFont('Arial','B',11);
-    $this->Cell(5,10,"Date:",0,0,'C');    
-
-    $this->SetXY(35, 67);
-    $this->SetFont('Arial','B',11);
-    $this->Cell(5,10,"Level:",0,0,'C');  
-
-    $this->SetXY(155, 67);
-    $this->SetFont('Arial','B',11);
-    $this->Cell(5,10,"Session:",0,0,'C');  
-
-
-    $this->Ln(15);// Line break
-    $this->SetFont('Arial','',8);
-    $this->SetX(30);
-    $this->Cell(40,5,"Fee",1,0,'C');
-    $this->Cell(35,5,"Scheme",1,0,'C');
-    $this->Cell(30,5,"Order of Payment",1,0,'C');
-    $this->Cell(25,5,"Amount",1,0,'C');
-    $this->Cell(25,5,"Deadline",1,0,'C');
-
-
-    $this->SetXY(110, 200);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"Please settle the amount before due date. For further information, contact the",0,0,'C'); 
-
-    $this->SetXY(100, 207);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"management or go through the guidelines in the website (https://kiddoacademy.com).",0,0,'C'); 
+    
 }
 
 
@@ -90,6 +56,47 @@ function Footer()
     $pdf -> AliasNbPages();
     $pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
+
+    $pdf->SetXY(80,50);
+    $pdf->SetFont('Arial','B',12);
+    $pdf->Cell(35,10,"Enrollment Voucher -",0,0,'C');
+    $pdf->Cell(40,10,$syname,0,0,'C');
+
+    $pdf->SetXY(35,60);
+    $pdf->SetFont('Arial','B',11);
+    $pdf->Cell(5,10,"Name:",0,0,'C');  
+
+    $pdf->SetXY(152,60);
+    $pdf->SetFont('Arial','B',11);
+    $pdf->Cell(5,10,"Date:",0,0,'C');    
+    $pdf->Cell(40,10,$date,0,0,'C');    
+
+    $pdf->SetXY(35, 67);
+    $pdf->SetFont('Arial','B',11);
+    $pdf->Cell(5,10,"Level:",0,0,'C');  
+
+    $pdf->SetXY(155, 67);
+    $pdf->SetFont('Arial','B',11);
+    $pdf->Cell(5,10,"Session:",0,0,'C'); 
+    $pdf->Cell(37,10,$session,0,0,'C');     
+
+    $pdf->Ln(15);// Line break
+    $pdf->SetFont('Arial','',8);
+    $pdf->SetX(30);
+    $pdf->Cell(40,5,"Fee",1,0,'C');
+    $pdf->Cell(35,5,"Scheme",1,0,'C');
+    $pdf->Cell(30,5,"Order of Payment",1,0,'C');
+    $pdf->Cell(25,5,"Amount",1,0,'C');
+    $pdf->Cell(25,5,"Deadline",1,0,'C');
+
+
+    $pdf->SetXY(110, 200);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"Please settle the amount before due date. For further information, contact the",0,0,'C'); 
+
+    $pdf->SetXY(100, 207);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"management or go through the guidelines in the website (https://kiddoacademy.com).",0,0,'C');
 
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(150,230);//X-Left, Y- Down

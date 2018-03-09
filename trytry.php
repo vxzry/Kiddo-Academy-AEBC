@@ -3,9 +3,11 @@ include "db_connect.php";
 $or=$_POST['txtOR'];
 $id=$_POST['txtAccId'];
 $pr=$_POST['txtPR'];
-$camnt=$_POST['amount'];
-$bank=$_POST['bank'];
+$camnt=$_POST['txtAmount'];
+$bank=$_POST['txtBankName'];
 $chknum=$_POST['num'];
+$tamount=$_POST['amountp'];
+$dates=date('Y-m-d');
 $i=0;
 foreach($id as $x)
 {
@@ -31,6 +33,7 @@ if($camnt!="")
 		exit(mysqli_error($con));
 	}
 }
+$query=mysqli_query($con, "insert into tblreceipt(tblRecAmount, tblRecDate, tblRec_tblStudentId) values ('$tamount','$dates','$studid')");
 if($num == 1)
 {
 	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'";
@@ -56,8 +59,8 @@ if($num == 1)
 		}
 	}
 	
-}else if($num != 1)
+}else if($num > 1)
 {
-	header("location:billing.php");
+	header("location:collectionMain.php");
 }
 ?>
