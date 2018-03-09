@@ -4,9 +4,13 @@ require ("fpdf.php");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
 
+
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syid = $row['tblSchoolYrId'];
+$firstname=$_POST['fname'];
+$middlename=$_POST['mname'];
+$lastname=$_POST['lname'];
 class PDF extends FPDF
 {
 // Page header
@@ -35,33 +39,8 @@ function Header()
     $this->SetFont('Arial','B',12);
     $this->Cell(5,10,"Notice of Admission",0,0,'C');
 
-    $this->SetXY(50,80);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"Dear ____________________,",0,0,'C');
 
-    $this->SetXY(110,90);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"We congratulate and inform you that you are now admitted to Kiddo Academy and",0,0,'C');
-
-    $this->SetXY(102,100);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"Development Center as a Grade __ student. You are requested to settle your bill and present ",0,0,'C');
-
-    $this->SetXY(68,110);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"with the following documents at the time of admission:",0,0,'C');
-
-    $this->SetXY(108,180);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"For further information, contact the management or go through the guidelines in",0,0,'C');
-
-    $this->SetXY(60,190);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"the website (https://kiddoacademy.com).",0,0,'C');
-
-    $this->SetXY(50,200);
-    $this->SetFont('Arial','',11);
-    $this->Cell(5,10,"Thank you.",0,0,'C');
+    
 }
 
 
@@ -84,13 +63,36 @@ function Footer()
     $pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
 
-  
-    // $pdf->SetFont('Arial','',10);
-    // $pdf->SetXY(30,230);//X-Left, Y- Down
-    // $pdf->Cell(10,10,'Aimee Tayag-Ang',0,0,'');
-    // $pdf->SetFont('Arial','',8);
-    // $pdf->SetXY(30,235);//X-Left, Y- Down
-    // $pdf->Cell(10,10,'School-Head',0,0,'');
+    $pdf->SetXY(25,80);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"Dear",0,0,'C');
+    $pdf->Cell(20,10,$lastname,0,0,'C');
+    $pdf->Cell(30,10,$firstname,0,0,'C');
+    $pdf->Cell(20,10,$middlename,0,0,'C');
+
+    $pdf->SetXY(113,90);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"We congratulate and inform you that you are now admitted to Kiddo Academy and",0,0,'C');
+
+    $pdf->SetXY(102,100);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"Development Center. You are requested to settle your bill and present the following documents",0,0,'C');
+
+    $pdf->SetXY(42,110);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"at the time of admission:",0,0,'C');
+
+    $pdf->SetXY(108,180);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"For further information, contact the management or go through the guidelines in",0,0,'C');
+
+    $pdf->SetXY(60,190);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"the website (https://kiddoacademy.com).",0,0,'C');
+
+    $pdf->SetXY(50,200);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(5,10,"Thank you.",0,0,'C');
 
 
 

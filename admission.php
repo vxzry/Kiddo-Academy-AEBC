@@ -124,6 +124,21 @@
       xmlhttp.send(null);
       document.getElementById("requirementfield").innerHTML=xmlhttp.responseText;
     }
+    function firstname()
+      {
+        document.getElementById("fname").value=document.getElementById("txtStudFname").value;
+      }
+
+    function middlename()
+      {
+        var val=document.getElementById("txtStudMname").value;
+        document.getElementById("mname").value=val;
+      }
+    function lastname()
+      {
+        var val=document.getElementById("txtStudLname").value;
+        document.getElementById("lname").value=val;
+      }
     </script>
   </head>
 
@@ -410,19 +425,19 @@
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-8" style="width:30%;">
-              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname" required>
+              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname" required onkeypress="firstname()">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Middle name:</label>
             <div class="col-lg-8" style="width:30%">
-              <input class="form-control" type="text" name="txtStudMname" id="txtStudMname">
+              <input class="form-control" type="text" name="txtStudMname" id="txtStudMname" onkeypress="middlename()">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:19%;">
             <label class="col-lg-2 control-label left">Last name:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-8" style="width:30%">
-              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname" required>
+              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname" required onkeypress="lastname()">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:25%;">
@@ -1025,7 +1040,10 @@ type="submit" class="btn btn-info" name="btnSave" id="btnSave"
 href="saveadmission.php">Save Applicant</button>
 </div>                                      </form> <!-- main form -->
 <form method="post" action="outputAdmissionNotice.php" target="_blank">
-<button type="submit" class="btn btn-success" name="btnSave" id="btnSave" style="margin-top: 5%; float:
+      <input type="text" id="fname" name="fname" />
+      <input type="text" id="mname" name="mname" />
+      <input type="text" id="lname" name="lname" />
+<button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 5%; float:
 right">Get Notice of Admission</button>
 </form>
                                   </div> <!-- tab pane step4 -->
