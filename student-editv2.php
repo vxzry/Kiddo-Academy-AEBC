@@ -58,6 +58,11 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+
+    <!-- sweetalert -->
+    <script src="sweetalert-master/dist/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="sweetalert-master/dist/sweetalert.css">
+
   <!-- iCheck for checkboxes and radio inputs -->
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,6 +91,35 @@
     })*/
   </script>
 </head>
+
+  <?php
+    $message = isset($_GET['message'])?intval($_GET['message']):0;
+
+    if($message == 1) {
+      echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 2) {
+      echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 3) {
+      echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 4) {
+      echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+    }
+
+    if($message == 5) {
+      echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+    }
+
+    if($message == 6) {
+      echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+    }
+  ?>
+
 <body class="hold-transition skin-green-light sidebar-mini">
 <div class="wrapper">
 
@@ -121,15 +155,15 @@
                     <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      <?php echo $namess ?>
+                      <!--<?php echo $namess ?>-->
                       <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!--<div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div>-->
                     <div class="pull-right">
                       <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
@@ -138,6 +172,7 @@
               </li>
             </ul>
           </div>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -152,13 +187,27 @@
 
             <div class="pull-left info">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
 
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: black; font-size: 15px; margin-top: 3%">Welcome!</li>
+            <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
+
            <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
@@ -215,15 +264,10 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
           <!-- Content Header (Page header) -->
-          <section class="content-header">
-            <ol class="breadcrumb" style="font-size:15px;">
-              <li><a href="#" style="color: black;"><i class="fa fa-envelope-o"></i> Home</a></li>
-              <li class="active">Edit Profile</li>
-            </ol>
-          </section>
+          <section class="content-header"></section>
 
     <!-- Main content -->
-    <section class="content" style="margin-top: 3%">
+    <section class="content">
 
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -360,6 +404,7 @@
       </div>
        <div class="btn-group" style="margin-top: 5%; float: right">
                       <button type="submit" class="btn btn-info" name="btnpersonal" id="btnpersonal">Save</button>
+
                     </div>
       
       </div>
@@ -410,12 +455,12 @@
                 </ul>
             </div>
 
-            <form role="form" method="post" action="updateFamilyInfo.php">
+            <form class="form-horizontal" role="form" method="post" action="updateFamilyInfo.php">
             <?php $arr = array("hi","hello"); ?>
                 <div class="tab-content" style="height: 110%">
                    
                     <div class="tab-pane active" role="tabpanel" id="step1">
-                         <h3>Father</h3>
+                         <center><h3>Father</h3></center>
                         
                             <div class="row mar_ned">
                                 
@@ -423,10 +468,11 @@
                       <!-- left column -->
                       <div class="col-md-4 col-sm-6 col-xs-12">
                       <div class="text-center">
-                          <img src="admin.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+                          <img src="<?php echo $studimg ?>" class="avatar img-circle img-thumbnail" alt="avatar">
                           <h6>Upload new photo</h6>
                           <input type="file" class="text-center center-block well well-sm" name="fatherfile" id="fatherfile">
                         </div>
+
                       </div>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                         <div>
@@ -562,16 +608,22 @@
                         </div>
                     </div>
                   
-                    <div class="tab-pane" role="tabpanel" id="step2">
-                         <h3>Mother</h3>
+                    <div class="tab-pane form-horizontal" role="tabpanel" id="step2">
+                        <center> <h3>Mother</h3></center>
 
                       <!-- left column -->
                       <div class="col-md-4 col-sm-6 col-xs-12">
-                      <div class="text-center">
+                      <!--<div class="text-center">
                           <img src="admin.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
                           <h6>Upload new photo</h6>
                           
+                        </div>-->
+                            <div class="text-center">
+                          <img src="<?php echo $studimg ?>" class="avatar img-circle img-thumbnail" alt="avatar">
+                          <h6>Upload new photo</h6>
+                          <input type="file" class="text-center center-block well well-sm">
                         </div>
+
                       </div>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                         <div>
@@ -603,12 +655,15 @@
 
                    ?>
                         <input type="hidden" name="txtPmId" id="txtPmId" value="<?php echo $row['tblParentId'] ?>"
-                        <div class="form-group">
+                        
+               
+                         <div class="form-group">
                             <label class="col-lg-3 control-label">First name:</label>
                             <div class="col-lg-7">
                               <input class="form-control" type="text" name="txtParentMFname" id="txtParentMFname" value = "<?php echo $pmfname ?>">
                             </div>
                           </div>
+
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Last name:</label>
                             <div class="col-lg-7">
@@ -904,13 +959,14 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> Last na please
-    </div>
-    <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
-    reserved.
-  </footer>
+
+ <footer class="main-footer">
+  <div class="pull-right hidden-xs">
+    <b>Version</b> 2017
+  </div>
+  <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
+  reserved.
+</footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -985,6 +1041,8 @@
 <script src="dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- Sweetalert -->
+<script src="js/sweetalert.min.js"></script>
 <!-- DataTables -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -1000,6 +1058,7 @@
 <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
 <!-- bootstrap color picker -->
 <script type="text/javascript" src="formwizard.js"></script>
+
 <script>
   $(function () {
     //Initialize Select2 Elements
