@@ -3,7 +3,7 @@ require ("fpdf.php");
 // $con  = mysqli_connect("localhost","root","");
 include "db_connect.php";
 // mysqli_select_db($con,'dbkadc');
-$studid=$_POST['txtstudid'];
+$studid='17002';
 
 class PDF extends FPDF
 {

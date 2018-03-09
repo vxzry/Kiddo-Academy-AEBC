@@ -360,8 +360,10 @@
 
                                       <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
 
-
-
+                                        <fieldset style="margin-top: 3%; padding: 3%">
+                                        <h3>REQUIREMENTS</h3>
+                                        <hr>
+                                         </fieldset>
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
 

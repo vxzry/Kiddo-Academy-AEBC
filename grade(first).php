@@ -139,9 +139,7 @@ $x=substr($login_session,0,1);
           <ul class="sidebar-menu" style="font-size:17px;">
             <li class="header" style="color: white">Welcome!</li>
             <li class="treeview active">
-              <a href="ParentMessage.html">
-                <i class="fa fa-envelope-o"></i> <span>Message <?php echo $namess ?></span>
-              </a>
+             
             </li>
             <?php
               $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";

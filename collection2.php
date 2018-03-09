@@ -31,7 +31,7 @@
    }
 
   $studid=$_GET['studentid'];
-  $query="select concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId='$studid' and s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1";
+  $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId='$studid' and s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1";
   $result=mysqli_query($con, $query);
   $row=mysqli_fetch_array($result);
   $name=$row['name'];
@@ -75,6 +75,35 @@
         color:#ff8080;
       }
     </style>
+    <script>
+      function showCheck()
+      {
+        if(document.getElementById('check').checked) {
+            $("#txtAmount").prop('disabled', false);
+            $("#txtBankName").prop('disabled', false);
+            $("#num").prop('disabled', false);
+        } else {
+            $("#txtAmount").prop('disabled', true);
+            $("#txtBankName").prop('disabled', true);
+            $("#num").prop('disabled', true);
+        }
+      }
+      function checkamnt()
+      {
+        var val=document.getElementById("txtAmount").value;
+        document.getElementById("checkamount").value=val;
+      }
+      function bank()
+      {
+        var val=document.getElementById("txtBankName").value;
+        document.getElementById("bankname").value=val;
+      }
+      function checknum()
+      {
+        var val=document.getElementById("num").value;
+        document.getElementById("chknum").value=val;
+      }
+    </script>
   </head>
 
  <body class="hold-transition skin-green-light sidebar-mini">
@@ -122,7 +151,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -338,21 +367,37 @@
             </div>            
         </div> <!-- / panel preview -->
                             <div class="form-group col-md-9" style="margin-top: 5%">
-                              <div class="col-md-12" style="margin-top: 3%">
+                            <input type="checkbox" name="check" id="check" onchange="showCheck()"> Check
+                              </label>
+                            </div>
+                            <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Number:</label>
-                              <input type="text" name="num" id="num" class="col-md-8">
+                              <input type="text" name="num" id="num" class="col-md-3" disabled onkeypress="checknum()">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
-                              <input type="number" name="amount" id="amount" class="col-md-3">
+                              <input type="number" name="txtAmount" id="txtAmount" class="col-md-3" disabled onkeypress="checkamnt()">
+                              <label class="col-md-2" style="text-align: right">Date:</label>
+                              <input type="date" name="txtDate" id="txtDate" class="col-md-3" value="<?php echo date('Y-m-d') ?>" disabled>
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
-                              <input type="text" name="bank" id="bank" class="col-md-8">
+                              <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled onkeypress="bank()">
+
                             </div>
                           </div>
         <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>
-                    </form> 
+                    </form>
+        <form method="post" action="reportreceipt.php" target="_blank">
+      <input type="hidden" value="<?php echo $totalamountpaid ?>" id="amnt" name="amnt" />
+      <input type="hidden" value="<?php echo $name ?>" id="name" name="name" />
+      <input type="hidden" value="<?php echo $studid ?>" id="student" name="student" />
+      <input type="hidden" id="checkamount" name="checkamount" />
+      <input type="hidden" id="bankname" name="bankname" />
+      <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
+      <input type="hidden" id="chknum" name="chknum" />
+      <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
+    </form> 
   </div>
 </div>
                           
