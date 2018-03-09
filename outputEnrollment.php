@@ -3,6 +3,7 @@ require ("fpdf.php");
 // $con  = mysqli_connect("localhost","root","");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
+$session=$_POST['session'];
 $date=$_POST['date'];
 
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
@@ -68,7 +69,7 @@ function Footer()
     $pdf->SetXY(152,60);
     $pdf->SetFont('Arial','B',11);
     $pdf->Cell(5,10,"Date:",0,0,'C');    
-    $pdf->Cell(25,10,$date,0,0,'C');    
+    $pdf->Cell(40,10,$date,0,0,'C');    
 
     $pdf->SetXY(35, 67);
     $pdf->SetFont('Arial','B',11);
@@ -76,8 +77,8 @@ function Footer()
 
     $pdf->SetXY(155, 67);
     $pdf->SetFont('Arial','B',11);
-    $pdf->Cell(5,10,"Session:",0,0,'C');  
-
+    $pdf->Cell(5,10,"Session:",0,0,'C'); 
+    $pdf->Cell(32,10,$session,0,0,'C');     
 
     $pdf->Ln(15);// Line break
     $pdf->SetFont('Arial','',8);
