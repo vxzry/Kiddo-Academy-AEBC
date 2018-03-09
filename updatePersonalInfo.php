@@ -46,7 +46,9 @@ if(isset($_POST['btnpersonal']))
 	  move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
 	 }
 	 
-	header("location:profile.php");
+	// header("location:profile.php");
+	header('location:profile.php?message=4');
+
 
 }
 ?>

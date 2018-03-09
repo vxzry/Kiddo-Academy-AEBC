@@ -136,15 +136,15 @@ function run(){
                     <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      <?php echo $namess ?>
+                      <!--<?php echo $namess ?>-->
                       <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!--<div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div>-->
                     <div class="pull-right">
                       <a href="#" class="btn btn-default btn-flat">Logout</a>
                     </div>
@@ -153,7 +153,7 @@ function run(){
               </li>
             </ul>
           </div>
-          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+         <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
           
         </nav>
       </header>
@@ -168,14 +168,29 @@ function run(){
             </div>
 
             <div class="pull-left info" style="margin-top: 3%">
-              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
-            <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
+            
+        <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
+            
            <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
@@ -548,14 +563,13 @@ function run(){
       </div>
       <!-- /.content-wrapper -->
 
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> Last na please
-        </div>
-        <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
-        reserved.
-      </footer>
-
+         <footer class="main-footer">
+          <div class="pull-right hidden-xs">
+            <b>Version</b> 2017
+          </div>
+          <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
+          reserved.
+        </footer>
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
