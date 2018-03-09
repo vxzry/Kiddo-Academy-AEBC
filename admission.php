@@ -1016,15 +1016,6 @@
 </div>
 
 
-
-<<<<<<< HEAD
-                                    <ul class="list-inline pull-right" style="margin-top: 5%">
-                                        <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
-                                    </ul>
-                                    <div class="btn-group" style="margin-top: 5%; float: right">
-                                    <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button>
-                                    </div>
-=======
                                     <ul class="list-inline pull-right" style
 ="margin-top: 5%">                                         <li><button
 type="button" class="btn btn-default prev-step">Previous</button></li>
@@ -1033,11 +1024,10 @@ type="button" class="btn btn-default prev-step">Previous</button></li>
 type="submit" class="btn btn-info" name="btnSave" id="btnSave"
 href="saveadmission.php">Save Applicant</button>
 </div>                                      </form> <!-- main form -->
-<form method="post" action="outputAdmissionNotice.php">
-<button type="submit" class="btn btn-success" name="btnSave" id="btnSave" target="_blank" style="margin-top: 5%; float:
+<form method="post" action="outputAdmissionNotice.php" target="_blank">
+<button type="submit" class="btn btn-success" name="btnSave" id="btnSave" style="margin-top: 5%; float:
 right">Get Notice of Admission</button>
 </form>
->>>>>>> 30b486859a9596dd64fc1822c26d691f5a933504
                                   </div> <!-- tab pane step4 -->
 
                                 <div class="clearfix"></div>
