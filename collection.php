@@ -71,9 +71,11 @@ $acc=$_POST['chkbills'];
         if(document.getElementById('check').checked) {
             $("#txtAmount").prop('disabled', false);
             $("#txtBankName").prop('disabled', false);
+            $("#num").prop('disabled', false);
         } else {
             $("#txtAmount").prop('disabled', true);
             $("#txtBankName").prop('disabled', true);
+            $("#num").prop('disabled', true);
         }
       }
       function checkamnt()
@@ -86,6 +88,12 @@ $acc=$_POST['chkbills'];
         var val=document.getElementById("txtBankName").value;
         document.getElementById("bankname").value=val;
       }
+      function checknum()
+      {
+        var val=document.getElementById("num").value;
+        document.getElementById("chknum").value=val;
+      }
+
     </script>
   </head>
 
@@ -134,7 +142,7 @@ $acc=$_POST['chkbills'];
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -339,11 +347,7 @@ $acc=$_POST['chkbills'];
 
          <!-- checkbox -->
                             <div class="form-group col-md-9" style="margin-top: 5%">
-
-                              <!-- <div class="col-md-12" style="margin-top: 3%">
-                              <label class="col-md-2">Check Number:</label>
-                              <input type="text" name="num" id="num" class="col-md-8">
-                            </div>
+                            <!--
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
                               <input type="number" name="amount" id="amount" class="col-md-3">
@@ -356,6 +360,10 @@ $acc=$_POST['chkbills'];
                               <label> -->
                                 <input type="checkbox" name="check" id="check" onchange="showCheck()"> Check
                               </label>
+                            </div>
+                            <div class="col-md-12" style="margin-top: 3%">
+                              <label class="col-md-2">Check Number:</label>
+                              <input type="text" name="num" id="num" class="col-md-3" disabled onkeypress="checknum()">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
@@ -373,12 +381,13 @@ $acc=$_POST['chkbills'];
          
     </form> 
     <form method="post" action="reportreceipt.php" target="_blank">
-      <input type="text" value="<?php echo $totalamountpaid ?>" id="amnt" name="amnt" />
-      <input type="text" value="<?php echo $studname ?>" id="name" name="name" />
-      <input type="text" value="<?php echo $studid ?>" id="student" name="student" />
-      <input type="text" id="checkamount" name="checkamount" />
-      <input type="text" id="bankname" name="bankname" />
-      <input type="text" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
+      <input type="hidden" value="<?php echo $totalamountpaid ?>" id="amnt" name="amnt" />
+      <input type="hidden" value="<?php echo $studname ?>" id="name" name="name" />
+      <input type="hidden" value="<?php echo $studid ?>" id="student" name="student" />
+      <input type="hidden" id="checkamount" name="checkamount" />
+      <input type="hidden" id="bankname" name="bankname" />
+      <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
+      <input type="hidden" id="chknum" name="chknum" />
       <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
     </form>
   </div>
