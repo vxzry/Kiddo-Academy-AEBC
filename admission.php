@@ -162,15 +162,15 @@
 		                <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
 		                <p>
-		                  <?php echo $namess ?>
+		                 <!-- <?php echo $namess ?>-->
 		                  <small><?php echo $rolename ?></small>
 		                </p>
 		              </li>
 		              <!-- Menu Footer-->
 		              <li class="user-footer">
-		                <div class="pull-left">
+		                <!--<div class="pull-left">
 		                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-		                </div>
+		                </div>-->
 		                <div class="pull-right">
 		                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
 		                </div>
@@ -195,14 +195,28 @@
 
             <div class="pull-left info">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
-              <p style="padding: 3px 30px;"><?php echo $rolename ?></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
 
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: black; font-size: 15px; margin-top: 3%">Welcome!</li>
+            <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
+           
+
            <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
@@ -325,6 +339,7 @@
 
                               <div class="tab-pane active" role="tabpanel" id="step1">
                                 <center><h3 style="margin-bottom: 3%; margin-left: 3%">Check Requirements</h3></center>
+                                <span style="color: rgba(255, 0, 0, 0.9); padding:5%;">* <span style="color: rgba(0, 0, 0, 0.9) ; font-size: 12px;">Indicates required fields</span></span>
                                 <hr>
                                   <div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -342,7 +357,7 @@
                                         </div>
                                         </div>
                                       <div class="form-group" style="margin-top: 3%; margin-left: 10%">
-                                        <label style="width: 35%">Admission for:</label>
+                                        <label style="width: 35%">Admission for:<span style="color:red; padding:5%;">*</span></label>
                                         <div>
                                           <select class="form-control" style="width: 35%;" name="selLevel" id="selLevel">
                                                   <option selected="selected" disabled>--Choose Level--</option>
@@ -359,16 +374,15 @@
                                       </div>
 
                                       <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
-
                                         <fieldset style="margin-top: 3%; padding: 3%">
-                                        <h3>REQUIREMENTS</h3>
+                                        <h3>REQUIREMENTS<span style="color:red; padding:1%;">*</span></h3>
                                         <hr>
                                          </fieldset>
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
 
                                       <ul class="list-inline pull-right" style="margin-top: 5%">
-                                          <li><button type="button" class="btn btn-primary next-step">Next</li>
+                                          <li><button type="button" class="btn btn-primary next-step" onclick="scrollWin()">Next</li>
                                       </ul>
 
                               </div> <!-- tab pane step1 -->
@@ -376,13 +390,14 @@
                                   <div class="tab-pane" role="tabpanel" id="step2">
                                     <center><h3 style="margin-bottom: 3%; margin-left: 3%">Student's Personal Information</h3></center>
                                     <div class="container">
+                                      <span style="color: rgba(255, 0, 0, 0.9); padding:5%;">* <span style="color: rgba(0, 0, 0, 0.9) ; font-size: 12px;">Indicates required fields</span></span>
     <hr>
   <div class="row">
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
           <img src="//placehold.it/100" class="avatar img-circle" alt="Student's Photo">
-          <h6>Upload photo...</h6>
+           <h6>Upload photo...</h6>
 
           <input type="file" class="form-control" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
         </div>
@@ -433,7 +448,7 @@
             <div class="col-lg-4" style="width:27%;">
               <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
             </div>
-            <label class="col-lg-1 control-label left">Gender:</label>
+            <label class="col-lg-1 control-label left">Gender:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-3">
               <select class="form-control" type="text" name="txtStudGender" id="txtStudGender">
                 <option selected disabled>--Select Gender--</option>
@@ -488,14 +503,15 @@
 <hr>
 
                                     <ul class="list-inline pull-right" style="margin-top: 5%">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Next</button></li>
+                                        <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary btn-info-full next-step" onclick="scrollWin()">Next</button></li>
                                     </ul>
                                   </div> <!-- tab pane step2-->
 
                                   <div class="tab-pane" role="tabpanel" id="step3">
                                     <center><h3 style="margin-bottom: 3%; margin-left: 3%">Family Information</h3></center>
 <div class="container">
+   <span style="color: rgba(255, 0, 0, 0.9); padding:5%;">* <span style="color: rgba(0, 0, 0, 0.9) ; font-size: 12px;">Indicates required fields</span></span>
     <hr>
   <div class="row">
       <!-- left column -->
@@ -843,8 +859,8 @@
                                     <div>
                                     <hr>
                                     <ul class="list-inline pull-right" style="margin-top: 5%">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <li><button type="button" class="btn btn-primary next-step">Next</button></li>
+                                        <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step" onclick="scrollWin()">Next</button></li>
                                     </ul>
                                     </div>
 
@@ -854,6 +870,7 @@
 
                                     <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
                                     <center><h3 style="margin-left: 3%">Health History</h3></center>
+                                    <span style="color: rgba(255, 0, 0, 0.9); padding:5%;">* <span style="color: rgba(0, 0, 0, 0.9) ; font-size: 12px;">Indicates required fields</span></span>
                                     <hr>
                                       <!-- <h3>Health History</h3> -->
 
@@ -880,7 +897,7 @@
 
                                           <div class="form-group" style="margin-top: 14%">
                                             <label class="col-lg-2 control-label">Blood Type:</label>
-                                              <div class="col-lg-7" style="width:10%;">
+                                              <div class="col-lg-7" style="width:11%;">
                                                 <select class="form-control choose" style="width: 100%;" name="selHealthBtype" id="selHealthBtype">
                                                   <option value="A">A</option>
                                                   <option value="B">B</option>
@@ -904,9 +921,9 @@
 
                                               <div class="form-group" style="margin-top: 21%">
                                                 <label class="col-lg-2 control-label">Reason:</label>
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-7" style="width:45%;">
                                                   <input class="form-control" type="text" name="txtHealthReason" id="txtHealthReason">
-                                                  <!-- <textarea rows="2" cols="20" class="form-control" type="text" name="txtHealthReason" id="txtHealthReason"></textarea> -->
+                                                  <!--<textarea rows="2" cols="20" class="form-control" type="text" name="txtHealthReason" id="txtHealthReason" style="width: 60%"></textarea>-->
                                                 </div>
                                               </div>
 
@@ -1000,6 +1017,14 @@
 
 
 
+<<<<<<< HEAD
+                                    <ul class="list-inline pull-right" style="margin-top: 5%">
+                                        <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
+                                    </ul>
+                                    <div class="btn-group" style="margin-top: 5%; float: right">
+                                    <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button>
+                                    </div>
+=======
                                     <ul class="list-inline pull-right" style
 ="margin-top: 5%">                                         <li><button
 type="button" class="btn btn-default prev-step">Previous</button></li>
@@ -1012,6 +1037,7 @@ href="saveadmission.php">Save Applicant</button>
 <button type="submit" class="btn btn-success" name="btnSave" id="btnSave" target="_blank" style="margin-top: 5%; float:
 right">Get Notice of Admission</button>
 </form>
+>>>>>>> 30b486859a9596dd64fc1822c26d691f5a933504
                                   </div> <!-- tab pane step4 -->
 
                                 <div class="clearfix"></div>
@@ -1143,6 +1169,13 @@ right">Get Notice of Admission</button>
     document.getElementById('age').value=age;
 }
   </script>
+
+    <script>
+  function scrollWin() {
+      window.scrollTo(0, -300);
+  }
+  </script>
+
   </body>
 
 </html>
