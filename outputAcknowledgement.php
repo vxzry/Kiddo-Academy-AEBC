@@ -4,7 +4,6 @@ require ("fpdf.php");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
 
-
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syid = $row['tblSchoolYrId'];

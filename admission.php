@@ -139,6 +139,7 @@
         var val=document.getElementById("txtStudLname").value;
         document.getElementById("lname").value=val;
       }
+      
     </script>
   </head>
 

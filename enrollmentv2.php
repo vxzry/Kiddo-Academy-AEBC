@@ -366,6 +366,10 @@ if(isset($_POST['btnProceed']))
                          </div>
                         </div> <!-- box body tab_! -->
                         </form>
+  <form method="post" action="outputEnrollment.php" target="_blank">
+      <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
+      <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
+    </form>
                       </div> <!-- box tab_1 -->
                     </div> <!-- tab pane tab_1 -->
                   </div>

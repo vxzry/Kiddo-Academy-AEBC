@@ -4,10 +4,13 @@ require ("fpdf.php");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
 
-
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syid = $row['tblSchoolYrId'];
+$query1=mysqli_query($con, "Select * FROM tblrequirement WHERE tblRequirementFlag=1");
+$row1=mysqli_fetch_array($query1);
+$syid = $row1['tblSchoolYrId'];
+$studtype=$_POST['r3'];
 $firstname=$_POST['fname'];
 $middlename=$_POST['mname'];
 $lastname=$_POST['lname'];
@@ -81,6 +84,10 @@ function Footer()
     $pdf->SetXY(42,110);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(5,10,"at the time of admission:",0,0,'C');
+
+    $pdf->SetXY(42,120);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(50,10,$r3,0,0,'C');
 
     $pdf->SetXY(108,180);
     $pdf->SetFont('Arial','',11);
