@@ -7,13 +7,6 @@ include "db_connect.php";
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syid = $row['tblSchoolYrId'];
-$query1=mysqli_query($con, "Select * FROM tblrequirement WHERE tblRequirementFlag=1");
-$row1=mysqli_fetch_array($query1);
-$syid = $row1['tblSchoolYrId'];
-$studtype=$_POST['r3'];
-$firstname=$_POST['fname'];
-$middlename=$_POST['mname'];
-$lastname=$_POST['lname'];
 class PDF extends FPDF
 {
 // Page header
@@ -38,11 +31,9 @@ function Header()
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
 
 
-    $this->SetXY(105,65);
+    $this->SetXY(112,65);
     $this->SetFont('Arial','B',12);
-    $this->Cell(5,10,"Notice of Admission",0,0,'C');
-
-
+    $this->Cell(5,10,"Acknowledgement Receipt",0,0,'C');
     
 }
 
@@ -66,41 +57,21 @@ function Footer()
     $pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
 
-    $pdf->SetXY(25,80);
-    $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"Dear",0,0,'C');
-    $pdf->Cell(20,10,$lastname,0,0,'C');
-    $pdf->Cell(30,10,$firstname,0,0,'C');
-    $pdf->Cell(20,10,$middlename,0,0,'C');
-
     $pdf->SetXY(113,90);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"We congratulate and inform you that you are now admitted to Kiddo Academy and",0,0,'C');
+    $pdf->Cell(5,10,"Received from _______________________________ the amount of ___________________",0,0,'C');
 
-    $pdf->SetXY(102,100);
+    $pdf->SetXY(107,100);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"Development Center. You are requested to settle your bill and present the following documents",0,0,'C');
+    $pdf->Cell(5,10,"________________________________________________________________________________",0,0,'C');
 
-    $pdf->SetXY(42,110);
+    $pdf->SetXY(45,110);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"at the time of admission:",0,0,'C');
+    $pdf->Cell(5,10,"representing the payment of:",0,0,'C');
 
-    $pdf->SetXY(42,120);
+    $pdf->SetXY(160,210);
     $pdf->SetFont('Arial','',11);
-
-    $pdf->SetXY(108,180);
-    $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"For further information, contact the management or go through the guidelines in",0,0,'C');
-
-    $pdf->SetXY(60,190);
-    $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"the website (https://kiddoacademy.com).",0,0,'C');
-
-    $pdf->SetXY(50,200);
-    $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"Thank you.",0,0,'C');
-
-
+    $pdf->Cell(5,10,"Received by:",0,0,'C');
 
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(150,230);//X-Left, Y- Down
