@@ -6,6 +6,7 @@ $studname=$_POST['name'];
 $studid=$_POST['student'];
 $checkamnt=$_POST['checkamount'];
 $bankname=$_POST['bankname'];
+$chknum=$_POST['chknum'];
 $date=$_POST['date'];
 $query=mysqli_query($con, "select * from tblstudentinfo where tblStudInfo_tblStudentId='$studid'");
 $row=mysqli_fetch_array($query);
@@ -87,6 +88,7 @@ function Footer()
     $pdf->SetXY(30,130);//X-Left, Y- Down
     $pdf->Cell(10,5,'Check: ',0,0,'');
     $pdf->Line(53,135,83,135);
+    $pdf->Cell(50,5,$chknum,0,0,'C');
     $pdf->SetXY(30,135);
     $pdf->Cell(10,5,'Amount:',0,0,'');
     $pdf->Line(53,140,83,140);
@@ -105,11 +107,11 @@ function Footer()
 
 
     
-    $pdf->SetXY(95,180);//X-Left, Y- Down
-    $pdf->Line(125,183,180,183);
-    $pdf->SetFont('Arial','',10);
-    $pdf->SetXY(137,185);//X-Left, Y- Down
-    $pdf->Cell(10,10,'Authorized Signature',0,0,'');
+    // $pdf->SetXY(95,180);//X-Left, Y- Down
+    // $pdf->Line(125,183,180,183);
+    // $pdf->SetFont('Arial','',10);
+    // $pdf->SetXY(137,185);//X-Left, Y- Down
+    // $pdf->Cell(10,10,'Authorized Signature',0,0,'');
 
 
 

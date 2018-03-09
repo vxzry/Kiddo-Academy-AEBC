@@ -334,7 +334,7 @@
                             </ul>
                           </div>
 
-                          <form method="post" action="saveadmission.php">
+                          <form method="post" action="saveadmission.php" id="form1">
                             <div class="tab-content">
 
                               <div class="tab-pane active" role="tabpanel" id="step1">
@@ -374,8 +374,10 @@
                                       </div>
 
                                       <div class="fieldset" style="border: 1px solid #d3d3d3; margin-top: 5%" id="requirementfield">
-
-
+                                        <fieldset style="margin-top: 3%; padding: 3%">
+                                        <h3>REQUIREMENTS<span style="color:red; padding:1%;">*</span></h3>
+                                        <hr>
+                                         </fieldset>
                                       </div> <!-- fieldser -->
                                     </div> <!-- col -->
 
@@ -1015,17 +1017,34 @@
 
 
 
+<<<<<<< HEAD
                                     <ul class="list-inline pull-right" style="margin-top: 5%">
                                         <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
                                     </ul>
                                     <div class="btn-group" style="margin-top: 5%; float: right">
                                     <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button>
                                     </div>
+=======
+                                    <ul class="list-inline pull-right" style
+="margin-top: 5%">                                         <li><button
+type="button" class="btn btn-default prev-step">Previous</button></li>
+</ul>                                     <div class="btn-group" style
+="margin-top: 5%; float: right">                                     <button
+type="submit" class="btn btn-info" name="btnSave" id="btnSave"
+href="saveadmission.php">Save Applicant</button>
+</div>                                      </form> <!-- main form -->
+<form method="post" action="outputAdmissionNotice.php">
+<button type="submit" class="btn btn-success" name="btnSave" id="btnSave" target="_blank" style="margin-top: 5%; float:
+right">Get Notice of Admission</button>
+</form>
+>>>>>>> 30b486859a9596dd64fc1822c26d691f5a933504
                                   </div> <!-- tab pane step4 -->
+
                                 <div class="clearfix"></div>
                               </div> <!-- tab pane step4 -->
                             </div> <!-- tab content -->
-                          </form> <!-- main form -->
+                         
+
                         </div> <!-- wizard -->
                       </section>
                     </div> <!-- /.box-body -->
