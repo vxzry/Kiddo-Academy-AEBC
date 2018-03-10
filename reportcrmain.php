@@ -65,7 +65,9 @@ $x=substr($login_session,0,1);
   function ddSy()
   {
     var x = document.getElementById("selsy").value;
-    document.getElementsByName("txtsy").innerHTML=x;
+    document.getElementById("txtsy0").value=x;
+    document.getElementById("txtsy1").value=x;
+    document.getElementById("txtsy2").value=x;
   }
   </script>
 </head>
@@ -264,15 +266,16 @@ $x=substr($login_session,0,1);
                 </thead>
                 <tbody>
                   <?php
+                  $i=0;
                   $type=array("Annually", "Monthly", "Daily");
                   foreach($type as $val)
                   {
                   ?>
                   <tr>
                   <td><?php echo $val ?></td>
-                  <td><form method="post" action="reportcollection.php"><input type="hidden" name="txttype" id="txttype" value="<?php echo $val ?>"/><input type="text" name="txtsy" id="txtsy"/><button type="submit" class="btn btn-info">Generate Report</button></form></td>
+                  <td><form method="post" action="reportcollection.php"><input type="hidden" name="txttype" id="txttype" value="<?php echo $val ?>"/><input type="text" name="txtsy" id="txtsy<?php echo $i ?>"/><button type="submit" class="btn btn-info">Generate Report</button></form></td>
                   </tr>
-                  <?php } ?>
+                  <?php $i++; } ?>
                   </tbody>
               </table>
             </div>    
