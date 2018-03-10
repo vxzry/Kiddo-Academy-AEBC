@@ -324,7 +324,7 @@
                                   <label class="col-sm-2" style="text-align: right">Session</label>
                                     <div class="col-sm-7">
                                     <select class="form-control choose" style="width: 100%;" name="selSession" id="selSession" >
-                                      <option selected="selected" disabled>--CHOOSE SESSION--</option>
+                                      <option selected="selected" value="0" disabled>--CHOOSE SESSION--</option>
                                       <option value="MORNING">MORNING</option>
                                       <option value="AFTERNOON">AFTERNOON</option>
                                     </select>
@@ -489,6 +489,7 @@
     $(document).ready(function() {
     $(".choose").select2();
   });
-  </script>
+  </script> selSession
+  
   </body>
 </html>

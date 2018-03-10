@@ -84,6 +84,7 @@ function Footer()
     $pdf->Cell(10,10,'in partial/full payment of ',0,0,'');
     $pdf->Line(123,106,180,106);
     $pdf->Line(30,115,180,115);
+    $pdf->Cell(100,8,'Total Fees',0,0,'C');
 
     $pdf->SetXY(30,130);//X-Left, Y- Down
     $pdf->Cell(10,5,'Check: ',0,0,'');
