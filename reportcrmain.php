@@ -273,7 +273,7 @@ $x=substr($login_session,0,1);
                   ?>
                   <tr>
                   <td><?php echo $val ?></td>
-                  <td><form method="post" action="reportcollection.php"><input type="hidden" name="txttype" id="txttype" value="<?php echo $val ?>"/><input type="text" name="txtsy" id="txtsy<?php echo $i ?>"/><button type="submit" class="btn btn-info">Generate Report</button></form></td>
+                  <td><form method="post" action="reportcollection.php"><input type="hidden" name="txttype" id="txttype" value="<?php echo $val ?>"/><input type="hidden" name="txtsy" id="txtsy<?php echo $i ?>"/><button type="submit" class="btn btn-info">Generate Report</button></form></td>
                   </tr>
                   <?php $i++; } ?>
                   </tbody>

@@ -1,13 +1,7 @@
-<?php 
-include "db_connect.php";
-include "session.php";
-$arrSubj=array();
-$query="select * from tblschoolyear where tblSchoolYearFlag=1 and tblSchoolYrActive='ACTIVE'";
-$result=mysqli_query($con, $query);
-$row=mysqli_fetch_array($result);
-$syid=$row['tblSchoolYrId'];
-$sy=$row['tblSchoolYrYear'];
-$x=substr($login_session,0,1);
+<?php
+   include('session.php');
+   include('db_connect.php');
+   $x=substr($login_session,0,1);
    if($x=="P")
    {
     $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
@@ -30,6 +24,10 @@ $x=substr($login_session,0,1);
     $result1=mysqli_query($con, $query1);
     $row1=mysqli_fetch_array($result1);
     $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
    }
 ?>
 <!DOCTYPE html>
@@ -38,6 +36,7 @@ $x=substr($login_session,0,1);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Kiddo Academy SIS</title>
+  <link rel="icon" type="image/gif" href="images/School Logo/symbol.png"/>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -55,12 +54,21 @@ $x=substr($login_session,0,1);
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="css/select2.min.css">
   <link rel="stylesheet" type="text/css" href="formwizard2.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        padding-right: 0 !important }
+    </style>
   <script>
   function changetblSOA()
   {
@@ -99,36 +107,33 @@ $x=substr($login_session,0,1);
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="admin.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Kim Shook Jin</span>
+              <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $namess ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="admin.jpg" class="img-circle" alt="User Image">
+                <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Kim Shook Jin
-                  <small>Head Teacher</small>
+                  <!-- <?php echo $namess ?> -->
+                  <small><?php echo $rolename ?></small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
+                <!-- <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
+                </div> -->
                 <div class="pull-right">
                   <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                 </div>
               </li>
             </ul>
           </li>
-           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
         </ul>
       </div>
+      <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -136,28 +141,33 @@ $x=substr($login_session,0,1);
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="admin.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info" style="margin-top: 3%">
-          <p>Kim Shook Jin<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
+       <div class="user-panel">
+            <div class="pull-left image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+            </div>
+
+            <div class="pull-left info" style="margin-top: 3%">
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
+
+            </div>
+          </div>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header" style="color: white">Welcome!</li>
+        <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
         <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
@@ -214,14 +224,7 @@ $x=substr($login_session,0,1);
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-    <h3>Student List</h3>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Reports</a></li>
-        <li class="active">Student List</li>
-      </ol>
-    </section>
+    <section class="content-header"> <h3>Student List</h3> </section>
 
     <!-- Main content -->
     <section class="content">
@@ -289,7 +292,7 @@ $x=substr($login_session,0,1);
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> Last na please
+      <b>Version</b> 2017
     </div>
     <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
     reserved.

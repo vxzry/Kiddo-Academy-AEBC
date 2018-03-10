@@ -1,13 +1,7 @@
-<?php 
-include "db_connect.php";
-include "session.php";
-$arrSubj=array();
-$query="select * from tblschoolyear where tblSchoolYearFlag=1 and tblSchoolYrActive='ACTIVE'";
-$result=mysqli_query($con, $query);
-$row=mysqli_fetch_array($result);
-$syid=$row['tblSchoolYrId'];
-$sy=$row['tblSchoolYrYear'];
-$x=substr($login_session,0,1);
+<?php
+   include('session.php');
+   include('db_connect.php');
+   $x=substr($login_session,0,1);
    if($x=="P")
    {
     $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
@@ -30,6 +24,10 @@ $x=substr($login_session,0,1);
     $result1=mysqli_query($con, $query1);
     $row1=mysqli_fetch_array($result1);
     $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
    }
 ?>
 <!DOCTYPE html>
@@ -38,6 +36,7 @@ $x=substr($login_session,0,1);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Kiddo Academy SIS</title>
+  <link rel="icon" type="image/gif" href="images/School Logo/symbol.png"/>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -115,15 +114,15 @@ $x=substr($login_session,0,1);
                     <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      <?php echo $namess ?>
+                      <!-- <?php echo $namess ?> -->
                       <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div> -->
                     <div class="pull-right">
                       <a href="#" class="btn btn-default btn-flat">Logout</a>
                     </div>
@@ -132,7 +131,7 @@ $x=substr($login_session,0,1);
               </li>
             </ul>
           </div>
-          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
           
         </nav>
       </header>
@@ -148,12 +147,26 @@ $x=substr($login_session,0,1);
             </div>
 
             <div class="pull-left info" style="margin-top: 3%">
-              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
+
             </div>
           </div>
 
           <ul class="sidebar-menu" style="font-size:15px;">
-            <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
+            <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
            <?php
             $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
             $result=mysqli_query($con, $query);
@@ -210,14 +223,7 @@ $x=substr($login_session,0,1);
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-    <h3>Student List</h3>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Reports</a></li>
-        <li class="active">Student List</li>
-      </ol>
-    </section>
+    <section class="content-header"> <h3>Student List</h3> </section>
 
     <!-- Main content -->
     <section class="content">
@@ -315,13 +321,13 @@ $x=substr($login_session,0,1);
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> Last na please
-    </div>
-    <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
-    reserved.
-  </footer>
+   <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2017
+      </div>
+      <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
+      reserved.
+    </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
