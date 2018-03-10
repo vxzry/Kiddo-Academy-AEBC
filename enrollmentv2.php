@@ -273,10 +273,11 @@ if(isset($_POST['btnProceed']))
                             
                             <input type="hidden" name="txtSession" id="txtSession" value="<?php echo $session ?>"/>
                             <?php
-                            $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
+                            $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name, tblstudent.tblStudent_tblLevelId from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
                             $result=mysqli_query($con, $query);
                             $row=mysqli_fetch_array($result);
                             $studname=$row['name'];
+                            $levelid=$row['tblStudent_tblLevelId'];
                             ?> 
                              <hr> 
                                 <div class="form-group" style="margin-top: 0%">
@@ -370,7 +371,8 @@ if(isset($_POST['btnProceed']))
   <form method="post" action="outputEnrollment.php" target="_blank">
       <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <input type="hidden" value="<?php echo $session ?>" id="session" name="session" />
-      <input type="hidden" value="<?php echo $studname ?>" id="studname" name="studname">
+      <input type="hidden" value="<?php echo $studname ?>" id="studname" name="studname"/>
+      <input type="text" value="<?php echo $levelid ?>" id="level" name="level"/>
 
       <button type="submit" class="btn btn-info btn-block" style="width: 20%; float: right; margin-top: 5%; margin-right: 2px">Get Enrollment Voucher</button>
     </form>
