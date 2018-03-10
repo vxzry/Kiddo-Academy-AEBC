@@ -96,15 +96,15 @@
                  <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                  <p>
-                   <?php echo $namess ?>
+                   <!--<?php echo $namess ?> -->
                    <small><?php echo $rolename ?></small>
                  </p>
                </li>
                <!-- Menu Footer-->
                <li class="user-footer">
-                 <div class="pull-left">
+                 <!--<div class="pull-left">
                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                 </div>
+                 </div>-->
                  <div class="pull-right">
                    <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                  </div>
@@ -113,7 +113,7 @@
            </li>
          </ul>
        </div>
-          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
        
      </nav>
    </header>
@@ -128,7 +128,8 @@
          </div>
 
          <div class="pull-left info" style="margin-top: 3%">
-           <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+          <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+          <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
          </div>
        </div>
 
@@ -192,9 +193,7 @@
    <!-- Content Wrapper. Contains page content -->
    <div class="content-wrapper">
      <!-- Content Header (Page header) -->
-     <section class="content-header">
-       <h3>Dashboard</h3>
-     </section>
+     <section class="content-header"></section>
 
      <!-- Main content -->
      <section class="content">

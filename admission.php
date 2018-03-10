@@ -299,7 +299,7 @@
                     <div class="box-header with-border"></div>
 
                     <div class="box-body">
-                      <label style="padding: 3%">Parent: </label>
+                      <!-- <label style="padding: 3%">Parent: </label>
                       <select class="form-control choose" name="parentChoose" id="parentChoose" style="width: 40%">
                         <option selected="selected" disabled>--Select Parent--</option>
                             <?php
@@ -310,7 +310,7 @@
                             ?>
                               <option value="<?php echo $row['tblParentId'] ?>"><?php echo $row['names'] ?></option>
                             <?php } ?>
-                      </select>
+                      </select> -->
                       <section>
                         <div class="wizard">
                           <div class="wizard-inner">

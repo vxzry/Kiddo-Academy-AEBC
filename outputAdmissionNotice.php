@@ -7,10 +7,6 @@ include "db_connect.php";
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syid = $row['tblSchoolYrId'];
-$query1=mysqli_query($con, "Select * FROM tblrequirement WHERE tblRequirementFlag=1");
-$row1=mysqli_fetch_array($query1);
-$syid = $row1['tblSchoolYrId'];
-$studtype=$_POST['r3'];
 $firstname=$_POST['fname'];
 $middlename=$_POST['mname'];
 $lastname=$_POST['lname'];
@@ -79,24 +75,21 @@ function Footer()
 
     $pdf->SetXY(102,100);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"Development Center. You are requested to settle your bill and present the following documents",0,0,'C');
+    $pdf->Cell(5,10,"Development Center. You are requested to settle your bill and present the required documents",0,0,'C');
 
     $pdf->SetXY(42,110);
     $pdf->SetFont('Arial','',11);
-    $pdf->Cell(5,10,"at the time of admission:",0,0,'C');
+    $pdf->Cell(5,10,"at the time of admission.",0,0,'C');
 
-    $pdf->SetXY(42,120);
-    $pdf->SetFont('Arial','',11);
-
-    $pdf->SetXY(108,180);
+    $pdf->SetXY(108,120);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(5,10,"For further information, contact the management or go through the guidelines in",0,0,'C');
 
-    $pdf->SetXY(60,190);
+    $pdf->SetXY(60,130);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(5,10,"the website (https://kiddoacademy.com).",0,0,'C');
 
-    $pdf->SetXY(50,200);
+    $pdf->SetXY(50,140);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(5,10,"Thank you.",0,0,'C');
 
