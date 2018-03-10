@@ -276,13 +276,14 @@ if(isset($_POST['btnProceed']))
                             $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
                             $result=mysqli_query($con, $query);
                             $row=mysqli_fetch_array($result);
+                            $studname=$row['name'];
                             ?> 
                              <hr> 
                                 <div class="form-group" style="margin-top: 0%">
                                 <h2>Payment Schemes</h2>
                                 <small>These are the fees availed. Please choose payment scheme.</small>
                                 <h4 style="margin-top: 5%"><input type="hidden" name="txtId" id="txtId" value="<?php echo $studid ?>" />Student Id: <?php echo $studid ?></h4>
-                             <h4>Student Name: <?php echo $row['name'] ?></h4>
+                             <h4>Student Name: <?php echo $studname ?></h4>
                                  <div class="col-md-12" style="margin-top: 6%">
                                     <table id="datatable2" class="table table-bordered table-striped">
                                       <thead>
@@ -369,6 +370,7 @@ if(isset($_POST['btnProceed']))
   <form method="post" action="outputEnrollment.php" target="_blank">
       <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <input type="hidden" value="<?php echo $session ?>" id="session" name="session" />
+      <input type="hidden" value="<?php echo $studname ?>" id="studname" name="studname">
 
       <button type="submit" class="btn btn-info btn-block" style="width: 20%; float: right; margin-top: 5%; margin-right: 2px">Get Enrollment Voucher</button>
     </form>

@@ -5,6 +5,7 @@ require ("fpdf.php");
 include "db_connect.php";
 $session=$_POST['session'];
 $date=$_POST['date'];
+$studname=$_POST['studname'];
 
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrActive='ACTIVE' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
@@ -64,7 +65,8 @@ function Footer()
 
     $pdf->SetXY(35,60);
     $pdf->SetFont('Arial','B',11);
-    $pdf->Cell(5,10,"Name:",0,0,'C');  
+    $pdf->Cell(5,10,"Name:",0,0,'C'); 
+    $pdf->Cell(45,10,$studname,0,0,'C');     
 
     $pdf->SetXY(152,60);
     $pdf->SetFont('Arial','B',11);
