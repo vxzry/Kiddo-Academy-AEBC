@@ -148,15 +148,15 @@
                     <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      <?php echo $namess ?>
+                      <!-- <?php echo $namess ?> -->
                       <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div> -->
                     <div class="pull-right">
                       <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
@@ -165,7 +165,7 @@
               </li>
             </ul>
           </div>
-          <p style="text-align: center; font-size: 20px; padding-top: 10px; color: white">Kiddo Academy AEBC</p>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
           
         </nav>
       </header>
@@ -181,13 +181,26 @@
 
             <div class="pull-left info">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
+             <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
            <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
@@ -244,15 +257,10 @@
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <ol class="breadcrumb" style="font-size:15px;">
-            <li><a href="RegistrarMessage.html" style="color: black;"><i class="fa fa-envelope-o"></i> Message</a></li>
-            <li class="active">Billing</li>
-          </ol>
-        </section>
+        <section class="content-header"></section>
 
         <!-- Main content -->
-        <section class="content"  style="margin-top: 4%">
+        <section class="content">
           <div class="row">
             <div class="col-md-12">
               <div class="box box-default">
@@ -479,13 +487,13 @@
       </div>
       <!-- /.content-wrapper -->
 
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> Last na please
-        </div>
-        <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
-        reserved.
-      </footer>
+ <footer class="main-footer">
+          <div class="pull-right hidden-xs">
+            <b>Version</b> 2017
+          </div>
+          <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
+          reserved.
+        </footer>
 
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
