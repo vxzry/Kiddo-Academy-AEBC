@@ -82,7 +82,7 @@
   {
     var lvl = document.getElementById("selLevel").value;
     var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeTblSect.php?selLevel="+document.getElementById("selLevel").value,false);
+    xmlhttp.open("GET","changeTblStud.php?selLevel="+document.getElementById("selLevel").value,false);
     xmlhttp.send(null);
     
     document.getElementById("datatable1").innerHTML=xmlhttp.responseText;

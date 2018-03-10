@@ -2,6 +2,7 @@
 require ("fpdf.php");
 include "db_connect.php";
 $type=$_POST['txttype'];
+$sy=$_POST['txtsy'];
 class PDF extends FPDF
 {
 // Page header
