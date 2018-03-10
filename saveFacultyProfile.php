@@ -42,7 +42,7 @@ $facultyid=$sy.$id;
 		// $result=mysqli_query($con, $query);
 	// User end
 
-	$query="insert into tblfaculty(tblFacultyId, tblFacultyFname, tblFacultyLname, tblFacultyMname, tblFacultyGender, tblFacultyEmail, tblFacultyFlag, tblFacultyContact, tblFacultyAddress, tblFacultyBday, tblFacultyBplace, tblFacultyPostion) values ('$facultyid', '$fname', '$lname', '$mname', '$gender', '$email', 1, '$no', '$add', '$bday', '$bplace' , '$position')";
+	$query="insert into tblfaculty(tblFacultyId, tblFacultyFname, tblFacultyLname, tblFacultyMname, tblFacultyGender, tblFacultyEmail, tblFacultyFlag, tblFacultyContact, tblFacultyAddress, tblFacultyBday, tblFacultyBplace, tblFacultyPosition) values ('$facultyid', '$fname', '$lname', '$mname', '$gender', '$email', 1, '$no', '$add', '$bday', '$bplace' , '$position')";
 	if (!$query = mysqli_query($con, $query)) {
     	exit(mysqli_error($con));
 	}else{
