@@ -2,7 +2,7 @@
 require ("fpdf.php");
 include "db_connect.php";
 $type=$_POST['txttype'];
-$sy=$_POST['txtsy'];
+$sysy=$_POST['txtsy'];
 class PDF extends FPDF
 {
 // Page header
@@ -27,20 +27,10 @@ function Header()
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
 
     $this->SetFont('Arial','',10);
-    $this->SetXY(30,50);//X-Left, Y- Down
+    $this->SetXY(170,50);//X-Left, Y- Down
 
     $tDate=date('Y-m-d');
     $this->Cell(10,10,'Date: '.$tDate,0,0,'');
-
-    $this->SetXY(100,60);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"Collection Report",0,0,'C');
-
-    $this->Ln(15);// Line break
-    $this->SetFont('Arial','',8);
-    $this->Cell(55,5,"Fee Name",1,0,'C');
-    $this->Cell(40,5,"# of Transactions",1,0,'C');
-    $this->Cell(35,5,"Amount",1,1,'C');
     
 }
 
@@ -65,22 +55,39 @@ function Footer()
 	$pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
 
+    $pdf->SetXY(100,60);
+    $pdf->SetFont('Arial','B',15);
+    $pdf->Cell(10,10,"Collection Report(".$type.")",0,0,'C');
+
+    $pdf->Ln(15);// Line break
+    $pdf->SetFont('Arial','',8);
+    $pdf->SetX('40');
+    $pdf->Cell(55,5,"Fee Name",1,0,'C');
+    $pdf->Cell(40,5,"# of Transactions",1,0,'C');
+    $pdf->Cell(35,5,"Amount",1,1,'C');
     //$query = mysqli_query(query)
     $tDate=date('Y-m-d');
     if($type=='Annually')
     {
-    $query = mysqli_query($con, "Select a.tblStudentId, concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname, fe.tblFeeName, ac.tblAccOR, ac.tblAccPR, ac.tblAccCredit FROM tblstudent a, tblstudentinfo ti, tblfee fe, tblscheme sc, tblaccount ac, tblstudscheme ssc WHERE a.tblStudentId = ti.tblStudInfo_tblStudentId AND a.tblStudentId=ssc.tblStudScheme_tblStudentId AND fe.tblFeeId=ssc.tblStudScheme_tblFeeId AND ssc.tblStudScheme_tblSchemeId=sc.tblSchemeId AND ac.tblAcc_tblStudSchemeId=ssc.tblStudScheme_tblFeeId and ac.tblAccPaymentDate='".$tDate."'");
-    }
+    $tamount=0;
+    $query = mysqli_query($con, "select tblFeeId, tblFeeName, tblFeeCode from tblfee where tblFeeFlag=1");
+    while($row=mysqli_fetch_array($query))
+    {
+        $feeid=$row['tblFeeId'];
+        $query1=mysqli_query($con, "select tblfee.tblFeeName, COUNT(tblaccount.tblAccId) as numtrans, tblaccount.tblAcc_tblStudentId, SUM(tblaccount.tblAccPayment) as totalp from tblfee, tblaccount, tblstudscheme where tblfee.tblFeeId=tblstudscheme.tblStudScheme_tblFeeId and tblaccount.tblAcc_tblStudSchemeId=tblstudscheme.tblStudSchemeId and tblstudscheme.tblStudScheme_tblSchoolYrId='$sysy' and tblaccount.tblAccFlag=1 and tblaccount.tblAccPaid='PAID' and tblfee.tblFeeId='$feeid'");
+        $row1=mysqli_fetch_array($query1);
 
-while($row3=mysqli_fetch_array($query)){
+    $pdf->SetX(40);
+    $pdf->Cell(55, 5, $row1['tblFeeName'], 1, 0);
+    $pdf->Cell(40, 5, $row1['numtrans'], 1, 0);
+    $pdf->Cell(35, 5, $row1['totalp'], 1, 1);
 
-    // $pdf->SetXY(40,85);
-    $pdf->Cell(55, 5, $row3['studentname'], 1, 0);
-    $pdf->Cell(40, 5, $row3['tblFeeName'], 1, 0);
-    $pdf->Cell(35, 5, $row3['tblAccOR'], 1, 0);
-    $pdf->Cell(35, 5, $row3['tblAccPR'], 1, 0);
-    $pdf->Cell(30, 5, $row3['tblAccCredit'], 1, 1);
-}
+    $tamount+=$row1['totalp'];
+    }}
+    $pdf->SetX(40);
+    $pdf->Cell(95, 5, 'TOTAL: ', 1, 0);
+    $pdf->Cell(35, 5, $tamount, 1, 1);
+
 
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(30,225);//X-Left, Y- Down
