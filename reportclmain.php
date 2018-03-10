@@ -69,11 +69,11 @@ $x=substr($login_session,0,1);
         padding-right: 0 !important }
     </style>
   <script>
-  function changetblSOA()
+  function changeTblClass()
   {
-    var lvl = document.getElementById("selSect").value;
+
     var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeTblSect.php?selLevel="+document.getElementById("selSect").value,false);
+    xmlhttp.open("GET","changeTblClass.php?selLevel="+document.getElementById("selLevel").value+"&&selSy="+document.getElementById("selSy").value+"&&selFac="+document.getElementById("selFac").value,false);
     xmlhttp.send(null);
     
     document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
@@ -238,8 +238,44 @@ $x=substr($login_session,0,1);
             
               <div class="box-body">
               <div class="col-md-6">
+                <div class="form-group">
+               <select class="form-control" style="width: 55%;" name="selSy" id="selSy" onchange="changeTblClass()">
+                  <option selected disabled value="0">--Choose School Year--</option>
+                  <?php
+                  $query="select * from tblschoolyear where tblSchoolYearFlag=1";
+                  $result=mysqli_query($con, $query);
+                  while($row=mysqli_fetch_array($result)) 
+                  {
+                  ?>
+                  <option value="<?php echo $row['tblSchoolYrId']; ?>"><?php echo $row['tblSchoolYrYear'] ?></option>
+                  <?php } ?>
+                </select>
+              </div>
               <div class="form-group">
-               
+               <select class="form-control" style="width: 35%;" name="selLevel" id="selLevel" onchange="changeTblClass()">
+                  <option selected disabled value="0">--Choose Level--</option>
+                  <?php
+                  $query="select * from tbllevel where tblLevelFlag=1";
+                  $result=mysqli_query($con, $query);
+                  while($row=mysqli_fetch_array($result))
+                  {
+                  ?>
+                  <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+              <div class="form-group">
+               <select class="form-control" style="width: 55%;" name="selFac" id="selFac" onchange="changeTblClass()">
+                  <option selected disabled value="0">--Choose Teacher-in-Charge--</option>
+                  <?php
+                  $query="select tblFacultyId, concat(tblFacultyLname, ', ', tblFacultyFname, ' ', tblFacultyMname) as facname from tblfaculty where tblFacultyFlag=1";
+                  $result=mysqli_query($con, $query);
+                  while($row=mysqli_fetch_array($result))
+                  {
+                  ?>
+                  <option value="<?php echo $row['tblFacultyId']; ?>"><?php echo $row['facname'] ?></option>
+                  <?php } ?>
+                </select>
               </div>
               </div>
 
@@ -258,13 +294,11 @@ $x=substr($login_session,0,1);
                     $result=mysqli_query($con, $query);
                     while($row=mysqli_fetch_array($result)):
                   ?>
-                <tr>
-                   
+                <tr> 
                   <td><?php echo $row['tblSectionId'] ?></td>
                   <td><?php echo $row['tblSectionName'] ?></td>
-                  <td></td>
-                     <td><form method="post" action="reportclasslist.php"><input type="hidden" name="txtsect" id="txtsect" value="<?php echo $row['tblSectionId'] ?>"/><button type="submit" class="btn btn-success"> Generate Report </button></form></td>
-                  </tr>
+                  <td><form method="post" action="reportclasslist.php"><input type="hidden" name="txtsect" id="txtsect" value="<?php echo $row['tblSectionId'] ?>"/><button type="submit" class="btn btn-success"> Generate Report </button></form></td>
+                </tr>
                   <?php endwhile; ?>
                   </tbody>
               </table>

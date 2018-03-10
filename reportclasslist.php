@@ -4,6 +4,7 @@ require ("fpdf.php");
 // mysqli_select_db($con,'dbkadc');
 include "db_connect.php";
 $sect=$_POST['txtsect'];
+$sysy=$_POST['txtSy'];
 
 $query=mysqli_query($con, "Select * FROM tblsection WHERE tblSectionId='$sect' AND tblSectionFlag = 1");
 $row=mysqli_fetch_array($query);
@@ -39,23 +40,7 @@ function Header()
     $this->SetX(111);
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
 
-    $this->SetFont('Arial','B',10);
-    $this->SetXY(30,50);//X-Left, Y- Down
-    $this->Cell(10,10,'Level: ',0,0,'');
-    $this->SetXY(150,50);
-    $this->Cell(10,10,"Section:",0,0,'');
-    $this->SetXY(30,55);
-    $this->Cell(10,10,"Teacher:",0,0,'');
-
-
-    $this->SetXY(105,65);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"Class List",0,0,'C');
-
-    $this->SetXY(40,80);
-    $this->SetFont('Arial','B',8);
-    $this->Cell(40,5,"Student Id",1,0,'C');
-    $this->Cell(100,5,"Student Name",1,1,'C');
+    
 
 }
 
@@ -79,7 +64,25 @@ function Footer()
     $pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
 
-   $query = mysqli_query($con, "select * from tblsectionstud where tblSectStud_tblSectionId='$sect' and tblSectStud_tblSchoolYrId='$syid'");
+    $pdf->SetFont('Arial','B',10);
+    $pdf->SetXY(30,50);//X-Left, Y- Down
+    $pdf->Cell(10,10,'Level: '.$lvlname,0,0,'');
+    $pdf->SetXY(150,50);
+    $pdf->Cell(10,10,"Section: ".$sectname,0,0,'');
+    $pdf->SetXY(30,55);
+    $pdf->Cell(10,10,"Teacher: ".$facultyname,0,0,'');
+
+
+    $pdf->SetXY(105,65);
+    $pdf->SetFont('Arial','B',15);
+    $pdf->Cell(10,10,"Class List",0,0,'C');
+
+    $pdf->SetXY(40,80);
+    $pdf->SetFont('Arial','B',8);
+    $pdf->Cell(40,5,"Student Id",1,0,'C');
+    $pdf->Cell(100,5,"Student Name",1,1,'C');
+
+   $query = mysqli_query($con, "select * from tblsectionstud where tblSectStud_tblSectionId='$sect' and tblSectStud_tblSchoolYrId='$sysy'");
     while($row=mysqli_fetch_array($query)):
         $studid=$row['tblSectStud_tblStudentId'];
         $query1=mysqli_query($con, "select concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname, s.tblStudentId from tblstudent s, tblstudentinfo ti where ti.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentId='$studid'");
