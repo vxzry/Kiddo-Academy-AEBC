@@ -139,7 +139,7 @@
         var val=document.getElementById("txtStudLname").value;
         document.getElementById("lname").value=val;
       }
-      
+
     </script>
   </head>
 
@@ -231,7 +231,7 @@
 
        </div>
             </li>
-           
+
 
            <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
@@ -412,10 +412,11 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="Student's Photo">
+          <img id="studpictureview" src="//placehold.it/100" class="avatar img-rounded img-reponsive" alt="Student's Photo"  style="height:180px;max-width:100%;">
            <h6>Upload photo...</h6>
 
-          <input type="file" class="form-control" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
+          <!-- <input type="file" class="form-control" name="avatar" id="picture" accept="image/*" style="margin-top:3%;" required> -->
+          <input type="file" accept="image/*" style="margin-top:3%;" onchange="document.getElementById('studpictureview').src = window.URL.createObjectURL(this.files[0])" required>
         </div>
       </div>
 
@@ -533,10 +534,11 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="Guardian's Photo">
-          <h6>Upload photo...</h6>
+          <img id="fpictureview" src="//placehold.it/100" class="avatar img-rounded img-reponsive" alt="Father's Photo"  style="height:180px;max-width:100%;">
+           <h6>Upload photo...</h6>
 
-          <input type="file" class="text-center center-block well well-sm" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
+          <!-- <input type="file" class="form-control" name="avatar" id="picture" accept="image/*" style="margin-top:3%;" required> -->
+          <input type="file" accept="image/*" style="margin-top:3%;" onchange="document.getElementById('fpictureview').src = window.URL.createObjectURL(this.files[0])">
         </div>
       </div>
 
@@ -653,10 +655,11 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="Guardian's Photo">
-          <h6>Upload photo...</h6>
+          <img id="mpictureview" src="//placehold.it/100" class="avatar img-rounded img-reponsive" alt="Mother's Photo"  style="height:180px;max-width:100%;">
+           <h6>Upload photo...</h6>
 
-          <input type="file" class="form-control" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
+          <!-- <input type="file" class="form-control" name="avatar" id="picture" accept="image/*" style="margin-top:3%;" required> -->
+          <input type="file" accept="image/*" style="margin-top:3%;" onchange="document.getElementById('mpictureview').src = window.URL.createObjectURL(this.files[0])">
         </div>
       </div>
 
@@ -1032,9 +1035,9 @@
 </div>
 
 
-              <div class="btn-group" style="margin-top: 5%; float: right">                                     
+              <div class="btn-group" style="margin-top: 5%; float: right">
                 <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="margin-right: 15px; ">Save Applicant</button>
-              </div>                                      
+              </div>
         </form> <!-- main form -->
           <form method="post" action="outputAdmissionNotice.php" target="_blank">
                 <input type="hidden" id="fname" name="fname" />
@@ -1050,7 +1053,7 @@
                                 <div class="clearfix"></div>
                               </div> <!-- tab pane step4 -->
                             </div> <!-- tab content -->
-                         
+
 
                         </div> <!-- wizard -->
                       </section>
@@ -1182,6 +1185,25 @@
       window.scrollTo(0, -300);
   }
   </script>
+
+  <script>
+
+function readURL(input) {
+  if (input.files && input.files[0]){
+    var reader = new FileReader();
+
+    reader.onload = function(e){
+      $('#pictureview').attr('src',e.target.result);
+    }
+    reader.readAsDataURL(input.file[0]);
+  } else{
+    $('#pictureview'.attr('src','//placehold.it/100'))
+  }
+}
+$("#picture").change(function() {
+  readURL(this);
+});
+</script>
 
   </body>
 
