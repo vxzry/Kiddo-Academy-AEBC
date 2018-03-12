@@ -64,15 +64,6 @@
 
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
     }
-  function appendScheme()
-    {
-      var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showScheme.php?optionalfees="+document.querySelector('input[name="optionalfees"]:checked').value,false);
-      xmlhttp.send(null);
-      // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
-      var objtofld = document.getElementById("fldst");
-      objtofld.appendChild(xmlhttp.responseText);
-    }
 
     (function(){
     if(window.addEventListener){
@@ -367,30 +358,22 @@
                                         ?>
                                         <div>
                                           
-                                          <input type="checkbox" name="optionalfees" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme()" /> <?php echo $row['tblFeeName'] ?></div>
+                                          <input type="checkbox" name="optionalfees[]" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>"> <?php echo $row['tblFeeName'] ?></div>
                                       <?php endwhile; ?>
                                         </fieldset>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-sm-12">
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
-                                        <fieldset style="margin-top: 2%; margin-left: 2%" id="fldst">
+                                        <fieldset style="margin-top: 2%; margin-left: 2%">
                                         <h4 style="font-weight: bold">Schemes</h4>
                                         <?php
                                         $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
                                         $result=mysqli_query($con, $query);
                                         while($row=mysqli_fetch_array($result)):
-                                          $feeid=$row['tblFeeId'];
-                                          $query1=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
-                                          while($row1=mysqli_fetch_array($query1))
-                                          {
                                         ?>
-                                        <div><label> <?php echo $row['tblFeeName'] ?></label>
-                                          <select class="form-control" name="selSchemeM" id="selSchemeM" style="width: 30%;">
-                                            <option disabled selected value="0">--Select Scheme</option>
-                                          </select>
-                                        </div>
-                                      <?php }endwhile; ?>
+                                        <div><p style="margin-top: 3%"> <?php echo $row['tblFeeName'] ?></p></div>
+                                      <?php endwhile; ?>
                                         </fieldset>
                                         </div>
                                         </div>
