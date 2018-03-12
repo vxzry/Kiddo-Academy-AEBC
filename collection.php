@@ -265,8 +265,6 @@ $acc=$_POST['chkbills'];
                             <thead>
                                 <tr>
                                     <th>Due Date</th>
-                                    <th>OR No.</th>
-                                    <th>PR No.</th>
                                     <th>Fee Code</th>
                                     <th>Fee Description</th>
                                     <th>Amount</th>
@@ -295,8 +293,6 @@ $acc=$_POST['chkbills'];
                               <tr>
                               <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row['tblAccId'] ?>"/>
                               <td><?php echo $row['tblAccDueDate'] ?></td>
-                              <td><input type="text" name="txtOR[]" id="txtOR" placeholder="OR#" style="width:55px" /></td>
-                              <td><input type="text" name="txtPR[]" id="txtPR" placeholder="PR#" style="width:55px" /></td>
                               <td><?php echo $row1['tblFeeCode'] ?></td>
                               <td><?php echo $row1['tblFeeName'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
@@ -329,12 +325,14 @@ $acc=$_POST['chkbills'];
                             
                         </div>
                     </div>
-                    <!-- <div class="form-group">
+                    
+                    <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
+                            <input type="text" name="txtOR" id="txtOR" placeholder="OR#" style="width:55px" />
+                            <input type="text" name="txtPR" id="txtPR" placeholder="PR#" style="width:55px" />
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">

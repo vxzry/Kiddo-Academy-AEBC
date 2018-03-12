@@ -11,8 +11,6 @@ $dates=date('Y-m-d');
 $i=0;
 foreach($id as $x)
 {
-	$y=$or[$i];
-	$z=$pr[$i];
 	$datenow=date('Y-m-d');
 	$query="select * from tblaccount where tblAccId='$x' and tblAccFlag=1";
 	$result=mysqli_query($con, $query);
@@ -20,7 +18,7 @@ foreach($id as $x)
 	$payment=$row['tblAccCredit'];
 	$num=$row['tblAccPaymentNum'];
 	$studid=$row['tblAcc_tblStudentId'];
-	$query="update tblaccount set tblAccOR='$y', tblAccPR='$z', tblAccPayment='$payment', tblAccRunningBal=null, tblAccPaid='PAID', tblAccPaymentDate='$datenow' where tblAccId='$x' and tblAccFlag=1";
+	$query="update tblaccount set tblAccOR='$or', tblAccPR='$pr', tblAccPayment='$payment', tblAccRunningBal=null, tblAccPaid='PAID', tblAccPaymentDate='$datenow' where tblAccId='$x' and tblAccFlag=1";
 	if (!$query = mysqli_query($con, $query)) {
 		exit(mysqli_error($con));
 	}
