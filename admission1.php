@@ -960,148 +960,156 @@
           <div class="col-xs-10">
             <center><h2 style="margin-bottom: 3%; margin-left: 3%">Student Information</h2></center>
             <div class="container">
-              <div class="col-md-3">
-                <div class="text-center" style="margin-top: 7%;">
-                <img src="//placehold.it/200" id="profile-img-tag" class="avatar img-thumbnail" width="200px" />
-                <input type="file" class="text-center center-block well well-sm" name="file" id="profile-img" accept="image/*" style="margin-top:3%;" required>
-                </div>
-              </div>
 
               <div class="col-md-9 personal-info">
-                <h3>Personal Information</h3>
+                <center><h3 style="margin-left: 3%">Health History</h3></center>
+                <hr>
+                  <!-- <h3>Health History</h3> -->
 
-                  <div class="form-group"style=" margin-top:5%; margin-bottom:11%;">
-                    <center><label class="col-lg-2 control-label"> First Name: <span style="color:red; padding:5%;">*</span></label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:60%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-user" aria-hidden="true"></i>
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label">Allergies:</label>
+                        <div class="col-lg-7" style="width:45%;">
+                          <input class="form-control" type="text" name="txtHealthAllergies" id="txtHealthAllergies">
                         </div>
-                        <input type="text" class="form-control" name="txtStudFname" placeholder="Student's First Name" required>
                       </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:17%">
-                    <center><label class="col-lg-2 control-label"> Middle Name: </label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:60%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" class="form-control" name="txtStudMname" placeholder="Student's Middle Name" >
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:23%">
-                    <center><label class="col-lg-2 control-label"> Last Name: <span style="color:red; padding:5%;">*</span></label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:60%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" class="form-control" name="txtStudLname" placeholder="Student's Last Name" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:29%">
-                    <center><label class="col-lg-2 control-label"> Birthdate: <span style="color:red; padding:5%;">*</span></label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:36%">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </div>
-                        <input class="form-control" type="date" name="txtStudBday" id="txtStudBday" placeholder="Student's Birthdate" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:35%;">
-                    <center><label class="col-lg-2 control-label left">Birthplace: <span style="color:red; padding:5%;">*</span></label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:60%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" class="form-control" name="txtStudBplace" id="txtStudBplace" placeholder="Student's Birthplace" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:41%;">
-                    <center><label class="col-lg-2 control-label left">Nationality:</label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:45%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-flag" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" class="form-control" name="txtStudNat" id="txtStudNat" placeholder="Student's Nationality" >
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:47%;">
-                    <center><label class="col-lg-2 control-label left">Religion:</label></center>
-                    <div class="col-lg-7">
-                      <div class="input-group" style="width:45%;">
-                        <div class="input-group-addon">
-                          <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" class="form-control" name="txtStudReligion" id="txtStudReligion" placeholder="Student's Religion" >
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:53%;">
-                    <center><label class="col-lg-2 control-label"> Home Address: <span style="color:red; padding:5%;">*</span></label></center>
-                    <div class="col-lg-5">
-                      <div class="input-group" style="width:41%">
-                        <div class="input-group-addon">
-                          <i class="fa fa-home" aria-hidden="true"></i>
-                        </div>
-                        <input type="text" class="form-control" name="txtStudAddBldg" id="txtStudAddBldg" placeholder="Unit/Bldg. No." required >
-                      </div>
-                    </div>
-                    <div class="col-lg-5" style="width:20%; margin-left:-213px;">
-                      <input class="form-control" type="text" placeholder="Street Name/No." name="txtStudAddSt" id="txtStudAddSt">
-                    </div>
-                    <div class="col-lg-5" style="width:20%; margin-left:-75px;">
-                      <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtStudAddBrgy" id="txtStudAddBrgy">
-                    </div>
-                  </div>
 
-                  <div class="form-group" style="margin-bottom:59%;">
-                    <label class="col-lg-2 control-label left"></label>
-                    <div class="col-lg-5" style="width:33%">
-                      <input class="form-control" type="text" placeholder="City/Municipality" name="txtStudAddCity" id="txtStudAddCity" required>
-                    </div>
-
-                    <div class="col-lg-3" style="margin-left:-15px;">
-                      <input class="form-control" type="text" value="Philippines" name="txtStudAddCountry" id="txtStudAddCountry">
-                    </div>
-                  </div>
-                  <div class="form-group" style="margin-bottom:65%;">
-                    <center><label class="col-lg-2 control-label">Spoken Language:</label></center>
-                    <div class="col-lg-7" style="width:27%;">
-                      <div class="input-group" >
-                        <div class="input-group-addon">
-                          <i class="fa fa-language" aria-hidden="true"></i>
+                      <div class="form-group" style="margin-top: 6%">
+                        <label class="col-lg-2">Illness or Disability:</label>
+                        <div class="col-lg-7" style="width:45%;">
+                          <input class="form-control" type="text" name="txtHealthIllness" id="txtHealthIllness">
                         </div>
-                        <input type="text" class="form-control" name="txtStudLang1" id="txtStudLang1" placeholder="First Language" >
                       </div>
-                    </div>
-                  </div>
 
-                  <div class="form-group" style="margin-bottom:58%;">
-                    <center><label class="col-lg-2 control-label"></label></center>
-                    <div class="col-lg-7" style="width:27%;">
-                      <div class="input-group" >
-                        <div class="input-group-addon">
-                          <i class="fa fa-language" aria-hidden="true"></i>
+                      <div class="form-group" style="margin-top: 10%">
+                        <label class="col-lg-2 control-label">Medication:</label>
+                        <div class="col-lg-7" style="width:45%;">
+                          <input class="form-control" type="text" name="txtHealthMeds" id="txtHealthMeds">
                         </div>
-                        <input type="text" class="form-control" name="txtStudLang2" id="txtStudLang2" placeholder="Second Language" >
                       </div>
-                    </div>
-                  </div>
+
+                      <div class="form-group" style="margin-top: 14%">
+                        <label class="col-lg-2 control-label">Blood Type:</label>
+                          <div class="col-lg-7" style="width:10%;">
+                            <select class="form-control choose" style="width: 100%;" name="selHealthBtype" id="selHealthBtype">
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="O">O</option>
+                              <option value="AB">AB</option>
+                            </select>
+                          </div>
+                          </div>
+
+
+                          <div class="form-group" style="margin-top: 18%">
+                            <label class="col-lg-3 control-label">Hospitalized?
+                              <label style="margin-left: 3%">Yes
+                                <input type="radio" name="h2" class="minimal" checked value="Y">
+                              </label>
+                              <label>No
+                                <input type="radio" name="h2" class="minimal" onchange="disabledReason()" value="N">
+                              </label>
+                            </label>
+                          </div>
+
+                          <div class="form-group" style="margin-top: 21%">
+                            <label class="col-lg-2 control-label">Reason:</label>
+                            <div class="col-lg-7">
+                              <input class="form-control" type="text" name="txtHealthReason" id="txtHealthReason">
+                              <!-- <textarea rows="2" cols="20" class="form-control" type="text" name="txtHealthReason" id="txtHealthReason"></textarea> -->
+                            </div>
+                          </div>
+
+                          <div class="form-group" style="margin-top: 25%">
+                            <label class="col-lg-7 control-label">In case of emergency, can we call your family doctor/pediatrician?
+                              <label style="margin-left: 3%">Yes
+                                <input type="radio" name="r1" class="minimal" checked value="Y">
+                              </label>
+                              <label>No
+                                <input type="radio" name="r1" class="minimal" onchange="disabledEmergency()" value="N">
+                              </label>
+                            </label>
+                          </div>
+
+                          <div class="form-group" style="margin-top: 29%">
+                            <label class="col-lg-2 control-label">Doctor's Name:</label>
+                            <div class="col-lg-7" style="width: 30%;">
+                              <input class="form-control" type="text" name="txtHealthDoctor" id="txtHealthDoctor">
+                            </div>
+                          </div>
+
+                          <div class="form-group" style="margin-top: 33%">
+                            <label class="col-lg-2 control-label">Hospital:</label>
+                            <div class="col-lg-7" style="width: 35%;">
+                              <input class="form-control" type="text" name="txtHealthHospital" id="txtHealthHospital">
+                            </div>
+                          </div>
+
+                          <div class="form-group" style="margin-top: 37%">
+                            <label class="col-lg-2 control-label">Tel/Mobile #:</label>
+                            <div class="col-lg-7" style="width: 17%;">
+                              <input class="form-control" type="text" name="txtHealthHosNum" id="txtHealthHosNum">
+                            </div>
+                          </div>
+
+                          <div class="form-group" style="margin-top: 41%">
+                            <label class="col-lg-2 control-label left">Hospital Address:</label>
+                            <div class="col-lg-2">
+                              <input class="form-control" type="text" placeholder="Unit/Bldg. No." name="txtHealthAddBldg" id="txtHealthAddBldg">
+                            </div>
+                            <div class="col-lg-3">
+                              <input class="form-control" type="text" placeholder="Street Name/No." name="txtHealthAddSt" id="txtHealthAddSt">
+                            </div>
+                            <div class="col-lg-2">
+                              <input class="form-control" type="text" placeholder="Brgy. Name/No." name="txtHealthAddBrgy" id="txtHealthAddBrgy">
+                            </div>
+                          </div>
+<div class="form-group" style="margin-top: 46%;">
+<label class="col-lg-2 control-label left"></label>
+<div class="col-lg-5" style="width: 27%;">
+<input class="form-control" type="text" placeholder="City/Municipality" name="txtHealthAddCity" id="txtHealthAddCity">
+</div>
+<div class="col-lg-2">
+<input class="form-control" type="text" value="Philippines" name="txtHealthAddCountry" id="txtHealthAddCountry">
+</div>
+</div>
+
+
+<div class="container" style="margin-top: 50%">
+<hr>
+<div class="row">
+<!-- edit form column -->
+<div class="col-md-9 personal-info">
+<h4 style="font-weight: bold">Emergency Contact</h4>
+<h5>Other person(s) to contact in case of emergency</h5>
+<div class= "right" style="margin-bottom:7%">
+<a href="#"><span class="btn btn-info" id="emcontactbutton" style="float: right" onclick="addEmergencyContact();" >ADD</span></a>
+</div>
+<div class="form-group" id="sibling">
+
+<label class="col-lg-4 control-label">Name:</label>
+<div class="col-lg-8" style="width: 45%; margin-bottom:1%;">
+<input class="form-control" type="text" name="txtEmName[]" id="txtEmName">
+</div>
+<label class="col-lg-4 control-label">Relation to Student:</label>
+<div class="col-lg-8" style="width: 45%; margin-bottom:1%;">
+<input class="form-control" type="text" name="txtReltoStud[]" id="txtReltoStud">
+</div>
+<label class="col-lg-4 control-label">Tel/Mobile Number:</label>
+<div class="col-lg-8" style="width: 45%; margin-bottom:1%;">
+<input class="form-control" type="text" name="txtEmNum[]" id="txtEmNum">
+</div>
+<label class="col-lg-4 control-label">Address:</label>
+<div class="col-lg-8" style="width: 45%;">
+<input class="form-control" type="text" name="txtEmAdress[]" id="txtEmAdress">
+</div>
+</div>
+</div>
+</div>
+</div>
+
               </div>
           </div>
-          <button class="btn btn-primary nextBtn btn-md pull-right" type="button" style="margin-top:20px;">Next</button>
-            <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
+            <button type="submit" class="btn btn-info" name="btnSave" id="btnSave">Save Applicant</button>
       </div>
     </div>
   </div>
