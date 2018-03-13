@@ -580,7 +580,7 @@
                           <div class="modal-body">
                             <div class="form-group">
 
-                                    <b><label class="col-sm-4 control-label"> Level/s: </label></b>
+                                    <b><label class="col-sm-4 control-label"> Subject/s: </label></b>
                                     <div class="col-sm-6 selectContainer">
                                       <div class="input-group">
                                       <?php

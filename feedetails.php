@@ -278,14 +278,14 @@
                       <div class="box">
                         <div class="box-header"></div>
                         <div class="box-body">
-                          <div class="col-md-4 col-sm-6 col-xs-12">
+                          <!-- <div class="col-md-4 col-sm-6 col-xs-12">
                              <div class="panel panel-default">
                                   
                                   <div class="panel-heading">List of Fees</div>
                                   <div class="panel-body">
                                   </div>
                                 </div>
-                          </div>
+                          </div> -->
                         <!-- edit form column -->
                         <form class="form-horizontal" role="form" method="post" action="saveFeeDetail.php">
                         <div class="col-md-4 col-sm-6 col-xs-12 personal-info" style="margin-top: 4%">

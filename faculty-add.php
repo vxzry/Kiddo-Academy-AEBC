@@ -160,9 +160,21 @@
          
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: black; font-size: 17px; margin-top: 3%">Welcome!</li>
-           <?php 
+          <ul class="sidebar-menu" style="font-size:15px;">
+            <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -177,7 +189,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -194,7 +206,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -208,7 +220,7 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
