@@ -284,14 +284,15 @@
             <div class="row">
                 <div class="col-xs-12">
                 <form action="trytry.php" method="post">
+                  <label>OR:</label><input type="text" name="txtOR" id="txtOR" placeholder="OR#" style="width:55px" />
+                  <label>PR:</label><input type="text" name="txtPR" id="txtPR" placeholder="PR#" style="width:55px" />
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
                                 <tr>
                                     <th hidden>Account Id</th>
                                     <th>Due Date</th>
-                                    <th>OR No.</th>
-                                    <th>PR No.</th>
+                                    
                                     <th>Fee Code</th>
                                     <th>Fee Description</th>
                                     <th>Amount</th>
@@ -326,8 +327,7 @@
                             <tr>
                               <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row2['tblAccId'] ?>"/>
                               <td><?php echo $row2['tblAccDueDate'] ?></td>
-                              <td><input type="text" name="txtOR[]" id="txtOR" placeholder="OR#" style="width:55px" /></td>
-                              <td><input type="text" name="txtPR[]" id="txtPR" placeholder="PR#" style="width:55px" /></td>
+                              
                               <td><?php echo $feecode ?></td>
                               <td><?php echo $feename ?></td>
                               <td><?php echo $credit ?></td>
