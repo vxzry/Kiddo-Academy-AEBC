@@ -160,7 +160,7 @@ if(isset($_POST['btnProceed']))
             </ul>
           </div>
           <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
-          
+
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -178,7 +178,7 @@ if(isset($_POST['btnProceed']))
               <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
-         
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
@@ -195,7 +195,7 @@ if(isset($_POST['btnProceed']))
 
        </div>
             </li>
-           <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -210,7 +210,7 @@ if(isset($_POST['btnProceed']))
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -227,7 +227,7 @@ if(isset($_POST['btnProceed']))
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -241,7 +241,7 @@ if(isset($_POST['btnProceed']))
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -270,7 +270,7 @@ if(isset($_POST['btnProceed']))
                         <form action="EnrollStudent.php" method="post">
                             <div class="box-body">
                             <input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $studid ?>"/>
-                            
+
                             <input type="hidden" name="txtSession" id="txtSession" value="<?php echo $session ?>"/>
                             <?php
                             $query="select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as name, tblstudent.tblStudent_tblLevelId from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studid' and tblstudent.tblStudentFlag=1";
@@ -278,8 +278,8 @@ if(isset($_POST['btnProceed']))
                             $row=mysqli_fetch_array($result);
                             $studname=$row['name'];
                             $levelid=$row['tblStudent_tblLevelId'];
-                            ?> 
-                             <hr> 
+                            ?>
+                             <hr>
                                 <div class="form-group" style="margin-top: 0%">
                                 <h2>Payment Schemes</h2>
                                 <small>These are the fees availed. Please choose payment scheme.</small>
@@ -296,7 +296,7 @@ if(isset($_POST['btnProceed']))
                                         </tr>
                                       </thead>
                                       <tbody id="tb">
-                                      <?php 
+                                      <?php
                                       $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1 group by tblFeeId";
                                       $result=mysqli_query($con, $query);
                                       while($row=mysqli_fetch_array($result)):
@@ -314,7 +314,7 @@ if(isset($_POST['btnProceed']))
                                           ?>
                                           <select class="form-control" style="width: 50%;" name="selSchemeMand[]" id="selSchemeMand" >
                                             <option selected="selected" readonly value="None">--CHOOSE SCHEME--</option>
-                                          <?php 
+                                          <?php
                                           $query1="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
                                           $result1=mysqli_query($con, $query1);
                                           while($row1=mysqli_fetch_array($result1)){
@@ -325,7 +325,7 @@ if(isset($_POST['btnProceed']))
                                         <?php endif; ?>
                                           </td>
                                         </tr>
-                                      <?php endwhile; ?>  
+                                      <?php endwhile; ?>
                                       <?php
                                       if($optfees != 'None')
                                       {
@@ -347,7 +347,7 @@ if(isset($_POST['btnProceed']))
                                           ?>
                                         <select class="form-control" style="width: 50%;" name="selSchemeOpt[]" id="selSchemeOpt">
                                       <option selected="selected" readonly value="None">--CHOOSE SCHEME--</option>
-                                      <?php 
+                                      <?php
                                           $query1="select * from tblScheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1";
                                           $result1=mysqli_query($con, $query1);
                                           while($row1=mysqli_fetch_array($result1)){
@@ -357,7 +357,7 @@ if(isset($_POST['btnProceed']))
                                       </select><?php endif; ?></td>
                                       </tr>
                                       <?php }}
-                                       
+
                                         ?>
                                       </tbody>
                                     </table>
@@ -372,7 +372,7 @@ if(isset($_POST['btnProceed']))
       <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <input type="hidden" value="<?php echo $session ?>" id="session" name="session" />
       <input type="hidden" value="<?php echo $studname ?>" id="studname" name="studname"/>
-      <input type="text" value="<?php echo $levelid ?>" id="level" name="level"/>
+      <input type="text" value="<?php echo $levelid ?>" id="level" name="level" hidden/>
 
       <button type="submit" class="btn btn-info btn-block" style="width: 20%; float: right; margin-top: 5%; margin-right: 2px">Get Enrollment Voucher</button>
     </form>
