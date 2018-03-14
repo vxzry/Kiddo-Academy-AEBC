@@ -52,6 +52,11 @@
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
+
+         <!-- sweetalert -->
+         <script src="sweetalert-master/dist/sweetalert-dev.js"></script>
+         <link rel="stylesheet" href="sweetalert-master/dist/sweetalert.css">
+
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
@@ -68,16 +73,16 @@
       var xmlhttp =  new XMLHttpRequest();
       xmlhttp.open("GET","changeTblBilling.php?selLevel="+document.getElementById("selLevel").value,false);
       xmlhttp.send(null);
-      
+
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
 
     }
     function addFields()
     {
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open('GET','billAdd.php?type='+document.querySelector('input[name="r1"]:checked').value+'&selFee='+document.getElementById('selFee').value,false); 
+      xmlhttp.open('GET','billAdd.php?type='+document.querySelector('input[name="r1"]:checked').value+'&selFee='+document.getElementById('selFee').value,false);
       xmlhttp.send(null);
-      
+
       document.getElementById("fg1").innerHTML=xmlhttp.responseText;
 
     }
@@ -85,6 +90,33 @@
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
+    <?php
+        $message = isset($_GET['message'])?intval($_GET['message']):0;
+
+        if($message == 1) {
+          echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 2) {
+          echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
+        }
+
+        if($message == 3) {
+          echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 4) {
+          echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+        }
+
+        if($message == 5) {
+          echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 6) {
+          echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+        }
+      ?>
     <div class="wrapper">
 
       <header class="main-header">
@@ -155,7 +187,7 @@
               <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
-         
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
@@ -172,7 +204,7 @@
 
        </div>
             </li>
-           <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -187,7 +219,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -204,7 +236,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -218,7 +250,7 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -246,13 +278,13 @@
 
                   <div class="tab-content">
 
-                  
+
                     <div class="tab-pane active" id="tab_1">
-                          
+
                           <div class="box-body">
                             <div class="col-md-6"  style="margin-top: 3%">
                               <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
-                              
+
                                   <div>
                                   <label>Select Billing Type: </label>
                                   <input type="radio" name="r1" id="r1" value="1" onclick="addFields()"/> General
@@ -260,7 +292,7 @@
                                   <input type="radio" name="r1" id="r1" value="2" onclick="addFields()"/> Per Student
                                 </div>
 
-                               <div style="margin-bottom:10px; padding: 10px;"> 
+                               <div style="margin-bottom:10px; padding: 10px;">
                                 <label>Select Fee: </label>
                               <select name="selFee" id="selFee" onclick="addFields()">
                                 <option disabled selected value="0">--Select Fee--</option>
@@ -273,7 +305,7 @@
                               </select>
                             </div>
 
-                              
+
                               <form method="post" action="billingGeneral.php"/>
 
                               <div class="fieldset" id="fg1" name="fg1" style="padding: 10px;"></div>
@@ -281,8 +313,8 @@
                               <button type="submit" class="btn btn-success" name="btnAdd" id="btnAdd"><i class="fa fa-edit"></i>Apply bill</button>
                               </div>
                             </form>
-                            
-                             
+
+
                             </div>
                           </div>
                     </div> <!-- tab_1 -->
@@ -396,6 +428,9 @@
     <script src="js/select2.full.min.js"></script>
     <script type="text/javascript" src="formwizard.js"></script>
 
+    <!-- Sweetalert -->
+    <script src="js/sweetalert.min.js"></script>
+
     <script>
       $(function () {
         $("#datatable").DataTable();
@@ -408,6 +443,6 @@
       $(".choose").select2();
     });
     </script>
-    
+
   </body>
 </html>

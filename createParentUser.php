@@ -1,4 +1,4 @@
-<?php include "db_connect.php"; 
+<?php include "db_connect.php";
 include('session.php');
    $x=substr($login_session,0,1);
    if($x=="P")
@@ -61,7 +61,7 @@ include('session.php');
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
   <script>
   // function showLevel()
-  //   { 
+  //   {
   //     var xmlhttp =  new XMLHttpRequest();
   //     xmlhttp.open("GET","showTblStudent.php?selLevel="+document.getElementById("selLevel").value,false);
   //     xmlhttp.send(null);
@@ -125,36 +125,33 @@ include('session.php');
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="images/Employees/registrar.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Park Chanyeol</span>
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $namess ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="images/Employees/registrar.jpg" class="img-circle" alt="User Image">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      Park Chanyeol
-                      <small>Registrar</small>
+                      <!--<?php echo $namess ?> -->
+                      <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div> -->
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
               </li>
-               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
             </ul>
           </div>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -164,10 +161,11 @@ include('session.php');
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="images/Employees/registrar.jpg" class="img-circle" alt="User Image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info" style="margin-top: 3%">
-              <p>Park Chanyeol<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
           <!-- search form -->
@@ -183,8 +181,20 @@ include('session.php');
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
            <ul class="sidebar-menu"  style="font-size:17px;">
-            <li class="header" style="color: white">Welcome!</li>
-            <?php 
+             <li class="header" style="color:black;">
+                 <div>
+             <?php
+               $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+               $result=mysqli_query($con, $query);
+               $row=mysqli_fetch_array($result);
+               $sy=$row['tblSchoolYrYear'];
+             ?>
+             <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+             <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+         </div>
+              </li>
+            <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -199,7 +209,7 @@ include('session.php');
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -216,7 +226,7 @@ include('session.php');
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -230,7 +240,7 @@ include('session.php');
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -239,13 +249,7 @@ include('session.php');
 
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <ol class="breadcrumb"  style="font-size:15px;">
-            <li><a href="RegistrarMessage.html" style="color: black;"><i class="fa fa-envelope-o"></i> Message</a></li>
-            <li class="active">Enrollment</li>
-          </ol>
-          </h5>
-        </section>
+        <section class="content-header"></section>
 
         <!-- Main content -->
     <section class="content" style="margin-top: 4%">
@@ -273,16 +277,16 @@ include('session.php');
                                 <div class="form-group" style="margin-top: 2%">
                                   <label>Student Id:</label>
                                   <input type="text" style="width: 30%;" name="txtStudId" id="txtStudId" value="<?php echo $studid ?>" readonly>
-                                </div>  
+                                </div>
                                 <div class="form-group" style="margin-top: 2%">
                                   <label>Student Name:</label>
                                   <input type="text" style="width: 30%;" name="txtStudName" id="txtStudName" value="<?php echo $studname ?>" readonly>
-                                </div>  
+                                </div>
                                 <div class="form-group" style="margin-top: 2%">
                                   <label>Student's Parent:</label>
                                   <select style="width: 30%;" name="selParent" id="selParent" onchange="putParentId()">
                                   <option>--Select Parent--</option>
-                                  <?php 
+                                  <?php
                                     $query="select  s.tblStudentId, p.tblParentId, p.tblParentRelation, concat(p.tblParentLname, ', ', p.tblParentFname, ' ', p.tblParentMname) as parentname from tblstudent s, tblparentstudent ps, tblparent p where s.tblStudentId='$studid' and s.tblStudentId=ps.tblParStud_tblStudentId and ps.tblParStud_tblParentId=p.tblParentId";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
@@ -295,20 +299,20 @@ include('session.php');
                                 <div class="form-group" style="margin-top: 2%">
                                   <label>Parent Id: </label>
                                   <input type="text" readonly style="width: 30%;" name="txtParentId" id="txtParentId">
-                                </div> 
+                                </div>
                                 <div class="form-group" style="margin-top: 2%">
                                   <label>Password: </label>
                                   <input type="password" style="width: 30%;" name="txtParentPass" id="txtParentPass">
-                                </div> 
+                                </div>
                                 <div class="form-group" style="margin-top: 4%">
                                   <button type="submit" class="btn btn-success" style="width: 15%;" name="btnSave" id="btnSave">OK</button>
-                                </div> 
+                                </div>
                               </div>
                               </form>
                             </div> <!-- box body tab_1 -->
-                         
 
-                          
+
+
                         </div> <!-- box body tab_! -->
                       </div> <!-- box tab_1 -->
                     </div> <!-- tab pane tab_1 -->
@@ -326,7 +330,7 @@ include('session.php');
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> Last na please
+          <b>Version</b> 2017
         </div>
         <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
         reserved.
