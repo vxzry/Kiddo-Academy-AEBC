@@ -427,19 +427,19 @@
           <div class="form-group" style="margin-bottom:7%;">
             <label class="col-lg-2 control-label left">First name:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-8" style="width:30%;">
-              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname" required onkeypress="firstname()">
+              <input class="form-control" type="text" name="txtStudFname" id="txtStudFname" required onkeyup="firstname()">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:13%;">
             <label class="col-lg-2 control-label left">Middle name:</label>
             <div class="col-lg-8" style="width:30%">
-              <input class="form-control" type="text" name="txtStudMname" id="txtStudMname" onkeypress="middlename()">
+              <input class="form-control" type="text" name="txtStudMname" id="txtStudMname" onkeyup="middlename()">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:19%;">
             <label class="col-lg-2 control-label left">Last name:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-8" style="width:30%">
-              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname" required onkeypress="lastname()">
+              <input class="form-control" type="text" name="txtStudLname" id="txtStudLname" required onkeyup="lastname()">
             </div>
           </div>
           <div class="form-group" style="margin-bottom:25%;">
