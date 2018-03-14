@@ -1,7 +1,7 @@
 <?php
    include('session.php');
    include('db_connect.php');
-   $x=substr($login_session,0,1); 
+   $x=substr($login_session,0,1);
    if($x=="P")
    {
     $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
@@ -92,7 +92,7 @@
   if(activeTab){
     $('#myTab a[href="' + activeTab + '"]').tab('show');
   }
-}); 
+});
 </script>
 
 <script>
@@ -102,7 +102,7 @@
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","changeTblFee.php?selFeeLvl="+document.getElementById("selFeeLvl").value,false);
     xmlhttp.send(null);
-    
+
     document.getElementById("datatable").innerHTML=xmlhttp.responseText;
 
   }
@@ -117,7 +117,7 @@
 
   function changeTblMass()
   {
-    
+
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","changeTblMass.php?chkPSchedStat="+document.getElementById("chkPSchedStat").value,false);
     xmlhttp.send(null);
@@ -133,7 +133,7 @@
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","changeSchedFee.php?selSchedFee="+document.getElementById("selSchedFee").value,false);
     xmlhttp.send(null);
-    
+
     document.getElementById("selSchedScheme").innerHTML=xmlhttp.responseText;
 
   }
@@ -142,7 +142,7 @@
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","changeTblSchedScheme.php?selSchedScheme="+document.getElementById("selSchedScheme").value,false);
     xmlhttp.send(null);
-    
+
     document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
 
   }
@@ -152,7 +152,7 @@
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","changeTblFeeType.php?selFeeType="+document.getElementById("selFeeType").value,false);
     xmlhttp.send(null);
-    
+
     document.getElementById("selFee").innerHTML=xmlhttp.responseText;
 
   }
@@ -164,7 +164,7 @@
     var xmlhttp =  new XMLHttpRequest();
     xmlhttp.open("GET","changeTblFeeDetail.php?selFee="+document.getElementById("selFee").value,false);
     xmlhttp.send(null);
-    
+
     document.getElementById("datatable4").innerHTML=xmlhttp.responseText;
 
   }
@@ -183,7 +183,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('txtUpdFeeId');
     var f2=document.getElementById('txtUpdFee');
@@ -216,7 +216,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('txtUpdSchemeId');
     var f2=document.getElementById('txtUpdFeeName');
@@ -245,7 +245,7 @@ function run(){
       target=target.parentElement;
     }
     var cells=target.cells;
-    
+
     if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
     var f1=document.getElementById('txtUpdDetLvl');
     var f2=document.getElementById('txtUpdDetName');
@@ -264,42 +264,42 @@ function run(){
   };
 }})();
 
-  (function(){    
-    if(window.addEventListener){    
-      window.addEventListener('load',run,false);    
-    }else if(window.attachEvent){   
-      window.attachEvent('onload',run);   
-    }   
-  function run(){   
-    var t=document.getElementById('datatable2');    
-    t.onclick=function(event){    
-      event=event || window.event;    
-      var target=event.target||event.srcElement;    
-      while (target&&target.nodeName!='TR'){    
-        target=target.parentElement;    
-      }   
-      var cells=target.cells;   
-          
-      if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}   
-      var f1=document.getElementById('txtDetId');   
-      var f2=document.getElementById('txtDetNo');   
-      var f3=document.getElementById('txtDetDueDate');    
-      var f4=document.getElementById('txtDetAmount');   
+  (function(){
+    if(window.addEventListener){
+      window.addEventListener('load',run,false);
+    }else if(window.attachEvent){
+      window.attachEvent('onload',run);
+    }
+  function run(){
+    var t=document.getElementById('datatable2');
+    t.onclick=function(event){
+      event=event || window.event;
+      var target=event.target||event.srcElement;
+      while (target&&target.nodeName!='TR'){
+        target=target.parentElement;
+      }
+      var cells=target.cells;
+
+      if(!cells.length||target.parentNode.nodeName=='THEAD'){return;}
+      var f1=document.getElementById('txtDetId');
+      var f2=document.getElementById('txtDetNo');
+      var f3=document.getElementById('txtDetDueDate');
+      var f4=document.getElementById('txtDetAmount');
       var f5=document.getElementById('txtDetDelId');
-      var f6=document.getElementById('txtDetId1');   
-      var f7=document.getElementById('txtDetNo1');   
-      var f8=document.getElementById('txtDetDueDate1');    
-      var f9=document.getElementById('txtDetAmount1');    
-      f1.value=cells[0].innerHTML;    
-      f2.value=cells[1].innerHTML;    
+      var f6=document.getElementById('txtDetId1');
+      var f7=document.getElementById('txtDetNo1');
+      var f8=document.getElementById('txtDetDueDate1');
+      var f9=document.getElementById('txtDetAmount1');
+      f1.value=cells[0].innerHTML;
+      f2.value=cells[1].innerHTML;
       f3.value=cells[2].innerHTML;
-      f4.value=cells[3].innerHTML;    
-      f5.value=cells[0].innerHTML;   
-      f6.value=cells[0].innerHTML;   
-      f7.value=cells[4].innerHTML;   
-      f8.value=cells[5].innerHTML;   
-      f9.value=cells[6].innerHTML;   
-    };    
+      f4.value=cells[3].innerHTML;
+      f5.value=cells[0].innerHTML;
+      f6.value=cells[0].innerHTML;
+      f7.value=cells[4].innerHTML;
+      f8.value=cells[5].innerHTML;
+      f9.value=cells[6].innerHTML;
+    };
   }})();
 
 function getFeeId()
@@ -308,7 +308,7 @@ function getFeeId()
   document.getElementById("txtFeeDet").value = fee;
   var feeId = document.getElementById("selFee").value;
   document.getElementById("txtFeeDetFee").value = feeId;
-  
+
 }
 
 $(document).ready(function(){
@@ -327,27 +327,27 @@ $(document).ready(function(){
 
 <?php
     $message = isset($_GET['message'])?intval($_GET['message']):0;
-    
+
     if($message == 1) {
       echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 2) {
       echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 3) {
       echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 4) {
       echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
     }
-    
+
     if($message == 5) {
       echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
     }
-    
+
     if($message == 6) {
       echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
     }
@@ -408,7 +408,7 @@ $(document).ready(function(){
             </ul>
           </div>
           <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
-          
+
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -426,7 +426,7 @@ $(document).ready(function(){
               <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
-         
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
@@ -443,7 +443,7 @@ $(document).ready(function(){
 
        </div>
             </li>
-           <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -458,7 +458,7 @@ $(document).ready(function(){
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -475,7 +475,7 @@ $(document).ready(function(){
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -489,7 +489,7 @@ $(document).ready(function(){
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -515,7 +515,7 @@ $(document).ready(function(){
 
 
                 <div class="tab-content">
-                  
+
 
                 <div class="tab-pane active" id="tab_1" style="padding: 3%">
                     <div class="btn-group" style="margin-bottom: 3%">
@@ -638,7 +638,7 @@ $(document).ready(function(){
                       </div>
                     </div>
                   </div>
-      
+
                   <!-- Update Modal -->
                   <div class="modal fade" id="updateModalOne" role="dialog">
                     <div class="modal-dialog">
@@ -663,7 +663,7 @@ $(document).ready(function(){
                               <b><label class="col-sm-4 control-label"> Fee Code </label></b>
                               <div class="col-sm-6 selectContainer">
                                 <div class="input-group" style="width:100%;">
-                                  <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;">
+                                  <input type="text" class="form-control" name="txtUpdFeeCode" id="txtUpdFeeCode" style="text-transform:uppercase ;" disabled>
                                 </div>
                               </div>
                             </div>
@@ -714,7 +714,7 @@ $(document).ready(function(){
                       </div>
                     </div>
                   </div>
-      
+
                   <!-- Delete Modal -->
                   <div class="modal fade" id="deleteModalOne" role="dialog">
                     <div class="modal-dialog">
@@ -786,7 +786,7 @@ $(document).ready(function(){
                       <td><?php echo $stat1 ?></td>
                       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button>
-                      
+
                       <a href = "feedetails.php"><form method="post" action="feedetails.php">
                       <input type="hidden" name="txtFdFeeId" id="txtFdFeeId" value="<?php echo $row['tblFeeId'] ?>"/>
                       <input type="hidden" name="txtFdFeeType" id="txtFdFeeType" value="<?php echo $row['tblFeeType'] ?>"/>
@@ -961,7 +961,7 @@ $(document).ready(function(){
               </div>
             </div>
             <!--modal delete end-->
-            
+
 
             <table id="datatable1" class="table table-bordered table-striped">
               <thead>
@@ -996,41 +996,41 @@ $(document).ready(function(){
 
         </div>
         <!-- /.tab-pane -->
-        
+
 
         <div class="tab-pane" id="tab_3" style="padding: 3%">
           <div class="form-inline">
             <div class="container" style="margin-bottom: 15px">
-                  <label class="col-sm-1">Fee Type: </label>  
-                      
+                  <label class="col-sm-1">Fee Type: </label>
+
                         <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="GENERAL FEE" onchange="changeTblMass()">  GENERAL FEE
                         <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="SPECIFIC FEE" onchange="enable()" style="margin-left: 10px;">  SPECIFIC FEE
-              </div>    
+              </div>
           </div>
 
           <div class="form-inline">
             <div class="container">
-              <label class="col-sm-1">Level: </label>   
-                    <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()" disabled>  
-                      <option>--Select Here--</option>    
-                    <?php   
-                    $query="select * from tbllevel where tblLevelFlag=1";   
-                    $result=mysqli_query($con, $query);   
-                    while($row=mysqli_fetch_array($result))   
-                    {   
+              <label class="col-sm-1">Level: </label>
+                    <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedLvl" id="selSchedLvl" onchange="changeSchedSchemeLvl()" disabled>
+                      <option>--Select Here--</option>
+                    <?php
+                    $query="select * from tbllevel where tblLevelFlag=1";
+                    $result=mysqli_query($con, $query);
+                    while($row=mysqli_fetch_array($result))
+                    {
                     ?>
-                    <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>   
-                    <?php } ?>    
-                    </select>   
-              </div>    
-          </div>    
-          
-          <div class="form-inline">   
+                    <option value="<?php echo $row['tblLevelId']; ?>"><?php echo $row['tblLevelName'] ?></option>
+                    <?php } ?>
+                    </select>
+              </div>
+          </div>
+
+          <div class="form-inline">
             <div class="container">
                 <label class="col-sm-1">Fee: </label>
                 <select class="form-control" style="width: 30%; margin-bottom: 1%" name="selSchedFee" id="selSchedFee" onchange="changeFee()" disabled>
                   <option>--Select Here--</option>
-                  <?php 
+                  <?php
                     $query = "select tblFeeId, tblFeeName from tblfee where tblFeeFlag = 1 and tblFeeType='SPECIFIC FEE'";
                     $result = mysqli_query($con, $query);
                     while($row = mysqli_fetch_array($result))
@@ -1041,7 +1041,7 @@ $(document).ready(function(){
                 </select>
             </div>
           </div>
-            
+
           <div class="form-inline">
             <div class="container">
                       <label class="col-sm-1">Scheme: </label>
@@ -1050,53 +1050,68 @@ $(document).ready(function(){
                       </select>
             </div>
           </div>
-               
+
+          <!-- Update Modal -->
           <div class="modal fade" id="updateModalThree" role="dialog">
             <div class="modal-dialog">
-            
-              <!-- Modal content-->
               <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h3 class="modal-title" style="font-style: bold">Update Schedule</h3>
-                </div>
-                <form method="post" action="updateSchemeDetail.php">
-                <div class="modal-body">
-                <input type="hidden" class="form-control" name="txtDetId" id="txtDetId">
-                <div class="form-group" style="margin-top: 5%">
-                        <label class="col-sm-4" style="text-align: right">Payment Order</label>
-                        <div class="col-sm-7">
-                        <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo">
+                <form autocomplete="off" data-toggle="validator" method="post" action="updateSchemeDetail.php" name="UpdSchemeDetail" id="UpdSchemeDetail" class="form-horizontal">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel"> UPDATE SCHEDULE </h4>
+                  </div>
+
+                  <div class="modal-body">
+
+                    <div class="form-group" style="display: none;">
+                      <label class="col-sm-4 control-label">Payment Scheme ID</label>
+                      <div class="col-sm-6">
+                        <div class = "input-group">
+                          <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                          <input type="text" class="form-control" name="txtDetId" id="txtDetId" readonly="" />
                         </div>
-                </div>
-                <div class="form-group"  style="margin-top: 15%">
-                     
-                    <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate">
+                      </div>
                     </div>
-                </div> 
-                <div class="form-group"  style="margin-top: 25%">
-                     
-                    <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
+
+                    <div class="form-group" style="margin-top: 7%;">
+                      <label class="col-sm-4 control-label" style="text-align: right">Payment Order</label>
+                      <div class="col-sm-6 selectContainer">
+                        <div class = "input-group" style="width:100%;">
+                          <input type="text" class="form-control" readonly name="txtDetNo" id="txtDetNo">
+                        </div>
+                      </div>
                     </div>
-                </div>       
-                </div>
-                <div class="modal-footer" style="margin-top: 10%">
-                <button type="submit" class="btn btn-info"  name="btnDetSave" id="btnDetSave">Save</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
+
+                    <div class="form-group" style="margin-top: 7%;">
+                      <label class="col-sm-4 control-label" for="textinput">Due Date</label>
+                      <div class="col-sm-6 selectContainer">
+                        <div class = "input-group" style="width:100%;">
+                          <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 7%;">
+                      <label class="col-sm-4 control-label" for="textinput">Amount on Due Date</label>
+                      <div class="col-sm-6 selectContainer">
+                        <div class = "input-group" style="width:100%;">
+                          <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer" style="margin-top: 7%">
+                      <button type="submit" class="btn btn-info"  name="btnDetSave" id="btnDetSave">Save</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
                 </form>
               </div>
-              
             </div>
           </div>
 
           <div class="modal fade" id="mdlUpdateSched" role="dialog">
               <div class="modal-dialog">
-              
+
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
@@ -1113,19 +1128,19 @@ $(document).ready(function(){
                           </div>
                   </div>
                   <div class="form-group"  style="margin-top: 15%">
-                       
+
                       <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Due Date</label>
                       <div class="col-sm-7">
                         <input type="text" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask name="txtDetDueDate" id="txtDetDueDate1">
                       </div>
-                  </div> 
+                  </div>
                   <div class="form-group"  style="margin-top: 25%">
-                       
+
                       <label class="col-sm-4 control-label" for="textinput" style="text-align: right">Amount on Due Date</label>
                       <div class="col-sm-7">
                         <input type="text" class="form-control" name="txtDetAmount" id="txtDetAmount1">
                       </div>
-                  </div>       
+                  </div>
                   </div>
                   <div class="modal-footer" style="margin-top: 10%">
                   <button type="submit" class="btn btn-info"  name="btnDetSave1" id="btnDetSave1">Save</button>
@@ -1133,39 +1148,46 @@ $(document).ready(function(){
                   </div>
                   </form>
                 </div>
-                
+
               </div>
           </div>
 
-  
+
+          <!-- Delete Modal -->
           <div class="modal fade" id="deleteModalThree" role="dialog">
             <div class="modal-dialog">
-            
+
               <!-- Modal content-->
               <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h3 class="modal-title" style="font-style: bold">Reset</h3>
-                </div>
-                <form method="post" action="deleteSchemeDetail.php">
-                <div class="modal-body">
-                <input type="hidden" class="form-control" name="txtDetDelId" id="txtDetDelId">
-                <div class="box-body table-responsive no-padding"   style="margin-top: 2%">
-                      <h3 align="center"> Are you sure you want to reset?</h3>
+                <form method="POST" action="deleteSchemeDetail.php" class="form-horizontal">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="deleteModalOne"> RESET </h4>
+                  </div>
+
+                  <div class="modal-body">
+                    <div class="form-group" style="display: none;">
+                      <label class="col-sm-4 control-label">Payment Sched ID</label>
+                      <div class="col-sm-5 input-group">
+                        <span class="input-group-addon"><i class="fa fa-list" aria-hidden="true"></i></span>
+                        <input type="hidden" class="form-control" name="txtDetDelId" id="txtDetDelId" readonly =""/>
+                      </div>
                     </div>
-                          
-                </div>
-                <div class="modal-footer" style="margin-top: 5%; float: center">
-                <button type="submit" class="btn btn-danger" name="btnReset" id="bnReset">Reset</button>
-                  <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                </div>
+
+                    <div class="form-group">
+                      <h4 align="center" style="margin-top: 5%">Are you sure you want to reset fields?</h4>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer" style="margin-top: 5%; float: center">
+                    <button type="submit" class="btn btn-danger" name="btnReset" id="bnReset">Reset</button>
+                      <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                  </div>
                 </form>
               </div>
-              
             </div>
           </div>
           <!--modal delete end-->
-          
+
 
           <table id="datatable2" class="table table-bordered table-striped">
             <thead>
@@ -1181,7 +1203,7 @@ $(document).ready(function(){
       </div>
       <!-- /.tab-pane -->
 
-    
+
             </div>
             <!-- /.tab-content -->
           </div>
@@ -1193,7 +1215,7 @@ $(document).ready(function(){
         </div>
         <!-- col-md-12 -->
       </div>
-      <!-- row -->  
+      <!-- row -->
     </section>
     <!-- /.content -->
   </div>
