@@ -73,14 +73,16 @@
 
       document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
     }
-  function appendScheme()
+  function appendScheme(i)
     {
+      var objtofld = document.getElementById("fldst");
+      var divingr = document.createElement("div");
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showScheme.php?optionalfees="+document.querySelector('input[name="optionalfees"]:checked').value,false);
+      xmlhttp.open("GET","showScheme.php?optionalfees="+i.value,false);
       xmlhttp.send(null);
       // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
-      var objtofld = document.getElementById("fldst");
-      objtofld.appendChild(xmlhttp.responseText);
+      divingr.innerHTML =xmlhttp.responseText
+      objtofld.appendChild(divingr);
     }
 
     (function(){
@@ -335,7 +337,7 @@
                                   <h3 class="modal-title" style="font-style: bold">Enroll Student</h3>
                                 </div>
                                  <div class="modal-body">
-                                <form method="post" action="enrollmentv2.php"/>
+                                <form method="post" action="EnrollStudent.php"/>
                                   <input type="hidden" name="txtStudentId" id="txtStudentId"/>
 
                                 <div class="form-group">
@@ -370,13 +372,15 @@
                                         <h4 style="font-weight: bold">Optional Fees</h4>
                                         <input type="hidden" name="optionalfees" value="None" />
                                         <?php
+
                                         $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
                                         $result=mysqli_query($con, $query);
                                         while($row=mysqli_fetch_array($result)):
                                         ?>
                                         <div>
 
-                                          <input type="checkbox" name="optionalfees" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme()" /> <?php echo $row['tblFeeName'] ?></div>
+                                          <input type="checkbox" class="optionalfees" name="optionalfees[]" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme(this)" /> <?php echo $row['tblFeeName'] ?></div>
+
                                       <?php endwhile; ?>
                                         </fieldset>
                                         </div>
@@ -394,11 +398,19 @@
                                           while($row1=mysqli_fetch_array($query1))
                                           {
                                         ?>
-                                        <div><label> <?php echo $row['tblFeeName'] ?></label>
+                                        <div><h4>Mandatory</h4><label> <?php echo $row['tblFeeName'] ?></label>
                                           <select class="form-control" name="selSchemeM" id="selSchemeM" style="width: 30%;">
                                             <option disabled selected value="0">--Select Scheme</option>
+                                            <?php
+                                            $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
+                                            while($row2=mysqli_fetch_array($query2))
+                                            { ?>
+                                              <option value="<?php echo $row2['tblSchemeId'] ?>"><?php echo $row2['tblSchemeType'] ?></option>
+                                            <?php } ?>
+                                            ?>
                                           </select>
                                         </div>
+                                        <div><h4>Optional</h4></div>
                                       <?php }endwhile; ?>
                                         </fieldset>
                                         </div>
