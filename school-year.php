@@ -247,7 +247,7 @@ function showTblMonth()
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>-->
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Logout</a>
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
@@ -390,7 +390,7 @@ function showTblMonth()
                     <td style="width: 100px"><?php echo$row['tblSchoolYrYear'] ?></td>
                     <td style="width: 100px"><?php echo$row['tblCurriculumName'] ?></td>
                     <td style="width: 100px"><?php echo $row['tblSchoolYrActive'] ?></td>
-                    <td style="width: 50px"><input type='button' class='btn   btn-info' value='View Curriculum'>
+                    <td style="width: 50px">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModalOne"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalOne"><i class="fa fa-trash"></i></button></td>
                     </tr>

@@ -278,7 +278,7 @@
 
                               <div class="fieldset" id="fg1" name="fg1" style="padding: 10px;"></div>
                               <div>
-                              <button type="submit" class="btn btn-success" name="btnAdd" id="btnAdd"><i class="fa fa-edit"></i>Proceed</button>
+                              <button type="submit" class="btn btn-success" name="btnAdd" id="btnAdd"><i class="fa fa-edit"></i>Apply bill</button>
                               </div>
                             </form>
                             

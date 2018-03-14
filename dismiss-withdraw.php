@@ -294,7 +294,7 @@ function run(){
                               </thead>
                               <tbody>
                               <?php
-                                $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudent_tblLevelId=l.tblLevelId and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentFlag=1 and s.tblStudentType != 'DISMISS' and s.tblStudentType != 'WITHDRAW' group by s.tblStudentId";
+                                $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, l.tblLevelName from tblstudent s, tblstudentinfo si, tbllevel l where s.tblStudent_tblLevelId=l.tblLevelId and si.tblStudInfo_tblStudentId=s.tblStudentId and s.tblStudentFlag=1 and s.tblStudentType = 'OFFICIAL' group by s.tblStudentId";
                                 $result=mysqli_query($con, $query);
                                 while($row=mysqli_fetch_array($result)) :
                               ?>
