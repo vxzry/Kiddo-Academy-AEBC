@@ -374,7 +374,9 @@
                         <div class="col-sm-9">
                             <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
-                    </div>   
+                    </div>  
+                    <input type="hidden" name="ind" id="ind" value="1"/>  
+
 
                 </div>
             </div>            
@@ -385,18 +387,17 @@
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Number:</label>
-                              <input type="text" name="num" id="num" class="col-md-3" disabled onkeypress="checknum()">
+                              <input type="text" name="num" id="num" class="col-md-3" disabled onkeyup="checknum()">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Check Amount:</label>
-                              <input type="number" name="txtAmount" id="txtAmount" class="col-md-3" disabled onkeypress="checkamnt()">
+                              <input type="number" name="txtAmount" id="txtAmount" class="col-md-3" disabled onkeyup="checkamnt()">
                               <label class="col-md-2" style="text-align: right">Date:</label>
-                              <input type="date" name="txtDate" id="txtDate" class="col-md-3" value="<?php echo date('Y-m-d') ?>" disabled>
+                              <input type="date" name="txtDate" id="txtDate" class="col-md-3" value="<?php echo date('Y-m-d') ?>">
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
                               <label class="col-md-2">Bank Name:</label>
-                              <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled onkeypress="bank()">
-
+                              <input type="text" name="txtBankName" id="txtBankName" class="col-md-8" disabled onkeyup="bank()">
                             </div>
                           </div>
         <button type="submit" class="btn btn-success btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">SAVE</button>

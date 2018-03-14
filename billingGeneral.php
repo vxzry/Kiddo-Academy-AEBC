@@ -104,7 +104,7 @@ foreach($lvl as $x)
 		$query="select * from tblstudent where tblStudentId='$s' and tblStudentFlag=1";
 		$row=mysqli_fetch_array(mysqli_query($con, $query));
 		$x=$row['tblStudent_tblLevelId'];
-		$query1="select tblStudSchemeId from tblstudscheme where tblStudScheme_tblStudentId='$studid'
+		$query1="select tblStudSchemeId from tblstudscheme where tblStudScheme_tblStudentId='$s'
 		and tblStudScheme_tblFeeId='$feeid' and tblStudScheme_tblSchoolYrId='$syid'";
 		$result1=$con->query($query1);
 		if($result1->num_rows == 0)
@@ -115,7 +115,7 @@ foreach($lvl as $x)
 			$studscheme=$row6['tblStudSchemeId'];
 			$studscheme ++;
 			$query2="insert into tblstudscheme(tblStudSchemeId, tblStudScheme_tblSchemeId, tblStudScheme_tblFeeId,
-				tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studscheme','$scheme','$feeid','$studid','$syid')";
+				tblStudScheme_tblStudentId, tblStudScheme_tblSchoolYrId) values ('$studscheme','$scheme','$feeid','$s','$syid')";
 			if (!$query2 = mysqli_query($con, $query2)) {
 			    exit(mysqli_error($con));
 			}else{
@@ -131,8 +131,8 @@ foreach($lvl as $x)
 					$row4=mysqli_fetch_array($result4);
 					$accountid=$row4['tblAccId'];
 					$accountid ++;
-					$query5="insert into tblaccount(tblAccId, tblAcc_tblStudentId, tblAcc_tblStudSchemeId, tblAccCredit, tblAccDueDate, tblAccPaymentNum, tblAccRunningBal) values
-					('$accountid', '$studid', '$studscheme', '$payment', '$duedate', '$paymentnum', '$payment')";
+					$query5="insert into tblaccount(tblAccId, tblAcc_tblStudentId, tblAcc_tblStudSchemeId, tblAccCredit, tblAccDueDate, tblAccPaymentNum, tblAccRunningBal, tblAccPaid) values
+					('$accountid', '$s', '$studscheme', '$payment', '$duedate', '$paymentnum', '$payment', 'UNPAID')";
 					if (!$query5 = mysqli_query($con, $query5)) {
 					exit(mysqli_error($con));
 					}

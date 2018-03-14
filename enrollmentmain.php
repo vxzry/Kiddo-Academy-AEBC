@@ -55,15 +55,6 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Noto Sans', sans-serif;
-        font-weight: bold;
-      }
-    </style>
-
   <script>
   function showLevel()
     {
@@ -163,7 +154,7 @@
             </ul>
           </div>
          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
-
+          
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -181,7 +172,7 @@
               <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
-
+         
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:17px;">
@@ -198,7 +189,7 @@
 
        </div>
             </li>
-           <?php
+           <?php 
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -213,7 +204,7 @@
 
         ?>
 
-        <li class="treeview">
+        <li class="treeview"> 
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -230,7 +221,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php
+      <?php 
       }//while
       }else
       {
@@ -244,7 +235,7 @@
               </a>
             </li>
       <?php
-       endwhile; }
+       endwhile; } 
       ?>
           </ul>
         </section>
@@ -254,7 +245,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-
+          
         </section>
 
         <!-- Main content -->
@@ -275,6 +266,10 @@
                             <div class="box-body">
                               <div class="col-md-6">
                                 <div class="form-group">
+                                  <!-- <form action="untitled.php" method="post">
+                                    <button type="submit">submit</button>
+                                  </form> -->
+                                  <label></label><button class="btn btn-info"><a href="outputListOfFees.php" target="_blank" style="color: white">List of Fees</a></button>
                                   <label>Filter by Level:</label>
                                   <select class="form-control" sty  le="width: 50%" name="selLevel" id="selLevel" onchange="showLevel();">
                                     <option selected disabled>--Choose Level--</option>
@@ -282,7 +277,7 @@
                                     $query="select * from tbllevel where tblLevelFlag=1 group by tblLevelName";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
-
+                                    
                                     ?>
                                     <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName']; ?></option>
                                     <?php endwhile; ?>
@@ -305,25 +300,25 @@
                                   $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and (s.tblStudentType='APPLICANT' or s.tblStudentType='PROMOTED') and s.tblStudentFlag=1";
                                   $result=mysqli_query($con, $query);
                                   while($row=mysqli_fetch_array($result)):
-								                  $studid=$row['tblStudentId'];
+                                  $studid=$row['tblStudentId'];
                                   ?>
                                     <tr>
                                       <td><?php echo $row['tblStudentId'] ?></td>
                                       <td><?php echo $row['name'] ?></td>
                                       <td><?php echo $row['tblStudentType'] ?></td>
-									  <?php
-									  $query1="select s.tblStudentId, s.tblStudentType, se.tblStudEnrollClearance from tblstudent s left join tblstudenroll se on se.tblStudEnroll_tblStudentId=s.tblStudentId where s.tblStudentId='$studid' and s.tblStudentFlag=1";
-									  $row3=mysqli_fetch_array(mysqli_query($con, $query1));
+                    <?php
+                    $query1="select s.tblStudentId, s.tblStudentType, se.tblStudEnrollClearance from tblstudent s left join tblstudenroll se on se.tblStudEnroll_tblStudentId=s.tblStudentId where s.tblStudentId='$studid' and s.tblStudentFlag=1";
+                    $row3=mysqli_fetch_array(mysqli_query($con, $query1));
                     $studclear=$row3['tblStudEnrollClearance'];
                     $studtype=$row3['tblStudentType'];
-									  if($studtype=='PROMOTED' && $studclear='N')
-									  {
-									  ?>
+                    if($studtype=='PROMOTED' && $studclear='N')
+                    {
+                    ?>
                                       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment" disabled>Enroll Student</button></td>
-									  <?php }else
-									  { ?>
-										<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment">Enroll Student</button></td>
-									  <?php } ?>
+                    <?php }else
+                    { ?>
+                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment">Enroll Student</button></td>
+                    <?php } ?>
                                     </tr>
                                   <?php endwhile; ?>
                                   </tbody>
@@ -351,7 +346,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group">  
                                     <div class="col-sm-6">
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
                                         <fieldset style="margin-top: 2%; margin-left: 2%">
@@ -375,15 +370,15 @@
                                         <input type="hidden" name="selSchemeMand" value="None" />
                                         <input type="hidden" name="selSchemeOpt" value="None" />
                                         <?php
-
+                                        
                                         $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
                                         $result=mysqli_query($con, $query);
                                         while($row=mysqli_fetch_array($result)):
                                         ?>
                                         <div>
-
+                                          
                                           <input type="checkbox" class="optionalfees" name="optionalfees[]" id="optionalfees" style="margin-top: 3%" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme(this)" /> <?php echo $row['tblFeeName'] ?></div>
-
+                                          
                                       <?php endwhile; ?>
                                         </fieldset>
                                         </div>
@@ -392,16 +387,17 @@
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
                                         <fieldset style="margin-top: 2%; margin-left: 2%" id="fldst">
                                         <h4 style="font-weight: bold">Schemes</h4>
+                                        <h4>Mandatory</h4>
                                         <?php
                                         $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
                                         $result=mysqli_query($con, $query);
                                         while($row=mysqli_fetch_array($result)):
                                           $feeid=$row['tblFeeId'];
-                                          $query1=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
-                                          while($row1=mysqli_fetch_array($query1))
+                                          $query1=$con->query("select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
+                                          if($query1->num_rows >=1 )
                                           {
                                         ?>
-                                        <div><h4>Mandatory</h4><label> <?php echo $row['tblFeeName'] ?></label>
+                                        <div><label> <?php echo $row['tblFeeName'] ?></label>
                                           <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;">
                                             <option disabled selected value="0">--Select Scheme</option>
                                             <?php
@@ -413,8 +409,9 @@
                                             ?>
                                           </select>
                                         </div>
+                                        <?php }endwhile; ?>
                                         <div><h4>Optional</h4></div>
-                                      <?php }endwhile; ?>
+                                      
                                         </fieldset>
                                         </div>
                                         </div>
@@ -429,9 +426,9 @@
                             </div> <!-- modal dialog -->
                           </div> <!-- modal fade -->
                             </div> <!-- box body tab_1 -->
+                          
 
-
-
+                          
                         </div> <!-- box body tab_! -->
                       </div> <!-- box tab_1 -->
                     </div> <!-- tab pane tab_1 -->
@@ -449,7 +446,7 @@
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2017
+          <b>Version</b> Last na please
         </div>
         <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
         reserved.
@@ -545,6 +542,6 @@
     $(".choose").select2();
   });
   </script> selSession
-
+  
   </body>
 </html>

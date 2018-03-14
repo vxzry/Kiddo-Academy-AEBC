@@ -1,5 +1,6 @@
 <?php
 include "db_connect.php";
+$ind=$_POST['ind'];
 $or=$_POST['txtOR'];
 $id=$_POST['txtAccId'];
 $pr=$_POST['txtPR'];
@@ -32,7 +33,7 @@ if($camnt!="")
 	}
 }
 $query=mysqli_query($con, "insert into tblreceipt(tblRecAmount, tblRecDate, tblRec_tblStudentId) values ('$tamount','$dates','$studid')");
-if($num == 1)
+if($ind == 1)
 {
 	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'";
 	$row1=mysqli_fetch_array(mysqli_query($con, $query1));
@@ -57,7 +58,7 @@ if($num == 1)
 		}
 	}
 	
-}else if($num > 1)
+}else if($ind == 0)
 {
 	header("location:collectionMain.php");
 }

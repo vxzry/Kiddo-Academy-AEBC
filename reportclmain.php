@@ -303,7 +303,7 @@
                 <tr> 
                   <td><?php echo $row['tblSectionId'] ?></td>
                   <td><?php echo $row['tblSectionName'] ?></td>
-                  <td><form method="post" action="reportclasslist.php"><input type="hidden" name="txtsect" id="txtsect" value="<?php echo $row['tblSectionId'] ?>"/><button type="submit" class="btn btn-success"> Generate Report </button></form></td>
+                  <td><form method="post" action="reportclasslist.php"><input type="hidden" name="txtsect" id="txtsect" value="<?php echo $row['tblSectionId'] ?>"/><input type="hidden" name="txtSy" id="txtSy" value="None"/><button type="submit" class="btn btn-success"> Generate Report </button></form></td>
                 </tr>
                   <?php endwhile; ?>
                   </tbody>

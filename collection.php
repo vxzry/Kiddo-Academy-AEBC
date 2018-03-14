@@ -338,7 +338,8 @@ $acc=$_POST['chkbills'];
                         <div class="col-sm-9">
                             <input type="date" class="form-control" id="date" name="date" disabled value="<?php echo date('Y-m-d') ?>">
                         </div>
-                    </div>   
+                    </div> 
+                    <input type="hidden" name="ind" id="ind" value="0"/>  
 
                 </div>
             </div>        

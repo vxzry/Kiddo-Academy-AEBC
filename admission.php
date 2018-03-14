@@ -1048,6 +1048,7 @@
                  <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
               </ul>
           </form>
+          <button class="btn btn-info" style="float:right; margin-top:5%"><a href="outputListOfFees.php" target="_blank" style="color: white">List of Fees</a></button>
                                   </div> <!-- tab pane step4 -->
 
                                 <div class="clearfix"></div>
