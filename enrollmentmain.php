@@ -346,6 +346,7 @@
                                     <div class="col-sm-6">
                                         <div class="fieldset" style="border: 2px solid gray; margin-top: 5%">
                                         <fieldset style="margin-top: 2%; margin-left: 2%">
+
                                         <h4 style="font-weight: bold">Mandatory Fees</h4>
                                         <?php
                                         $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
@@ -362,6 +363,8 @@
                                         <fieldset style="margin-top: 2%; margin-left: 2%">
                                         <h4 style="font-weight: bold">Optional Fees</h4>
                                         <input type="hidden" name="optionalfees" value="None" />
+                                        <input type="hidden" name="selSchemeMand" value="None" />
+                                        <input type="hidden" name="selSchemeOpt" value="None" />
                                         <?php
                                         
                                         $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
@@ -390,7 +393,7 @@
                                           {
                                         ?>
                                         <div><h4>Mandatory</h4><label> <?php echo $row['tblFeeName'] ?></label>
-                                          <select class="form-control" name="selSchemeM" id="selSchemeM" style="width: 30%;">
+                                          <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;">
                                             <option disabled selected value="0">--Select Scheme</option>
                                             <?php
                                             $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
