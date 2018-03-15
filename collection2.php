@@ -410,7 +410,7 @@
       <input type="hidden" id="bankname" name="bankname" />
       <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <input type="hidden" id="chknum" name="chknum" />
-      <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
+      <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Print Receipt</button>
     </form> 
   </div>
 </div>
