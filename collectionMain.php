@@ -225,14 +225,14 @@
         </section>
 
         <!-- Main content -->
-        <section class="content"  style="margin-top: 4%">
+        <section class="content">
           <div class="row">
             <div class="col-md-12">
               <div class="box box-default">
                 <div class="box-header with-border"></div>
                 <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px;">Collection</h2>
-                    <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
+                    <h2 class="box-title" style="font-size:20px; padding:5px;">Collection</h2>
+                    <div class="form-group" margin-left: 2%"></div>
                   </div>
                 <div class="box-body">
                   <div class="nav-tabs-custom">

@@ -465,10 +465,10 @@
             <div class="col-lg-4" style="width:27%;">
               <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
             </div>
-            <label class="col-lg-1 control-label left">Gender:<span style="color:red; padding:5%;">*</span></label>
+            <label class="col-lg-1 control-label left">Sex:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-3">
               <select class="form-control" type="text" name="txtStudGender" id="txtStudGender">
-                <option selected disabled>--Select Gender--</option>
+                <option selected disabled>--Select Sex--</option>
                 <option value="Female">Female</option>
                 <option value="Male">Male</option>
               </select>
