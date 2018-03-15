@@ -55,6 +55,14 @@ include "db_connect.php";
       document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
 
     }
+    $('#form1').submit(function() {
+    submitTwoForms();
+    return false;
+    });
+
+    function submitF (){
+  window.location = "http://bing.com";
+      }
 
     // (function(){
     // if(window.addEventListener){
@@ -315,6 +323,12 @@ include "db_connect.php";
                                     </table>
                                   </div> <!-- col-md-12 tab_2-->
                                 <div class="col-md-12" style="margin-top: 6%">
+                                  
+                  <button type="submit" class="btn btn-success" name="btnProceed" id="btnProceed">Proceed to Collection</button>
+                         </div>
+                        </div> <!-- box body tab_! -->
+                        </form>
+                        <form action="enrollment-fees.php" method="post" id="form1" >
                                     <table id="datatable2" class="table table-bordered table-striped">
                                       <thead>
                                       <tr>
@@ -323,12 +337,13 @@ include "db_connect.php";
                                       </tr>
                                     </thead>
                                     </table>
+                                    <button type="submit">Submit</button>
+                                  </form>
                                   </div>
                           <div class="pull-right" style="margin-top: 5%">
-                  <button type="submit" class="btn btn-success" name="btnProceed" id="btnProceed">Proceed to Collection</button>
-                         </div>
-                        </div> <!-- box body tab_! -->
-                        </form>
+                            <form id="form2" action="outputListOfFees.php" method="post" target="_blank">
+                              <button type="submit" onclick="submitF()">Submit</button>
+                            </form>
                       </div> <!-- box tab_1 -->
                     </div> <!-- tab pane tab_1 -->
                   </div>
