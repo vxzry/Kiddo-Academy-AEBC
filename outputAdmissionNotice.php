@@ -102,7 +102,6 @@ function Footer()
     $pdf->SetXY(150,235);//X-Left, Y- Down
     $pdf->Cell(10,10,'School-Head',0,0,'');
 
-
     $pdf -> Output();
 
 
