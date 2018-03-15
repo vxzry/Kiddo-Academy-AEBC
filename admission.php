@@ -1034,22 +1034,46 @@
   </div>
 </div>
 
-
-              <div class="btn-group" style="margin-top: 5%; float: right">
-                <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="margin-right: 15px; ">Save Applicant</button>
-              </div>
-        </form> <!-- main form -->
-          <form method="post" action="outputAdmissionNotice.php" target="_blank">
-                <input type="hidden" id="fname" name="fname" />
-                <input type="hidden" id="mname" name="mname" />
-                <input type="hidden" id="lname" name="lname" />
-          <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 5%; float: right;margin-right: 7px; ">Get Notice of Admission</button>
-             <ul class="list-inline pull-right" style="margin-top: 5%">
+              <ul class="list-inline pull-right" style="margin-top: 5%">
                  <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
               </ul>
-          </form>
-          <button class="btn btn-info" style="float:right; margin-top:5%"><a href="outputListOfFees.php" target="_blank" style="color: white">List of Fees</a></button>
-                                  </div> <!-- tab pane step4 -->
+              <div class="btn-group" style="margin-top: 5%; float: right">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdmission" style="margin-right: 15px; ">Save Student</button>
+              </div>
+             
+
+
+              <!-- Modal Admission -->
+                <div class="modal fade" id="modalAdmission" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="deleteModalOne"> PROCEED </h4>
+                        </div>
+                        <div>
+                        <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="margin-top: 3%; margin-left: 40%">Save Student</button>
+                        </div>
+                        <div style="margin-left: 33%">
+                        <form method="post" action="outputAdmissionNotice.php" target="_blank">
+                                <input type="hidden" id="fname" name="fname" />
+                                <input type="hidden" id="mname" name="mname" />
+                                <input type="hidden" id="lname" name="lname" />
+                          <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 3%;">Print Notice of Admission</button>
+                        </form>
+                        </div>
+                        <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--modal end-->
+        
+
+        </form> <!-- main form -->
+             </div> <!-- tab pane step4 -->
 
                                 <div class="clearfix"></div>
                               </div> <!-- tab pane step4 -->
