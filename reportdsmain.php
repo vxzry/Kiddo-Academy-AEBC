@@ -251,7 +251,7 @@
               </div>
 
               <div class="col-md-12">
-                <form method="post" action="reportdeficientstudents.php">
+                
               <table id="datatable1" class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -268,7 +268,7 @@
                   ?>
                   <tr>
                   <td><?php echo $stat ?></td>
-                  <td><input type="hidden" name="txttype" id="txttype" value="<?php echo $stat ?>"/><button type="submit" class="btn btn-info">Generate Report</button></td>
+                  <td><form method="post" action="reportdeficientstudents.php"><input type="hidden" name="txttype" id="txttype" value="<?php echo $stat ?>"/><button type="submit" class="btn btn-info">Generate Report</button></form></td>
                   </tr>
                   <?php
                   $i++;
@@ -276,7 +276,7 @@
                   ?>
                   </tbody>
               </table>
-            </form>
+            
             </div>    
             </div>
 
