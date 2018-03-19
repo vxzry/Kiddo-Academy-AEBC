@@ -242,6 +242,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
 
                     <div class="tab-pane active" id="tab_1">
                         <div class="box-body">
+                          <form action="reportstatementofaccount.php" method="post" target="_blank"><input type="hidden" value="<?php echo $studid ?>" name="studentid" id="studentid"/><button class="btn btn-info" type="submit">Get Statement of Account</button></form>
                           <form action="collection.php" method="post">
                             <div class="box-body">
                             <div class="col-md-6" style="margin-top: 2%">

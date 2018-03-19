@@ -45,7 +45,7 @@ if($ind == 1)
 				exit(mysqli_error($con));
 	}else
 	{
-		header("location:createParentUser.php?studentid=$studid");
+		header("location:collectionMain.php");
 	}
 	}else if($studtype=='PROMOTED') 
 	{
@@ -54,7 +54,7 @@ if($ind == 1)
 					exit(mysqli_error($con));
 		}else
 		{
-			header("location:enrollmentmain.php");
+			header("location:collectionMain.php");
 		}
 	}
 	

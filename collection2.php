@@ -30,7 +30,7 @@
     $rolename=$row['tblRoleName'];
    }
 
-  $studid=$_GET['studentid'];
+  $studid=$_POST['txtStudId'];
   $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId='$studid' and s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1";
   $result=mysqli_query($con, $query);
   $row=mysqli_fetch_array($result);

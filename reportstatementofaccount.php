@@ -3,8 +3,14 @@ require ("fpdf.php");
 // $con  = mysqli_connect("localhost","root","");
 include "db_connect.php";
 // mysqli_select_db($con,'dbkadc');
-$studid='17002';
-
+$studid=$_POST['studentid'];
+$query=mysqli_query($con, "select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentId='$studid' and s.tblStudentFlag=1");
+$row=mysqli_fetch_array($query);
+$studname=$row['studentname'];
+$lvlid=$row['tblStudent_tblLevelId'];
+$query1=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
+$row1=mysqli_fetch_array($query1);
+$lvlname=$row1['tblLevelName'];
 class PDF extends FPDF
 {
 // Page header
@@ -28,34 +34,7 @@ function Header()
     $this->SetX(135);
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
 
-    $this->SetFont('Arial','',10);
-    $this->SetXY(30,50);//X-Left, Y- Down
-    $this->Cell(10,10,'Name of Student: ',0,0,'');
-    $this->SetXY(180,50);
-    $this->Cell(10,10,'Student #: ',0,0,'');
-    $this->SetXY(30,55);
-    $this->Cell(10,10,'Level: ',0,0,'');
-    $this->SetXY(180,55);
-    $this->Cell(10,10,'Date: ',0,0,'');
-    $this->SetXY(30,60);
-    $this->Cell(10,10,'Scheme Type: ',0,0,'');
-
-    $this->SetXY(130,70);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"STATEMENT OF ACCOUNT",0,0,'C');
-
-    $this->Ln(15);// Line break
-    $this->SetFont('Arial','',8);
-    $this->Cell(25,5,"Due/Payment Date",1,0,'C');
-    $this->Cell(15,5,"Code",1,0,'C');
-    $this->Cell(40,5,"Details",1,0,'C');
-    $this->Cell(15,5,"TN#",1,0,'C');
-    $this->Cell(25,5,"Credit",1,0,'C');
-    $this->Cell(25,5,"Receipt Number",1,0,'C');
-    $this->Cell(25,5,"Payment Date",1,0,'C');
-    $this->Cell(25,5,"Payment",1,0,'C');
-    $this->Cell(25,5,"Running Balance",1,0,'C');
-    $this->Cell(40,5,"Remarks",1,1,'C');
+    
 }
 
 
@@ -78,7 +57,36 @@ function Footer()
 	$pdf -> AliasNbPages();
 	$pdf -> AddPage("L","Letter",0);
 
-    $query=mysqli_query($con, "select a.* from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and s.tblStudScheme_tblSchoolYrId=5 group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
+    $pdf->SetFont('Arial','',10);
+    $pdf->SetXY(30,50);//X-Left, Y- Down
+    $pdf->Cell(10,10,'Name of Student: '.$studname,0,0,'');
+    $pdf->SetXY(180,50);
+    $pdf->Cell(10,10,'Student Id: '.$studid,0,0,'');
+    $pdf->SetXY(30,55);
+    $pdf->Cell(10,10,'Level: '.$lvlname,0,0,'');
+    $pdf->SetXY(180,55);
+    $pdf->Cell(10,10,'Date: '.date("Y-m-d"),0,0,'');
+    $pdf->SetXY(30,60);
+    $pdf->Cell(10,10,'Scheme Type: ',0,0,'');
+
+    $pdf->SetXY(130,70);
+    $pdf->SetFont('Arial','B',15);
+    $pdf->Cell(10,10,"STATEMENT OF ACCOUNT",0,0,'C');
+
+    $pdf->Ln(15);// Line break
+    $pdf->SetFont('Arial','',8);
+    $pdf->Cell(25,5,"Due/Payment Date",1,0,'C');
+    $pdf->Cell(15,5,"Code",1,0,'C');
+    $pdf->Cell(40,5,"Details",1,0,'C');
+    $pdf->Cell(15,5,"TN#",1,0,'C');
+    $pdf->Cell(25,5,"Credit",1,0,'C');
+    $pdf->Cell(25,5,"Receipt Number",1,0,'C');
+    $pdf->Cell(25,5,"Payment Date",1,0,'C');
+    $pdf->Cell(25,5,"Payment",1,0,'C');
+    $pdf->Cell(25,5,"Running Balance",1,0,'C');
+    $pdf->Cell(40,5,"Remarks",1,1,'C');
+
+    $query=mysqli_query($con, "select a.* from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and s.tblStudScheme_tblSchoolYrId='$syid' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
 // if (!$query) {
 //     printf("Error: %s\n", mysqli_error($con));
 //     exit();
