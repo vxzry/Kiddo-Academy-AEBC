@@ -70,9 +70,6 @@
     //         $("#txtHealthReason").attr("disabled", false);
     //     }
     // });
-    function submitF (){
-  window.location = "http://bing.com";
-      }
     function disabledReason() {
     var txtHealthReason = document.getElementById('txtHealthReason');
     txtHealthReason.readOnly = true;
@@ -142,7 +139,10 @@
         var val=document.getElementById("txtStudLname").value;
         document.getElementById("lname").value=val;
       }
-
+      function submitF()
+      {
+        window.location="admission.php";
+      }
     </script>
   </head>
 
@@ -353,7 +353,7 @@
                             </ul>
                           </div>
 
-                          <form method="post" action="outputAdmissionNotice.php" target="_blank" id="form1">
+                          <form method="post" action="saveadmission.php" id="form1">
                             <div class="tab-content">
 
                               <div class="tab-pane active" role="tabpanel" id="step1">
@@ -468,10 +468,10 @@
             <div class="col-lg-4" style="width:27%;">
               <input class="form-control" type="text" name="txtStudNat" id="txtStudNat">
             </div>
-            <label class="col-lg-1 control-label left">Sex:<span style="color:red; padding:5%;">*</span></label>
+            <label class="col-lg-1 control-label left">Gender:<span style="color:red; padding:5%;">*</span></label>
             <div class="col-lg-3">
               <select class="form-control" type="text" name="txtStudGender" id="txtStudGender">
-                <option selected disabled>--Select Sex--</option>
+                <option selected disabled>--Select Gender--</option>
                 <option value="Female">Female</option>
                 <option value="Male">Male</option>
               </select>
@@ -1032,9 +1032,6 @@
             <div class="col-lg-8" style="width: 45%;">
               <input class="form-control" type="text" name="txtEmAdress[]" id="txtEmAdress">
           </div>
-          <input type="hidden" id="fname" name="fname" />
-          <input type="hidden" id="mname" name="mname" />
-          <input type="hidden" id="lname" name="lname" />
        </div>
       </div>
   </div>
@@ -1044,7 +1041,7 @@
                  <li><button type="button" class="btn btn-default prev-step" onclick="scrollWin()">Previous</button></li>
               </ul>
               <div class="btn-group" style="margin-top: 5%; float: right">
-                <button type="submit" class="btn btn-success" onclick="submitF()">Save Student</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAdmission" style="margin-right: 15px; ">Save Student</button>
               </div>
              
 
@@ -1061,14 +1058,21 @@
                         <div>
                         <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="margin-top: 3%; margin-left: 40%">Save Student</button>
                         </div>
+
+                        <div>
+                        <button type="button" class="btn btn-primary" name="btnfees" id="btnfees" style="margin-top: 3%; margin-left: 37%;"><a target="_blank" href="outputListofFees.php" style="color: white">Print List of Fees</a></button>
+                        </div>
+
                         <div style="margin-left: 33%">
-                        <!-- <form method="post" action="outputAdmissionNotice.php" target="_blank">
-                                
-                          <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 3%;">Print Notice of Admission</button>
-                        </form> -->
+                        <form method="post" action="outputAdmissionNotice.php" target="_blank">
+                                <input type="hidden" id="fname" name="fname" />
+                                <input type="hidden" id="mname" name="mname" />
+                                <input type="hidden" id="lname" name="lname" />
+                          <button type="submit" class="btn btn-success" name="btnbtn" id="btnbtn" style="margin-top: 3%;" target="_blank">Print Notice of Admission</button>
+                        </form>
                         </div>
                         <div class="modal-footer" style="margin-top: 5%; float: center">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                   </div>
