@@ -30,8 +30,9 @@
     $rolename=$row['tblRoleName'];
    }
 
-$overdue=$_POST['txtoverdue'];
-$overdue *= 0.04;
+// $overdue=$_POST['txtoverdue'];
+// $overdue *= 0.04;
+  $overdue=0;
 $acc=$_POST['chkbills'];
 foreach($acc as $q)
 {
@@ -276,6 +277,7 @@ foreach($acc as $q)
                             <thead>
                                 <tr>
                                     <th>Due Date</th>
+                                    <th>Overdue</th>
                                     <th>Fee Code</th>
                                     <th>Fee Description</th>
                                     <th>Amount</th>
@@ -300,19 +302,39 @@ foreach($acc as $q)
                                 $result1=mysqli_query($con, $query1);
                                 $row1=mysqli_fetch_array($result1);
                                 $credit=$row['tblAccCredit'];
+                                $duedate=$row['tblAccDueDate'];
+                                $curdate=date('Y-m-d');
+                                $end_ts = strtotime($duedate);
+                                $now_ts = strtotime($curdate);
+                                if($now_ts > $end_ts)
+                                {
+                                  $over="Y";
+                                  $overdue+=$credit;
+                                }else
+                                {
+                                  $over="N";
+                                }
                             ?>
                               <tr>
                               <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row['tblAccId'] ?>"/>
                               <td><?php echo $row['tblAccDueDate'] ?></td>
+                              <td><?php echo $over ?></td>
                               <td><?php echo $row1['tblFeeCode'] ?></td>
                               <td><?php echo $row1['tblFeeName'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
                             </tr>
-                            <?php $totalamountdue = $totalamountdue+$credit+$overdue;
-                            $totalamountpaid = $totalamountpaid+$credit+$overdue;} ?>
+                            <?php 
+                            $totalamountdue = $totalamountdue+$credit;
+                            $totalamountpaid = $totalamountpaid+$credit;
+                            }
+                            $overdue *= 0.04;
+                            $totalamountdue += $overdue;
+                            $totalamountpaid += $overdue;
+                            ?>
                             <tr style="color: red">
                               <td>Overdue Charge:</td>
+                              <td> </td>
                               <td> </td>
                               <td> </td>
                               <td> </td>
@@ -347,8 +369,12 @@ foreach($acc as $q)
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
                         <div class="col-sm-9">
-                            <input type="text" name="txtOR" id="txtOR" placeholder="OR#" style="width:55px" />
-                            <input type="text" name="txtPR" id="txtPR" placeholder="PR#" style="width:55px" />
+                            <?php
+                              $query=mysqli_query($con, "select SUM(a.tblAccCredit) as bal from tblaccount a, tblstudscheme s where a.tblAcc_tblStudentId='$studentid' and a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAccPaid='UNPAID' and a.tblAccFlag=1 and s.tblStudSchemeFlag=1 and s.tblStudScheme_tblSchoolYrId='$syid'");
+                              $row=mysqli_fetch_array($query);
+                              $runningbal=$row['bal'];
+                            ?>
+                            <input type="text" class="form-control" id="bal" name="bal" value="<?php echo $runningbal ?>" disabled>
                         </div>
                     </div>
                     <div class="form-group">
