@@ -42,7 +42,7 @@ foreach($optfees as $val)
 			
 			if($result->num_rows >= 1)
 			{
-				$query1="select * from tblstudscheme where tblStudScheme_tblFeeId='$fee' and tblStudSchemeFlag=1 and tblStudScheme_tblStudentId='$studid' and tblStudScheme_tblSchoolYrId='$syid' and tblStudScheme_tblSchemeId='$x'";
+				$query1="select * from tblstudscheme where tblStudScheme_tblFeeId='$val' and tblStudSchemeFlag=1 and tblStudScheme_tblStudentId='$studid' and tblStudScheme_tblSchoolYrId='$syid' and tblStudScheme_tblSchemeId='$x'";
 				$result1=$con->query($query1);
 				if($result1->num_rows == 0)
 				{

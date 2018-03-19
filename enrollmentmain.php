@@ -269,19 +269,21 @@
                                   <!-- <form action="untitled.php" method="post">
                                     <button type="submit">submit</button>
                                   </form> -->
-                                  <label></label><button class="btn btn-info"><a href="outputListOfFees.php" target="_blank" style="color: white">List of Fees</a></button>
-                                  <label>Filter by Level:</label>
-                                  <select class="form-control" sty  le="width: 50%" name="selLevel" id="selLevel" onchange="showLevel();">
-                                    <option selected disabled>--Choose Level--</option>
-                                    <?php
-                                    $query="select * from tbllevel where tblLevelFlag=1 group by tblLevelName";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                    
-                                    ?>
-                                    <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName']; ?></option>
-                                    <?php endwhile; ?>
-                                  </select>
+                                  <label></label><button class="btn btn-info"><a href="outputListOfFees.php" target="_blank" style="color: white;">List of Fees</a></button>
+                                  <div style="margin-top: 5%">
+                                    <label>Filter by Level:</label>
+                                    <select class="form-control" sty  le="width: 50%" name="selLevel" id="selLevel" onchange="showLevel();">
+                                      <option selected disabled>--Choose Level--</option>
+                                      <?php
+                                      $query="select * from tbllevel where tblLevelFlag=1 group by tblLevelName";
+                                      $result=mysqli_query($con, $query);
+                                      while($row=mysqli_fetch_array($result)):
+                                      
+                                      ?>
+                                      <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName']; ?></option>
+                                      <?php endwhile; ?>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
 

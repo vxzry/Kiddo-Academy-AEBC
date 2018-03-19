@@ -235,7 +235,7 @@ $x=substr($login_session,0,1);
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-    <h3>Student List</h3>
+    <h3>Accounts Receivables</h3>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Reports</a></li>

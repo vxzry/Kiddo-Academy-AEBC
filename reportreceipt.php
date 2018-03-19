@@ -36,7 +36,7 @@ function Header()
 
     $this->SetXY(35,55);
     $this->SetFont('Arial','B',15);
-    $this->Cell(150,3,"RECEIPT",0,0,'C');
+    $this->Cell(150,3,"ACKNOWLEDGEMENT RECEIPT",0,0,'C');
     $this->SetFont('Arial','',10);
     $this->SetX(145);
     $this->Cell(10,10,'Date: '.date('Y-m-d'),0,0);

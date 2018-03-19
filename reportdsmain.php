@@ -224,7 +224,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header"> <h3>Student List</h3> </section>
+    <section class="content-header"> <h3>Deficient Student List</h3> </section>
 
     <!-- Main content -->
     <section class="content">

@@ -551,7 +551,7 @@ function run(){
                               </div> <!-- modal content -->
                             </div> <!-- modal dialog -->
                           </div> <!-- modal fade -->
-                    </div>  -->
+                    </div>  
                    
                    </div> <!-- tab content -->
                   </div><!-- nav tabs custom -->
