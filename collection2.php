@@ -382,7 +382,8 @@
             </div>            
         </div> <!-- / panel preview -->
                             <div class="form-group col-md-9" style="margin-top: 5%">
-                            <input type="checkbox" name="check" id="check" onchange="showCheck()"> Check
+                            <input type="checkbox" name="chkCheck" id="chkCheck" onchange="showCheck()" value="1"> Check
+                            <input type="hidden" name="chkCheck" id="chkCheck" value="0">
                               </label>
                             </div>
                             <div class="col-md-12" style="margin-top: 3%">
