@@ -30,7 +30,18 @@
     $rolename=$row['tblRoleName'];
    }
 
+$overdue=$_POST['txtoverdue'];
+$overdue *= 0.04;
 $acc=$_POST['chkbills'];
+foreach($acc as $q)
+{
+  $query=mysqli_query($con, "select tblAcc_tblStudentId from tblaccount where tblAccId='$q' and tblAccFlag=1");
+  $row=mysqli_fetch_array($query);
+  $studentid=$row['tblAcc_tblStudentId'];
+  $query=mysqli_query($con, "select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as studentname from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studentid' and tblstudent.tblStudentFlag=1");
+  $row=mysqli_fetch_array($query);
+  $studname=$row['studentname'];
+}
 ?>
 <!DOCTYPE html>
 
@@ -252,7 +263,7 @@ $acc=$_POST['chkbills'];
                           <div class="container">
   <div class="row">
         <div class="col-sm-11">
-            <legend style="font-weight: bold;">Student Name: Kwon Soonyoung</legend>
+            <legend style="font-weight: bold;">Student Name: <?php echo $studname ?></legend>
         </div>
         <form action="trytry.php" method="post">
         <div class="col-sm-10">
@@ -298,8 +309,15 @@ $acc=$_POST['chkbills'];
                               <td><?php echo $row['tblAccCredit'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
                             </tr>
-                            <?php $totalamountdue += $credit;
-                            $totalamountpaid += $credit;} ?>
+                            <?php $totalamountdue = $totalamountdue+$credit+$overdue;
+                            $totalamountpaid = $totalamountpaid+$credit+$overdue;} ?>
+                            <tr style="color: red">
+                              <td>Overdue Charge:</td>
+                              <td> </td>
+                              <td> </td>
+                              <td> </td>
+                              <td><?php echo $overdue ?></td>
+                            </tr>
                             </tbody> <!-- preview content goes here-->
                         </table>
                     </div>                           
