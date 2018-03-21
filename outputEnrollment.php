@@ -6,6 +6,7 @@ include "db_connect.php";
 $session=$_POST['session'];
 $date=$_POST['date'];
 $studname=$_POST['studname'];
+$studid=$_POST['studid']
 $lvlid=$_POST['level'];
 $query=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
 $row=mysqli_fetch_array($query);
@@ -94,6 +95,19 @@ function Footer()
     $pdf->Cell(30,5,"Order of Payment",1,0,'C');
     $pdf->Cell(25,5,"Amount",1,0,'C');
     $pdf->Cell(25,5,"Deadline",1,0,'C');
+
+    $pdf->Ln(15);// Line break
+    $pdf->SetFont('Arial','',8);
+    $pdf->SetX(30);
+
+    $query=mysqli_query($con, "Select * FROM tblaccount WHERE tblAcc_tblStudentId='$studid");
+    $row=mysqli_fetch_array($query);
+
+    $pdf->Cell(40,5,"",1,0,'C');
+    $pdf->Cell(35,5,"",1,0,'C');
+    $pdf->Cell(30,5,"",1,0,'C');
+    $pdf->Cell(25,5,$row['tblAccCredit'],1,0,'C');
+    $pdf->Cell(25,5,$row['tblAccDueDate'],1,0,'C');
 
 
     $pdf->SetXY(110, 200);
