@@ -422,6 +422,7 @@
                                     <?php echo $row1['facultyname'] ?>
                                   </td>
                                   <td style="width: 25%">
+                                    <button type="button" class="btn btn-info view_section" data-toggle="modal" data-target="#mdlViewSection" data-id="<?php echo $row['tblSectionId'] ?>" data-title="<?php echo $row['tblLevelName'].' - '.$row['tblSectionName']; ?>">View Students</button>
                                     <button type="button" class="btn btn-primary fill_section" data-toggle="modal" data-target="#mdlFillSection" data-id="<?php echo $row['tblSectionId'] ?>">Fill Section</button>
                                     <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button> -->
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button>
@@ -430,6 +431,31 @@
                               <?php endwhile; ?>
                           </tbody>
                         </table>
+
+                        <div class="modal fade" id="mdlViewSection" role="dialog">
+                          <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 class="modal-title" style="font-style: bold"><span id="view_students_title"></span></h3>
+                              </div>
+                                <div class="modal-body">
+                                  <div class="box-body table-responsive no-padding" style="margin-top: 2%">
+                                    <div class="form-group">
+                                      <label>Students:</label>
+                                        <textarea class="form-control" name="section_student_list" id="section_student_list" cols="50" rows="10" readonly style="resize: none;"></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer" style="float: center">
+                                  <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                </div>
+                              </form>
+                            </div>
+
+                          </div>
+                        </div>
 
                         <div class="modal fade" id="mdlFillSection" role="dialog">
                           <div class="modal-dialog">
@@ -773,6 +799,28 @@
                     console.log(data);
                     $('#student_list').val(data.responseText);
                     $('#btnFillSection').attr('disabled', true);
+                }
+            });
+          });
+
+          $('.view_section').click(function(e){
+            var id = $(this).attr('data-id');
+            $('#view_students_title').text($(this).attr('data-title'));
+            
+            $.ajax({
+                type: 'GET',  
+                url: 'showSectionStudents.php',
+                data: {
+                  id: id
+                },
+                dataType: 'html',
+                success: function(data) {
+                  console.log(data);
+                  $('#section_student_list').val(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                    $('#section_student_list').val(data.responseText);
                 }
             });
           });
