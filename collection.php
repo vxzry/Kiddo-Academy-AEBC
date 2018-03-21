@@ -30,7 +30,19 @@
     $rolename=$row['tblRoleName'];
    }
 
+// $overdue=$_POST['txtoverdue'];
+// $overdue *= 0.04;
+  $overdue=0;
 $acc=$_POST['chkbills'];
+foreach($acc as $q)
+{
+  $query=mysqli_query($con, "select tblAcc_tblStudentId from tblaccount where tblAccId='$q' and tblAccFlag=1");
+  $row=mysqli_fetch_array($query);
+  $studentid=$row['tblAcc_tblStudentId'];
+  $query=mysqli_query($con, "select concat(tblstudentinfo.tblStudInfoLname, ', ', tblstudentinfo.tblStudInfoFname, ' ', tblstudentinfo.tblStudInfoMname) as studentname from tblstudentinfo join tblstudent on tblstudent.tblStudentId=tblstudentinfo.tblStudInfo_tblStudentId where tblstudent.tblStudentId='$studentid' and tblstudent.tblStudentFlag=1");
+  $row=mysqli_fetch_array($query);
+  $studname=$row['studentname'];
+}
 ?>
 <!DOCTYPE html>
 
@@ -252,7 +264,7 @@ $acc=$_POST['chkbills'];
                           <div class="container">
   <div class="row">
         <div class="col-sm-11">
-            <legend style="font-weight: bold;">Student Name: Kwon Soonyoung</legend>
+            <legend style="font-weight: bold;">Student Name: <?php echo $studname ?></legend>
         </div>
         <form action="trytry.php" method="post">
         <div class="col-sm-10">
@@ -265,6 +277,7 @@ $acc=$_POST['chkbills'];
                             <thead>
                                 <tr>
                                     <th>Due Date</th>
+                                    <th>Overdue</th>
                                     <th>Fee Code</th>
                                     <th>Fee Description</th>
                                     <th>Amount</th>
@@ -289,17 +302,44 @@ $acc=$_POST['chkbills'];
                                 $result1=mysqli_query($con, $query1);
                                 $row1=mysqli_fetch_array($result1);
                                 $credit=$row['tblAccCredit'];
+                                $duedate=$row['tblAccDueDate'];
+                                $curdate=date('Y-m-d');
+                                $end_ts = strtotime($duedate);
+                                $now_ts = strtotime($curdate);
+                                if($now_ts > $end_ts)
+                                {
+                                  $over="Y";
+                                  $overdue+=$credit;
+                                }else
+                                {
+                                  $over="N";
+                                }
                             ?>
                               <tr>
                               <td hidden><input type="hidden" name="txtAccId[]" id="txtAccId" value="<?php echo $row['tblAccId'] ?>"/>
                               <td><?php echo $row['tblAccDueDate'] ?></td>
+                              <td><?php echo $over ?></td>
                               <td><?php echo $row1['tblFeeCode'] ?></td>
                               <td><?php echo $row1['tblFeeName'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
                               <td><?php echo $row['tblAccCredit'] ?></td>
                             </tr>
-                            <?php $totalamountdue += $credit;
-                            $totalamountpaid += $credit;} ?>
+                            <?php 
+                            $totalamountdue = $totalamountdue+$credit;
+                            $totalamountpaid = $totalamountpaid+$credit;
+                            }
+                            $overdue *= 0.04;
+                            $totalamountdue += $overdue;
+                            $totalamountpaid += $overdue;
+                            ?>
+                            <tr style="color: red">
+                              <td>Overdue Charge:</td>
+                              <td> </td>
+                              <td> </td>
+                              <td> </td>
+                              <td> </td>
+                              <td><?php echo $overdue ?></td>
+                            </tr>
                             </tbody> <!-- preview content goes here-->
                         </table>
                     </div>                           
@@ -329,8 +369,12 @@ $acc=$_POST['chkbills'];
                     <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
                         <div class="col-sm-9">
-                            <input type="text" name="txtOR" id="txtOR" placeholder="OR#" style="width:55px" />
-                            <input type="text" name="txtPR" id="txtPR" placeholder="PR#" style="width:55px" />
+                            <?php
+                              $query=mysqli_query($con, "select SUM(a.tblAccCredit) as bal from tblaccount a, tblstudscheme s where a.tblAcc_tblStudentId='$studentid' and a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAccPaid='UNPAID' and a.tblAccFlag=1 and s.tblStudSchemeFlag=1 and s.tblStudScheme_tblSchoolYrId='$syid'");
+                              $row=mysqli_fetch_array($query);
+                              $runningbal=$row['bal'];
+                            ?>
+                            <input type="text" class="form-control" id="bal" name="bal" value="<?php echo $runningbal ?>" disabled>
                         </div>
                     </div>
                     <div class="form-group">

@@ -242,6 +242,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
 
                     <div class="tab-pane active" id="tab_1">
                         <div class="box-body">
+                          <form action="reportstatementofaccount.php" method="post" target="_blank"><input type="hidden" value="<?php echo $studid ?>" name="studentid" id="studentid"/><button class="btn btn-info" type="submit">Get Statement of Account</button></form>
                           <form action="collection.php" method="post">
                             <div class="box-body">
                             <div class="col-md-6" style="margin-top: 2%">
@@ -265,6 +266,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                   </thead>
                                   <tbody>
                                   <?php
+                                    $overdue=0;
                                     $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId='$syid' and a.tblAccPaid='UNPAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
@@ -299,13 +301,14 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                      <?php
                                       if($over=='Y')
                                       {
-
+                                        $overdue+=$payment;
                                       }
                                      ?>
                                     </tr>
                                   <?php endwhile; ?>
                                   </tbody>
                                 </table>
+                                <input type="hidden" value="<?php echo $overdue ?>" name="txtoverdue" id="txtoverdue"/>
                               </div> <!-- col-md-12 -->
                             </div> <!-- box body -->
                           </form>

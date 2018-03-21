@@ -155,12 +155,12 @@ $query="select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' a
 
 		}
 	endwhile;
-$query="update tblstudent set tblStudentPreferSession='$session' where tblStudentId='$studid' and tblStudentFlag=1 and tblStudentType='OFFICIAL'";
+$query="update tblstudent set tblStudentPreferSession='$session', tblStudentType='ENROLLEE' where tblStudentId='$studid' and tblStudentFlag=1";
 	if (!$query = mysqli_query($con, $query)) {
 				exit(mysqli_error($con));
 	}else
 	{
 		
-		header("location:collection2.php?studentid=$studid");
+		header("location:createParentUser.php?studentid=$studid");
 		}
 ?>

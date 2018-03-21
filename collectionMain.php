@@ -238,6 +238,7 @@
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs" id="myTab">
                       <li class="active"><a href="#tab_1" data-toggle="tab">Student's Payment</a></li>
+                      <li><a href="#tab_3" data-toggle="tab">First Installments</a></li>
                       <li><a href="#tab_2" data-toggle="tab">Checks</a></li>
                     </ul>
 
@@ -328,7 +329,7 @@
                                       <td>
                                       <form action="BILLINGMAIN.php" method="post">
                                       <input type="hidden" value="<?php echo $row['tblStudentId'] ?>" name="txtStudId" id="txtStudId"/>
-                                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Proceed to Billing</button></form></td>
+                                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Proceed to Billing</button></form><form action="reportstatementofaccount.php" method="post" target="_blank"><input type="hidden" value="<?php echo $row['tblStudentId'] ?>" name="studentid" id="studentid"/><button class="btn btn-info" type="submit">Get Statement of Account</button></form></td>
                                     </tr>
                                   <?php endwhile; ?>
                                   </tbody>
@@ -338,6 +339,48 @@
                       
                       </div> <!-- box-->
                     </div>
+                    <div class="tab-pane" id="tab_3">
+                      <div class="box">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                          
+                            <div class="col-md-12" style="margin-top: 5%">
+                                <table id="datatable1" class="table table-bordered table-striped">
+                                  <thead>
+                                   <tr>
+                                       <th>Student ID</th>
+                                       <th>Student Name</th>
+                                       <th>Level</th>
+                                       <th>Action</th>
+                                     </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php
+                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='ENROLLEE' and s.tblStudentFlag=1";
+                                    $result=mysqli_query($con, $query);
+                                    while($row=mysqli_fetch_array($result)):
+                                      $lvl=$row['tblStudent_tblLevelId'];
+                                      $query1=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvl' and tblLevelFlag=1");
+                                      $row1=mysqli_fetch_array($query1);
+                                      $lvlName=$row1['tblLevelName'];
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $row['tblStudentId'] ?></td>
+                                      <td><?php echo $row['studentname'] ?></td>
+                                      <td><?php echo $lvlName ?></td>
+                                      <td><form method="post" action="collection2.php"><input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $row['tblStudentId'] ?>"/><button type="submit" class="btn btn-success" name="btnStud" id="btnStud">Collect Payment</button></form></td>
+                                    </tr>
+                                    <?php
+                                    endwhile;
+                                     ?>
+                                  </tbody>
+                                </table>
+
+                        </div> <!-- box-body -->
+                      
+                      </div> <!-- box-->
+                    </div> <!--tab pane tab_1 -->
+                  </div>
                     </div><!-- <div class="nav-tabs-custom"> -->
                 </div> <!-- box body -->
               </div> <!-- box- box-default-->

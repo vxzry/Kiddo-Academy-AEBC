@@ -24,8 +24,7 @@ if($sectcnt < $max)
 {
 	$query="select s.tblStudentId,  concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name
 from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId 
-and s.tblStudentType='OFFICIAL'
-and s.tblStudentFlag=1 order by tblStudentId and s.tblStudent_tblLevelId='$lvl'";
+and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1 and s.tblStudent_tblLevelId='$lvl' order by tblStudentId";
 $result=mysqli_query($con, $query);
 while($row=mysqli_fetch_array($result)):
 	$studid=$row['tblStudentId'];
@@ -43,7 +42,6 @@ for($y=0; $y<$ctr; $y++)
 {
 	
 	$stud=$arrStud[$y];
-
 	$query1="select * from tblsectionstud order by tblSectStudId desc limit 0, 1";
 	$result1=mysqli_query($con, $query1);
 	$row1=mysqli_fetch_array($result1);

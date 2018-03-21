@@ -119,7 +119,7 @@
   {
 
     var xmlhttp =  new XMLHttpRequest();
-    xmlhttp.open("GET","changeTblMass.php?chkPSchedStat="+document.getElementById("chkPSchedStat").value,false);
+    xmlhttp.open("GET","changeTblMass.php?chkPSchedStat="+document.getElementById("chkPSchedStat1").value,false);
     xmlhttp.send(null);
     document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
   }
@@ -1003,8 +1003,8 @@ $(document).ready(function(){
             <div class="container" style="margin-bottom: 15px">
                   <label class="col-sm-1">Fee Type: </label>
 
-                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="GENERAL FEE" onchange="changeTblMass()">  GENERAL FEE
-                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="SPECIFIC FEE" onchange="enable()" style="margin-left: 10px;">  SPECIFIC FEE
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat1" value="GENERAL FEE" onclick="changeTblMass()">  GENERAL FEE
+                        <input type="radio" name="chkPSchedStat" id="chkPSchedStat" value="SPECIFIC FEE" onclick="enable()" style="margin-left: 10px;">  SPECIFIC FEE
               </div>
           </div>
 
