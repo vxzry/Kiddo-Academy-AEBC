@@ -29,19 +29,8 @@
     $row=mysqli_fetch_array($result);
     $rolename=$row['tblRoleName'];
    }
-
-// $studid=$_POST['txtStudId'];
-// $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE'";
-// $result=mysqli_query($con, $query);
-// $row=mysqli_fetch_array($result);
-// $syid=$row['tblSchoolYrId'];
-// $query="select * from tblstudent where tblStudentId='$studid' and tblStudentFlag=1";
-// $result=mysqli_query($con, $query);
-// $row=mysqli_fetch_array($result);
-// $lvlid=$row['tblStudent_tblLevelId'];
 ?>
 <!DOCTYPE html>
-
 <html>
 
   <head>
@@ -63,22 +52,77 @@
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
+
+         <!-- sweetalert -->
+         <script src="sweetalert-master/dist/sweetalert-dev.js"></script>
+         <link rel="stylesheet" href="sweetalert-master/dist/sweetalert.css">
+
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
-     <link rel="stylesheet" type="text/css" href="formwizard2.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <style>
       body {
         font-family: 'Noto Sans', sans-serif;
         font-weight: bold;
-        font-size: 12px;
+      }
+
+      fieldset{
+        border: 1px solid black;
       }
     </style>
+    <script>
+    function changeBillingLevel()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeTblBilling.php?selLevel="+document.getElementById("selLevel").value,false);
+      xmlhttp.send(null);
+
+      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+
+    }
+    function addFields()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open('GET','billAdd.php?type='+document.querySelector('input[name="r1"]:checked').value+'&selFee='+document.getElementById('selFee').value,false);
+      xmlhttp.send(null);
+
+      document.getElementById("fg1").innerHTML=xmlhttp.responseText;
+
+    }
+    </script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
+    <?php
+        $message = isset($_GET['message'])?intval($_GET['message']):0;
+
+        if($message == 1) {
+          echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 2) {
+          echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
+        }
+
+        if($message == 3) {
+          echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 4) {
+          echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+        }
+
+        if($message == 5) {
+          echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 6) {
+          echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+        }
+      ?>
     <div class="wrapper">
+
       <header class="main-header">
         <!-- Logo -->
         <a href="dashboard.php" class="logo">
@@ -111,15 +155,15 @@
                     <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      <!-- <?php echo $namess ?> -->
+                      <!--<?php echo $namess ?>-->
                       <small><?php echo $rolename ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <!-- <div class="pull-left">
+                   <!-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div> -->
+                    </div>-->
                     <div class="pull-right">
                       <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
@@ -128,8 +172,8 @@
               </li>
             </ul>
           </div>
-          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
-          
+            <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
+
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -142,16 +186,16 @@
               <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
 
-            <div class="pull-left info" style="margin-top: 3%">
+                        <div class="pull-left info" style="margin-top: 3%">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
               <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
             </div>
           </div>
-         
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
-            <li class="header" style="color:black;">
+                    <li class="header" style="color:black;">
                <div>
            <?php
              $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
@@ -164,7 +208,7 @@
 
        </div>
             </li>
-            <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -179,7 +223,7 @@
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -196,7 +240,7 @@
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -210,7 +254,7 @@
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
           </ul>
         </section>
@@ -221,167 +265,163 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-      
+
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
             <div class="col-md-12">
-              <div class="box box-default">
-                <div class="box-header with-border"></div>
-                <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:20px; padding:5px;">Collection</h2>
-                    <div class="form-group" margin-left: 2%"></div>
-                  </div>
+              <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
                   <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs" id="myTab">
-                      <li class="active"><a href="#tab_1" data-toggle="tab">Student's Payment</a></li>
-                      <li><a href="#tab_3" data-toggle="tab">First Installments</a></li>
-                      <li><a href="#tab_2" data-toggle="tab">Checks</a></li>
-                    </ul>
+                    <div class="box-header with-border">
+                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">ENROLLMENT</h2>
+                    <h4 style="margin-top: 3%">Student Name: Comia, Diana Rose</h4>
+                  </div>
+
 
                   <div class="tab-content">
 
-                    <div class="tab-pane" id="tab_2">
-                      <div class="box">
-                        <div class="box-header"></div>
-                        <div class="box-body">
-                          
-                            <div class="col-md-12" style="margin-top: 5%">
-                                <table id="datatable1" class="table table-bordered table-striped">
-                                  <thead>
-                                   <tr>
-                                       <th>Student ID</th>
-                                       <th>Student Name</th>
-                                       <th>Check #</th>
-                                       <th>Amount</th>
-                                       <th>Bank Name</th>
-                                       <th>Payment Date</th>
-                                       <th>Action</th>
-                                     </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php
-                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, tblChkId, tblChkAmount, tblChkBank, tblChkDate, ca.tblChkNum from tblstudent s, tblstudentinfo si, tblcheck ca where ca.tblChk_tblStudentId=s.tblStudentId and s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1 and ca.tblChkRTag!='PAID'";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                    ?>
-                                    <tr>
-                                      <td><?php echo $row['tblStudentId'] ?></td>
-                                      <td><?php echo $row['studentname'] ?></td>
-                                      <td><?php echo $row['tblChkNum'] ?></td>
-                                      <td><?php echo $row['tblChkAmount'] ?></td>
-                                      <td><?php echo $row['tblChkBank'] ?></td>
-                                      <td><?php echo $row['tblChkDate'] ?></td>
-                                      <td><form method="post" action="tagCheck.php"><input type="hidden" name="txtChkId" id="txtChkId" value="<?php echo $row['tblChkId'] ?>"/><input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $row['tblStudentId'] ?>"/><button type="submit" class="btn btn-success" name="btnStud" id="btnStud">Tag Check as Paid</button></form></td>
-                                    </tr>
-                                    <?php
-                                    endwhile;
-                                     ?>
-                                  </tbody>
-                                </table>
 
-                        </div> <!-- box-body -->
-                      
-                      </div> <!-- box-->
-                    </div> <!--tab pane tab_1 -->
-                  </div>
                     <div class="tab-pane active" id="tab_1">
-                      <div class="box">
-                        <div class="box-header"></div>
-                        <div class="box-body">
-                            <div class="col-md-6"  style="margin-top: 3%">
-                              <div class="form-group">
-                                  <label>Level</label>
-                                  <select class="form-control" style="width: 50%;" onchange="changeBillingLevel()" name="selLevel" id="selLevel">
-                                    <option selected="selected" disabled>--Select Level--</option>
-                                    <?php
-                                    $query="select tblLevelId, tblLevelName from tbllevel where tblLevelFlag=1";
-                                    $result = mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                    ?>
-                                    <option value="<?php echo $row['tblLevelId'] ?>"><?php echo $row['tblLevelName'] ?></option>
-                                    <?php endwhile ?>
-                                  </select>
+
+                          <div class="box-body">
+                            <div class="col-md-12"  style="margin-top: 3%">
+                              <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
+
+                                  <div>
+                                  <label>Session: </label>
+                                  <input type="radio" name="s1" id="s1" value="MORNING" style="margin-left: 3%" /> Morning
+                                  <input type="radio" name="s1" id="s1" value="AFTERNOON" /> Afternoon
                                 </div>
+                                
+                              
+                                <div class="row" style="margin-top: 3%">
+                                  <div class="col-md-6">
+                                    <fieldset style="margin: 5px; margin-left: -7px; height: 50%">
+                                      <h4 style="font-weight: bold; padding: 3px; margin-left: 2%">Mandatory</h4>
+                                      <hr>
+                                      <?php
+                                        $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
+                                        $result=mysqli_query($con, $query);
+                                        while($row=mysqli_fetch_array($result)):
+                                        ?>
+                                        <div><p style="padding-left: 10px"> <?php echo $row['tblFeeName'] ?></p></div>
+                                      <?php endwhile; ?>
+                                    </fieldset>
+                                  </div>
+                                    <div class="col-md-6">
+                                    <fieldset style="margin: 5px; margin-left: -7px;">
+                                      <h4 style="font-weight: bold; padding: 3px; margin-left: 2%">Optional</h4>
+                                      <hr>
+                                      <?php
+                                        
+                                        $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
+                                        $result=mysqli_query($con, $query);
+                                        while($row=mysqli_fetch_array($result)):
+                                        ?>
+                                        <div>
+                                          
+                                          <input type="checkbox" class="optionalfees" name="optionalfees[]" id="optionalfees" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme(this)" /> <?php echo $row['tblFeeName'] ?></div>
+                                          
+                                      <?php endwhile; ?>
+                                    </fieldset>
+                                  </div>
+
+                                  <div class="col-md-12" style="margin-top: 3%">
+                                    <h4 style="font-weight: bold">Schemes</h4>
+                                        
+                                        <h4 style="margin-top: 2%">Mandatory</h4>
+                                        <fieldset style="margin-top: 2%; padding: 5px" id="fldst">
+                                        <?php
+                                        $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
+                                        $result=mysqli_query($con, $query);
+                                        while($row=mysqli_fetch_array($result)):
+                                          $feeid=$row['tblFeeId'];
+                                          $query1=$con->query("select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
+                                          if($query1->num_rows >=1 )
+                                          {
+                                        ?>
+                                        <div><label> <?php echo $row['tblFeeName'] ?></label>
+                                          <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;">
+                                            <option disabled selected value="0">--Select Scheme</option>
+                                            <?php
+                                            $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
+                                            while($row2=mysqli_fetch_array($query2))
+                                            { ?>
+                                              <option value="<?php echo $row2['tblSchemeId'] ?>"><?php echo $row2['tblSchemeType'] ?></option>
+                                            <?php } ?>
+                                            ?>
+                                          </select>
+                                          <div style="margin-top: 5%; margin-bottom: 5%">
+                                          <table class="table table-bordered table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th>No. of Payment</th>
+                                                <th>Due Date</th>
+                                                <th>Amount</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                        </div>
+                                        <?php }endwhile; ?>
+                                      
+                                        </fieldset>
+                                         <div><h4 style="margin-top: 2%">Optional</h4></div>
+                                        </div>
+                                  </div>
+                                </div>
+                                
+                                
                               </div>
+                             
+                             
+                                 <div class="btn-group" style="margin-top: 5%; float: right">
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalEnrollment" style="margin-right: 15px; ">Proceed</button>
+                                </div>
 
-                              <div class="col-md-12" style="margin-top: 3%">
-                                <table id="datatable2" class="table table-bordered table-striped">
-                                  <thead>
-                                    <tr>
-                                      <th>Student ID</th>
-                                      <th>Student Name</th>
-                                      <th>Action</th>
-                                    </tr>
-                                  </thead> 
-                                  <tbody>
-                                  <?php
-                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1;";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                  ?>
-                                    <tr>
-                                      <td><?php echo $row['tblStudentId'] ?></td>
-                                      <td><?php echo $row['studentname'] ?></td>
-                                      <td>
-                                      <form action="BILLINGMAIN.php" method="post">
-                                      <input type="hidden" value="<?php echo $row['tblStudentId'] ?>" name="txtStudId" id="txtStudId"/>
-                                      <button type="submit" class="btn btn-success" name="btnStud" id="btnStud"><i class="fa fa-edit"></i>Proceed to Billing</button></form><form action="reportstatementofaccount.php" method="post" target="_blank"><input type="hidden" value="<?php echo $row['tblStudentId'] ?>" name="studentid" id="studentid"/><button class="btn btn-info" type="submit">Get Statement of Account</button></form></td>
-                                    </tr>
-                                  <?php endwhile; ?>
-                                  </tbody>
-                                </table>
-                              </div> <!-- col-md-12 -->
-                            </div> <!-- box body -->
-                      
-                      </div> <!-- box-->
+              <!-- Modal Enrollment -->
+                <div class="modal fade" id="modalEnrollment" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="deleteModalOne"> PROCEED </h4>
+                        </div>
+                        <div class="row" style="margin-top: 5%">
+                        <div class="col-md-6">
+                        <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="float: right">Enroll Student</button>
+                        </div>
+
+                        <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" name="btnfees" id="btnfees" style="float: left"><a target="_blank" href="outputListofFees.php" style="color: white">Print Voucher</a></button>
+                        </div>
+                        </div>
+                        <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
-                    <div class="tab-pane" id="tab_3">
-                      <div class="box">
-                        <div class="box-header"></div>
-                        <div class="box-body">
-                          
-                            <div class="col-md-12" style="margin-top: 5%">
-                                <table id="datatable3" class="table table-bordered table-striped">
-                                  <thead>
-                                   <tr>
-                                       <th>Student ID</th>
-                                       <th>Student Name</th>
-                                       <th>Level</th>
-                                       <th>Action</th>
-                                     </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php
-                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='ENROLLEE' and s.tblStudentFlag=1";
-                                    $result=mysqli_query($con, $query);
-                                    while($row=mysqli_fetch_array($result)):
-                                      $lvl=$row['tblStudent_tblLevelId'];
-                                      $query1=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvl' and tblLevelFlag=1");
-                                      $row1=mysqli_fetch_array($query1);
-                                      $lvlName=$row1['tblLevelName'];
-                                    ?>
-                                    <tr>
-                                      <td><?php echo $row['tblStudentId'] ?></td>
-                                      <td><?php echo $row['studentname'] ?></td>
-                                      <td><?php echo $lvlName ?></td>
-                                      <td><form method="post" action="collection2.php"><input type="hidden" name="txtStudId" id="txtStudId" value="<?php echo $row['tblStudentId'] ?>"/><button type="submit" class="btn btn-success" name="btnStud" id="btnStud">Collect Payment</button></form></td>
-                                    </tr>
-                                    <?php
-                                    endwhile;
-                                     ?>
-                                  </tbody>
-                                </table>
-
-                        </div> <!-- box-body -->
-                      
-                      </div> <!-- box-->
-                    </div> <!--tab pane tab_1 -->
                   </div>
-                    </div><!-- <div class="nav-tabs-custom"> -->
+                </div>
+                <!--modal end-->
+
+                            </div>
+                          </div>
+                    </div> <!-- tab_1 -->
+
+                  </div> <!-- tab content -->
+                  </div>
+                </div> <!-- nav -->
                 </div> <!-- box body -->
               </div> <!-- box- box-default-->
             </div> <!-- col-md-12 -->
@@ -392,7 +432,7 @@
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2017
+          <b>Version</b> Last na please
         </div>
         <strong>Copyright &copy; 2017 <a href="http://almsaeedstudio.com">Kiddo Academy and Development Center</a>.</strong> All rights
         reserved.
@@ -460,7 +500,7 @@
       <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- jQuery 2.2.3 -->
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -477,6 +517,9 @@
     <script src="js/select2.full.min.js"></script>
     <script type="text/javascript" src="formwizard.js"></script>
 
+    <!-- Sweetalert -->
+    <script src="js/sweetalert.min.js"></script>
+
     <script>
       $(function () {
         $("#datatable").DataTable();
@@ -489,6 +532,6 @@
       $(".choose").select2();
     });
     </script>
-    
+
   </body>
 </html>
