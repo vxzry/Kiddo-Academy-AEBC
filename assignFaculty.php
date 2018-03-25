@@ -1,8 +1,8 @@
 <?php
 include "db_connect.php";
-$sectid=$_POST['txtSectionId'];
-$facultyid=$_POST['selFaculty'];
-$session=$_POST['txtSession'];
+$sectid=trim($_POST['txtSectionId']);
+$facultyid=trim($_POST['selFaculty']);
+$session=trim($_POST['txtSession']);
 
 $query="select tblSectionId from tblsection where tblSectionSession='$session' and tblSection_tblFacultyId='$facultyid'";
 $result=$con->query($query);
