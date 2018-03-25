@@ -67,7 +67,6 @@ function Footer()
     $pdf->SetXY(180,55);
     $pdf->Cell(10,10,'Date: '.date("Y-m-d"),0,0,'');
     $pdf->SetXY(30,60);
-    $pdf->Cell(10,10,'Scheme Type: ',0,0,'');
 
     $pdf->SetXY(130,70);
     $pdf->SetFont('Arial','B',15);
@@ -78,30 +77,34 @@ function Footer()
     $pdf->Cell(25,5,"Due/Payment Date",1,0,'C');
     $pdf->Cell(15,5,"Code",1,0,'C');
     $pdf->Cell(40,5,"Details",1,0,'C');
-    $pdf->Cell(15,5,"TN#",1,0,'C');
+    // $pdf->Cell(15,5,"TN#",1,0,'C');
     $pdf->Cell(25,5,"Credit",1,0,'C');
     $pdf->Cell(25,5,"Receipt Number",1,0,'C');
     $pdf->Cell(25,5,"Payment Date",1,0,'C');
     $pdf->Cell(25,5,"Payment",1,0,'C');
     $pdf->Cell(25,5,"Running Balance",1,0,'C');
-    $pdf->Cell(40,5,"Remarks",1,1,'C');
+    $pdf->Cell(40,5,"Status",1,1,'C');
 
-    $query=mysqli_query($con, "select a.* from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and s.tblStudScheme_tblSchoolYrId='$syid' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
+    $query=mysqli_query($con, "select a.*, s.tblStudScheme_tblFeeId from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and s.tblStudScheme_tblSchoolYrId='$syid' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
 // if (!$query) {
 //     printf("Error: %s\n", mysqli_error($con));
 //     exit();
 // }
     $totcredit = 0;
-
     $totpayment = 0;
    while($row3=mysqli_fetch_array($query)){
+    $feeid=$row3['tblStudScheme_tblFeeId'];
+    $query1=mysqli_query($con, "select * from tblfee where tblFeeId='$feeid' and tblFeeFlag=1");
+    $row2=mysqli_fetch_array($query1);
+    $feecode=$row2['tblFeeCode'];
+    $feename=$row2['tblFeeName'];
 
     $pdf->Cell(25, 5, $row3['tblAccDueDate'], 1, 0);
 
-    $pdf->Cell(15, 5, $row3['tblAccDueDate'], 1, 0);
-    $pdf->Cell(40, 5, $row3['tblAccDueDate'], 1, 0);
+    $pdf->Cell(15, 5, $feecode, 1, 0);
+    $pdf->Cell(40, 5, $feename, 1, 0);
 
-    $pdf->Cell(15, 5, $row3['tblAccTN'], 1, 0);
+    // $pdf->Cell(15, 5, $row3['tblAccTN'], 1, 0);
     $pdf->Cell(25, 5, $row3['tblAccCredit'], 1, 0,'R');
     $totcredit = $totcredit + $row3['tblAccCredit'];
     $pdf->Cell(25, 5, $row3['tblAccOR'], 1, 0);
@@ -109,13 +112,13 @@ function Footer()
     $pdf->Cell(25, 5, $row3['tblAccPayment'], 1, 0,'R');
     $totpayment = $totpayment + $row3['tblAccPayment'];
     $pdf->Cell(25, 5, $row3['tblAccRunningBal'], 1, 0,'R');
-    $pdf->Cell(40, 5, $row3['tblAccRemark'], 1, 1);
+    $pdf->Cell(40, 5, $row3['tblAccPaid'], 1, 1);
 }
 
 
     $totrunbal = $totcredit - $totpayment;
     $pdf->Cell(80,5,"Total on School Year End",1,0,'C');
-    $pdf->Cell(15,5," ",1,0,'C');
+    // $pdf->Cell(15,5," ",1,0,'C');
     $pdf->Cell(25,5,$totcredit,1,0,'R');
     $pdf->Cell(25,5," ",1,0,'C');
     $pdf->Cell(25,5," ",1,0,'C');

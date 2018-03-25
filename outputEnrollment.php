@@ -6,7 +6,7 @@ include "db_connect.php";
 $session=$_POST['session'];
 $date=$_POST['date'];
 $studname=$_POST['studname'];
-$studid=$_POST['studid']
+$studid=$_POST['studid'];
 $lvlid=$_POST['level'];
 $query=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
 $row=mysqli_fetch_array($query);
