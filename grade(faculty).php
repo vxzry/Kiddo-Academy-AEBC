@@ -240,7 +240,7 @@ $x=substr($login_session,0,1);
                                 $result=mysqli_query($con, $query);
                                 while($row=mysqli_fetch_array($result)):
                                   $studid=$row['tblStudentId'];
-                                  $query1="select * from tblgradeave where tblGenAve_tblStudentId='$studid' and tblGenAve_tblSchoolYrId='$syid'";
+                                  $query1="select * from tblgradeave where tblGenAve_tblStudentId='$studid' and tblGenAve_tblSchoolYrId='$syid' and tblGenAveId IN ( select max(tblGenAveId) from tblgradeave group by tblGenAve_tblStudentId )";
                                   $row1=mysqli_fetch_array(mysqli_query($con, $query1));
                                   $genave=$row1['tblGenAverage'];
                                   $avestat=$row1['tblGenAveStatus'];
