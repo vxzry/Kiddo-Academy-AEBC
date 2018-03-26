@@ -101,7 +101,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
       var objtofld = document.getElementById("fldst2");
       var divingr = document.createElement("div");
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showScheme.php?optionalfees="+i.value+"&level="+level,false);
+      xmlhttp.open("GET","showScheme2.php?optionalfees="+i.value+"&&level="+level,false);
       xmlhttp.send(null);
       // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
       divingr.innerHTML =xmlhttp.responseText
