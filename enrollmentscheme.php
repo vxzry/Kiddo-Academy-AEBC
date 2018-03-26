@@ -29,6 +29,11 @@
     $row=mysqli_fetch_array($result);
     $rolename=$row['tblRoleName'];
    }
+$studid=$_POST['txtstud'];
+$query=mysqli_query($con, "select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentId='$studid'");
+$row=mysqli_fetch_array($query);
+$studname=$row['studentname'];
+$lvlid=$row['tblStudent_tblLevelId'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,6 +94,17 @@
 
       document.getElementById("fg1").innerHTML=xmlhttp.responseText;
 
+    }
+    function appendScheme(i)
+    {
+      var objtofld = document.getElementById("fldst2");
+      var divingr = document.createElement("div");
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","showScheme.php?optionalfees="+i.value,false);
+      xmlhttp.send(null);
+      // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
+      divingr.innerHTML =xmlhttp.responseText
+      objtofld.appendChild(divingr);
     }
     </script>
   </head>
@@ -277,7 +293,7 @@
                   <div class="nav-tabs-custom">
                     <div class="box-header with-border">
                     <h2 class="box-title" style="font-size:25px; margin-top: 10px">ENROLLMENT</h2>
-                    <h4 style="margin-top: 3%">Student Name: Comia, Diana Rose</h4>
+                    <h4 style="margin-top: 3%">Student Name: <?php echo $studname ?></h4>
                   </div>
 
 
@@ -285,12 +301,13 @@
 
 
                     <div class="tab-pane active" id="tab_1">
-
+                          <form method="post" action="changeEnrollScheme.php">
                           <div class="box-body">
                             <div class="col-md-12"  style="margin-top: 3%">
                               <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
 
                                   <div>
+                                  <input type="hidden" value="<?php echo $studid ?>" name="txtstudid" id="txtstudid" />
                                   <label>Session: </label>
                                   <input type="radio" name="s1" id="s1" value="MORNING" style="margin-left: 3%" /> Morning
                                   <input type="radio" name="s1" id="s1" value="AFTERNOON" /> Afternoon
@@ -349,7 +366,9 @@
                                             <?php
                                             $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
                                             while($row2=mysqli_fetch_array($query2))
-                                            { ?>
+                                            { 
+                                              $schemeid=$row2['tblSchemeId'];
+                                              ?>
                                               <option value="<?php echo $row2['tblSchemeId'] ?>"><?php echo $row2['tblSchemeType'] ?></option>
                                             <?php } ?>
                                             ?>
@@ -358,17 +377,27 @@
                                           <table class="table table-bordered table-striped">
                                             <thead>
                                               <tr>
-                                                <th>No. of Payment</th>
+                                                <th>Level</th>
+                                                <th>Order of Payment</th>
                                                 <th>Due Date</th>
                                                 <th>Amount</th>
                                               </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+                                              $query3=mysqli_query($con, "select * from tblschemedetail where tblSchemeDetail_tblScheme='$schemeid' and tblSchemeDetailFlag=1 and tblSchemeDetail_tblLevel='$lvlid'");
+                                              while($row3=mysqli_fetch_array($query3)):
+                                                $query4=mysqli_query($con, "select * from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
+                                                $row4=mysqli_fetch_array($query4);
+                                                $lvlname=$row4['tblLevelName'];
+                                            ?>
                                               <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><?php echo $lvlname ?></td>
+                                                <td><?php echo $row3['tblSchemeDetailName'] ?></td>
+                                                <td><?php echo $row3['tblSchemeDetailDueDate'] ?></td>
+                                                <td><?php echo $row3['tblSchemeDetailAmount'] ?></td>
                                               </tr>
+                                            <?php endwhile; ?>
                                             </tbody>
                                           </table>
                                         </div>
@@ -376,7 +405,10 @@
                                         <?php }endwhile; ?>
                                       
                                         </fieldset>
-                                         <div><h4 style="margin-top: 2%">Optional</h4></div>
+                                         <div><h4 style="margin-top: 2%">Optional</h4>
+                                          <fieldset style="margin-top: 2%; padding: 5px" id="fldst2">
+                                          </fieldset>
+                                         </div>
                                         </div>
                                   </div>
                                 </div>
@@ -414,6 +446,7 @@
                   </div>
                 </div>
                 <!--modal end-->
+                          </form>
 
                             </div>
                           </div>

@@ -259,16 +259,19 @@
                     <h2 class="box-title" style="font-size:20px;">Enrollment</h2>
                       <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
                   </div>
+                  <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs" id="myTab">
+                      <li class="active"><a href="#tab_1" data-toggle="tab">Enroll Students</a></li>
+                      <li><a href="#tab_3" data-toggle="tab">Change Schemes</a></li>
+                    </ul>
                   <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
+                    
+                  <div class="tab-pane active" id="tab_1">
                         <div class="box">
                         <div class="box-header"></div>
                             <div class="box-body">
                               <div class="col-md-6">
                                 <div class="form-group">
-                                  <!-- <form action="untitled.php" method="post">
-                                    <button type="submit">submit</button>
-                                  </form> -->
                                   <label></label><button class="btn btn-info"><a href="outputListOfFees.php" target="_blank" style="color: white;">List of Fees</a></button>
                                   <div style="margin-top: 5%">
                                     <label>Filter by Level:</label>
@@ -418,7 +421,7 @@
                                         </div>
                                         </div>
                                 </div>
-                                                          </div>
+                                                          
                                 <div class="modal-footer" style="margin-top: 30%; float: center">
                                   <button type="submit" class="btn btn-danger" name="btnProceed" id="btnProceed">OK</button>
                                   <button type="button" class="btn btn-info" data-dismiss="modal">CANCEL</button>
@@ -434,9 +437,50 @@
                         </div> <!-- box body tab_! -->
                       </div> <!-- box tab_1 -->
                     </div> <!-- tab pane tab_1 -->
-                  </div>
+                    <div class="tab-pane" id="tab_3">
+                        <div class="box">
+                        <div class="box-header"></div>
+                        <div class="box-body">
+                        <div class="col-md-12">
+                        <table id="datatable1" class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>Student Id</th>
+                              <th>Student Name</th>
+                              <th>Type</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php
+                          $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as name, s.tblStudentType from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentType='ENROLLEE' and s.tblStudentFlag=1";
+                          $result=mysqli_query($con, $query);
+                                  while($row=mysqli_fetch_array($result)):
+                          $studid=$row['tblStudentId'];
+                           ?>
+                          <tr>
+                            <td><?php echo $row['tblStudentId'] ?></td>
+                            <td><?php echo $row['name'] ?></td>
+                            <td><?php echo $row['tblStudentType'] ?></td>
+                    <?php
+                    $query1="select s.tblStudentId, s.tblStudentType, se.tblStudEnrollClearance from tblstudent s left join tblstudenroll se on se.tblStudEnroll_tblStudentId=s.tblStudentId where s.tblStudentId='$studid' and s.tblStudentFlag=1";
+                    $row3=mysqli_fetch_array(mysqli_query($con, $query1));
+                    $studclear=$row3['tblStudEnrollClearance'];
+                    $studtype=$row3['tblStudentType']; ?>
+                    <td><form action="enrollmentscheme.php" method="post"><input type="hidden" name="txtstud" id="txtstud" value="<?php echo $row['tblStudentId'] ?>" /><button type="submit" class="btn btn-success">Change Student's Scheme</button></form></td>
+                    </tr>
+                      <?php endwhile; ?>
+                      </tbody>
+                     </table>
+                        </div>
+                        </div> <!-- box body tab_! -->
+                      </div> <!-- box tab_1 -->
+                    </div>
+                    </div> <!-- tab pane tab_1 -->
+                  <!-- *tab content -->
+                </div> <!-- nav tab -->
                 </div>
-                <!-- /.tab-content -->
+                <!-- box body -->
               </div>
               <!-- nav-tabs-custom -->
             </div>
