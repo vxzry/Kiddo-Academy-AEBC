@@ -105,80 +105,83 @@ $x=substr($login_session,0,1);
       <span class="logo-lg"><image src="logo.png" style="width: 200px; padding: 3px;"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="admin.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Kim Shook Jin</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="admin.jpg" class="img-circle" alt="User Image">
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs"><?php echo $namess ?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
-                <p>
-                  Kim Shook Jin
-                  <small>Head Teacher</small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
-                </div>
+                    <p>
+                      <!--<?php echo $namess ?>-->
+                     <!--  <small><?php echo $rolename ?></small> -->
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                   <!-- <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>-->
+                    <div class="pull-right">
+                      <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
+                    </div>
+                  </li>
+                </ul>
               </li>
             </ul>
-          </li>
-           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="admin.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info" style="margin-top: 3%">
-          <p>Kim Shook Jin<i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header" style="color: white">Welcome!</li>
-        <?php 
+          </div>
+            <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
+
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
+            </div>
+
+                        <div class="pull-left info" style="margin-top: 3%">
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><!-- <?php echo $rolename ?></p> -->
+            </div>
+          </div>
+
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu" style="font-size:15px;">
+                    <li class="header" style="color:black;">
+               <div>
+           <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+       </div>
+            </li>
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -193,7 +196,7 @@ $x=substr($login_session,0,1);
 
         ?>
 
-        <li class="treeview"> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
             <span class="pull-right-container">
@@ -210,7 +213,7 @@ $x=substr($login_session,0,1);
             <?php endwhile; ?>
           </ul>
         </li>
-      <?php 
+      <?php
       }//while
       }else
       {
@@ -224,23 +227,19 @@ $x=substr($login_session,0,1);
               </a>
             </li>
       <?php
-       endwhile; } 
+       endwhile; }
       ?>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <h3>Accounts Receivables</h3>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Reports</a></li>
-        <li class="active">Accounts Receivables</li>
-      </ol>
+      
     </section>
 
     <!-- Main content -->
@@ -272,20 +271,21 @@ $x=substr($login_session,0,1);
 
                   <div class="tab-pane fade in active" id="tab_1" style="padding: 3% 3%;">
                     <h4>Filters:</h4>
-                    <label>Level: </label>
-                 <select name="selLvl" id="selLvl" onchange="changeTblTab1()">
-                  <option disabled selected>--Select Level--</option>
-                  <?php
-                  $query=mysqli_query($con, "select * from tbllevel where tblLevelFlag=1");
-                  while($row=mysqli_fetch_array($query)):
-                  ?>
-                  <option value="<?php echo $row['tblLevelId'] ?>" /><?php echo $row['tblLevelName'] ?></option>
-                <?php endwhile; ?>
-                 </select>
-                 <label>Section: </label>
-                 <select name="selSect" id="selSect" onchange="changeTblTab2()">
-                  <option disabled selected>--Select Section--</option>
-                 </select>  
+                    <label style="margin: 2%;">Level: </label>
+                       <select name="selLvl" id="selLvl" onchange="changeTblTab1()" style="margin-left: 15px">
+                        <option disabled selected>--Select Level--</option>
+                        <?php
+                        $query=mysqli_query($con, "select * from tbllevel where tblLevelFlag=1");
+                        while($row=mysqli_fetch_array($query)):
+                        ?>
+                        <option value="<?php echo $row['tblLevelId'] ?>" /><?php echo $row['tblLevelName'] ?></option>
+                      <?php endwhile; ?>
+                       </select>
+                 <br>
+                       <label style="margin: 2%">Section: </label>
+                       <select name="selSect" id="selSect" onchange="changeTblTab2()">
+                        <option disabled selected>--Select Section--</option>
+                       </select>  
                  
                   <table id="datatable" class="table table-bordered table-striped">
                     <thead>
@@ -310,8 +310,8 @@ $x=substr($login_session,0,1);
                    <div class="tab-pane fade" id="tab_2" style="padding: 3% 3%;">
                     
                     <h4>Filter: </h4>
-                    <label>School Year: </label>
-                    <select name="selsy" id="selsy" onchange="enabledButton()">
+                    <label style="margin: 2%;">School Year: </label>
+                    <select name="selsy" id="selsy" onchange="enabledButton()" style="margin-left: 8px">
                     <option disabled selected value="0">--Select School Year--</option>
                     <?php
                     $query=mysqli_query($con, "select * from tblschoolyear where tblSchoolYearFlag=1");
@@ -320,7 +320,8 @@ $x=substr($login_session,0,1);
                     <option value="<?php echo $row['tblSchoolYrId'] ?>"><?php echo $row['tblSchoolYrYear'] ?></option>
                     <?php endwhile; ?>
                 </select>
-                    <label>Check Status: </label>
+                <br>
+                    <label style="margin: 2%;">Check Status: </label>
                     <select name="selstat" id="selstat" onchange="enabledButton()">
                   <option disabled selected value="0">--Select Check Status--</option>
                   <option value="PAID">PAID</option>

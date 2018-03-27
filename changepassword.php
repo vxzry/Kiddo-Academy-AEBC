@@ -276,92 +276,68 @@
                 <div class="box-body">
                   <div class="nav-tabs-custom">
                     <div class="box-header with-border">
-                    
-                    <h4 style="margin-top: 3%">Student Name: Comia, Diana Rose</h4>
-                  </div>
+                    <h4 style="margin-top: 3%">Change Password?</h4>
+                    </div>
 
 
-                  <div class="tab-content">
+                    <div class="tab-content">
 
 
-                    <div class="tab-pane active" id="tab_1">
+                      <div class="tab-pane active" id="tab_1">
 
-                          <div class="box-body">
-                            <div class="col-md-12"  style="margin-top: 3%">
-                              <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
+                            <div class="box-body">
+                              <div class="col-md-12"  style="margin-top: 3%">
+                                <form method="post" action="updatepassword.php" id="pw">
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-3 control-label">New Password:</label>
+                                    <div class="col-sm-3">
+                                        <input type="password" class="form-control" id="password" name="password" value="">
+                                    </div>
 
-                                <div>
-                                  <h4 style="text-align: center">Statement of Account</h4>
-                                </div>
-                                <table id="datatable" name="datatable" class="table table-bordered table-striped">
-                              <thead>
-                                <tr>
-                                  <th>Due/Payment Date</th>
-                                  <th>Code</th>
-                                  <th>Details</th>
-                                  <th>Credit</th>
-                                  <th>Receipt #</th>
-                                  <th>Payment Date</th>
-                                  <th>Payment</th>
-                                  <th>Running Balance</th>
-                                  <th>Status</th>
-                                </tr>
-                                </thead>
 
-                                <tbody>
-                                <?php
-                                  
-                                  $query=mysqli_query($con, "select a.*, s.tblStudScheme_tblFeeId from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and s.tblStudScheme_tblSchoolYrId='$syid' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
+                                    <div class="btn-group" style="margin-top: 5%; float: right">
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPassword" style="margin-right: 15px; ">Proceed</button>
+                                    </div>
 
-								    $totcredit = 0;
-								    $totpayment = 0;
-								 while($row3=mysqli_fetch_array($query)){
-								    $feeid=$row3['tblStudScheme_tblFeeId'];
-								    $query1=mysqli_query($con, "select * from tblfee where tblFeeId='$feeid' and tblFeeFlag=1");
-								    $row2=mysqli_fetch_array($query1);
-								    $feecode=$row2['tblFeeCode'];
-								    $feename=$row2['tblFeeName'];
-                                ?>
-                                <tr>
-                                  <td><?php echo $row['tblAccDueDate'] ?></td>
-                                  <td><?php echo $feecode ?></td>
-                                  <td><?php echo $feename ?></td>
-                                  <td><?php echo $row['tblAccCredit'] ?></td>
+              <!-- Modal Enrollment -->
+                <div class="modal fade" id="modalPassword" role="dialog">
+                  <div class="modal-dialog">
 
-                                  $totcredit = $totcredit + $row3['tblAccCredit'];
-                                  <td><?php echo $row3['tblAccOR'] ?></td>
-                                  <td><?php echo $row3['tblAccPaymentDate'] ?></td>
-                                  <td><?php echo $row3['tblAccPayment'] ?></td>
-                                  $totpayment = $totpayment + $row3['tblAccPayment'];
-                                  <td><?php echo $row3['tblAccRunningBal'] ?></td>
-                                  <td><?php echo $row3['tblAccPaid'] ?></td>
-                              	 }
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="changePassword"> PROCEED </h4>
+                        </div>
+                        <div class="row" style="margin-top: 5%">
 
-                              	    <!--  $totrunbal = $totcredit - $totpayment;
-                                  <td>Total on School Year End</td> -->
-
-                                </tr>
-                              <?php endwhile; ?>
-                                </tbody>
-                                </table>
-                              
-                                
-                                </div>
-                                
-                                
-                              </div>
-
+                            <div class="form-group">
+                              <h4 align="center" style="margin-top: 5%">Are you sure you want to change password?</h4>
                             </div>
+                          
+                        </div>
+                          <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="submit" class="btn btn-info" name="changePW" id="changePW">OK</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                           </div>
-                    </div> <!-- tab_1 -->
-
-                  </div> <!-- tab content -->
+                    </div>
                   </div>
-                </div> <!-- nav -->
-                </div> <!-- box body -->
-              </div> <!-- box- box-default-->
-            </div> <!-- col-md-12 -->
-          </div> <!-- row -->
+                </div>
+                <!--modal end-->
+                                </div> 
+                              </form>
+                              </div>
+                                  
+                                  
+                            </div>
+
+                      </div>
+                    </div>
+                  </div> <!-- tab_1 -->
+
+                </div> <!-- tab content -->
+              </div>
+            </div> <!-- nav -->
+          </div> <!-- box body -->
         </section>
       </div>
       <!-- /.content-wrapper -->
