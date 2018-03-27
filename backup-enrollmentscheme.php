@@ -101,7 +101,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
       var objtofld = document.getElementById("fldst2");
       var divingr = document.createElement("div");
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showScheme.php?optionalfees="+i.value+"&level="+level,false);
+      xmlhttp.open("GET","showScheme2.php?optionalfees="+i.value+"&&level="+level,false);
       xmlhttp.send(null);
       // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
       divingr.innerHTML =xmlhttp.responseText
@@ -438,18 +438,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                         </div>
 
                         <div class="col-md-6">
-                          <form>
-                            <!-- <input type="hidden" value="<?php echo $session ?>" name="session">
-                            <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
-                            <input type="hidden" value="<?php echo $studname ?>" name="studname">
-                            <input type="hidden" value="<?php echo $studid ?>" name="studid"> -->
-                            <input type="hidden" value="MORNING" name="session">
-                            <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
-                            <input type="hidden" value="Albania, Gwyneth Stephanie N/" name="studname">
-                            <input type="hidden" value="17001" name="studid">
-                            <input type="hidden" value="NURSERY" name="level">
-                              <button type="button" class="btn btn-primary" name="btnfees" id="btnfees" style="float: left"><a target="_blank" href="outputEnrollment.php" style="color: white">Print Voucher</a></button>
-                          </form>
+                        <button type="button" class="btn btn-primary" name="btnfees" id="btnfees" style="float: left"><a target="_blank" href="outputListofFees.php" style="color: white">Print Voucher</a></button>
                         </div>
                         </div>
                         <div class="modal-footer" style="margin-top: 5%; float: center">

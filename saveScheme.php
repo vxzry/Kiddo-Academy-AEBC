@@ -32,7 +32,7 @@
 		$row = mysqli_fetch_array($result);
 		$detId = $row['tblSchemeDetailId'];
 		$detId++;
-		$query = "insert into tblschemedetail(tblSchemeDetailId, tblSchemeDetailName, tblSchemeDetail_tblLevel, tblSchemeDetail_tblScheme) values ('$detId', '$i', '$val', '$amntId')";
+		$query = "insert into tblschemedetail(tblSchemeDetailId, tblSchemeDetailName, tblSchemeDetail_tblLevel, tblSchemeDetail_tblScheme, tblSchemeDetail_tblFee) values ('$detId', '$i', '$val', '$amntId', '$feeId')";
 		$result = mysqli_query($con, $query);
 		}
 		$query  = "select * from tbllevel where tblLevelFlag = 1";

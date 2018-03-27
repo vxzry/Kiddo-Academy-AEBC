@@ -425,7 +425,7 @@
                                     <button type="button" class="btn btn-info view_section" data-toggle="modal" data-target="#mdlViewSection" data-id="<?php echo $row['tblSectionId'] ?>" data-title="<?php echo $row['tblLevelName'].' - '.$row['tblSectionName']; ?>">View Students</button>
                                     <button type="button" class="btn btn-primary fill_section" data-toggle="modal" data-target="#mdlFillSection" data-id="<?php echo $row['tblSectionId'] ?>">Fill Section</button>
                                     <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlViewStud">View Students</button> -->
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%">Assign Faculty-in-Charge</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlAssignFaculty" style="margin-top: 2%" data-faculty="<?php echo $row1['tblFacultyId'] ?>">Assign Faculty-in-Charge</button>
                                   </td>
                               </tr>
                               <?php endwhile; ?>
@@ -823,6 +823,14 @@
                     $('#section_student_list').val(data.responseText);
                 }
             });
+          });
+
+          $('#mdlAssignFaculty').on('shown.bs.modal', function(e){
+            if(e.relatedTarget.dataset.faculty){
+              $('#selFaculty').val(e.relatedTarget.dataset.faculty);
+            } else {
+              $('#selFaculty').val('--Select Faculty-in-charge--');
+            }
           });
       });
     </script>
