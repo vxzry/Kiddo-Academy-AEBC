@@ -5,6 +5,7 @@ $session=$_POST['s1'];
 $schemem=$_POST['selSchemeMand'];
 $schemeo=$_POST['selSchemeOpt'];
 $optfees=$_POST['optionalfees'];
+$lvlid=$_POST['txtlvlid'];
 
 $query=mysqli_query($con, "select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' and tblStudScheme_tblSchoolYrId='$syid' and tblStudSchemeFlag=1");
 while($row=mysqli_fetch_array($query))
@@ -132,6 +133,7 @@ $query="select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' a
 				$duedate=$row3['tblSchemeDetailDueDate'];
 				$payment=$row3['tblSchemeDetailAmount'];
 				$paymentnum=$row3['tblSchemeDetailName'];
+				echo $studscheme."/".$schemeId."/".$studfeeid."/".$duedate."/".$payment."/".$paymentnum."<br/>";
 				$query5="select * from tblaccount order by tblAccId desc limit 0, 1";
 				$result4=mysqli_query($con, $query5);
 				$row4=mysqli_fetch_array($result4);
@@ -150,6 +152,7 @@ $query="select * from tblstudscheme where tblStudScheme_tblStudentId='$studid' a
 			$result1=mysqli_query($con, $query1);
 			$row1=mysqli_fetch_array($result1);
 			$feeamnt=$row1['tblFeeAmountAmount'];
+
 			$query2="select * from tblaccount order by tblAccId desc limit 0, 1";
 			$result2 = mysqli_query($con, $query2);
 			$row2 = mysqli_fetch_assoc($result2);

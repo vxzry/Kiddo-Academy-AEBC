@@ -1,16 +1,4 @@
-<script>
-	function showSchemeDetail(i)
-	{
-	  var level = document.getElementById("txtlvlid").value;
-	  document.getElementById("txt").value=level;
 
-	//   var xmlhttp =  new XMLHttpRequest();
- //      xmlhttp.open('GET','showScheme2.php?scheme='+i.value+'&level='+level,false);
- //      xmlhttp.send(null);
-
- //      document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
-	}
-</script>
 <?php
 include "db_connect.php";
 $feeid=$_GET['optionalfees'];
@@ -51,5 +39,5 @@ while($row=mysqli_fetch_array($result))
    </tbody>
  </table>
 </div>
-<input type="text" value="<?php echo $lvlid ?>" name="txtlvlid" id="txtlvlid" />
-<input type="text" name="txt" id="txt" value="hi" />
+<input type="hidden" value="<?php echo $lvlid ?>" name="txtlevelid" id="txtlevelid" />
+<!--   -->

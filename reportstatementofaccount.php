@@ -85,7 +85,7 @@ function Footer()
     $pdf->Cell(25,5,"Running Balance",1,0,'C');
     $pdf->Cell(40,5,"Status",1,1,'C');
 
-    $query=mysqli_query($con, "select a.*, s.tblStudScheme_tblFeeId from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and s.tblStudScheme_tblSchoolYrId='$syid' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
+    $query=mysqli_query($con, "select a.*, s.tblStudScheme_tblFeeId from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='".$studid."' and a.tblAccFlag=1 and s.tblStudSchemeFlag=1 and s.tblStudScheme_tblSchoolYrId='$syid' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId");
 // if (!$query) {
 //     printf("Error: %s\n", mysqli_error($con));
 //     exit();

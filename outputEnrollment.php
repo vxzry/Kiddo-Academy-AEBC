@@ -7,7 +7,7 @@ $session=$_POST['session'];
 $date=$_POST['date'];
 $studname=$_POST['studname'];
 $studid=$_POST['studid'];
-$lvlid=$_POST['level'];
+$lvlid=$_POST['txtlevel'];
 $query=mysqli_query($con, "select tblLevelName from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
 $row=mysqli_fetch_array($query);
 $lvlName=$row['tblLevelName'];
@@ -98,18 +98,27 @@ function Footer()
 
     $pdf->Ln(15);// Line break
     $pdf->SetFont('Arial','',8);
-    $pdf->SetX(30);
-
-    $query=mysqli_query($con, "Select * FROM tblaccount WHERE tblAcc_tblStudentId='$studid");
-    $row=mysqli_fetch_array($query);
-
-    $pdf->Cell(40,5,"",1,0,'C');
-    $pdf->Cell(35,5,"",1,0,'C');
-    $pdf->Cell(30,5,"",1,0,'C');
+    
+    $ctr=87;
+    $query=mysqli_query($con, "Select * FROM tblaccount WHERE tblAcc_tblStudentId='$studid' and tblAccFlag=1");
+    while($row=mysqli_fetch_array($query)):
+    $ssid=$row['tblAcc_tblStudSchemeId'];
+    $query1=mysqli_query($con, "select * from tblstudscheme where tblStudSchemeId='$ssid' and tblStudSchemeFlag=1 and tblStudScheme_tblSchoolYrId='$syid'");
+    $row1=mysqli_fetch_array($query1);
+    $feeid=$row1['tblStudScheme_tblFeeId'];
+    $schemeid=$row1['tblStudScheme_tblSchemeId'];
+    $query2=mysqli_query($con, "select * from tblfee where tblFeeId='$feeid' and tblFeeFlag=1");
+    $row2=mysqli_fetch_array($query2);
+    $query3=mysqli_query($con, "select * from tblscheme where tblSchemeId='$schemeid' and tblSchemeFlag=1");
+    $row3=mysqli_fetch_array($query3);
+    $pdf->SetXY(30, $ctr);
+    $pdf->Cell(40,5,$row2['tblFeeName'],1,0,'C');
+    $pdf->Cell(35,5,$row3['tblSchemeType'],1,0,'C');
+    $pdf->Cell(30,5,$row['tblAccPaymentNum'],1,0,'C');
     $pdf->Cell(25,5,$row['tblAccCredit'],1,0,'C');
-    $pdf->Cell(25,5,$row['tblAccDueDate'],1,0,'C');
-
-
+    $pdf->Cell(25,5,$row['tblAccDueDate'],1,1,'C');
+    $ctr+=5;
+endwhile;   
     $pdf->SetXY(110, 200);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(5,10,"Please settle the amount before due date. For further information, contact the",0,0,'C'); 

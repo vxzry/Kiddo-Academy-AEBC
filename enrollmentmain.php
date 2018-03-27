@@ -319,10 +319,10 @@
                     if($studtype=='PROMOTED' && $studclear='N')
                     {
                     ?>
-                                      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment" disabled>Enroll Student</button></td>
+                                      <td><form action="enrollmentscheme.php" method="post"><input type="hidden" name="txtstud" id="txtstud" value="<?php echo $row['tblStudentId'] ?>" /><button type="submit" class="btn btn-success" disabled>Change Student's Scheme</button></form></td>
                     <?php }else
                     { ?>
-                    <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#mdlEnrollment">Enroll Student</button></td>
+                    <td><form action="enrollmentscheme.php" method="post"><input type="hidden" name="txtstud" id="txtstud" value="<?php echo $row['tblStudentId'] ?>" /><button type="submit" class="btn btn-success">Enroll Student</button></form></td>
                     <?php } ?>
                                     </tr>
                                   <?php endwhile; ?>
