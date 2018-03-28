@@ -79,36 +79,38 @@ $x=substr($login_session,0,1);
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="images/Employees/admin.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Kim Seok Jin</span>
+                  <img src="images/Employees/admin.png" class="user-image" alt="User Image">
+                  <span class="hidden-xs">
+                    <?php echo $namess ?>
+                  </span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="images/Employees/admin.jpg" class="img-circle" alt="User Image">
+                    <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
 
                     <p>
-                      <?php echo $namess ?>
-                      <small>Head Teacher</small>
+                      <!--<?php echo $namess ?>-->
+                      <!-- <small>
+                        <?php echo $rolename ?>
+                      </small> -->
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!--<div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div>-->
                     <div class="pull-right">
                       <a href="logout.php" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>
               </li>
-               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
             </ul>
           </div>
+          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
+
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
@@ -118,40 +120,99 @@ $x=substr($login_session,0,1);
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="images/Employees/admin.jpg" class="img-circle" alt="User Image">
+              <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
+
             <div class="pull-left info" style="margin-top: 3%">
-              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 5px"></i></p>
+              <p>
+                <?php echo $namess ?>
+                <i class="fa fa-circle text-success" style="margin-left: 7px"></i>
+              </p>
+             <!--  <p style="padding: 3px 30px; font-size: 12px;">
+                <?php echo $rolename ?>
+              </p> -->
             </div>
           </div>
-          <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-                  <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                  </span>
-            </div>
-          </form>
+
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu" style="font-size:17px;">
-            <li class="header" style="color: white">Welcome!</li>
-            <li class="treeview active">
-             
+          <ul class="sidebar-menu" style="font-size:15px;">
+
+            <li class="header" style="color:black;">
+              <div>
+                <?php
+             $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
+             $result=mysqli_query($con, $query);
+             $row=mysqli_fetch_array($result);
+             $sy=$row['tblSchoolYrYear'];
+           ?>
+                  <h4 style="padding-left:5%;">
+                    <?php echo $sy ?>
+                  </h4>
+                  <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+
+              </div>
             </li>
-            <?php
+
+            <?php 
+        $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
+        $result=mysqli_query($con, $query);
+        $row=mysqli_fetch_array($result);
+          $rolename=$row['tblRoleName'];
+          if($rolename=='ADMIN' || $rolename=='REGISTRAR')
+          {
+            $query1="select distinct(m.tblModuleType) from tblmodule m, tblrole r, tblrolemodule rm where r.tblRoleId='$roleid' and r.tblRoleId=rm.tblRoleModule_tblRoleId and m.tblModuleId=rm.tblRoleModule_tblModuleId and m.tblModuleFlag=1 group by m.tblModuleId";
+            $result1=mysqli_query($con, $query1);
+            while($row1=mysqli_fetch_array($result1))
+            {
+              $modulename=$row1['tblModuleType'];
+
+        ?>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-gears"></i>
+                <span>
+                  <?php echo $modulename ?>
+                </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <?php
+              $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
+              $result2=mysqli_query($con, $query2);
+              while($row2=mysqli_fetch_array($result2)):
+            ?>
+                  <li>
+                    <a href="<?php echo $row2['tblModuleLinks'] ?>">
+                      <i class="fa fa-circle-o"></i>
+                      <?php echo $row2['tblModuleName'] ?>
+                    </a>
+                  </li>
+                  <?php endwhile; ?>
+              </ul>
+            </li>
+            <?php 
+      }//while
+      }else
+      {
               $query="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid'";
               $result=mysqli_query($con, $query);
               while($row=mysqli_fetch_array($result)):
-            ?>
-           <li class="treeview">
+      ?>
+            <li class="treeview">
               <a href="<?php echo $row['tblModuleLinks'] ?>">
-                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
+                <i class="fa fa-list"></i>
+                <span>
+                  <?php echo $row['tblModuleName'] ?>
+                </span>
               </a>
             </li>
-          <?php endwhile ?>
+            <?php
+       endwhile; } 
+      ?>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -160,11 +221,11 @@ $x=substr($login_session,0,1);
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <ol class="breadcrumb" style="font-size:15px;">
+          <!-- <ol class="breadcrumb" style="font-size:15px;">
             <li><a href="dashboard.php" style="color: black;"><i class="fa fa-dashboard"></i> Dashboard</a></li>
             <li><a href="#" style="color: black;">Transaction</a></li>
             <li class="active">Sectioning</li>
-          </ol>
+          </ol> -->
         </section>
 
         <!-- Main content -->

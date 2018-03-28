@@ -311,6 +311,7 @@
                               <div class="fieldset" id="fg1" name="fg1" style="padding: 10px;"></div>
                               <div>
                               <button type="submit" class="btn btn-success" name="btnAdd" id="btnAdd"><i class="fa fa-edit"></i>Apply bill</button>
+                              <button class="btn btn-info"><a href="outputListOfFees.php" target="_blank" style="color: white;">List of Fees</a></button>
                               </div>
                             </form>
 

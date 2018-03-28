@@ -8,6 +8,9 @@ $sy=$_POST['txtsy'];
 $query=mysqli_query($con, "Select * FROM tblschoolyear WHERE tblSchoolYrId = '$sy' AND tblSchoolYearFlag = 1");
 $row=mysqli_fetch_array($query);
 $syname = $row['tblSchoolYrYear'];
+$query = mysqli_query($con, "Select COUNT(a.tblStudentId) as numstud FROM tblstudent a, tblstudentinfo ti, tblstudenroll se, tbllevel l WHERE a.tblStudentId = ti.tblStudInfo_tblStudentId AND se.tblStudEnroll_tblStudentId=a.tblStudentId and a.tblStudent_tblLevelId=l.tblLevelId and se.tblStudEnroll_tblSchoolYrId='$sy'");
+$row2=mysqli_fetch_array($query);
+$numstud=$row2['numstud'];
 
 class PDF extends FPDF
 {
@@ -31,24 +34,6 @@ function Header()
     $this->Ln(3);// Line break
     $this->SetX(111);
     $this->Cell(10,10,"Website: www.kiddoacademy.com",0,0,'C');
-
-    $this->SetFont('Arial','B',10);
-    $this->SetXY(30,50);//X-Left, Y- Down
-    $this->Cell(10,10,'School Year: ',0,0,'');
-    $this->SetXY(30,55);
-    $this->Cell(10,10,"Total Number of Enrollees:",0,0,'');
-
-
-    $this->SetXY(105,65);
-    $this->SetFont('Arial','B',15);
-    $this->Cell(10,10,"Summary of Student Enrollees",0,0,'C');
-
-    $this->SetXY(40,80);
-    $this->SetFont('Arial','B',8);
-    $this->Cell(40,5,"Student Id",1,0,'C');
-    $this->Cell(70,5,"Student Name",1,0,'C');
-    $this->Cell(40,5,"Student Name",1,1,'C');
-
 }
 
 
@@ -70,6 +55,24 @@ function Footer()
     $pdf -> AliasNbPages();
     $pdf -> AddPage("P","Letter",0);
     //$pdf -> SetFont('Arial','',8);
+
+    $pdf->SetFont('Arial','B',10);
+    $pdf->SetXY(30,50);//X-Left, Y- Down
+    $pdf->Cell(10,10,'School Year: '.$syname,0,0,'');
+    $pdf->SetXY(30,55);
+    $pdf->Cell(10,10,"Total Number of Enrollees: ".$numstud,0,0,'');
+
+
+    $pdf->SetXY(105,65);
+    $pdf->SetFont('Arial','B',15);
+    $pdf->Cell(10,10,"Summary of Student Enrollees",0,0,'C');
+
+    $pdf->SetXY(40,80);
+    $pdf->SetFont('Arial','B',8);
+    $pdf->Cell(40,5,"Student Id",1,0,'C');
+    $pdf->Cell(70,5,"Student Name",1,0,'C');
+    $pdf->Cell(40,5,"Level",1,1,'C');
+
 
    $query = mysqli_query($con, "Select a.tblStudentId, concat(ti.tblStudInfoLname, ', ', ti.tblStudInfoFname, ' ', ti.tblStudInfoMname) as studentname , tblLevelName FROM tblstudent a, tblstudentinfo ti, tblstudenroll se, tbllevel l WHERE a.tblStudentId = ti.tblStudInfo_tblStudentId AND se.tblStudEnroll_tblStudentId=a.tblStudentId and a.tblStudent_tblLevelId=l.tblLevelId and se.tblStudEnroll_tblSchoolYrId='$sy'");
 

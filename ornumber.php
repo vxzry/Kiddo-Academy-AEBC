@@ -29,11 +29,6 @@
     $row=mysqli_fetch_array($result);
     $rolename=$row['tblRoleName'];
    }
-$studid=$_POST['txtstud'];
-$query=mysqli_query($con, "select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentId='$studid'");
-$row=mysqli_fetch_array($query);
-$studname=$row['studentname'];
-$lvlid=$row['tblStudent_tblLevelId'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,43 +90,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
       document.getElementById("fg1").innerHTML=xmlhttp.responseText;
 
     }
-    function appendScheme(i)
-    {
-      var level = document.getElementById("txtlvlid").value;
-      var objtofld = document.getElementById("fldst2");
-      var divingr = document.createElement("div");
-      var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showScheme.php?optionalfees="+i.value+"&level="+level,false);
-      xmlhttp.send(null);
-      // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
-      divingr.innerHTML =xmlhttp.responseText
-      objtofld.appendChild(divingr);
-    }
     </script>
-    <script>
-  function showSchemeDetail(i)
-  {
-    var level = document.getElementById("txtlevelid").value;
-    var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open('GET','showScheme2.php?scheme='+i.value+'&level='+level,false);
-      xmlhttp.send(null);
-
-      document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
-  }
-  function showSchemeDetail2(i)
-  {
-    var level = document.getElementById("txtlvlid").value;
-    var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open('GET','showScheme2.php?scheme='+i.value+'&level='+level,false);
-      xmlhttp.send(null);
-
-      document.getElementById("datatable3").innerHTML=xmlhttp.responseText;
-  }
-  function getSession(x)
-  {
-    document.getElementById("session").value=x.value;
-  }
-</script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -197,7 +156,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
 
                     <p>
                       <!--<?php echo $namess ?>-->
-                      <small><?php echo $rolename ?></small>
+                     <!--  <small><?php echo $rolename ?></small> -->
                     </p>
                   </li>
                   <!-- Menu Footer-->
@@ -229,7 +188,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
 
                         <div class="pull-left info" style="margin-top: 3%">
               <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
-              <p style="padding: 3px 30px; font-size: 12px;"><?php echo $rolename ?></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><!-- <?php echo $rolename ?></p> -->
             </div>
           </div>
 
@@ -317,204 +276,73 @@ $lvlid=$row['tblStudent_tblLevelId'];
                 <div class="box-body">
                   <div class="nav-tabs-custom">
                     <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">ENROLLMENT</h2>
-                    <h4 style="margin-top: 3%">Student Name: <?php echo $studname ?></h4>
-                  </div>
+                    <h4 style="margin-top: 3%">O.R. Number</h4>
+                    </div>
 
 
-                  <div class="tab-content">
+                    <div class="tab-content">
 
 
-                    <div class="tab-pane active" id="tab_1">
-                          <form method="post" action="changeEnrollScheme.php">
-                          <div class="box-body">
-                            <div class="col-md-12"  style="margin-top: 3%">
-                              <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
+                      <div class="tab-pane active" id="tab_1">
 
-                                  <div>
-                                  <input type="hidden" value="<?php echo $studid ?>" name="txtstudid" id="txtstudid" />
-                                  <input type="hidden" value="<?php echo $lvlid ?>" name="txtlvlid" id="txtlvlid" />
-                                  <label>Session: </label>
-                                  <input type="radio" name="s1" id="s1" value="MORNING" style="margin-left: 3%" onclick="getSession(this)"/> Morning
-                                  <input type="radio" name="s1" id="s2" value="AFTERNOON" onclick="getSession(this)"/> Afternoon
-                                </div>
-                                
-                              
-                                <div class="row" style="margin-top: 3%">
-                                  <div class="col-md-6">
-                                    <fieldset style="margin: 5px; margin-left: -7px; height: 50%">
-                                      <h4 style="font-weight: bold; padding: 3px; margin-left: 2%">Mandatory</h4>
-                                      <hr>
+                            <div class="box-body">
+                              <div class="col-md-12"  style="margin-top: 3%">
+                                <form method="post" action="updateOr.php" id="pw">
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-3 control-label">Set O.R. Number:</label>
+                                    <div class="col-sm-3">
                                       <?php
-                                        $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
-                                        $result=mysqli_query($con, $query);
-                                        while($row=mysqli_fetch_array($result)):
-                                        ?>
-                                        <div><p style="padding-left: 10px"> <?php echo $row['tblFeeName'] ?></p></div>
-                                      <?php endwhile; ?>
-                                    </fieldset>
-                                  </div>
-                                    <div class="col-md-6">
-                                    <fieldset style="margin: 5px; margin-left: -7px;">
-                                      <h4 style="font-weight: bold; padding: 3px; margin-left: 2%">Optional</h4>
-                                      <hr>
-                                      <?php
-                                        
-                                        $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
-                                        $result=mysqli_query($con, $query);
-                                        while($row=mysqli_fetch_array($result)):
-                                        ?>
-                                        <div>
-                                          
-                                          <input type="checkbox" class="optionalfees" name="optionalfees[]" id="optionalfees" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme(this)" /> <?php echo $row['tblFeeName'] ?></div>
-                                          
-                                      <?php endwhile; ?>
-                                    </fieldset>
-                                  </div>
+                                        $query=mysqli_query($con, "select * from tblornumber where tblOrFlag=1");
+                                        $row=mysqli_fetch_array($query);
+                                        $ornum=$row['tblOrNum'];
+                                      ?>
+                                        <input type="text" class="form-control" id="or" name="or" value="<?php echo $ornum ?>">
+                                    </div>
 
-                                  <div class="col-md-12" style="margin-top: 3%">
-                                    <h4 style="font-weight: bold">Schemes</h4>
-                                        
-                                        <h4 style="margin-top: 2%">Mandatory</h4>
-                                        <fieldset style="margin-top: 2%; padding: 5px" id="fldst">
-                                        <?php
-                                        $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
-                                        $result=mysqli_query($con, $query);
-                                        while($row=mysqli_fetch_array($result)):
-                                          $feeid=$row['tblFeeId'];
-                                          $query1=$con->query("select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
-                                          if($query1->num_rows >=1 )
-                                          {
-                                        ?>
-                                        <div><input type="hidden" value="<?php echo $lvlid ?>" name="txtlvlid" id="txtlvlid" />
-                                          <label> <?php echo $row['tblFeeName'] ?></label>
-                                          <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;" onchange="showSchemeDetail2(this)">
-                                            <option disabled selected value="0">--Select Scheme</option>
-                                            <?php
-                                            $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
-                                            while($row2=mysqli_fetch_array($query2))
-                                            { 
-                                              $schemeid=$row2['tblSchemeId'];
-                                              ?>
-                                              <option value="<?php echo $row2['tblSchemeId'] ?>"><?php echo $row2['tblSchemeType'] ?></option>
-                                            <?php } ?>
-                                            ?>
-                                          </select>
-                                          <div style="margin-top: 5%; margin-bottom: 5%">
-                                             <table class="table table-bordered table-striped" id="datatable3">
-                                               <thead>
-                                                 <tr>
-                                                   <th>Level</th>
-                                                   <th>Order of Payment</th>
-                                                   <th>Due Date</th>
-                                                   <th>Amount</th>
-                                                 </tr>
-                                               </thead>
-                                               <tbody>
-                                               </tbody>
-                                             </table>
-                                          <!-- <table class="table table-bordered table-striped">
-                                            <thead>
-                                              <tr>
-                                                <th>Level</th>
-                                                <th>Order of Payment</th>
-                                                <th>Due Date</th>
-                                                <th>Amount</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-                                              $query3=mysqli_query($con, "select * from tblschemedetail where tblSchemeDetail_tblScheme='$schemeid' and tblSchemeDetailFlag=1 and tblSchemeDetail_tblLevel='$lvlid'");
-                                              while($row3=mysqli_fetch_array($query3)):
-                                                $query4=mysqli_query($con, "select * from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
-                                                $row4=mysqli_fetch_array($query4);
-                                                $lvlname=$row4['tblLevelName'];
-                                            ?>
-                                              <tr>
-                                                <td><?php echo $lvlname ?></td>
-                                                <td><?php echo $row3['tblSchemeDetailName'] ?></td>
-                                                <td><?php echo $row3['tblSchemeDetailDueDate'] ?></td>
-                                                <td><?php echo $row3['tblSchemeDetailAmount'] ?></td>
-                                              </tr>
-                                            <?php endwhile; ?>
-                                            </tbody>
-                                          </table> -->
-                                        </div>
-                                        </div>
-                                        <?php }endwhile; ?>
-                                      
-                                        </fieldset>
-                                         <div><h4 style="margin-top: 2%">Optional</h4>
-                                          <fieldset style="margin-top: 2%; padding: 5px" id="fldst2">
-                                          </fieldset>
-                                         </div>
-                                        </div>
-                                  </div>
-                                </div>
-                                
-                                
-                              </div>
-                             
-                             
-                                 <div class="btn-group" style="margin-top: 5%; float: right">
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalEnrollment" style="margin-right: 15px; ">Proceed</button>
-                                </div>
+
+                                    <div class="btn-group" style="margin-top: 5%; float: right">
+                                        <button type="submit" class="btn btn-success" style="margin-right: 15px; ">Proceed</button>
+                                    </div>
 
               <!-- Modal Enrollment -->
-                <div class="modal fade" id="modalEnrollment" role="dialog">
+                <div class="modal fade" id="modalPassword" role="dialog">
                   <div class="modal-dialog">
 
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title" id="deleteModalOne"> PROCEED </h4>
+                          <h4 class="modal-title" id="changePassword"> PROCEED </h4>
                         </div>
                         <div class="row" style="margin-top: 5%">
-                        <div class="col-md-6">
-                        <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="changeEnrollScheme.php" style="float: right">Enroll Student</button>
-                        </div>
 
-                        <div class="col-md-6">
-                          <form method="post" action="outputEnrollment.php" target="_blank">
-                            <input type="hidden" value="<?php echo $session ?>" name="session">
-                            <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
-                            <input type="hidden" value="<?php echo $studname ?>" name="studname">
-                            <input type="hidden" value="<?php echo $studid ?>" name="studid">
-                            
-                              
-                          </form>
+                            <div class="form-group">
+                              <h4 align="center" style="margin-top: 5%">Are you sure you want to change password?</h4>
+                            </div>
+                          
                         </div>
-                        <div class="col-md-6">
-                        <form method="post" action="outputEnrollment.php" target="_blank">
-                                <input type="hidden" value="<?php echo $session ?>" name="session" id="session">
-                            <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
-                            <input type="hidden" value="<?php echo $studname ?>" name="studname">
-                            <input type="hidden" value="<?php echo $studid ?>" name="studid">
-                            <input type="hidden" value="<?php echo $lvlid ?>" name="txtlevel">
-                          <button type="submit" class="btn btn-primary" name="btnbtn" id="btnbtn" style="margin-top: 3%;" target="_blank">Print Voucher</button>
-                        </form>
-                      </div>
-                        </div>
-                        <div class="modal-footer" style="margin-top: 5%; float: center">
+                          <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="submit" class="btn btn-info" name="changePW" id="changePW">OK</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </div>
+                          </div>
                     </div>
                   </div>
                 </div>
                 <!--modal end-->
-                          </form>
-
+                                </div> 
+                              </form>
+                              </div>
+                                  
+                                  
                             </div>
-                          </div>
-                    </div> <!-- tab_1 -->
 
-                  </div> <!-- tab content -->
-                  </div>
-                </div> <!-- nav -->
-                </div> <!-- box body -->
-              </div> <!-- box- box-default-->
-            </div> <!-- col-md-12 -->
-          </div> <!-- row -->
+                      </div>
+                    </div>
+                  </div> <!-- tab_1 -->
+
+                </div> <!-- tab content -->
+              </div>
+            </div> <!-- nav -->
+          </div> <!-- box body -->
         </section>
       </div>
       <!-- /.content-wrapper -->

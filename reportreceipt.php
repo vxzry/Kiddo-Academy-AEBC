@@ -8,6 +8,7 @@ $checkamnt=$_POST['checkamount'];
 $bankname=$_POST['bankname'];
 $chknum=$_POST['chknum'];
 $date=$_POST['date'];
+$or=$_POST['txtor'];
 $query=mysqli_query($con, "select * from tblstudentinfo where tblStudInfo_tblStudentId='$studid'");
 $row=mysqli_fetch_array($query);
 $address=$row['tblStudInfoAddSt']." ".$row['tblStudInfoAddBrgy']." ".$row['tblStudInfoAddCity']." ".$row['tblStudInfoAddCountry'];
@@ -38,7 +39,7 @@ function Header()
     $this->SetFont('Arial','B',15);
     $this->Cell(150,3,"ACKNOWLEDGEMENT RECEIPT",0,0,'C');
     $this->SetFont('Arial','',10);
-    $this->SetX(145);
+    $this->SetX(155);
     $this->Cell(10,10,'Date: '.date('Y-m-d'),0,0);
     
 }
@@ -65,7 +66,8 @@ function Footer()
     //$pdf -> SetFont('Arial','',8);
 
     //$query = mysqli_query(query)
-
+    $pdf->SetXY(155, 60);
+    $pdf->Cell(10,10,'O.R. Number: '.$or,0,0);
 
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(30,80);//X-Left, Y- Down

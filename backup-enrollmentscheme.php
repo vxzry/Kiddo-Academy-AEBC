@@ -101,37 +101,13 @@ $lvlid=$row['tblStudent_tblLevelId'];
       var objtofld = document.getElementById("fldst2");
       var divingr = document.createElement("div");
       var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open("GET","showScheme.php?optionalfees="+i.value+"&level="+level,false);
+      xmlhttp.open("GET","showScheme2.php?optionalfees="+i.value+"&&level="+level,false);
       xmlhttp.send(null);
       // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
       divingr.innerHTML =xmlhttp.responseText
       objtofld.appendChild(divingr);
     }
     </script>
-    <script>
-  function showSchemeDetail(i)
-  {
-    var level = document.getElementById("txtlevelid").value;
-    var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open('GET','showScheme2.php?scheme='+i.value+'&level='+level,false);
-      xmlhttp.send(null);
-
-      document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
-  }
-  function showSchemeDetail2(i)
-  {
-    var level = document.getElementById("txtlvlid").value;
-    var xmlhttp =  new XMLHttpRequest();
-      xmlhttp.open('GET','showScheme2.php?scheme='+i.value+'&level='+level,false);
-      xmlhttp.send(null);
-
-      document.getElementById("datatable3").innerHTML=xmlhttp.responseText;
-  }
-  function getSession(x)
-  {
-    document.getElementById("session").value=x.value;
-  }
-</script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -335,8 +311,8 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                   <input type="hidden" value="<?php echo $studid ?>" name="txtstudid" id="txtstudid" />
                                   <input type="hidden" value="<?php echo $lvlid ?>" name="txtlvlid" id="txtlvlid" />
                                   <label>Session: </label>
-                                  <input type="radio" name="s1" id="s1" value="MORNING" style="margin-left: 3%" onclick="getSession(this)"/> Morning
-                                  <input type="radio" name="s1" id="s2" value="AFTERNOON" onclick="getSession(this)"/> Afternoon
+                                  <input type="radio" name="s1" id="s1" value="MORNING" style="margin-left: 3%" /> Morning
+                                  <input type="radio" name="s1" id="s1" value="AFTERNOON" /> Afternoon
                                 </div>
                                 
                               
@@ -386,9 +362,8 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                           if($query1->num_rows >=1 )
                                           {
                                         ?>
-                                        <div><input type="hidden" value="<?php echo $lvlid ?>" name="txtlvlid" id="txtlvlid" />
-                                          <label> <?php echo $row['tblFeeName'] ?></label>
-                                          <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;" onchange="showSchemeDetail2(this)">
+                                        <div><label> <?php echo $row['tblFeeName'] ?></label>
+                                          <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;">
                                             <option disabled selected value="0">--Select Scheme</option>
                                             <?php
                                             $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
@@ -401,19 +376,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                             ?>
                                           </select>
                                           <div style="margin-top: 5%; margin-bottom: 5%">
-                                             <table class="table table-bordered table-striped" id="datatable3">
-                                               <thead>
-                                                 <tr>
-                                                   <th>Level</th>
-                                                   <th>Order of Payment</th>
-                                                   <th>Due Date</th>
-                                                   <th>Amount</th>
-                                                 </tr>
-                                               </thead>
-                                               <tbody>
-                                               </tbody>
-                                             </table>
-                                          <!-- <table class="table table-bordered table-striped">
+                                          <table class="table table-bordered table-striped">
                                             <thead>
                                               <tr>
                                                 <th>Level</th>
@@ -438,7 +401,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                               </tr>
                                             <?php endwhile; ?>
                                             </tbody>
-                                          </table> -->
+                                          </table>
                                         </div>
                                         </div>
                                         <?php }endwhile; ?>
@@ -471,29 +434,12 @@ $lvlid=$row['tblStudent_tblLevelId'];
                         </div>
                         <div class="row" style="margin-top: 5%">
                         <div class="col-md-6">
-                        <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="changeEnrollScheme.php" style="float: right">Enroll Student</button>
+                        <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="float: right">Enroll Student</button>
                         </div>
 
                         <div class="col-md-6">
-                          <form method="post" action="outputEnrollment.php" target="_blank">
-                            <input type="hidden" value="<?php echo $session ?>" name="session">
-                            <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
-                            <input type="hidden" value="<?php echo $studname ?>" name="studname">
-                            <input type="hidden" value="<?php echo $studid ?>" name="studid">
-                            
-                              
-                          </form>
+                        <button type="button" class="btn btn-primary" name="btnfees" id="btnfees" style="float: left"><a target="_blank" href="outputListofFees.php" style="color: white">Print Voucher</a></button>
                         </div>
-                        <div class="col-md-6">
-                        <form method="post" action="outputEnrollment.php" target="_blank">
-                                <input type="hidden" value="<?php echo $session ?>" name="session" id="session">
-                            <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
-                            <input type="hidden" value="<?php echo $studname ?>" name="studname">
-                            <input type="hidden" value="<?php echo $studid ?>" name="studid">
-                            <input type="hidden" value="<?php echo $lvlid ?>" name="txtlevel">
-                          <button type="submit" class="btn btn-primary" name="btnbtn" id="btnbtn" style="margin-top: 3%;" target="_blank">Print Voucher</button>
-                        </form>
-                      </div>
                         </div>
                         <div class="modal-footer" style="margin-top: 5%; float: center">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

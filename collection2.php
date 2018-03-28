@@ -284,8 +284,6 @@
             <div class="row">
                 <div class="col-xs-12">
                 <form action="trytry.php" method="post">
-                  <label>OR:</label><input type="text" name="txtOR" id="txtOR" placeholder="OR#" style="width:55px" />
-                  <label>PR:</label><input type="text" name="txtPR" id="txtPR" placeholder="PR#" style="width:55px" />
                     <div class="table-responsive" class="table-editable">
                         <table class="table preview-table">
                             <thead>
@@ -352,6 +350,19 @@
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                     <div class="form-group">
+                        <label for="amount" class="col-sm-3 control-label">O.R. Number:</label>
+                        <div class="col-sm-9">
+                          <?php
+                                        $query=mysqli_query($con, "select * from tblornumber where tblOrFlag=1");
+                                        $row=mysqli_fetch_array($query);
+                                        $ornum=$row['tblOrCurrent'];
+                                        $ornum++;
+                                        $query1=mysqli_query($con, "update tblornumber set tblOrCurrent='$ornum' where tblOrFlag=1");
+                                      ?>
+                            <input type="text" class="form-control" id="txtOR" name="txtOR" value="<?php echo $ornum ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Due</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" id="amount" name="amount" disabled value="<?php echo $totalamountdue ?>">
@@ -363,12 +374,17 @@
                             <input type="number" class="form-control" id="amountp" name="amountp" value="<?php echo $totalamountpaid ?>">
                         </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Running Balance</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="amount" name="amount" disabled>
+                            <?php
+                              $query=mysqli_query($con, "select SUM(a.tblAccCredit) as bal from tblaccount a, tblstudscheme s where a.tblAcc_tblStudentId='$studid' and a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAccPaid='UNPAID' and a.tblAccFlag=1 and s.tblStudSchemeFlag=1 and s.tblStudScheme_tblSchoolYrId='$syid'");
+                              $row=mysqli_fetch_array($query);
+                              $runningbal=$row['bal'];
+                            ?>
+                            <input type="text" class="form-control" id="bal" name="bal" value="<?php echo number_format((float)$runningbal, 2, '.', ''); ?>" disabled>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">

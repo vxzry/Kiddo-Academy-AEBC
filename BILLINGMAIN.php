@@ -267,7 +267,7 @@ $lvlid=$row['tblStudent_tblLevelId'];
                                   <tbody>
                                   <?php
                                     $overdue=0;
-                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId='$syid' and a.tblAccPaid='UNPAID' group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
+                                    $query="select * from tblaccount a, tblstudscheme s where a.tblAcc_tblStudSchemeId=s.tblStudSchemeId and a.tblAcc_tblStudentId='$studid' and s.tblStudScheme_tblSchoolYrId='$syid' and a.tblAccPaid='UNPAID' and a.tblAccFlag=1 and s.tblStudSchemeFlag=1 group by a.tblAccPaymentNum, a.tblAcc_tblStudSchemeId";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
                                       $payment=$row['tblAccCredit'];
