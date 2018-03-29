@@ -66,4 +66,6 @@ if($ind == 1)
 {
 	header("location:collectionMain.php");
 }
+
+include "studentClearance.php";
 ?>
