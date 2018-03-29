@@ -19,5 +19,6 @@ foreach($studid as $val)
 	}
 	$i++;
 }
+include "studentClearance.php";
 header("location:grade(first).php");
 ?>
