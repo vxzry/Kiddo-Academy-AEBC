@@ -825,14 +825,14 @@ $(document).ready(function(){
                               <i class="fa fa-clone" aria-hidden="true"></i>
                             </div>
                             <select class="form-control choose" style="width: 100%;" name="selAddSchemeFee" id="selAddSchemeFee">
-                              <option selected="selected" value="">--Select Fee--</option>
+                              <option selected="selected" value="-1">--Select Fee--</option>
                               <?php
-                                $query = "select distinct tblFeeName from tblfee where tblFeeFlag = 1";
+                                $query = "select distinct tblFeeName, tblFeeMandatory from tblfee where tblFeeFlag = 1";
                                 $result = mysqli_query($con, $query);
                                 while($row = mysqli_fetch_array($result))
                                 {
                               ?>
-                              <option value="<?php echo $row['tblFeeName'] ?>"><?php echo $row['tblFeeName'] ?></option>
+                              <option value="<?php echo $row['tblFeeName'] ?>" data-feemandatory="<?php echo $row['tblFeeMandatory'] ?>"><?php echo $row['tblFeeName'] ?></option>
                               <?php } ?>
                             </select>
                           </div>
@@ -852,7 +852,7 @@ $(document).ready(function(){
                         <b><label class="col-sm-4 control-label"> No. of Payments </label></b>
                         <div class="col-sm-6 selectContainer">
                           <div class="input-group" style="width:100%;">
-                            <input class="rem" type="number" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
+                            <input class="rem" type="number" value="1" min="1" max="31" name="txtAddSchemeNo" id="txtAddSchemeNo">
                           </div>
                         </div>
                       </div>
@@ -1499,7 +1499,29 @@ var activeTab = localStorage.getItem('activeTab');
         .on('hidden.bs.modal', function () {
             $('#UpdScheme').bootstrapValidator('resetForm', true);
         });
+    $('#selAddSchemeFee').attr('prev', $('#selAddSchemeFee').val());
+    $('#selAddSchemeFee').on('change', function() {
+        var feemandatory = $('option:selected', this).attr('data-feemandatory');
+        if(feemandatory == 'N') {
+          //not mandatory
+            $('#txtAddScheme').val('NO SCHEME').addClass('c-readonly');
+            $('#txtAddSchemeNo').val('1').addClass('c-readonly');
+        } else {
+          //mandatory
+           $('#txtAddScheme').val('').removeClass('c-readonly');
+            $('#txtAddSchemeNo').val('1').removeClass('c-readonly');
+        }
+          setTimeout(function() {
+            $('#addScheme').bootstrapValidator('revalidate','txtAddScheme');
+        }, 500);
+      $('#selAddSchemeFee').attr('prev', $('#selAddSchemeFee').val());
+        
+    });
 
+    $('.input-group').on('keydown', '.c-readonly' ,function(e) {
+        e.preventDefault();
+        console.log('testing');
+    });
 
 });
   </script>

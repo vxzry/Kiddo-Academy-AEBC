@@ -353,6 +353,20 @@ foreach($acc as $q)
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                     <div class="form-group">
+                        <label for="amount" class="col-sm-3 control-label">O.R. Number:</label>
+                        <div class="col-sm-9">
+                          <?php
+                                        $query=mysqli_query($con, "select * from tblornumber where tblOrFlag=1");
+                                        $row=mysqli_fetch_array($query);
+                                        $ornum=$row['tblOrCurrent'];
+                                        $ornum++;
+                                        $query1=mysqli_query($con, "update tblornumber set tblOrCurrent='$ornum' where tblOrFlag=1");
+
+                                      ?>
+                            <input type="text" class="form-control" id="txtOR" name="txtOR" value="<?php echo $ornum ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="amount" class="col-sm-3 control-label">Total Amount Due</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" id="amountd" name="amountd" disabled value="<?php echo $totalamountdue ?>">
@@ -374,7 +388,7 @@ foreach($acc as $q)
                               $row=mysqli_fetch_array($query);
                               $runningbal=$row['bal'];
                             ?>
-                            <input type="text" class="form-control" id="bal" name="bal" value="<?php echo $runningbal ?>" disabled>
+                            <input type="text" class="form-control" id="bal" name="bal" value="<?php echo number_format((float)$runningbal, 2, '.', ''); ?>" disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -432,6 +446,7 @@ foreach($acc as $q)
       <input type="hidden" id="bankname" name="bankname" />
       <input type="hidden" id="date" name="date" value="<?php echo date('Y-m-d') ?>" />
       <input type="hidden" id="chknum" name="chknum" />
+      <input type="hidden" id="txtor" name="txtor" value="<?php echo $ornum ?>" />
       <button type="submit" class="btn btn-info btn-block" style="width: 10%; float: right; margin-top: 5%; margin-right: 12%">Get Receipt</button>
     </form>
   </div>

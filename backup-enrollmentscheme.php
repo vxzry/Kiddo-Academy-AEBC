@@ -29,6 +29,11 @@
     $row=mysqli_fetch_array($result);
     $rolename=$row['tblRoleName'];
    }
+$studid=$_POST['txtstud'];
+$query=mysqli_query($con, "select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname, s.tblStudent_tblLevelId from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentFlag=1 and si.tblStudInfoFlag=1 and s.tblStudentId='$studid'");
+$row=mysqli_fetch_array($query);
+$studname=$row['studentname'];
+$lvlid=$row['tblStudent_tblLevelId'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,6 +71,10 @@
         font-family: 'Noto Sans', sans-serif;
         font-weight: bold;
       }
+
+      fieldset{
+        border: 1px solid black;
+      }
     </style>
     <script>
     function changeBillingLevel()
@@ -85,6 +94,18 @@
 
       document.getElementById("fg1").innerHTML=xmlhttp.responseText;
 
+    }
+    function appendScheme(i)
+    {
+      var level = document.getElementById("txtlvlid").value;
+      var objtofld = document.getElementById("fldst2");
+      var divingr = document.createElement("div");
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","showScheme2.php?optionalfees="+i.value+"&&level="+level,false);
+      xmlhttp.send(null);
+      // document.getElementById("fldst").innerHTML=xmlhttp.responseText;
+      divingr.innerHTML =xmlhttp.responseText
+      objtofld.appendChild(divingr);
     }
     </script>
   </head>
@@ -271,8 +292,9 @@
               <div class="box box-default"  style="margin-top: 10px">
                 <div class="box-body">
                   <div class="nav-tabs-custom">
-                                      <div class="box-header with-border">
-                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">BILLING</h2>
+                    <div class="box-header with-border">
+                    <h2 class="box-title" style="font-size:25px; margin-top: 10px">ENROLLMENT</h2>
+                    <h4 style="margin-top: 3%">Student Name: <?php echo $studname ?></h4>
                   </div>
 
 
@@ -280,57 +302,158 @@
 
 
                     <div class="tab-pane active" id="tab_1">
-
+                          <form method="post" action="changeEnrollScheme.php">
                           <div class="box-body">
-                            <div class="col-md-6"  style="margin-top: 3%">
+                            <div class="col-md-12"  style="margin-top: 3%">
                               <!-- <button type="button" class="btn btn-success" name="billAdd" id="billAdd" onclick="addField();">Add Additional Fee</button> -->
 
                                   <div>
-                                  <label>Select Billing Type: </label>
-                                  <input type="radio" name="r1" id="r1" value="1" onclick="addFields()"/> General
-                                  <input type="radio" name="r1" id="r1" value="0" onclick="addFields()"/> Per Level
-                                  <input type="radio" name="r1" id="r1" value="2" onclick="addFields()"/> Per Student
+                                  <input type="hidden" value="<?php echo $studid ?>" name="txtstudid" id="txtstudid" />
+                                  <input type="hidden" value="<?php echo $lvlid ?>" name="txtlvlid" id="txtlvlid" />
+                                  <label>Session: </label>
+                                  <input type="radio" name="s1" id="s1" value="MORNING" style="margin-left: 3%" /> Morning
+                                  <input type="radio" name="s1" id="s1" value="AFTERNOON" /> Afternoon
+                                </div>
+                                
+                              
+                                <div class="row" style="margin-top: 3%">
+                                  <div class="col-md-6">
+                                    <fieldset style="margin: 5px; margin-left: -7px; height: 50%">
+                                      <h4 style="font-weight: bold; padding: 3px; margin-left: 2%">Mandatory</h4>
+                                      <hr>
+                                      <?php
+                                        $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
+                                        $result=mysqli_query($con, $query);
+                                        while($row=mysqli_fetch_array($result)):
+                                        ?>
+                                        <div><p style="padding-left: 10px"> <?php echo $row['tblFeeName'] ?></p></div>
+                                      <?php endwhile; ?>
+                                    </fieldset>
+                                  </div>
+                                    <div class="col-md-6">
+                                    <fieldset style="margin: 5px; margin-left: -7px;">
+                                      <h4 style="font-weight: bold; padding: 3px; margin-left: 2%">Optional</h4>
+                                      <hr>
+                                      <?php
+                                        
+                                        $query="select * from tblfee where tblFeeMandatory='N' and tblFeeFlag=1";
+                                        $result=mysqli_query($con, $query);
+                                        while($row=mysqli_fetch_array($result)):
+                                        ?>
+                                        <div>
+                                          
+                                          <input type="checkbox" class="optionalfees" name="optionalfees[]" id="optionalfees" value="<?php echo $row['tblFeeId'] ?>" onclick="appendScheme(this)" /> <?php echo $row['tblFeeName'] ?></div>
+                                          
+                                      <?php endwhile; ?>
+                                    </fieldset>
+                                  </div>
+
+                                  <div class="col-md-12" style="margin-top: 3%">
+                                    <h4 style="font-weight: bold">Schemes</h4>
+                                        
+                                        <h4 style="margin-top: 2%">Mandatory</h4>
+                                        <fieldset style="margin-top: 2%; padding: 5px" id="fldst">
+                                        <?php
+                                        $query="select * from tblfee where tblFeeMandatory='Y' and tblFeeFlag=1";
+                                        $result=mysqli_query($con, $query);
+                                        while($row=mysqli_fetch_array($result)):
+                                          $feeid=$row['tblFeeId'];
+                                          $query1=$con->query("select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
+                                          if($query1->num_rows >=1 )
+                                          {
+                                        ?>
+                                        <div><label> <?php echo $row['tblFeeName'] ?></label>
+                                          <select class="form-control" name="selSchemeMand[]" id="selSchemeMand" style="width: 30%;">
+                                            <option disabled selected value="0">--Select Scheme</option>
+                                            <?php
+                                            $query2=mysqli_query($con, "select * from tblscheme where tblScheme_tblFeeId='$feeid' and tblSchemeFlag=1");
+                                            while($row2=mysqli_fetch_array($query2))
+                                            { 
+                                              $schemeid=$row2['tblSchemeId'];
+                                              ?>
+                                              <option value="<?php echo $row2['tblSchemeId'] ?>"><?php echo $row2['tblSchemeType'] ?></option>
+                                            <?php } ?>
+                                            ?>
+                                          </select>
+                                          <div style="margin-top: 5%; margin-bottom: 5%">
+                                          <table class="table table-bordered table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th>Level</th>
+                                                <th>Order of Payment</th>
+                                                <th>Due Date</th>
+                                                <th>Amount</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                              $query3=mysqli_query($con, "select * from tblschemedetail where tblSchemeDetail_tblScheme='$schemeid' and tblSchemeDetailFlag=1 and tblSchemeDetail_tblLevel='$lvlid'");
+                                              while($row3=mysqli_fetch_array($query3)):
+                                                $query4=mysqli_query($con, "select * from tbllevel where tblLevelId='$lvlid' and tblLevelFlag=1");
+                                                $row4=mysqli_fetch_array($query4);
+                                                $lvlname=$row4['tblLevelName'];
+                                            ?>
+                                              <tr>
+                                                <td><?php echo $lvlname ?></td>
+                                                <td><?php echo $row3['tblSchemeDetailName'] ?></td>
+                                                <td><?php echo $row3['tblSchemeDetailDueDate'] ?></td>
+                                                <td><?php echo $row3['tblSchemeDetailAmount'] ?></td>
+                                              </tr>
+                                            <?php endwhile; ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                        </div>
+                                        <?php }endwhile; ?>
+                                      
+                                        </fieldset>
+                                         <div><h4 style="margin-top: 2%">Optional</h4>
+                                          <fieldset style="margin-top: 2%; padding: 5px" id="fldst2">
+                                          </fieldset>
+                                         </div>
+                                        </div>
+                                  </div>
+                                </div>
+                                
+                                
+                              </div>
+                             
+                             
+                                 <div class="btn-group" style="margin-top: 5%; float: right">
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalEnrollment" style="margin-right: 15px; ">Proceed</button>
                                 </div>
 
-                               <div style="margin-bottom:10px; padding: 10px;">
-                                <label>Select Fee: </label>
-                              <select name="selFee" id="selFee" onclick="addFields()">
-                                <option disabled selected value="0">--Select Fee--</option>
-                                <?php
-                                $query=mysqli_query($con,"select * from tblfee where tblFeeFlag=1 and tblFeeMandatory='N'");
-                                while($row=mysqli_fetch_array($query)):
-                                ?>
-                                <option value="<?php echo $row['tblFeeId'] ?>"><?php echo $row['tblFeeCode'] ?>: <?php echo $row['tblFeeName'] ?></option>
-                              <?php endwhile; ?>
-                              </select>
-                            </div>
+              <!-- Modal Enrollment -->
+                <div class="modal fade" id="modalEnrollment" role="dialog">
+                  <div class="modal-dialog">
 
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="deleteModalOne"> PROCEED </h4>
+                        </div>
+                        <div class="row" style="margin-top: 5%">
+                        <div class="col-md-6">
+                        <button type="submit" class="btn btn-info" name="btnSave" id="btnSave" href="saveadmission.php" style="float: right">Enroll Student</button>
+                        </div>
 
-                              <form method="post" action="billingGeneral.php"/>
-
-                              <div class="fieldset" id="fg1" name="fg1" style="padding: 10px;"></div>
-                              <div>
-                              <button type="submit" class="btn btn-success" name="btnAdd" id="btnAdd"><i class="fa fa-edit"></i>Apply bill</button>
-                              <button class="btn btn-info"><a href="outputListOfFees.php" target="_blank" style="color: white;">List of Fees</a></button>
-                              </div>
-                            </form>
-
+                        <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" name="btnfees" id="btnfees" style="float: left"><a target="_blank" href="outputListofFees.php" style="color: white">Print Voucher</a></button>
+                        </div>
+                        </div>
+                        <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--modal end-->
+                          </form>
 
                             </div>
                           </div>
                     </div> <!-- tab_1 -->
-                    <div class="tab-pane" id="tab_2">
-                          <h2> Client example </h2>
-                          <h3>Output: </h3>
-                          <div id="output">this element will be accessed by jquery and this text replaced</div>
-                          <div class="box-body">
-                            <div class="col-md-6"  style="margin-top: 3%">
-                              <div class="form-group">
-                                <p>hi</p>
-                              </div>
-                            </div>
-                          </div>
-                    </div><!-- tab_2 -->
+
                   </div> <!-- tab content -->
                   </div>
                 </div> <!-- nav -->

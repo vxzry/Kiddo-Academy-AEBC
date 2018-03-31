@@ -1,7 +1,7 @@
-<?php 
-include "db_connect.php";
-include "session.php";
-$x=substr($login_session,0,1);
+<?php
+   include('session.php');
+   include('db_connect.php');
+   $x=substr($login_session,0,1);
    if($x=="P")
    {
     $query="select tblParentId, concat(tblParentLname, ', ', tblParentFname, ' ', tblParentMname) as names from tblparent where tblParent_tblUserId='$user_id' and tblParentFlag=1";
@@ -24,6 +24,10 @@ $x=substr($login_session,0,1);
     $result1=mysqli_query($con, $query1);
     $row1=mysqli_fetch_array($result1);
     $roleid=$row1['tblUser_tblRoleId'];
+    $query="select * from tblrole where tblRoleId='$roleid' and tblRoleFlag=1";
+    $result=mysqli_query($con, $query);
+    $row=mysqli_fetch_array($result);
+    $rolename=$row['tblRoleName'];
    }
 ?>
 <!DOCTYPE html>
@@ -48,12 +52,75 @@ $x=substr($login_session,0,1);
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
+
+         <!-- sweetalert -->
+         <script src="sweetalert-master/dist/sweetalert-dev.js"></script>
+         <link rel="stylesheet" href="sweetalert-master/dist/sweetalert.css">
+
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="formwizard2.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+      }
+
+      fieldset{
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+    function changeBillingLevel()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open("GET","changeTblBilling.php?selLevel="+document.getElementById("selLevel").value,false);
+      xmlhttp.send(null);
+
+      document.getElementById("datatable1").innerHTML=xmlhttp.responseText;
+
+    }
+    function addFields()
+    {
+      var xmlhttp =  new XMLHttpRequest();
+      xmlhttp.open('GET','billAdd.php?type='+document.querySelector('input[name="r1"]:checked').value+'&selFee='+document.getElementById('selFee').value,false);
+      xmlhttp.send(null);
+
+      document.getElementById("fg1").innerHTML=xmlhttp.responseText;
+
+    }
+    </script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
+    <?php
+        $message = isset($_GET['message'])?intval($_GET['message']):0;
+
+        if($message == 1) {
+          echo "<script> swal('Data insertion failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 2) {
+          echo "<script> swal('Added succesfully!', ' ', 'success'); </script>";
+        }
+
+        if($message == 3) {
+          echo "<script> swal('Data update failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 4) {
+          echo "<script> swal('Updated succesfully!', ' ', 'success'); </script>";
+        }
+
+        if($message == 5) {
+          echo "<script> swal('Data deletion failed!', ' ', 'error'); </script>";
+        }
+
+        if($message == 6) {
+          echo "<script> swal('Deleted succesfully!', ' ', 'success'); </script>";
+        }
+      ?>
     <div class="wrapper">
 
       <header class="main-header">
@@ -80,9 +147,7 @@ $x=substr($login_session,0,1);
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="images/Employees/admin.png" class="user-image" alt="User Image">
-                  <span class="hidden-xs">
-                    <?php echo $namess ?>
-                  </span>
+                  <span class="hidden-xs"><?php echo $namess ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -91,14 +156,12 @@ $x=substr($login_session,0,1);
 
                     <p>
                       <!--<?php echo $namess ?>-->
-                      <!-- <small>
-                        <?php echo $rolename ?>
-                      </small> -->
+                     <!--  <small><?php echo $rolename ?></small> -->
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <!--<div class="pull-left">
+                   <!-- <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>-->
                     <div class="pull-right">
@@ -109,7 +172,7 @@ $x=substr($login_session,0,1);
               </li>
             </ul>
           </div>
-          <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
+            <p style="text-align: center; font-size: 14px; padding-top: 15px; color: white">Kiddo Academy Admission and Enrollment with Billing and Collection</p>
 
         </nav>
       </header>
@@ -123,38 +186,29 @@ $x=substr($login_session,0,1);
               <img src="images/Employees/admin.png" class="img-circle" alt="User Image">
             </div>
 
-            <div class="pull-left info" style="margin-top: 3%">
-              <p>
-                <?php echo $namess ?>
-                <i class="fa fa-circle text-success" style="margin-left: 7px"></i>
-              </p>
-             <!--  <p style="padding: 3px 30px; font-size: 12px;">
-                <?php echo $rolename ?>
-              </p> -->
+                        <div class="pull-left info" style="margin-top: 3%">
+              <p><?php echo $namess ?><i class="fa fa-circle text-success" style="margin-left: 7px"></i></p>
+              <p style="padding: 3px 30px; font-size: 12px;"><!-- <?php echo $rolename ?></p> -->
             </div>
           </div>
 
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="font-size:15px;">
-
-            <li class="header" style="color:black;">
-              <div>
-                <?php
+                    <li class="header" style="color:black;">
+               <div>
+           <?php
              $query="select * from tblschoolyear where tblSchoolYrActive='ACTIVE' and tblSchoolYearFlag=1";
              $result=mysqli_query($con, $query);
              $row=mysqli_fetch_array($result);
              $sy=$row['tblSchoolYrYear'];
            ?>
-                  <h4 style="padding-left:5%;">
-                    <?php echo $sy ?>
-                  </h4>
-                  <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
+           <h4 style="padding-left:5%;"><?php echo $sy ?></h4>
+           <p style="font-size: 12px; padding-left:5%;">Welcome!</p>
 
-              </div>
+       </div>
             </li>
-
-            <?php 
+           <?php
         $query="select * from tblrole where tblRoleFlag=1 and tblRoleId='$roleid'";
         $result=mysqli_query($con, $query);
         $row=mysqli_fetch_array($result);
@@ -169,32 +223,24 @@ $x=substr($login_session,0,1);
 
         ?>
 
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-gears"></i>
-                <span>
-                  <?php echo $modulename ?>
-                </span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <?php
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gears"></i> <span><?php echo $modulename ?></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+           <?php
               $query2="select * from tblrolemodule rm, tblmodule m where m.tblModuleId=rm.tblRoleModule_tblModuleId and rm.tblRoleModule_tblRoleId='$roleid' and m.tblModuleType='$modulename' and m.tblModuleFlag=1 group by m.tblModuleId";
               $result2=mysqli_query($con, $query2);
               while($row2=mysqli_fetch_array($result2)):
             ?>
-                  <li>
-                    <a href="<?php echo $row2['tblModuleLinks'] ?>">
-                      <i class="fa fa-circle-o"></i>
-                      <?php echo $row2['tblModuleName'] ?>
-                    </a>
-                  </li>
-                  <?php endwhile; ?>
-              </ul>
-            </li>
-            <?php 
+            <li><a href="<?php echo $row2['tblModuleLinks'] ?>"><i class="fa fa-circle-o"></i><?php echo $row2['tblModuleName'] ?></a></li>
+            <?php endwhile; ?>
+          </ul>
+        </li>
+      <?php
       }//while
       }else
       {
@@ -202,94 +248,102 @@ $x=substr($login_session,0,1);
               $result=mysqli_query($con, $query);
               while($row=mysqli_fetch_array($result)):
       ?>
-            <li class="treeview">
+           <li class="treeview">
               <a href="<?php echo $row['tblModuleLinks'] ?>">
-                <i class="fa fa-list"></i>
-                <span>
-                  <?php echo $row['tblModuleName'] ?>
-                </span>
+                <i class="fa fa-list"></i> <span><?php echo $row['tblModuleName'] ?></span>
               </a>
             </li>
-            <?php
-       endwhile; } 
+      <?php
+       endwhile; }
       ?>
           </ul>
         </section>
         <!-- /.sidebar -->
       </aside>
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <!-- <ol class="breadcrumb" style="font-size:15px;">
-            <li><a href="dashboard.php" style="color: black;"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="#" style="color: black;">Transaction</a></li>
-            <li class="active">Sectioning</li>
-          </ol> -->
+
         </section>
 
         <!-- Main content -->
-        <section class="content" style="margin-top: 3%">
+        <section class="content">
           <div class="row">
-              <div class="col-md-12">
-                <div class="box box-default">
-                  <div class="box-header with-border"></div>
-                  <div class="box-body">
+            <div class="col-md-12">
+              <div class="box box-default"  style="margin-top: 10px">
+                <div class="box-body">
+                  <div class="nav-tabs-custom">
                     <div class="box-header with-border">
-                      <h2 class="box-title" style="font-size:20px;">Advisory Class</h2>
-                        <div class="form-group" style="margin-top: 3%; margin-left: 2%"></div>
-                      </div>
+                    <h4 style="margin-top: 3%">O.R. Number</h4>
+                    </div>
+
 
                     <div class="tab-content">
 
-                      <div class="tab-pane active" id="tab_1">
-                        <div class="box">
-                          <div class="box-header"> </div>
-                            <div class="box-body">
-                              <table id="datatable" name="datatable" class="table table-bordered table-striped">
-                              <thead>
-                                <tr>
-                                  <th></th>
-                                  <th>Section Name</th>
-                                  <th>Action</th>
-                                </tr>
-                                </thead>
 
-                                <tbody>
-                                <?php
-                                  
-                                  $query="select * from tblsection where tblSection_tblFacultyId='$id' and tblSectionFlag=1";
-                                  $result=mysqli_query($con, $query);
-                                  while($row=mysqli_fetch_array($result)):
-                                ?>
-                                <tr>
-                                  <td><?php echo $row['tblSectionId'] ?></td>
-                                  <td><?php echo $row['tblSectionName'] ?></td>
-                                  <td><form method="post" action="grade(faculty).php">
-                                  <input type="hidden" name="txtSectId" id="txtSectId" value="<?php echo $row['tblSectionId'] ?>"/>
-                                  <button type="submit" class="btn btn-success" name="btnSect" id="btnSect"><i class="fa fa-edit"></i>View Section List</button></form></td>
-                                </tr>
-                              <?php endwhile; ?>
-                                </tbody>
-                                </table>
-                              
-                            </div>
+                      <div class="tab-pane active" id="tab_1">
+
+                            <div class="box-body">
+                              <div class="col-md-12"  style="margin-top: 3%">
+                                <form method="post" action="updateOr.php" id="pw">
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-3 control-label">Set O.R. Number:</label>
+                                    <div class="col-sm-3">
+                                      <?php
+                                        $query=mysqli_query($con, "select * from tblornumber where tblOrFlag=1");
+                                        $row=mysqli_fetch_array($query);
+                                        $ornum=$row['tblOrNum'];
+                                      ?>
+                                        <input type="text" class="form-control" id="or" name="or" value="<?php echo $ornum ?>">
+                                    </div>
+
+
+                                    <div class="btn-group" style="margin-top: 5%; float: right">
+                                        <button type="submit" class="btn btn-success" style="margin-right: 15px; ">Proceed</button>
+                                    </div>
+
+              <!-- Modal Enrollment -->
+                <div class="modal fade" id="modalPassword" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="changePassword"> PROCEED </h4>
                         </div>
-                        <!-- /.box -->
-                      </div>
-                      <!-- /.tab pane tab_1 -->
+                        <div class="row" style="margin-top: 5%">
+
+                            <div class="form-group">
+                              <h4 align="center" style="margin-top: 5%">Are you sure you want to change password?</h4>
+                            </div>
+                          
+                        </div>
+                          <div class="modal-footer" style="margin-top: 5%; float: center">
+                            <button type="submit" class="btn btn-info" name="changePW" id="changePW">OK</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                          </div>
                     </div>
-                    <!-- /. tab content -->
                   </div>
-                  <!-- /.box-body -->
+                </div>
+                <!--modal end-->
+                                </div> 
+                              </form>
+                              </div>
+                                  
+                                  
+                            </div>
+
+                      </div>
+                    </div>
+                  </div> <!-- tab_1 -->
+
+                </div> <!-- tab content -->
               </div>
-              <!-- /.box-default -->
-            </div>
-            <!-- /.col-md-12 -->
-          </div>
-          <!-- /.row -->
+            </div> <!-- nav -->
+          </div> <!-- box body -->
         </section>
-        <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
 
@@ -363,7 +417,7 @@ $x=substr($login_session,0,1);
       <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- jQuery 2.2.3 -->
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -380,8 +434,10 @@ $x=substr($login_session,0,1);
     <script src="js/select2.full.min.js"></script>
     <script type="text/javascript" src="formwizard.js"></script>
 
-    <script>
+    <!-- Sweetalert -->
+    <script src="js/sweetalert.min.js"></script>
 
+    <script>
       $(function () {
         $("#datatable").DataTable();
         $("#datatable1").DataTable();
@@ -392,9 +448,7 @@ $x=substr($login_session,0,1);
       $(document).ready(function() {
       $(".choose").select2();
     });
-
     </script>
 
   </body>
-
 </html>

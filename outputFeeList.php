@@ -58,7 +58,12 @@ function Footer()
 
     $pdf->SetXY(80,50);
     $pdf->SetFont('Arial','B',12);
-    $pdf->Cell(60,10,"Option 1 - Cash Payment Scheme",0,0,'C');
+
+    $query=mysqli_query($con, "Select tblFeeName FROM tblfee WHERE tblFeeFlag = 1 and tblFeeMandatory='Y' and tblFeeId = 1");
+    while($row=mysqli_fetch_array($query)){
+    $stype = $row['tblFeeName'];
+
+    $pdf->Cell(60,10,$stype,0,0,'C');
 
     $query1=mysqli_query($con, "Select tblLevelName FROM tbllevel WHERE tblLevelFlag = 1");
     
@@ -66,14 +71,15 @@ function Footer()
     $pdf->Ln(15);// Line break
     $pdf->SetFont('Arial','',8);
     $pdf->SetX(30);
-    $pdf->Cell(35,5,"Fee",1,0,'C');
+    $pdf->Cell(35,5,"Scheme",1,0,'C');
     
     while($row1=mysqli_fetch_array($query1)){
 
     $pdf->Cell(20,5, $row1['tblLevelName'],1,0,'C');
     }
 
-    $query2=mysqli_query($con, "Select * FROM tblfee WHERE tblFeeFlag = 1");
+
+    $query2=mysqli_query($con, "Select s.tblSchemeType, f.tblSchemeDetailAmount FROM tblscheme s, tblschemedetail f");
     
     $pdf->Ln(15);// Line break
     $pdf->SetFont('Arial','',8);
@@ -83,11 +89,12 @@ function Footer()
 
     $pdf->Cell(35,5,$row2['tblFeeName'],1,1,'C');
     }
+}
 
-    $pdf->Ln(15);// Line break
-    $pdf->SetFont('Arial','B',8);
-    $pdf->SetXY(30,80);
-    $pdf->Cell(35,5,"TOTAL",1,1,'C');
+    // $pdf->Ln(15);// Line break
+    // $pdf->SetFont('Arial','B',8);
+    // $pdf->SetXY(30,80);
+    // $pdf->Cell(35,5,"TOTAL",1,1,'C');
 
     $pdf->SetFont('Arial','',10);
     $pdf->SetXY(150,230);//X-Left, Y- Down

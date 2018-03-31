@@ -3,7 +3,7 @@ include "db_connect.php";
 $ind=$_POST['ind'];
 $or=$_POST['txtOR'];
 $id=$_POST['txtAccId'];
-$pr=$_POST['txtPR'];
+$pr="";
 $chk=$_POST['chkCheck'];
 if($chk==1)
 {
@@ -36,7 +36,7 @@ if($chk==1)
 		exit(mysqli_error($con));
 	}
 }
-$query=mysqli_query($con, "insert into tblreceipt(tblRecAmount, tblRecDate, tblRec_tblStudentId) values ('$tamount','$dates','$studid')");
+$query=mysqli_query($con, "insert into tblreceipt(tblRecAmount, tblRecDate, tblRec_tblStudentId, tblRecOR) values ('$tamount','$dates','$studid', '$or')");
 if($ind == 1)
 {
 	$query1="select tblStudentType from tblstudent where tblStudentFlag=1 and tblStudentId='$studid'";

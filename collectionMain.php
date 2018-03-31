@@ -75,6 +75,16 @@
         font-size: 12px;
       }
     </style>
+    <script>
+      function changeBillingLevel()
+      {
+        var xmlhttp =  new XMLHttpRequest();
+        xmlhttp.open("GET","changeBillingLevel.php?selLevel="+document.getElementById("selLevel").value,false);
+        xmlhttp.send(null);
+
+        document.getElementById("datatable2").innerHTML=xmlhttp.responseText;
+      }
+    </script>
   </head>
 
   <body class="hold-transition skin-green-light sidebar-mini">
@@ -309,7 +319,7 @@
                               </div>
 
                               <div class="col-md-12" style="margin-top: 3%">
-                                <table id="datatable1" class="table table-bordered table-striped">
+                                <table id="datatable2" class="table table-bordered table-striped">
                                   <thead>
                                     <tr>
                                       <th>Student ID</th>
@@ -319,7 +329,7 @@
                                   </thead> 
                                   <tbody>
                                   <?php
-                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1;";
+                                    $query="select s.tblStudentId, concat(si.tblStudInfoLname, ', ', si.tblStudInfoFname, ' ', si.tblStudInfoMname) as studentname from tblstudent s, tblstudentinfo si where s.tblStudentId=si.tblStudInfo_tblStudentId and s.tblStudentType='OFFICIAL' and s.tblStudentFlag=1";
                                     $result=mysqli_query($con, $query);
                                     while($row=mysqli_fetch_array($result)):
                                   ?>
@@ -345,7 +355,7 @@
                         <div class="box-body">
                           
                             <div class="col-md-12" style="margin-top: 5%">
-                                <table id="datatable1" class="table table-bordered table-striped">
+                                <table id="datatable3" class="table table-bordered table-striped">
                                   <thead>
                                    <tr>
                                        <th>Student ID</th>
